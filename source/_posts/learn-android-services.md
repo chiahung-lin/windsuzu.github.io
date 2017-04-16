@@ -1,9 +1,10 @@
 ---
 title: 學習Android背景執行服務 Android Services
+date: 2017-04-05 00:44:58
+categories: Android
 tags:
   - Android
   - Android Services
-date: 2017-04-05 00:44:58
 ---
 
 
@@ -11,7 +12,7 @@ date: 2017-04-05 00:44:58
 
 Android的`Service`是Android的四大組件之一。不同於`Activity`的生命週期，`Service`可以在背景不斷的工作，直到停止或是系統無法提供資源為止。通常運用在後台播放音樂、定時檢查更新資料，或是執行很久的工作，如上傳及下載檔案。
 
-#### 好文參考 :
+## 好文參考
 [Services | Android Developers](https://developer.android.com/guide/components/services.html?hl=zh-tw)
 [Android Service完全解析，关于服务你所需知道的一切(上)](http://blog.csdn.net/guolin_blog/article/details/11952435)
 [健行科技Android手機程式設計人才培訓班 - Service背景執行程式](http://www.aaronlife.com/teaching/uch_android_2015-02-06_00.html)
@@ -36,7 +37,7 @@ Android的`Service`是Android的四大組件之一。不同於`Activity`的生�
 
 ## 用法
 
-1. 在AndroidManifest.xml檔中新增定義。
+### 在AndroidManifest.xml檔中新增定義。
 ```xml
 <? xml version = "1.0" encoding = "utf-8" ?>    
 < manifest xmlns:android = "http://schemas.android.com/apk/res/android"   
@@ -61,7 +62,10 @@ Android的`Service`是Android的四大組件之一。不同於`Activity`的生�
 </ manifest >  
 ```
 
-2. 實作一個繼承自Service類別的物件。bindService與startService兩者能夠同時存在並不衝突，而且在這次專案裡剛好都會使用到，所以只要同時實作onStartCommand()與onBind()兩個事件即可。
+### 實作 Service 類別
+
+實作一個繼承自Service類別的物件。bindService與startService兩者能夠同時存在並不衝突，而且在這次專案裡剛好都會使用到，所以只要同時實作onStartCommand()與onBind()兩個事件即可。
+
 ```Java
 public class MyService extends Service {   
   
@@ -102,7 +106,10 @@ public class MyService extends Service {
 }  
 ```
 
-3. 在Activity中呼叫startService()來執行第一種啟動Service的方法。
+### 在 Activity 實作 (1)
+
+在Activity中呼叫startService()來執行第一種啟動Service的方法。
+
 ```Java
 @Override
 public View onCreate(Bundle savedInstanceState)
@@ -114,7 +121,10 @@ public View onCreate(Bundle savedInstanceState)
 }
 ```
 
-4. 在Activity建立 MyBinder 與 ServiceConnection 物件，並呼叫bindService()執行第二種方法。
+### 在 Activity 實作 (2)
+
+建立 MyBinder 與 ServiceConnection 物件，並呼叫bindService()執行第二種方法。
+
 ```Java
 public class MainActivity extends Activity {
 
