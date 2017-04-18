@@ -70,8 +70,14 @@ theme: next
 deploy: 
   type: git
   repo: git@github.com:windsuzu/windsuzu.github.io.git
+  branch: master
 
 # Search
 search:
   path: search.xml
   field: post
+
+
+# Sitemap
+sitemap:
+    path: sitemap.xml
