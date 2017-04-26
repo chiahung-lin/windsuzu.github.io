@@ -81,3 +81,9 @@ search:
 # Sitemap
 sitemap:
     path: sitemap.xml
+
+# FlowChart
+flowchart:
+  raphael:
+  flowchart:
+  options: # options used for `drawSVG`
