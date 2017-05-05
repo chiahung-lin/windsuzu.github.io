@@ -236,7 +236,7 @@ Data Binding 減輕原本 MVP 中 Presenter 要與 Model 和 View 互動的職�
 <p style="color:red"/>Model 還是負責 App 的資料邏輯
 <p style="color:blue"/>View 利用 Data Binding 的方式與 ViewModel 進行溝通
 > 在此必須要去學習一下 Android 最新的 Data Binding
- 可以查看 [學習Android Data Binding](https://developer.android.com/topic/libraries/data-binding/index.html)
+ 可以查看 [學習Android Data Binding](https://windsuzu.github.io/2017/04/29/learn-android-databinding/)
 
 <p style="color:green"/>ViewModel 負責一些與介面邏輯運算，完成 View 與 Model 的交互
 

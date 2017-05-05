@@ -62,6 +62,12 @@ observable.subscribe(observer);
 ## Hello, World !
 沒關係，先從最基本的回傳字串實際操作看看 !
 
+### 設置 Gradle
+``` gradle
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
+```
+
 ### 觀察者 Observer
 先從創建一個觀察者 Observer 看看 :
 ``` java

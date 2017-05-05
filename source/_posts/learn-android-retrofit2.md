@@ -39,7 +39,7 @@ Retrofit 是什麼 ? 我也是學習 RxJava 途中才知道， Retrofit 跟 Voll
 * Gradle 配置
 ``` xml
 compile 'com.squareup.retrofit2:retrofit:2.2.0'
-compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
+compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 ```
 
 * 別忘了到 manifest 新增網路的權限
