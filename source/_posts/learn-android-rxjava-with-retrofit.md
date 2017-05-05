@@ -30,7 +30,7 @@ categories:
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
 ```
-> 要記得 retrofit 與他的快樂夥伴的版本要一致
+> 要記得 retrofit 與他的快樂夥伴的版本要一致 (2.2.0)
 
 在設置這邊發生了好多錯誤，原來之前學習時用的是 RxJava1，所以跟 Retrofit2 的 Adapter 配不起來 (汗)，1和2有一些差別，可以到 [RxJava Github - What's different in 2.0](https://github.com/ReactiveX/RxJava/wiki/What%27s-different-in-2.0) 查看。
 
@@ -45,6 +45,7 @@ public interface GitHubService {
     @GET("users/{userId}")
     Observable<GitHubUser> getUser(@Path("userId") String userId);
 }
+```
 
 這邊要注意的是原本的 Call<GitHubUser> 變為 Observable<GitHubUser> ，因為是用 RxJava 觀察者模式訂閱，所以必須要返回一個 Observable 對象，才能夠進行接續的 `subscribeOn()` 、 `subScribe()` 等 RxJava 操作。其餘的都跟只有 Retrofit 時一樣。
 
@@ -64,15 +65,15 @@ public Retrofit provideRetrofit(String baseUrl) {
 
 ## 實作 Retrofit + RxJava 異步網路請求
 ``` java
-
 GitHubService service = provideRetrofit(GitHubService.BASEURL).create(GitHubService.class);
 
 service.getUser(USERID)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(user -> Log.d(TAG, user.getName()));
-
 ```
+
+先利用 `getUser()` 獲得 Observable ，再開始使用 RxJava 的方法，能夠歷經 map 、 fliter 、 flatMap ，最後傳給 Observer 進行主執行緒的操作。
 
 ## 結
 除此之外，若是像設計登入流程，伺服器可能會先回傳一個 token ，需要再以 token 去取得用戶資料。這時可能就要使用 flatMap 再一次發送 token 取得資料。
