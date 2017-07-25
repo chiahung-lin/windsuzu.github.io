@@ -138,7 +138,3 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     return [0]
 }
 ```
-
-
-# Github:
-https://github.com/windsuzu/LeetCode-Solution-For-Swift/blob/master/%231.%20Two%20Sum.playground/Contents.swift
