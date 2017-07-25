@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "3.3.1"
+    "version": "3.3.5"
   },
   "dependencies": {
     "hexo": "^3.3.1",
@@ -12,7 +12,7 @@
     "hexo-deployer-heroku": "^0.1.1",
     "hexo-deployer-openshift": "^0.1.1",
     "hexo-deployer-rsync": "^0.1.2",
-    "hexo-filter-flowchart": "^1.0.2",
+    "hexo-filter-flowchart": "^1.0.4",
     "hexo-filter-sequence": "^1.0.1",
     "hexo-generator-archive": "^0.1.4",
     "hexo-generator-category": "^0.1.3",

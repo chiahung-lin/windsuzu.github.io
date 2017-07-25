@@ -9,7 +9,6 @@ tags:
 - Dagger2
 
 categories:
-- 軟體工程
 - Android
 ---
 
@@ -38,7 +37,6 @@ cond2(no)->op1
 op1->op3
 op2->op3
 ```
-
 
 ## @Inject
 回到上次慘不忍睹的程式碼，不斷的創建造成開發效率變得很低。
