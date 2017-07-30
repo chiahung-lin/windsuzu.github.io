@@ -1,5 +1,5 @@
 ---
-title: 'LeetCode#1 Two Sum - Use Swift'
+title: LeetCode#1 Two Sum - Use Swift
 date: 2017-07-22 09:18:56
 tags:
 - LeetCode

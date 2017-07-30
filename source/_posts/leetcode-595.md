@@ -1,5 +1,5 @@
 ---
-title: LeetCode#595 Big Countries - Use MYSQL
+title: LeetCode#595 Big Countries - Use MySQL
 date: 2017-07-24 09:03:46
 tags:
 - LeetCode
