@@ -1,12 +1,14 @@
 ---
-title: LeetCode#476 Number Complement - Use Swift
+title: LeetCode#476 Number Complement - in Swift
 date: 2017-07-28 23:54:58
 tags:
 - LeetCode
 - Swift
+- Bit Manipulation
 categories: 
 - LeetCode
 - Swift
+- Bit Manipulation
 ---
 
 # 題目

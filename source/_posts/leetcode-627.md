@@ -1,5 +1,5 @@
 ---
-title: LeetCode#627 Swap Salary - Use MySQL
+title: LeetCode#627 Swap Salary - in MySQL
 date: 2017-07-27 13:37:05
 tags:
 - LeetCode

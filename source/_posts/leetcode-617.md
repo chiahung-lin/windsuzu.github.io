@@ -1,12 +1,14 @@
 ---
-title: LeetCode#617 Merge Two Binary Trees - Use Swift
+title: LeetCode#617 Merge Two Binary Trees - in Swift
 date: 2017-07-25 23:50:46
 tags:
 - LeetCode
 - Swift
+- Tree
 categories: 
 - LeetCode
 - Swift
+- Tree
 ---
 
 # 題目

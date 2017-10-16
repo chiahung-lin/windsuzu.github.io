@@ -1,12 +1,14 @@
 ---
-title: LeetCode#561 Array Partition I - Use Swift
+title: LeetCode#561 Array Partition I - in Swift
 date: 2017-07-26 13:26:20
 tags:
 - LeetCode
 - Swift
+- Array
 categories: 
 - LeetCode
 - Swift
+- Array
 ---
 
 # 題目

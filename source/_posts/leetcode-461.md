@@ -1,12 +1,14 @@
 ---
-title: LeetCode#461 Hamming distance - Use Swift
+title: LeetCode#461 Hamming distance - in Swift
 date: 2017-07-23 09:03:46
 tags:
 - LeetCode
 - Swift
+- Bit Manipulation
 categories: 
 - LeetCode
 - Swift
+- Bit Manipulation
 ---
 
 

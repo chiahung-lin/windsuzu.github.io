@@ -1,12 +1,14 @@
 ---
-title: LeetCode#500 Keyboard Row - Use Swift
+title: LeetCode#500 Keyboard Row - in Swift
 date: 2017-07-29 17:22:55
 tags:
 - LeetCode
 - Swift
+- Hash Table
 categories: 
 - LeetCode
 - Swift
+- Hash Table
 ---
 
 # 題目
