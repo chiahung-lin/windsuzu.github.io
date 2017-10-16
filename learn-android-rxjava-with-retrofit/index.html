@@ -1,0 +1,953 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="Ovk0hBXjKPPKtg5oCm39lxBF-ASTmfYJwoxb1aUUOEo" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,RxJava,RxAndroid,Retrofit," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Jay's Code" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 !   前面的文章學習 Android Retrofit 2學習 Android RxJava  這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。 Setup設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。 123">
+<meta name="keywords" content="Android,RxJava,RxAndroid,Retrofit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="學習 RxJava 結合 Retrofit">
+<meta property="og:url" content="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/index.html">
+<meta property="og:site_name" content="Jay's Code">
+<meta property="og:description" content="個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 !   前面的文章學習 Android Retrofit 2學習 Android RxJava  這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。 Setup設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。 123">
+<meta property="og:updated_time" content="2017-07-25T16:55:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="學習 RxJava 結合 Retrofit">
+<meta name="twitter:description" content="個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 !   前面的文章學習 Android Retrofit 2學習 Android RxJava  這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。 Setup設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。 123">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/"/>
+
+
+
+
+
+  <title> 學習 RxJava 結合 Retrofit | Jay's Code </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jay's Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Study Recording</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                學習 RxJava 結合 Retrofit
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-05-05T18:14:45+08:00">
+                2017-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/learn-android-rxjava-with-retrofit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="learn-android-rxjava-with-retrofit/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 ! </p>
+<blockquote>
+<p>前面的文章<br><a href="https://windsuzu.github.io/2017/05/02/learn-android-retrofit2/">學習 Android Retrofit 2</a><br><a href="https://windsuzu.github.io/2017/05/05/learn-android-rxjava/">學習 Android RxJava</a></p>
+</blockquote>
+<p>這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。</p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">"io.reactivex.rxjava2:rxjava:2.x.y"</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex.rxjava2:rxandroid:2.0.1'</span></div><div class="line"></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.2.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.2.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:adapter-rxjava2:2.2.0'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>要記得 retrofit 與他的快樂夥伴的版本要一致 (2.2.0)</p>
+</blockquote>
+<p>在設置這邊發生了好多錯誤，原來之前學習時用的是 RxJava1，所以跟 Retrofit2 的 Adapter 配不起來 (汗)，1和2有一些差別，可以到 <a href="https://github.com/ReactiveX/RxJava/wiki/What%27s-different-in-2.0" target="_blank" rel="external">RxJava Github - What’s different in 2.0</a> 查看。</p>
+<h2 id="實作-Retrofit-Service-Interface"><a href="#實作-Retrofit-Service-Interface" class="headerlink" title="實作 Retrofit Service Interface"></a>實作 Retrofit Service Interface</h2><p>一樣拿 GitHub Api 測試看看 :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String BASEURL = <span class="string">"http://api.github.com/"</span>;</div><div class="line"></div><div class="line">    <span class="meta">@GET</span>(<span class="string">"users/&#123;userId&#125;"</span>)</div><div class="line">    <span class="function">Observable&lt;GitHubUser&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"userId"</span>)</span> String userId)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這邊要注意的是原本的 Call<githubuser> 變為 Observable<githubuser> ，因為是用 RxJava 觀察者模式訂閱，所以必須要返回一個 Observable 對象，才能夠進行接續的 <code>subscribeOn()</code> 、 <code>subScribe()</code> 等 RxJava 操作。其餘的都跟只有 Retrofit 時一樣。</githubuser></githubuser></p>
+<h2 id="創建-Retrofit-元件"><a href="#創建-Retrofit-元件" class="headerlink" title="創建 Retrofit 元件"></a>創建 Retrofit 元件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Retrofit <span class="title">provideRetrofit</span><span class="params">(String baseUrl)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">            .addConverterFactory(GsonConverterFactory.create())</div><div class="line">            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">            .baseUrl(baseUrl)</div><div class="line">            .build();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這邊除了原本添加的 Gson 轉換器，還要新增 Retrofit 與 RxJava 相依的 RxJava2CallAdapterFactory 。</p>
+<h2 id="實作-Retrofit-RxJava-異步網路請求"><a href="#實作-Retrofit-RxJava-異步網路請求" class="headerlink" title="實作 Retrofit + RxJava 異步網路請求"></a>實作 Retrofit + RxJava 異步網路請求</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GitHubService service = provideRetrofit(GitHubService.BASEURL).create(GitHubService.class);</div><div class="line"></div><div class="line">service.getUser(USERID)</div><div class="line">        .subscribeOn(Schedulers.io())</div><div class="line">        .observeOn(AndroidSchedulers.mainThread())</div><div class="line">        .subscribe(user -&gt; Log.d(TAG, user.getName()));</div></pre></td></tr></table></figure>
+<p>先利用 <code>getUser()</code> 獲得 Observable ，再開始使用 RxJava 的方法，能夠歷經 map 、 fliter 、 flatMap ，最後傳給 Observer 進行主執行緒的操作。</p>
+<h2 id="結"><a href="#結" class="headerlink" title="結"></a>結</h2><p>除此之外，若是像設計登入流程，伺服器可能會先回傳一個 token ，需要再以 token 去取得用戶資料。這時可能就要使用 flatMap 再一次發送 token 取得資料。</p>
+<p>或是登入時需要實作 <code>onError()</code> 的響應，一方面又想要維持 lambda 語法的簡潔，那就必須要另外新增兩個 <code>Action (Consumer)</code> ，來實作 <code>onNext()</code> 、 <code>onError()</code> 的方法，再放入 <code>subScribe</code> 中。</p>
+<blockquote>
+<p>上面說的登入設計可以參考這篇文章<br><a href="http://www.jianshu.com/p/1fb294ec7e3b" target="_blank" rel="external">【Android】RxJava + Retrofit完成网络请求</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/RxJava/" rel="tag"># RxJava</a>
+          
+            <a href="/tags/RxAndroid/" rel="tag"># RxAndroid</a>
+          
+            <a href="/tags/Retrofit/" rel="tag"># Retrofit</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/leetcode-1/" rel="next" title="LeetCode#1 Two Sum - in Swift">
+                <i class="fa fa-chevron-left"></i> LeetCode#1 Two Sum - in Swift
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/learn-android-rxjava/" rel="prev" title="學習 Android RxJava">
+                學習 Android RxJava <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Jay Wang" />
+          <p class="site-author-name" itemprop="name">Jay Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">慢慢學習。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Setup"><span class="nav-number">1.</span> <span class="nav-text">Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作-Retrofit-Service-Interface"><span class="nav-number">2.</span> <span class="nav-text">實作 Retrofit Service Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#創建-Retrofit-元件"><span class="nav-number">3.</span> <span class="nav-text">創建 Retrofit 元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作-Retrofit-RxJava-異步網路請求"><span class="nav-number">4.</span> <span class="nav-text">實作 Retrofit + RxJava 異步網路請求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結"><span class="nav-number">5.</span> <span class="nav-text">結</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jay Wang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jays-code.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://windsuzu.github.io/learn-android-rxjava-with-retrofit/';
+          this.page.identifier = 'learn-android-rxjava-with-retrofit/';
+          this.page.title = '學習 RxJava 結合 Retrofit';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jays-code.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

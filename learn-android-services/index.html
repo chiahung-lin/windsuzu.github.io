@@ -1,0 +1,949 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="Ovk0hBXjKPPKtg5oCm39lxBF-ASTmfYJwoxb1aUUOEo" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Android Services," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Jay's Code" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近為了設計無網路情況下，將資料儲存在SQLite中，而偵測用戶網路連接後，將資料上傳。必須使用到Service的功能，所以剛好有機會把Service學得更深! Android的Service是Android的四大組件之一。不同於Activity的生命週期，Service可以在背景不斷的工作，直到停止或是系統無法提供資源為止。通常運用在後台播放音樂、定時檢查更新資料，或是執行很久的工作，如上傳及下">
+<meta name="keywords" content="Android,Android Services">
+<meta property="og:type" content="article">
+<meta property="og:title" content="學習Android背景執行服務 Android Services">
+<meta property="og:url" content="http://windsuzu.github.io/learn-android-services/index.html">
+<meta property="og:site_name" content="Jay's Code">
+<meta property="og:description" content="最近為了設計無網路情況下，將資料儲存在SQLite中，而偵測用戶網路連接後，將資料上傳。必須使用到Service的功能，所以剛好有機會把Service學得更深! Android的Service是Android的四大組件之一。不同於Activity的生命週期，Service可以在背景不斷的工作，直到停止或是系統無法提供資源為止。通常運用在後台播放音樂、定時檢查更新資料，或是執行很久的工作，如上傳及下">
+<meta property="og:image" content="https://developer.android.com/images/service_lifecycle.png">
+<meta property="og:updated_time" content="2017-04-16T10:51:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="學習Android背景執行服務 Android Services">
+<meta name="twitter:description" content="最近為了設計無網路情況下，將資料儲存在SQLite中，而偵測用戶網路連接後，將資料上傳。必須使用到Service的功能，所以剛好有機會把Service學得更深! Android的Service是Android的四大組件之一。不同於Activity的生命週期，Service可以在背景不斷的工作，直到停止或是系統無法提供資源為止。通常運用在後台播放音樂、定時檢查更新資料，或是執行很久的工作，如上傳及下">
+<meta name="twitter:image" content="https://developer.android.com/images/service_lifecycle.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://windsuzu.github.io/learn-android-services/"/>
+
+
+
+
+
+  <title> 學習Android背景執行服務 Android Services | Jay's Code </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jay's Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Study Recording</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-services/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                學習Android背景執行服務 Android Services
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-04-05T00:44:58+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/learn-android-services/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="learn-android-services/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近為了設計無網路情況下，將資料儲存在SQLite中，而偵測用戶網路連接後，將資料上傳。必須使用到Service的功能，所以剛好有機會把Service學得更深!</p>
+<p>Android的<code>Service</code>是Android的四大組件之一。不同於<code>Activity</code>的生命週期，<code>Service</code>可以在背景不斷的工作，直到停止或是系統無法提供資源為止。通常運用在後台播放音樂、定時檢查更新資料，或是執行很久的工作，如上傳及下載檔案。</p>
+<h2 id="好文參考"><a href="#好文參考" class="headerlink" title="好文參考"></a>好文參考</h2><p><a href="https://developer.android.com/guide/components/services.html?hl=zh-tw" target="_blank" rel="external">Services | Android Developers</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/11952435" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切(上)</a><br><a href="http://www.aaronlife.com/teaching/uch_android_2015-02-06_00.html" target="_blank" rel="external">健行科技Android手機程式設計人才培訓班 - Service背景執行程式</a><br><a href="http://xnfood.com.tw/android-service/" target="_blank" rel="external">《Android》『Service』- 背景執行服務的基本用法</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>要讓Service能在後台運行，必須定義一個繼承Service的類別，並在<code>AndroidManifest.xml</code>宣告這個Service以及其他相關屬性，並了解如何啟動他。Service的呼叫分為兩種 :</p>
+<h3 id="startService"><a href="#startService" class="headerlink" title="startService"></a>startService</h3><p>當Service使用<code>startService()</code>啟動後，就算Activity被關閉，Service也會持續在Background工作著。Service與Acitivty之間沒有什麼交集，Service完成任務也不會回傳東西給原來的應用程式。</p>
+<h3 id="bindService"><a href="#bindService" class="headerlink" title="bindService"></a>bindService</h3><p>呼叫<code>bindService()</code>則可以讓Activity與Service進行綁定，例如在Activity中指定Service執行某些任務。而bindService也能夠讓Service被多個不同的應用程式呼叫，達到跨應用程式的互動與協作。</p>
+<p><img src="https://developer.android.com/images/service_lifecycle.png" alt="兩種啟動Service方式的生命週期" title="https://developer.android.com/guide/components/services.html"></p>
+<ol>
+<li><p>應用程式呼叫<code>startService()</code>後，系統呼叫Service類別內的<code>onCreate()</code>，接著呼叫<code>onStartCommand()</code>利用Intent提供的參數做事。直到工作結束或是應用程式呼叫<code>stopService()</code>才會停止。</p>
+</li>
+<li><p>應用程式呼叫<code>bindService()</code>與Service綁定前，應用程式需要建立一個<code>serviceConnection</code>物件，呼叫後若Service尚未啟動，Service類別內的<code>onCreate()</code>就會被呼叫，使用這種方法啟動Service的應用程式，可以透過<code>onBind()</code>方法取得IBinder物件，接下來就可以透過IBinder物件來取得Service的事件。</p>
+</li>
+</ol>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="在AndroidManifest-xml檔中新增定義。"><a href="#在AndroidManifest-xml檔中新增定義。" class="headerlink" title="在AndroidManifest.xml檔中新增定義。"></a>在AndroidManifest.xml檔中新增定義。</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;? xml version = "1.0" encoding = "utf-8" ?&gt;    </div><div class="line"><span class="tag">&lt; <span class="attr">manifest</span> <span class="attr">xmlns:android</span> = <span class="string">"http://schemas.android.com/apk/res/android"</span>   </span></div><div class="line">    <span class="attr">package</span> = <span class="string">"com.example.serviceTest"</span>  </div><div class="line">    <span class="attr">android:versionCode</span> = <span class="string">"1"</span>  </div><div class="line">    <span class="attr">android:versionName</span> = <span class="string">"1.0"</span> &gt;   </div><div class="line">  </div><div class="line">    <span class="tag">&lt; <span class="attr">uses-sdk</span>  </span></div><div class="line">        <span class="attr">android:minSdkVersion</span> = <span class="string">"14"</span>  </div><div class="line">        <span class="attr">android:targetSdkVersion</span> = <span class="string">"17"</span> /&gt;</div><div class="line">  </div><div class="line">    <span class="tag">&lt; <span class="attr">application</span>  </span></div><div class="line">        <span class="attr">android:allowBackup</span> = <span class="string">"true"</span></div><div class="line">        <span class="attr">android:icon</span> = <span class="string">"@drawable/ic_launcher"</span>  </div><div class="line">        <span class="attr">android:label</span> = <span class="string">"@string/app_name"</span>  </div><div class="line">        <span class="attr">android:theme</span> = <span class="string">"@style/AppTheme"</span> &gt;   </div><div class="line">    ……  </div><div class="line">        <span class="tag">&lt; <span class="attr">service</span> <span class="attr">android:name</span> = <span class="string">"com.example.serviceTest.MyService"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/ <span class="attr">service</span> &gt;</span>  </div><div class="line">    <span class="tag">&lt;/ <span class="attr">application</span> &gt;</span>  </div><div class="line">  </div><div class="line"><span class="tag">&lt;/ <span class="attr">manifest</span> &gt;</span></div></pre></td></tr></table></figure>
+<h3 id="實作-Service-類別"><a href="#實作-Service-類別" class="headerlink" title="實作 Service 類別"></a>實作 Service 類別</h3><p>實作一個繼承自Service類別的物件。bindService與startService兩者能夠同時存在並不衝突，而且在這次專案裡剛好都會使用到，所以只要同時實作onStartCommand()與onBind()兩個事件即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;   </div><div class="line">  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyService"</span>;</div><div class="line">  </div><div class="line">    <span class="keyword">private</span> MyBinder mBinder = <span class="keyword">new</span> MyBinder();</div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;   </div><div class="line">        <span class="keyword">super</span> .onCreate();  </div><div class="line">        Log.d(TAG, <span class="string">"onCreate() executed"</span>);</div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;   </div><div class="line">        Log.d(TAG, <span class="string">"onStartCommand() executed"</span>);  </div><div class="line">        <span class="comment">// 執行任務</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;   </div><div class="line">        <span class="keyword">super</span>.onDestroy();  </div><div class="line">        Log.d(TAG, <span class="string">"onDestroy() executed"</span>);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> mBinder;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MyBinder</span> <span class="keyword">extends</span> <span class="title">Binder</span> </span>&#123;  </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDownload</span><span class="params">()</span> </span>&#123;   </div><div class="line">            Log.d(<span class="string">"TAG"</span>, <span class="string">"startDownload() executed"</span>);  </div><div class="line">            <span class="comment">// 執行任務</span></div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="在-Activity-實作-1"><a href="#在-Activity-實作-1" class="headerlink" title="在 Activity 實作 (1)"></a>在 Activity 實作 (1)</h3><p>在Activity中呼叫startService()來執行第一種啟動Service的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></div><div class="line">&#123;</div><div class="line">    setContentView(R.layout.activity_main);</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MyService.class); </div><div class="line">    <span class="keyword">this</span>.startService(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="在-Activity-實作-2"><a href="#在-Activity-實作-2" class="headerlink" title="在 Activity 實作 (2)"></a>在 Activity 實作 (2)</h3><p>建立 MyBinder 與 ServiceConnection 物件，並呼叫bindService()執行第二種方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> MyService.MyBinder myBinder;  </div><div class="line">	<span class="keyword">private</span> ServiceConnection mServiceConnection = <span class="keyword">new</span> ServiceConnection() &#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName className, IBinder binder)</span> </span>&#123;</div><div class="line">            myBinder = (MyService.MyBinder) service;  </div><div class="line">            myBinder.startDownload();  </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName className)</span> </span>&#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MyService.class);</div><div class="line">        <span class="keyword">this</span>.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="keyword">this</span>.unbindService(mServiceConnection);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上就是關於Android Services的基礎操作，另外還有很多Service相關的東西，如IntentService、Service和Thread的關係、如何運行前台的Service、或者是遠端Service的協作等著學習。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Android-Services/" rel="tag"># Android Services</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/learn-iOS-distribution/" rel="next" title="學習在 Xcode 8 進行 iOS 上架">
+                <i class="fa fa-chevron-left"></i> 學習在 Xcode 8 進行 iOS 上架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/learn-git/" rel="prev" title="學習版本控制基礎 - Git & Gitlab">
+                學習版本控制基礎 - Git & Gitlab <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Jay Wang" />
+          <p class="site-author-name" itemprop="name">Jay Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">慢慢學習。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#好文參考"><span class="nav-number">1.</span> <span class="nav-text">好文參考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#startService"><span class="nav-number">2.1.</span> <span class="nav-text">startService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bindService"><span class="nav-number">2.2.</span> <span class="nav-text">bindService</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">3.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在AndroidManifest-xml檔中新增定義。"><span class="nav-number">3.1.</span> <span class="nav-text">在AndroidManifest.xml檔中新增定義。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#實作-Service-類別"><span class="nav-number">3.2.</span> <span class="nav-text">實作 Service 類別</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Activity-實作-1"><span class="nav-number">3.3.</span> <span class="nav-text">在 Activity 實作 (1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Activity-實作-2"><span class="nav-number">3.4.</span> <span class="nav-text">在 Activity 實作 (2)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jay Wang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jays-code.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://windsuzu.github.io/learn-android-services/';
+          this.page.identifier = 'learn-android-services/';
+          this.page.title = '學習Android背景執行服務 Android Services';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jays-code.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

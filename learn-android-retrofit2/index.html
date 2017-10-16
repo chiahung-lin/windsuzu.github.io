@@ -1,0 +1,1002 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="Ovk0hBXjKPPKtg5oCm39lxBF-ASTmfYJwoxb1aUUOEo" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Retrofit," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Jay's Code" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Retrofit 是什麼 ? 我也是學習 RxJava 途中才知道， Retrofit 跟 Volley 一樣是 Android 一種 HTTP 請求的框架，但實際操作了一遍，感覺比 Volley 還要更簡便，而且能夠支援 RxJava 的關係，必須要學習一下。  好文參考【Android】Retrofit 2.0 的使用Android Retrofit 2.0使用你真的会用Retrofit2吗?">
+<meta name="keywords" content="Android,Retrofit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="學習 Android Retrofit 2">
+<meta property="og:url" content="http://windsuzu.github.io/learn-android-retrofit2/index.html">
+<meta property="og:site_name" content="Jay's Code">
+<meta property="og:description" content="Retrofit 是什麼 ? 我也是學習 RxJava 途中才知道， Retrofit 跟 Volley 一樣是 Android 一種 HTTP 請求的框架，但實際操作了一遍，感覺比 Volley 還要更簡便，而且能夠支援 RxJava 的關係，必須要學習一下。  好文參考【Android】Retrofit 2.0 的使用Android Retrofit 2.0使用你真的会用Retrofit2吗?">
+<meta property="og:image" content="http://windsuzu.github.io/learn-android-retrofit2/retrofit.png">
+<meta property="og:image" content="http://windsuzu.github.io/learn-android-retrofit2/gsonformat1.png">
+<meta property="og:image" content="http://windsuzu.github.io/learn-android-retrofit2/gsonformat2.png">
+<meta property="og:updated_time" content="2017-07-25T16:55:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="學習 Android Retrofit 2">
+<meta name="twitter:description" content="Retrofit 是什麼 ? 我也是學習 RxJava 途中才知道， Retrofit 跟 Volley 一樣是 Android 一種 HTTP 請求的框架，但實際操作了一遍，感覺比 Volley 還要更簡便，而且能夠支援 RxJava 的關係，必須要學習一下。  好文參考【Android】Retrofit 2.0 的使用Android Retrofit 2.0使用你真的会用Retrofit2吗?">
+<meta name="twitter:image" content="http://windsuzu.github.io/learn-android-retrofit2/retrofit.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://windsuzu.github.io/learn-android-retrofit2/"/>
+
+
+
+
+
+  <title> 學習 Android Retrofit 2 | Jay's Code </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jay's Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Study Recording</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-retrofit2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                學習 Android Retrofit 2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-05-02T17:59:05+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/learn-android-retrofit2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="learn-android-retrofit2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Retrofit 是什麼 ? 我也是學習 RxJava 途中才知道， Retrofit 跟 Volley 一樣是 Android 一種 HTTP 請求的框架，但實際操作了一遍，感覺比 Volley 還要更簡便，而且能夠支援 RxJava 的關係，必須要學習一下。</p>
+<blockquote>
+<p>好文參考<br><a href="http://www.jianshu.com/p/7efdc3477269" target="_blank" rel="external">【Android】Retrofit 2.0 的使用</a><br><a href="http://wuxiaolong.me/2016/01/15/retrofit/" target="_blank" rel="external">Android Retrofit 2.0使用</a><br><a href="http://www.jianshu.com/p/308f3c54abdd" target="_blank" rel="external">你真的会用Retrofit2吗?Retrofit2完全教程</a><br><a href="http://bxbxbai.github.io/2015/12/13/retrofit2/" target="_blank" rel="external">Retrofit2源碼解析</a></p>
+</blockquote>
+<h2 id="Retrofit-2-介紹"><a href="#Retrofit-2-介紹" class="headerlink" title="Retrofit 2 介紹"></a>Retrofit 2 介紹</h2><p>上面說到 Retrofit 2 為一種 HTTP 請求的工具，並且使用 REST API 設計，由 RESTful Client 向 Server 發出請求。</p>
+<blockquote>
+<p>有關 RESTful API 的相關文章<br><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">RESTful API 设计指南</a><br><a href="http://ithelp.ithome.com.tw/articles/10157431" target="_blank" rel="external">定義 1 - 什麼是 REST/RESTful ?</a></p>
+</blockquote>
+<p><img src="/learn-android-retrofit2/retrofit.png" alt="Retrofit 模型"></p>
+<ol>
+<li>創建一個能裝載數據的 Class (Model or POJO)，</li>
+<li>創建 Interface 來管理各種 HTTP APIs</li>
+<li>最後創建 REST Client 發出請求，等待回傳 JSON 數據，使用內建的 Gson 解析序列</li>
+</ol>
+<hr>
+<h2 id="Retrofit-2-基本的用法"><a href="#Retrofit-2-基本的用法" class="headerlink" title="Retrofit 2 基本的用法"></a>Retrofit 2 基本的用法</h2><h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><ul>
+<li><p>Gradle 配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile 'com.squareup.retrofit2:retrofit:2.2.0'</div><div class="line">compile 'com.squareup.retrofit2:converter-gson:2.2.0'</div></pre></td></tr></table></figure>
+</li>
+<li><p>別忘了到 manifest 新增網路的權限</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="創建裝載數據-Class"><a href="#創建裝載數據-Class" class="headerlink" title="創建裝載數據 Class"></a>創建裝載數據 Class</h3><p>這邊可以使用 Android Studio 的插件 GsonFormat ，輕鬆將 JSON 轉換為 JavaBean 類別。</p>
+<p>安裝方法 -&gt; Settings -&gt; Plugins -&gt; Browse Repositories -&gt; 搜尋 GsonFormat -&gt; restart</p>
+<p>新增空白的 Class 後 Alt + Insert</p>
+<p><img src="/learn-android-retrofit2/gsonformat1.png" alt=""><br><img src="/learn-android-retrofit2/gsonformat2.png" alt=""></p>
+<p>就能夠直接產生一個 JavaBean 的類別 !<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> email;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.email = email;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="創建-Retrofit-物件與實作-Interface"><a href="#創建-Retrofit-物件與實作-Interface" class="headerlink" title="創建 Retrofit 物件與實作 Interface"></a>創建 Retrofit 物件與實作 Interface</h3><p>假設今天要到 <code>http://www.api.com/user/{userid}</code> 取得 user 的資料。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">            .addConverterFactory(GsonConverterFactory.create()) <span class="comment">// 使用 Gson 解析</span></div><div class="line">            .baseUrl(<span class="string">"http://www.api.com/"</span>)</div><div class="line">            .build();</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApiService</span> </span>&#123;</div><div class="line">  <span class="comment">// 會返回一個 call 類別</span></div><div class="line">  <span class="meta">@GET</span>(<span class="string">"user/&#123;userid&#125;"</span>)</div><div class="line">  <span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"userid"</span>)</span> String userid)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="創建要去請求-API-的-Client-Service"><a href="#創建要去請求-API-的-Client-Service" class="headerlink" title="創建要去請求 API 的 Client Service"></a>創建要去請求 API 的 Client Service</h3><ul>
+<li><p>創建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Api apiService = retrofit.create(ApiService.class);</div><div class="line">Call&lt;User&gt; call = apiService.getUser(<span class="string">"123"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>發出請求 (同步)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">User user = call.execute();</div></pre></td></tr></table></figure>
+</li>
+<li><p>發出請求 (異步)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">call.enqueue(<span class="keyword">new</span> Callback&lt;User&gt;()&#123;  </div><div class="line">         <span class="meta">@Override</span>  </div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Response&lt;User&gt; response)</span> </span>&#123;  </div><div class="line">             <span class="comment">//成功後，使用 response.body() 得到結果</span></div><div class="line">             User user = response.body();</div><div class="line">          &#125;  </div><div class="line">          <span class="meta">@Override</span>  </div><div class="line">          <span class="function"><span class="keyword">public</span> <span class="title">voidonFailure</span><span class="params">(Throwable t)</span> </span>&#123;  </div><div class="line">             <span class="comment">// 請求失敗</span></div><div class="line">         &#125;  </div><div class="line">     &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="HTTP-API-不同的請求方法"><a href="#HTTP-API-不同的請求方法" class="headerlink" title="HTTP API 不同的請求方法"></a>HTTP API 不同的請求方法</h2><p>以下來自官方的文檔，作為記憶之用，請參考 <a href="http://square.github.io/retrofit/" target="_blank" rel="external">Retrofit Documentation</a></p>
+<blockquote>
+<p>另外可以參考<br><a href="https://bng86.gitbooks.io/android-third-party-/content/retrofit.html" target="_blank" rel="external">Retrofit · Android third-party 使用心得</a><br><a href="http://www.devwiki.net/2016/03/19/Retrofit-Use-Course-2/" target="_blank" rel="external">Retrofit使用教程(二) | DevWiki Blog</a></p>
+</blockquote>
+<h3 id="GET-METHOD"><a href="#GET-METHOD" class="headerlink" title="GET METHOD"></a>GET METHOD</h3><ul>
+<li><p>假設要讀取用戶列表，不用用到任何參數</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"users/list"</span>)</div><div class="line">Call&lt;List&lt;User&gt;&gt; getUsers();</div></pre></td></tr></table></figure>
+</li>
+<li><p>可以帶入 query</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"users/list?sort=desc"</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>URL 帶入參數</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"group/&#123;id&#125;/users"</span>)</div><div class="line">Call&lt;List&lt;User&gt;&gt; groupList(<span class="meta">@Path</span>(<span class="string">"id"</span>) <span class="keyword">int</span> groupId);</div></pre></td></tr></table></figure>
+</li>
+<li><p>若要邊帶入 URL 參數並且 query</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"group/&#123;id&#125;/users"</span>)</div><div class="line">Call&lt;List&lt;User&gt;&gt; groupList(<span class="meta">@Path</span>(<span class="string">"id"</span>) <span class="keyword">int</span> groupId, <span class="meta">@Query</span>(<span class="string">"sort"</span>) String sort);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="POST-METHOD"><a href="#POST-METHOD" class="headerlink" title="POST METHOD"></a>POST METHOD</h3><ul>
+<li><p>假設要更新使用者資料，需要使用 <code>form-encoded</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormUrlEncoded</span></div><div class="line"><span class="meta">@POST</span>(<span class="string">"user/edit"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">updateUser</span><span class="params">(@Field(<span class="string">"first_name"</span>)</span> String first, @<span class="title">Field</span><span class="params">(<span class="string">"last_name"</span>)</span> String last)</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>需要利用 <code>multipart</code> 上傳文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Multipart</span></div><div class="line"><span class="meta">@PUT</span>(<span class="string">"user/photo"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">updateUser</span><span class="params">(@Part(<span class="string">"photo"</span>)</span> RequestBody photo, @<span class="title">Part</span><span class="params">(<span class="string">"description"</span>)</span> RequestBody description)</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>使用過 Retrofit 的確比 Volley 的用法更簡潔方便了，再來就要試試怎麼樣引入 RxJava 當中。多多實作再來了解其中的運作原理吧 !</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Retrofit/" rel="tag"># Retrofit</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/learn-android-rxjava/" rel="next" title="學習 Android RxJava">
+                <i class="fa fa-chevron-left"></i> 學習 Android RxJava
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/learn-android-databinding/" rel="prev" title="學習 Android Data Binding">
+                學習 Android Data Binding <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Jay Wang" />
+          <p class="site-author-name" itemprop="name">Jay Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">慢慢學習。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Retrofit-2-介紹"><span class="nav-number">1.</span> <span class="nav-text">Retrofit 2 介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Retrofit-2-基本的用法"><span class="nav-number">2.</span> <span class="nav-text">Retrofit 2 基本的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup"><span class="nav-number">2.1.</span> <span class="nav-text">Setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#創建裝載數據-Class"><span class="nav-number">2.2.</span> <span class="nav-text">創建裝載數據 Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#創建-Retrofit-物件與實作-Interface"><span class="nav-number">2.3.</span> <span class="nav-text">創建 Retrofit 物件與實作 Interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#創建要去請求-API-的-Client-Service"><span class="nav-number">2.4.</span> <span class="nav-text">創建要去請求 API 的 Client Service</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-API-不同的請求方法"><span class="nav-number">3.</span> <span class="nav-text">HTTP API 不同的請求方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GET-METHOD"><span class="nav-number">3.1.</span> <span class="nav-text">GET METHOD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST-METHOD"><span class="nav-number">3.2.</span> <span class="nav-text">POST METHOD</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jay Wang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jays-code.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://windsuzu.github.io/learn-android-retrofit2/';
+          this.page.identifier = 'learn-android-retrofit2/';
+          this.page.title = '學習 Android Retrofit 2';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jays-code.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
