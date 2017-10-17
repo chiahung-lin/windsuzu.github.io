@@ -296,6 +296,187 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-492/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-492/" itemprop="url">
+                  LeetCode#492 Construct the Rectangle - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-18T14:06:31+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-492/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-492/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>For a web developer, it is very important to know how to design a web page’s size. So, given a specific rectangular web page’s area, your job by now is to design a rectangular web page, whose length L and width W satisfy the following requirements:</p>
+<ol>
+<li>The area of the rectangular web page you designed must equal to the given target area.</li>
+<li>The width W should not be larger than the length L, which means L &gt;= W.</li>
+<li>The difference between length L and width W should be as small as possible.</li>
+</ol>
+<p>給一個四邊形，必須找到他的「長」跟「寬」。</p>
+<ol>
+<li>長乘以寬剛好等於給予的面積</li>
+<li>長必須要大於等於寬</li>
+<li>長與寬盡量趨近於相等（正方形）。</li>
+</ol>
+<p>Example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">4</span></div><div class="line"><span class="type">Output</span>: [<span class="number">2</span>, <span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>: </div><div class="line"><span class="type">The</span> target area <span class="keyword">is</span> <span class="number">4</span>, and all the possible ways to construct it are [<span class="number">1</span>,<span class="number">4</span>], [<span class="number">2</span>,<span class="number">2</span>], [<span class="number">4</span>,<span class="number">1</span>].</div><div class="line"><span class="type">But</span> according to requirement <span class="number">2</span>, [<span class="number">1</span>,<span class="number">4</span>] <span class="keyword">is</span> illegal; according to requirement <span class="number">3</span>,  [<span class="number">4</span>,<span class="number">1</span>] <span class="keyword">is</span> not optimal compared to [<span class="number">2</span>,<span class="number">2</span>]. <span class="type">So</span> the length <span class="type">L</span> <span class="keyword">is</span> <span class="number">2</span>, and the width <span class="type">W</span> <span class="keyword">is</span> <span class="number">2</span>.</div></pre></td></tr></table></figure></p>
+<p>四邊形的面積為 4 ，他的長寬可能為 [1,4], [2,2], [4,1] ，寬不能大於長所以 [1,4] 去掉， [2,2] 比起 [4,1] 更趨近於正方形，所以答案是 [2,2] 。</p>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>要求出趨近於正方形的長寬，最先想到的是把面積開根號，看寬是否為整數。<br>是整數代表是正方形，直接回傳 [w, w]<br>如果不是，依序將開根號得來的寬化成整數，減一直到能被面積整除，就可以求得寬。最後回傳 [area/w, w]</p>
+<p><img src="/leetcode-492/rectangle.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation <span class="comment">// sqrt function needs to import Foundation</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">constructRectangle</span><span class="params">(<span class="number">_</span> area: Int)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> area == <span class="number">0</span> &#123; <span class="keyword">return</span> [] &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> w = <span class="type">Int</span>(sqrt(<span class="type">Double</span>(area)))</div><div class="line">    <span class="keyword">while</span> area % w != <span class="number">0</span> &#123;</div><div class="line">        w -= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [area / w, w]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-283/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2005,197 +2186,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-226/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-226/" itemprop="url">
-                  LeetCode#226 Invert Binary Tree - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-08T13:10:25+08:00">
-                2017-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-226/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-226/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Invert a binary tree.</p>
-<p>翻轉二元樹。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     4</div><div class="line">   /   \</div><div class="line">  2     7</div><div class="line"> / \   / \</div><div class="line">1   3 6   9</div></pre></td></tr></table></figure>
-<p>to</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     4</div><div class="line">   /   \</div><div class="line">  7     2</div><div class="line"> / \   / \</div><div class="line">9   6 3   1</div></pre></td></tr></table></figure>
-<h1 id="Trivia"><a href="#Trivia" class="headerlink" title="Trivia"></a>Trivia</h1><p>This problem was inspired by this original tweet by Max Howell:</p>
-<p>Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.</p>
-<p>Homebrew 的開發者 Max Howell 在<a href="https://twitter.com/mxcl/status/608682016205344768" target="_blank" rel="external">推特發文</a> :<br>Google: 雖然我們 90% 工程師都在用你寫的軟體（Homebrew），但你不能在白板上反轉二元樹，所以滾蛋。</p>
-<h1 id="第一次解題-19-ms"><a href="#第一次解題-19-ms" class="headerlink" title="第一次解題 : 19 ms"></a>第一次解題 : 19 ms</h1><p>把每層的左右換邊就好<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="number">4</span></div><div class="line">   /   \</div><div class="line">  <span class="number">2</span>     <span class="number">7</span></div><div class="line"> / \   / \</div><div class="line"><span class="number">1</span>   <span class="number">3</span> <span class="number">6</span>   <span class="number">9</span></div></pre></td></tr></table></figure></p>
-<p>第一次轉節點 2 跟 7</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="number">4</span></div><div class="line">   /   \</div><div class="line">  <span class="number">7</span>     <span class="number">2</span></div><div class="line"> / \   / \</div><div class="line"><span class="number">6</span>   <span class="number">9</span> <span class="number">1</span>   <span class="number">3</span></div></pre></td></tr></table></figure>
-<p>第二次轉 6 9</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="number">4</span></div><div class="line">   /   \</div><div class="line">  <span class="number">7</span>     <span class="number">2</span></div><div class="line"> / \   / \</div><div class="line"><span class="number">9</span>   <span class="number">6</span> <span class="number">1</span>   <span class="number">3</span></div></pre></td></tr></table></figure>
-<p>第三次轉 1 3</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="number">4</span></div><div class="line">   /   \</div><div class="line">  <span class="number">7</span>     <span class="number">2</span></div><div class="line"> / \   / \</div><div class="line"><span class="number">9</span>   <span class="number">6</span> <span class="number">3</span>   <span class="number">1</span></div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">invertTree</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">TreeNode</span>? &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> temp = root.<span class="keyword">left</span></div><div class="line">    root.<span class="keyword">left</span> = root.<span class="keyword">right</span></div><div class="line">    root.<span class="keyword">right</span> = temp</div><div class="line">    </div><div class="line">    invertTree(root.<span class="keyword">left</span>)</div><div class="line">    invertTree(root.<span class="keyword">right</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> root</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2245,7 +2235,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

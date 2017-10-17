@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-16T06:59:56.000Z</updated>
+  <updated>2017-10-17T07:31:29.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#345 Reverse Vowels of a String - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-345/"/>
+    <id>http://windsuzu.github.io/leetcode-345/</id>
+    <published>2017-10-17T07:25:58.000Z</published>
+    <updated>2017-10-17T07:31:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and reverse only the vowels of a string.</p>
+<p>反轉字串，但只反轉母音的部分。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">1</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"hello"</span>, <span class="keyword">return</span> <span class="string">"holle"</span>.</div></pre></td></tr></table></figure>
+<p>hello 中的 eo 轉換為 oe</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">2</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"leetcode"</span>, <span class="keyword">return</span> <span class="string">"leotcede"</span>.</div></pre></td></tr></table></figure>
+<p>leetcode 中的 eeoe 轉換為 eoee</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義母音表，接著像 <a href="https://windsuzu.github.io/leetcode-344/">Reverse String</a> 這題一樣進行兩個指針的迴圈。</p>
+<p>不同的是，若當下左邊的字母不為母音，就將左指針 +1<br>反之，右邊不為母音，將右指針 -1</p>
+<p>確定抓到左右兩個母音時，就將左右調換，左右各進退一步。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseVowels</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">set</span>: <span class="type">Set</span>&lt;<span class="type">Character</span>&gt; = [<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>, <span class="string">"A"</span>, <span class="string">"E"</span>, <span class="string">"I"</span>, <span class="string">"O"</span>, <span class="string">"U"</span>]</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">right</span> = s.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &#123;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">left</span>]) &#123;</div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">right</span>]) &#123;</div><div class="line">            <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> temp = s[<span class="keyword">left</span>]</div><div class="line">        s[<span class="keyword">left</span>] = s[<span class="keyword">right</span>]</div><div class="line">        s[<span class="keyword">right</span>] = temp</div><div class="line">        <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Write a function that takes a string as input and reverse only the vow
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Two Pointers" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Two-Pointers/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Two-Pointers/String/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
+    
+      <category term="Two Pointers" scheme="http://windsuzu.github.io/tags/Two-Pointers/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#342 Power of Four - in Swift</title>
@@ -855,49 +901,6 @@
       <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
     
       <category term="MySQL" scheme="http://windsuzu.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#107 Binary Tree Level Order Traversal II - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-107/"/>
-    <id>http://windsuzu.github.io/leetcode-107/</id>
-    <published>2017-09-27T05:23:14.000Z</published>
-    <updated>2017-09-27T05:48:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, return the bottom-up level order traversal of its nodes’ values. (ie, from left to right, level by level from leaf to root).</p>
-<p>給定二元樹，返回他從底部到根部的節點尋訪。 (由左到右，由層到層，從葉到根)</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> binary tree [<span class="number">3</span>,<span class="number">9</span>,<span class="number">20</span>,null,null,<span class="number">15</span>,<span class="number">7</span>],</div><div class="line"></div><div class="line">       <span class="number">3</span></div><div class="line">      / \</div><div class="line">     <span class="number">9</span>  <span class="number">20</span></div><div class="line">       /  \</div><div class="line">      <span class="number">15</span>   <span class="number">7</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> its bottom-up level order traversal <span class="keyword">as</span>:</div><div class="line"></div><div class="line">[</div><div class="line">   [<span class="number">15</span>,<span class="number">7</span>],</div><div class="line">   [<span class="number">9</span>,<span class="number">20</span>],</div><div class="line">   [<span class="number">3</span>]</div><div class="line">]</div></pre></td></tr></table></figure>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義一個空的二維陣列，若 level = 第一層陣列的大小，則添加一個新的陣列進去。</p>
-<p>若到達底部節點，就將值送入對應的陣列中。</p>
-<p><img src="/leetcode-107/bfs2matrix.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">levelOrderBottom</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    <span class="keyword">var</span> res = [[<span class="type">Int</span>]]()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">bfs</span><span class="params">(<span class="number">_</span> root: TreeNode?, level: Int)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> level &gt;= res.<span class="built_in">count</span> &#123;</div><div class="line">            res.insert([<span class="type">Int</span>](), at: <span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">        bfs(root!.<span class="keyword">left</span>, level: level + <span class="number">1</span>)</div><div class="line">        bfs(root!.<span class="keyword">right</span>, level: level + <span class="number">1</span>)</div><div class="line">        res[res.<span class="built_in">count</span> - level - <span class="number">1</span>].append(root!.val)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    bfs(root, level: <span class="number">0</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary tree, return the bottom-up level order traversal of its
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
-    
-      <category term="Breadth-first Search" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/Breadth-first-Search/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
-    
-      <category term="Breadth-first Search" scheme="http://windsuzu.github.io/tags/Breadth-first-Search/"/>
     
   </entry>
   

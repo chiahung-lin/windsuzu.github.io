@@ -3,6 +3,50 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#345 Reverse Vowels of a String - in Swift]]></title>
+      <url>/leetcode-345/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and reverse only the vowels of a string.</p>
+<p>反轉字串，但只反轉母音的部分。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">1</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"hello"</span>, <span class="keyword">return</span> <span class="string">"holle"</span>.</div></pre></td></tr></table></figure>
+<p>hello 中的 eo 轉換為 oe</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">2</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"leetcode"</span>, <span class="keyword">return</span> <span class="string">"leotcede"</span>.</div></pre></td></tr></table></figure>
+<p>leetcode 中的 eeoe 轉換為 eoee</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義母音表，接著像 <a href="https://windsuzu.github.io/leetcode-344/">Reverse String</a> 這題一樣進行兩個指針的迴圈。</p>
+<p>不同的是，若當下左邊的字母不為母音，就將左指針 +1<br>反之，右邊不為母音，將右指針 -1</p>
+<p>確定抓到左右兩個母音時，就將左右調換，左右各進退一步。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseVowels</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">set</span>: <span class="type">Set</span>&lt;<span class="type">Character</span>&gt; = [<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>, <span class="string">"A"</span>, <span class="string">"E"</span>, <span class="string">"I"</span>, <span class="string">"O"</span>, <span class="string">"U"</span>]</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">right</span> = s.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &#123;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">left</span>]) &#123;</div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">right</span>]) &#123;</div><div class="line">            <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> temp = s[<span class="keyword">left</span>]</div><div class="line">        s[<span class="keyword">left</span>] = s[<span class="keyword">right</span>]</div><div class="line">        s[<span class="keyword">right</span>] = temp</div><div class="line">        <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Two Pointers </category>
+            
+            <category> String </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> String </tag>
+            
+            <tag> Two Pointers </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#342 Power of Four - in Swift]]></title>
       <url>/leetcode-342/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer (signed 32 bits), write a function to check whether it is a power of 4.</p>
