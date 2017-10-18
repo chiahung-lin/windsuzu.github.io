@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-17T07:31:29.000Z</updated>
+  <updated>2017-10-18T07:13:44.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#367 Valid Perfect Square - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-367/"/>
+    <id>http://windsuzu.github.io/leetcode-367/</id>
+    <published>2017-10-18T06:39:48.000Z</published>
+    <updated>2017-10-18T07:13:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a positive integer num, write a function which returns True if num is a perfect square else False.</p>
+<p>給一正整數，驗證其是否為一個完全平方數。</p>
+<p>Note: Do not use any built-in library function such as sqrt.</p>
+<p>不使用任何語法中的 sqrt 函式。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">16</span></div><div class="line"><span class="type">Returns</span>: <span class="type">True</span></div></pre></td></tr></table></figure></p>
+<p>16 可以是 4 的平方數</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">14</span></div><div class="line"><span class="type">Returns</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>14 不是任何正整數的平方數</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h1 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h1><p>根據 <a href="http://www.cs.wustl.edu/~kjg/CS101_SP97/Notes/SquareRoot/sqrt.html" target="_blank" rel="external">http://www.cs.wustl.edu/~kjg/CS101_SP97/Notes/SquareRoot/sqrt.html</a> 的指引，要達成 sqrt function 的運作，首先先找出一個數符合 <code>y^2 = x, y = x/y</code> ，知道這個條件後:</p>
+<ul>
+<li>猜一個數 g 來代表 y ，並且測試</li>
+<li>檢驗 x / g</li>
+<li>如果 x/g 等於 g ，那就代表找到 sqrt 的解，若沒有等於，再猜一個更好的 g</li>
+<li>這個更好的 g 等於 x 和 x /g 的平均值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPerfectSquare</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> x = num</div><div class="line">    <span class="keyword">while</span> x * x &gt; num &#123;</div><div class="line">        x = (x + (num/x)) / <span class="number">2</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> x * x == num</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h1><p>使用二元搜尋法，從對半開始找起，如果等於答案則返回 true 。</p>
+<p>大於則將右邊改為中間數 - 1，小於則將左邊改為中間數 + 1 。持續對半搜尋答案。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPerfectSquareBinary</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> (<span class="keyword">left</span>, <span class="keyword">right</span>) = (<span class="number">1</span>, num)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">left</span> &lt;= <span class="keyword">right</span> &#123;</div><div class="line">        <span class="keyword">let</span> mid = (<span class="keyword">left</span> + <span class="keyword">right</span>) / <span class="number">2</span></div><div class="line">        <span class="keyword">if</span> mid * mid == num &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> mid * mid &gt; num &#123;</div><div class="line">            <span class="keyword">right</span> = mid - <span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">left</span> = mid + <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a positive integer num, write a function which returns True if n
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Math" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/"/>
+    
+      <category term="Binary Search" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/Binary-Search/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
+    
+      <category term="Binary Search" scheme="http://windsuzu.github.io/tags/Binary-Search/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#345 Reverse Vowels of a String - in Swift</title>
@@ -865,42 +920,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#182 Duplicate Emails - in MySQL</title>
-    <link href="http://windsuzu.github.io/leetcode-182/"/>
-    <id>http://windsuzu.github.io/leetcode-182/</id>
-    <published>2017-09-28T04:11:41.000Z</published>
-    <updated>2017-09-28T04:19:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a SQL query to find all duplicate emails in a table named Person.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+<span class="comment">----+---------+</span></div><div class="line">| Id | Email   |</div><div class="line">+<span class="comment">----+---------+</span></div><div class="line">| 1  | a@b.com |</div><div class="line">| 2  | c@d.com |</div><div class="line">| 3  | a@b.com |</div><div class="line">+<span class="comment">----+---------+</span></div></pre></td></tr></table></figure>
-<p>寫出 SQL Query 從 Person 找出所有有重複的 email 資料。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example, your query should return the following for the above table:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+<span class="comment">---------+</span></div><div class="line">| Email   |</div><div class="line">+<span class="comment">---------+</span></div><div class="line">| a@b.com |</div><div class="line">+<span class="comment">---------+</span></div></pre></td></tr></table></figure>
-<p>根據上面的例子，應該要回傳這樣的表。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>首先用 GROUP BY 將 Email 分組起來。</p>
-<p>再來利用 HAVING 找出分組後誰的 Email 數量大於 1 的即可。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> Email</div><div class="line"><span class="keyword">FROM</span> Person</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</div><div class="line"><span class="keyword">HAVING</span> <span class="keyword">count</span>(Email) &gt; <span class="number">1</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Write a SQL query to find all duplicate emails in a table named Person
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="MySQL" scheme="http://windsuzu.github.io/categories/LeetCode/MySQL/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="MySQL" scheme="http://windsuzu.github.io/tags/MySQL/"/>
     
   </entry>
   

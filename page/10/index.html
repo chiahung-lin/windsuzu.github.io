@@ -296,6 +296,195 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-561/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-561/" itemprop="url">
+                  LeetCode#561 Array Partition I - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-26T13:26:20+08:00">
+                2017-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-561/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-561/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.</p>
+<p>給一個「2n數量」的整數陣列，目標是把這些整數分成「n組」配對的整數，並且找出每組的最小值的最大值。</p>
+<p>Example 1:<br><code>Input: [1,4,3,2]</code></p>
+<p>Output: 4<br><code>Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4).</code></p>
+<p>範例中 n 為 2 ，所有配對的最大加總就是 4</p>
+<p>Note:<br> n is a positive integer, which is in the range of [1, 10000].<br> All the integers in the array will be in the range of [-10000, 10000].</p>
+<p> n 必須為正整數，範圍是 1 至 10000<br> 陣列中所有數字必須介於 -10000 至 10000</p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>其實他題目講解得有點爛，花了一些時間終於知道他想要幹嘛，難怪大家給題目評分 GOOD 75 , BAD 209 。</p>
+<p>意思是說 : 如果給的陣列是 <code>[1,4,3,2]</code> 好了<br>我必須去找出 2個2個 配對， 並且從每一個配對的最小值，全部加總起來找到最大值。</p>
+<p>如果分成 [1,4], [3,2] -&gt; 1 + 2 = 3<br>分成 [1,3], [4,2] -&gt; 1 + 2 = 3<br>分成 [1,2], [4,3] -&gt; 1 + 3 = 4</p>
+<p>所以最大值就是 4</p>
+<h1 id="第一次解題-Accepted"><a href="#第一次解題-Accepted" class="headerlink" title="第一次解題 : Accepted"></a>第一次解題 : Accepted</h1><p>可以發現任何的2n陣列如 <code>[1,5,3,7,9,8,33,20]</code><br>想要找到「每組最小值」總和最大值的話<br>剛好就是「每兩個最小」的值取最小的值</p>
+<p>以<code>[1,5,3,7,9,8,33,20]</code>來說 就是 (1,3), (5,7), (8,9), (20,33) -&gt; 1 + 5 + 8 + 20 = 34<br>所以只需要將陣列由小到大排序<br>並且跳過偶數位置的數字，相加起來就是答案</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrayPairSum</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">let</span> sortNums = nums.sorted(by: &lt;)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;sortNums.<span class="built_in">count</span> <span class="keyword">where</span> i % <span class="number">2</span> == <span class="number">0</span> &#123;</div><div class="line">        sum += sortNums[i]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> sum</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-617/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2053,187 +2242,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-dependency-injection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/learn-android-dependency-injection/" itemprop="url">
-                  學習 Android 依賴注入 Dependency Injection (DI)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-04-22T16:11:19+08:00">
-                2017-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/軟體工程/" itemprop="url" rel="index">
-                    <span itemprop="name">軟體工程</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/軟體工程/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/learn-android-dependency-injection/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="learn-android-dependency-injection/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前學到的幾種 Android 設計架構，都是為了要讓程式碼簡化，使得程式可讀性變高，以及更順利、簡單的進行單元測試。而在 <a href="http://chriszou.com/2016/05/06/android-unit-testing-di.html" target="_blank" rel="external">Android單元測試（五）：依賴注入，將mock方便的用起來</a> 這篇文章學習單元測試時，發現依賴注入 (Dependency Injection，DI)能夠讓單元測試變得更容易，甚至可以讓 App 的架構變得更乾淨。究竟 DI 是何方神聖，身為一個入門開發者一定要來學一下。</p>
-<h2 id="什麼是依賴注入"><a href="#什麼是依賴注入" class="headerlink" title="什麼是依賴注入"></a>什麼是依賴注入</h2><p>根據 <a href="http://android.jobbole.com/82386/" target="_blank" rel="external">聊聊 Android 中的依賴注入</a> 這篇文章敘述，原來 DI 只是一種 設計模式 (design pattern) ，而且還有許多的框架可以使用。 DI 的目的就是讓開發者能夠寫出”低耦合“的程式碼，不但能更輕鬆的進行單元測試，也幫助維持整個 App 的架構。畢竟如果一款要生存長久的 App ，開發的時間就會越長，往往測試的效率就會慢慢地降低。所以善用 DI 來改善設計，增加可維護性、可拓展性、降低耦合，試著讓程式簡潔優雅一些吧。</p>
-<h2 id="依賴注入的概念"><a href="#依賴注入的概念" class="headerlink" title="依賴注入的概念"></a>依賴注入的概念</h2><h3 id="什麼是-Dependency"><a href="#什麼是-Dependency" class="headerlink" title="什麼是 Dependency ?"></a>什麼是 Dependency ?</h3><p>在 DI 的觀念裡有兩個角色 : Client 、 Dependency ，如果在 App 裡面，有 A Class 用到了 B Class ，那麼 A 就是 Client ，而 B 則是 Dependency 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModuleA</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> ModuleB moduleB;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">ModuleA</span><span class="params">()</span> </span>&#123;</div><div class="line">      moduleB = <span class="keyword">new</span> ModuleB();  <span class="comment">// A 產生了對 B 的 dependency</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="什麼是-Injection"><a href="#什麼是-Injection" class="headerlink" title="什麼是 Injection ?"></a>什麼是 Injection ?</h3><p>上面的程式碼中， B 在外部已經創建好， 接著就像被注入 (Inject) 一般 set 到 Client 的 A裡面，這就算是 DI 的一種方式。但是在上面的例子中 A 和 B 之間還是存在高度耦合，不算是一個很好的 Injection ，一般常用的方法，是透過 client 的 Constructor 將 dependency 傳入。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModuleA</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> ModuleB moduleB;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">ModuleA</span><span class="params">(ModuleB moduleB)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.moduleB = moduleB;  <span class="comment">// 將 B 作為 A 的 Constructor 參數傳入</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>現在，A Class 不需要知道如何去實現 B ，只要任何繼承了 B 的 Class 都可以傳入，降低兩者間的耦合。<br>到這邊就是 DI 的概念，簡單。</p>
-<h2 id="依賴注入的問題"><a href="#依賴注入的問題" class="headerlink" title="依賴注入的問題"></a>依賴注入的問題</h2><p>習得了 DI 技能馬上就去打 Boss ，發現了一個天大的問題。如果你手動一個一個一個的新增 dependency ，你會發現、你會訝異，所有的 dependency 從最頂端的 Client 一直延伸開來。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 如果原本的 ModuleB 也需要兩個 dependency C &amp; D</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModuleB</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> ModuleC moduleC;</div><div class="line">   <span class="keyword">private</span> ModuleD moduleD;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">ModuleB</span><span class="params">(ModuleC moduleC, ModuleD moduleD)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.moduleC = moduleC;</div><div class="line">      <span class="keyword">this</span>.moduleD = moduleD;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>而 ModuleC 還需要 Module E !</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModuleC</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> ModuleE moduleE;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">ModuleC</span><span class="params">(ModuleE moduleE)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.moduleE = moduleE;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那可憐 Activity 要呼叫 ModuleA 時就會變成這樣 。･ﾟ･(つд`ﾟ)･ﾟ･<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> ModuleA moduleA;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    	<span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        ModuleD moduleD = <span class="keyword">new</span> ModuleD();</div><div class="line">        ModuleE moduleE = <span class="keyword">new</span> ModuleE();</div><div class="line"></div><div class="line">        ModuleC moduleC = <span class="keyword">new</span> ModuleC(moduleE);</div><div class="line">        ModuleB moduleB = <span class="keyword">new</span> ModuleB(moduleC, moduleD);</div><div class="line"></div><div class="line">        moduleA = <span class="keyword">new</span> ModuleA(moduleB);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>有夠亂啊 !!!<br>還好，前人們在很早以前使用 DI 時早就出現了這樣的問題，所以早就有許多解決使用 DI 問題的框架。</p>
-<h2 id="依賴注入的框架"><a href="#依賴注入的框架" class="headerlink" title="依賴注入的框架"></a>依賴注入的框架</h2><p>現在我們的問題是，如果有越來越多的 dependency 被我製造時，這些 dependency 可能會在不同的 client class 被 new 出來， 不但變得更複雜了，而且還重複了一堆程式碼。</p>
-<p>而在 Java 的領域中，已經有很多框架幫助我們解決問題，例如最近流行的一種框架叫作 Dagger2 。</p>
-<p>這些框架幫助我們建立一個類似 dependency 的工廠，所有的 dependency ，還是 dependency 的 dependency ，都要統一在這個工廠裡生產。所有要用到這些 dependency 的 client 就去這個工廠取得，而且 client 只需要知道他要用的 dependency 是誰，不需要知道他要的 dependency 又用了哪些 dependency ， 框架系統會自動幫我們判斷。</p>
-<p>所以接著來學學怎麼使用 Dagger2 吧！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2283,7 +2291,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">105</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2294,7 +2302,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

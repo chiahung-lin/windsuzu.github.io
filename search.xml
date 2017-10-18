@@ -3,6 +3,59 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#367 Valid Perfect Square - in Swift]]></title>
+      <url>/leetcode-367/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a positive integer num, write a function which returns True if num is a perfect square else False.</p>
+<p>給一正整數，驗證其是否為一個完全平方數。</p>
+<p>Note: Do not use any built-in library function such as sqrt.</p>
+<p>不使用任何語法中的 sqrt 函式。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">16</span></div><div class="line"><span class="type">Returns</span>: <span class="type">True</span></div></pre></td></tr></table></figure></p>
+<p>16 可以是 4 的平方數</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">14</span></div><div class="line"><span class="type">Returns</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>14 不是任何正整數的平方數</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h1 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h1><p>根據 <a href="http://www.cs.wustl.edu/~kjg/CS101_SP97/Notes/SquareRoot/sqrt.html" target="_blank" rel="external">http://www.cs.wustl.edu/~kjg/CS101_SP97/Notes/SquareRoot/sqrt.html</a> 的指引，要達成 sqrt function 的運作，首先先找出一個數符合 <code>y^2 = x, y = x/y</code> ，知道這個條件後:</p>
+<ul>
+<li>猜一個數 g 來代表 y ，並且測試</li>
+<li>檢驗 x / g</li>
+<li>如果 x/g 等於 g ，那就代表找到 sqrt 的解，若沒有等於，再猜一個更好的 g</li>
+<li>這個更好的 g 等於 x 和 x /g 的平均值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPerfectSquare</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> x = num</div><div class="line">    <span class="keyword">while</span> x * x &gt; num &#123;</div><div class="line">        x = (x + (num/x)) / <span class="number">2</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> x * x == num</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h1><p>使用二元搜尋法，從對半開始找起，如果等於答案則返回 true 。</p>
+<p>大於則將右邊改為中間數 - 1，小於則將左邊改為中間數 + 1 。持續對半搜尋答案。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPerfectSquareBinary</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> (<span class="keyword">left</span>, <span class="keyword">right</span>) = (<span class="number">1</span>, num)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">left</span> &lt;= <span class="keyword">right</span> &#123;</div><div class="line">        <span class="keyword">let</span> mid = (<span class="keyword">left</span> + <span class="keyword">right</span>) / <span class="number">2</span></div><div class="line">        <span class="keyword">if</span> mid * mid == num &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> mid * mid &gt; num &#123;</div><div class="line">            <span class="keyword">right</span> = mid - <span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">left</span> = mid + <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Math </category>
+            
+            <category> Binary Search </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Math </tag>
+            
+            <tag> Binary Search </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#345 Reverse Vowels of a String - in Swift]]></title>
       <url>/leetcode-345/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and reverse only the vowels of a string.</p>
@@ -1510,11 +1563,11 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
+            
+            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2036,9 +2089,9 @@
             
             <tag> Array </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Divide and Conquer </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -2473,11 +2526,11 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
+            
+            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2796,9 +2849,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -3181,9 +3234,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -4429,8 +4482,6 @@
         
         <tags>
             
-            <tag> 軟體工程 </tag>
-            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -4438,6 +4489,8 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
+            
+            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -4515,6 +4568,8 @@
         
         <tags>
             
+            <tag> Android </tag>
+            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -4524,8 +4579,6 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
-            
-            <tag> Android </tag>
             
             <tag> iOS </tag>
             
