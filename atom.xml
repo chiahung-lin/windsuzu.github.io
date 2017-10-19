@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-18T07:13:44.000Z</updated>
+  <updated>2017-10-19T07:18:39.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#175 Combine Two Tables - in MySQL</title>
+    <link href="http://windsuzu.github.io/leetcode-175/"/>
+    <id>http://windsuzu.github.io/leetcode-175/</id>
+    <published>2017-10-19T07:13:44.000Z</published>
+    <updated>2017-10-19T07:18:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Table: Person</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| PersonId    | int     |</div><div class="line">| FirstName   | varchar |</div><div class="line">| LastName    | varchar |</div><div class="line">+-------------+---------+</div><div class="line">PersonId is the primary key column for this table.</div><div class="line"></div><div class="line">PersonId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Table: Address</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| AddressId   | int     |</div><div class="line">| PersonId    | int     |</div><div class="line">| City        | varchar |</div><div class="line">| State       | varchar |</div><div class="line">+-------------+---------+</div><div class="line">AddressId is the primary key column for this table.</div><div class="line"></div><div class="line">AddressId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
+<p>Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:<br>FirstName, LastName, City, State</p>
+<p>寫一個 SQL 查詢，回傳每一個 Person 的值，以及其對應的 Address 欄位，<br>格式為 FirstName, LastName, City, State ，<br>不管有沒有對應的 Address 都要傳回。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>沒什麼難度的 SQL 查詢。</p>
+<p>注意的是不管有沒有對應的 Address 都要回傳 Person ，所以要使用 LEFT JOIN 右邊為空時返回 null 即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> FirstName, LastName, City, State</div><div class="line"><span class="keyword">FROM</span> Person</div><div class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">ON</span> Person.PersonId = Address.PersonId</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div c
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="MySQL" scheme="http://windsuzu.github.io/categories/LeetCode/MySQL/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="MySQL" scheme="http://windsuzu.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#367 Valid Perfect Square - in Swift</title>
@@ -875,51 +908,6 @@
       <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
     
       <category term="Hash Table" scheme="http://windsuzu.github.io/tags/Hash-Table/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#326 Power of Three - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-326/"/>
-    <id>http://windsuzu.github.io/leetcode-326/</id>
-    <published>2017-09-29T05:18:37.000Z</published>
-    <updated>2017-09-29T05:31:37.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer, write a function to determine if it is a power of three.</p>
-<p>給予一個整數，找出他是否為 3 的某次方。</p>
-<p>Follow up:<br>Could you do it without using any loop / recursion?</p>
-<p>能否不用任何迴圈 / 遞迴 ?</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="Iterative-Solution"><a href="#Iterative-Solution" class="headerlink" title="Iterative Solution"></a>Iterative Solution</h2><p>作為 3 的次方數，不斷除以 3 就會變成 1 ，但必須要注意數字要保持 % 3 == 0 。</p>
-<p>27 -&gt; 27/3 -&gt; 9/3 -&gt; 3/3 -&gt; 1 (O)</p>
-<p>18 -&gt; 18/3 -&gt; 6/3 -&gt; 2 (X)</p>
-<p>15 -&gt; 15/3 -&gt; 5 (%3 != 0) (X)</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> x = n</div><div class="line">    <span class="keyword">if</span> x &gt; <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">while</span> x % <span class="number">3</span> == <span class="number">0</span> &#123;</div><div class="line">            x /= <span class="number">3</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> x == <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Recursive-Solution"><a href="#Recursive-Solution" class="headerlink" title="Recursive Solution"></a>Recursive Solution</h2><p>把迴圈換成遞迴。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> n &gt; <span class="number">0</span> &amp;&amp; (n == <span class="number">1</span> || (n % <span class="number">3</span> == <span class="number">0</span> &amp;&amp; isPowerOfThree(n / <span class="number">3</span>)))</div></pre></td></tr></table></figure>
-<h2 id="No-Loop-Recursion-Solution"><a href="#No-Loop-Recursion-Solution" class="headerlink" title="No Loop / Recursion Solution"></a>No Loop / Recursion Solution</h2><p>3^19 為 1,162,261,467 , 再過來 3^20 = 3,486,784,401 已經超出 Int 的最大範圍 (2,147,483,647)。</p>
-<p>所以只要 n &gt; 0 且能被 3^19 整除就是 3 的次方數。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> ( n &gt; <span class="number">0</span> &amp;&amp; <span class="number">1162261467</span> % n == <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given an integer, write a function to determine if it is a power of th
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Math" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
     
   </entry>
   

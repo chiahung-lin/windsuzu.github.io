@@ -3,6 +3,37 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#175 Combine Two Tables - in MySQL]]></title>
+      <url>/leetcode-175/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Table: Person</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| PersonId    | int     |</div><div class="line">| FirstName   | varchar |</div><div class="line">| LastName    | varchar |</div><div class="line">+-------------+---------+</div><div class="line">PersonId is the primary key column for this table.</div><div class="line"></div><div class="line">PersonId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Table: Address</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| AddressId   | int     |</div><div class="line">| PersonId    | int     |</div><div class="line">| City        | varchar |</div><div class="line">| State       | varchar |</div><div class="line">+-------------+---------+</div><div class="line">AddressId is the primary key column for this table.</div><div class="line"></div><div class="line">AddressId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
+<p>Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:<br>FirstName, LastName, City, State</p>
+<p>寫一個 SQL 查詢，回傳每一個 Person 的值，以及其對應的 Address 欄位，<br>格式為 FirstName, LastName, City, State ，<br>不管有沒有對應的 Address 都要傳回。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>沒什麼難度的 SQL 查詢。</p>
+<p>注意的是不管有沒有對應的 Address 都要回傳 Person ，所以要使用 LEFT JOIN 右邊為空時返回 null 即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> FirstName, LastName, City, State</div><div class="line"><span class="keyword">FROM</span> Person</div><div class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">ON</span> Person.PersonId = Address.PersonId</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> MySQL </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#367 Valid Perfect Square - in Swift]]></title>
       <url>/leetcode-367/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a positive integer num, write a function which returns True if num is a perfect square else False.</p>
@@ -1563,11 +1594,11 @@
             
             <tag> Swift </tag>
             
+            <tag> Hash Table </tag>
+            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
-            
-            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2089,9 +2120,9 @@
             
             <tag> Array </tag>
             
-            <tag> Divide and Conquer </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Divide and Conquer </tag>
             
         </tags>
         
@@ -2526,11 +2557,11 @@
             
             <tag> Swift </tag>
             
+            <tag> Hash Table </tag>
+            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
-            
-            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2849,9 +2880,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -3234,9 +3265,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
