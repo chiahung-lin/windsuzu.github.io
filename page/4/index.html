@@ -296,6 +296,202 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-108/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-108/" itemprop="url">
+                  LeetCode#108 Convert Sorted Array to Binary Search Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-20T13:52:50+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Depth-first Search</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-108/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-108/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array where elements are sorted in ascending order, convert it to a height balanced BST.</p>
+<p>給定一個升序陣列，把它轉換成高度平衡的二元搜尋樹。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span> :</div><div class="line"></div><div class="line">        <span class="number">3</span></div><div class="line">      /   \</div><div class="line">     <span class="number">2</span>	   <span class="number">5</span></div><div class="line">    /	  /</div><div class="line">   <span class="number">1</span>	 <span class="number">4</span></div></pre></td></tr></table></figure>
+<p>必須要轉換成高度平衡的二元搜尋樹。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先取得陣列中間值作為根節點。</p>
+<p>再將陣列切為小於根節點的一半，與大於根節點的另一半。</p>
+<p>再從這兩個陣列重新遞迴一遍剛剛的步驟，就可以得到高度平衡的 BST 。</p>
+<p><img src="/leetcode-108/array2bst.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">sortedArrayToBST</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">TreeNode</span>? &#123;</div><div class="line">    <span class="keyword">if</span> nums.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> mid = nums[nums.<span class="built_in">count</span>/<span class="number">2</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> tree = <span class="type">TreeNode</span>(mid)</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> leftnums = <span class="type">Array</span>(nums[<span class="number">0</span>..&lt;nums.<span class="built_in">count</span>/<span class="number">2</span>])</div><div class="line">    <span class="keyword">let</span> rightnums = <span class="type">Array</span>(nums[nums.<span class="built_in">count</span>/<span class="number">2</span> + <span class="number">1</span>..&lt;nums.<span class="built_in">count</span>])</div><div class="line">    </div><div class="line">    tree.<span class="keyword">left</span> = sortedArrayToBST(leftnums)</div><div class="line">    tree.<span class="keyword">right</span> = sortedArrayToBST(rightnums)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> tree</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-671/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2053,210 +2249,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-628/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-628/" itemprop="url">
-                  LeetCode#628 Maximum Product of Three Numbers - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-10T00:00:03+08:00">
-                2017-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-628/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-628/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer array, find three numbers whose product is maximum and output the maximum product.</p>
-<p>給一個整數陣列，找出三個數字他們相乘會是最大的數字。</p>
-<p>Note:</p>
-<ol>
-<li>The length of the given array will be in range [3,10^4] and all elements are in the range [-1000, 1000].</li>
-<li>Multiplication of any three numbers in the input won’t exceed the range of 32-bit signed integer.</li>
-</ol>
-<p>整數陣列的範圍為 [3, 10^4] ，然後所有元素的值的範圍為 [-1000, 1000] 。<br>算出來的乘積答案不會超過 32 位元正負號整數。</p>
-<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line"><span class="type">Output</span>: <span class="number">6</span></div></pre></td></tr></table></figure></p>
-<p>剛好陣列只有三個數字，最大乘積即是 6 。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="type">Output</span>: <span class="number">24</span></div></pre></td></tr></table></figure></p>
-<p>陣列中最大的乘積是 <code>2 * 3 * 4</code> = 24</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>一開始想到一個直觀又懶的解法，直接把陣列先重新排序，<br>然後抓最大的三個數字就可以得到最大乘積。</p>
-<p>但是事情沒有那麼單純，題目規定數字範圍在 -1000 到 1000 當中，<br>也就是如果最小的兩個數字的絕對值比第二、第三大，那在相乘最大數字，就會得到更大的乘積。</p>
-<p>所以必須要找出兩種可能，並且比較誰比較大，即是答案。</p>
-<p><img src="/leetcode-628/maxproduct.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maximumProduct</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">let</span> nums = nums.sorted(by: &gt;)</div><div class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[<span class="number">2</span>],</div><div class="line">               nums[<span class="number">0</span>] * nums[nums.<span class="built_in">count</span> - <span class="number">1</span>] * nums[nums.<span class="built_in">count</span> - <span class="number">2</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2306,7 +2298,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">107</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

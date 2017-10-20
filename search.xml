@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#459 Repeated Substring Pattern - in Swift]]></title>
+      <url>/leetcode-459/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</p>
+<p>給定一個不為空的字串，且字元皆為小寫英文字母，字串長度不超過 10000 。<br>驗證該字串，是否為字串中某子字串複製組合而成。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"abab"</span></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">It's</span> the substring <span class="string">"ab"</span> twice.</div></pre></td></tr></table></figure></p>
+<p>abab 是被 ab 子字串複製組合而成</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"aba"</span></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>aba 不為任何子字串的重複</p>
+<p>Example 3:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"abcabcabcabc"</span></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">It's</span> the substring <span class="string">"abc"</span> four times. (<span class="type">And</span> the substring <span class="string">"abcabc"</span> twice.)</div></pre></td></tr></table></figure></p>
+<p>abcabcabcabc 為 abc 重組四次， abcabc 重組兩次而成</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>若字串符合題目條件，<br>那字串第一個字元會是每個重複字串的第一個字元(頭)，<br>而字串最後一個字元會是每個重複字串的最後一個字元(腳)。</p>
+<p>將原字串 S 複製為二生出 SS ( abab -&gt; abababab )<br>再將 SS 頭跟腳去掉得到 S2 ( abababab -&gt; _bababa_ )<br>若在去掉頭腳的 S2 中還可以找到 S 的模式那代表這個字串是符合題目條件的。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">repeatedSubstringPattern</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> ss = s + s</div><div class="line">    <span class="keyword">let</span> s2 = ss.substring(with: ss.index(after: ss.startIndex)..&lt;ss.index(before: ss.endIndex))</div><div class="line">    <span class="keyword">return</span> s2.<span class="built_in">contains</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> String </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> String </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#175 Combine Two Tables - in MySQL]]></title>
       <url>/leetcode-175/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Table: Person</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| PersonId    | int     |</div><div class="line">| FirstName   | varchar |</div><div class="line">| LastName    | varchar |</div><div class="line">+-------------+---------+</div><div class="line">PersonId is the primary key column for this table.</div><div class="line"></div><div class="line">PersonId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
@@ -4513,6 +4553,8 @@
         
         <tags>
             
+            <tag> 軟體工程 </tag>
+            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -4520,8 +4562,6 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
-            
-            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -4599,8 +4639,6 @@
         
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -4610,6 +4648,8 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
+            
+            <tag> Android </tag>
             
             <tag> iOS </tag>
             

@@ -296,6 +296,207 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-645/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-645/" itemprop="url">
+                  LeetCode#645 Set Mismatch - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-30T14:17:33+08:00">
+                2017-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-645/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-645/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The set S originally contains numbers from 1 to n. But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set, which results in repetition of one number and loss of another number.</p>
+<p>一組 Set 包含整數 1 到 n ，但發生了資料錯誤，有一個整數被重複印出兩次且取代某另一個整數，所以整組 Set 中包含一個已重複的整數和一個消失的整數。</p>
+<p>Given an array nums representing the data status of this set after the error. Your task is to firstly find the number occurs twice and then find the number that is missing. Return them in the form of an array.</p>
+<p>給一個陣列代表已經發生錯誤的 Set ，你的工作是先找出出現兩次的數，然後再找出消失的數。回傳這兩個數。</p>
+<blockquote>
+<p>Note:<br>The given array size will in the range [2, 10000].<br>The given array’s numbers won’t have any order.</p>
+<p>陣列長度介於 [2, 10000]<br>給予的陣列不會有任何排列。</p>
+</blockquote>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>]</div><div class="line"><span class="type">Output</span>: [<span class="number">2</span>,<span class="number">3</span>]</div></pre></td></tr></table></figure></p>
+<p>2 被重複印出兩次， 3 是消失的那一個數字，所以回傳 [2, 3] 。</p>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>一個字典拿來記錄每一個數字出現的次數，並且計算如果資料沒有發生錯誤，正確的總數會是多少。</p>
+<p>尋遍資料，如果出現兩次即可確定重複數字為何，沒有出現過的則與正確總數相減，最後得出缺少的數字。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>] -&gt; dict = [<span class="number">1</span>: <span class="number">1</span>, <span class="number">2</span>: <span class="number">2</span>, <span class="number">4</span>: <span class="number">1</span>]</div><div class="line">          -&gt; sum = <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span> + <span class="number">4</span> = <span class="number">10</span></div><div class="line"></div><div class="line">dict[<span class="number">2</span>] &gt; <span class="number">1</span> =&gt; <span class="number">2</span> duplicated</div><div class="line"><span class="number">10</span> - <span class="number">1</span> - <span class="number">2</span> - <span class="number">4</span> = <span class="number">3</span> =&gt; <span class="number">3</span> loss</div><div class="line"></div><div class="line">result = [<span class="number">2</span>, <span class="number">3</span>]</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findErrorNums</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Int</span>: <span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> sum = <span class="type">Array</span>(<span class="number">1</span>...nums.<span class="built_in">count</span>).<span class="built_in">reduce</span>(<span class="number">0</span>, &#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums &#123;</div><div class="line">        dict[num] = dict[num] != <span class="literal">nil</span> ? dict[num]! + <span class="number">1</span> : <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> dict[num]! &gt; <span class="number">1</span>&#123;</div><div class="line">            res.append(num)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            sum -= num</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    res.append(sum)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-326/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2017,202 +2218,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-108/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-108/" itemprop="url">
-                  LeetCode#108 Convert Sorted Array to Binary Search Tree - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-20T13:52:50+08:00">
-                2017-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/" itemprop="url" rel="index">
-                    <span itemprop="name">Depth-first Search</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-108/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-108/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array where elements are sorted in ascending order, convert it to a height balanced BST.</p>
-<p>給定一個升序陣列，把它轉換成高度平衡的二元搜尋樹。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span> :</div><div class="line"></div><div class="line">        <span class="number">3</span></div><div class="line">      /   \</div><div class="line">     <span class="number">2</span>	   <span class="number">5</span></div><div class="line">    /	  /</div><div class="line">   <span class="number">1</span>	 <span class="number">4</span></div></pre></td></tr></table></figure>
-<p>必須要轉換成高度平衡的二元搜尋樹。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先取得陣列中間值作為根節點。</p>
-<p>再將陣列切為小於根節點的一半，與大於根節點的另一半。</p>
-<p>再從這兩個陣列重新遞迴一遍剛剛的步驟，就可以得到高度平衡的 BST 。</p>
-<p><img src="/leetcode-108/array2bst.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">sortedArrayToBST</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">TreeNode</span>? &#123;</div><div class="line">    <span class="keyword">if</span> nums.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> mid = nums[nums.<span class="built_in">count</span>/<span class="number">2</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> tree = <span class="type">TreeNode</span>(mid)</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> leftnums = <span class="type">Array</span>(nums[<span class="number">0</span>..&lt;nums.<span class="built_in">count</span>/<span class="number">2</span>])</div><div class="line">    <span class="keyword">let</span> rightnums = <span class="type">Array</span>(nums[nums.<span class="built_in">count</span>/<span class="number">2</span> + <span class="number">1</span>..&lt;nums.<span class="built_in">count</span>])</div><div class="line">    </div><div class="line">    tree.<span class="keyword">left</span> = sortedArrayToBST(leftnums)</div><div class="line">    tree.<span class="keyword">right</span> = sortedArrayToBST(rightnums)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> tree</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2262,7 +2267,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">107</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

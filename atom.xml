@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-19T07:18:39.000Z</updated>
+  <updated>2017-10-20T06:28:42.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#459 Repeated Substring Pattern - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-459/"/>
+    <id>http://windsuzu.github.io/leetcode-459/</id>
+    <published>2017-10-20T06:13:11.000Z</published>
+    <updated>2017-10-20T06:28:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</p>
+<p>給定一個不為空的字串，且字元皆為小寫英文字母，字串長度不超過 10000 。<br>驗證該字串，是否為字串中某子字串複製組合而成。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"abab"</span></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">It's</span> the substring <span class="string">"ab"</span> twice.</div></pre></td></tr></table></figure></p>
+<p>abab 是被 ab 子字串複製組合而成</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"aba"</span></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>aba 不為任何子字串的重複</p>
+<p>Example 3:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"abcabcabcabc"</span></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">It's</span> the substring <span class="string">"abc"</span> four times. (<span class="type">And</span> the substring <span class="string">"abcabc"</span> twice.)</div></pre></td></tr></table></figure></p>
+<p>abcabcabcabc 為 abc 重組四次， abcabc 重組兩次而成</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>若字串符合題目條件，<br>那字串第一個字元會是每個重複字串的第一個字元(頭)，<br>而字串最後一個字元會是每個重複字串的最後一個字元(腳)。</p>
+<p>將原字串 S 複製為二生出 SS ( abab -&gt; abababab )<br>再將 SS 頭跟腳去掉得到 S2 ( abababab -&gt; _bababa_ )<br>若在去掉頭腳的 S2 中還可以找到 S 的模式那代表這個字串是符合題目條件的。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">repeatedSubstringPattern</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> ss = s + s</div><div class="line">    <span class="keyword">let</span> s2 = ss.substring(with: ss.index(after: ss.startIndex)..&lt;ss.index(before: ss.endIndex))</div><div class="line">    <span class="keyword">return</span> s2.<span class="built_in">contains</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a non-empty string check if it can be constructed by taking a su
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/String/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#175 Combine Two Tables - in MySQL</title>
@@ -859,55 +901,6 @@
       <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
     
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#645 Set Mismatch - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-645/"/>
-    <id>http://windsuzu.github.io/leetcode-645/</id>
-    <published>2017-09-30T06:17:33.000Z</published>
-    <updated>2017-10-02T06:25:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The set S originally contains numbers from 1 to n. But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set, which results in repetition of one number and loss of another number.</p>
-<p>一組 Set 包含整數 1 到 n ，但發生了資料錯誤，有一個整數被重複印出兩次且取代某另一個整數，所以整組 Set 中包含一個已重複的整數和一個消失的整數。</p>
-<p>Given an array nums representing the data status of this set after the error. Your task is to firstly find the number occurs twice and then find the number that is missing. Return them in the form of an array.</p>
-<p>給一個陣列代表已經發生錯誤的 Set ，你的工作是先找出出現兩次的數，然後再找出消失的數。回傳這兩個數。</p>
-<blockquote>
-<p>Note:<br>The given array size will in the range [2, 10000].<br>The given array’s numbers won’t have any order.</p>
-<p>陣列長度介於 [2, 10000]<br>給予的陣列不會有任何排列。</p>
-</blockquote>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>]</div><div class="line"><span class="type">Output</span>: [<span class="number">2</span>,<span class="number">3</span>]</div></pre></td></tr></table></figure></p>
-<p>2 被重複印出兩次， 3 是消失的那一個數字，所以回傳 [2, 3] 。</p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>一個字典拿來記錄每一個數字出現的次數，並且計算如果資料沒有發生錯誤，正確的總數會是多少。</p>
-<p>尋遍資料，如果出現兩次即可確定重複數字為何，沒有出現過的則與正確總數相減，最後得出缺少的數字。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>] -&gt; dict = [<span class="number">1</span>: <span class="number">1</span>, <span class="number">2</span>: <span class="number">2</span>, <span class="number">4</span>: <span class="number">1</span>]</div><div class="line">          -&gt; sum = <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span> + <span class="number">4</span> = <span class="number">10</span></div><div class="line"></div><div class="line">dict[<span class="number">2</span>] &gt; <span class="number">1</span> =&gt; <span class="number">2</span> duplicated</div><div class="line"><span class="number">10</span> - <span class="number">1</span> - <span class="number">2</span> - <span class="number">4</span> = <span class="number">3</span> =&gt; <span class="number">3</span> loss</div><div class="line"></div><div class="line">result = [<span class="number">2</span>, <span class="number">3</span>]</div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findErrorNums</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Int</span>: <span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> sum = <span class="type">Array</span>(<span class="number">1</span>...nums.<span class="built_in">count</span>).<span class="built_in">reduce</span>(<span class="number">0</span>, &#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums &#123;</div><div class="line">        dict[num] = dict[num] != <span class="literal">nil</span> ? dict[num]! + <span class="number">1</span> : <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> dict[num]! &gt; <span class="number">1</span>&#123;</div><div class="line">            res.append(num)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            sum -= num</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    res.append(sum)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;The set S originally contains numbers from 1 to n. But unfortunately, 
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Hash Table" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Hash-Table/"/>
-    
-      <category term="Math" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Hash-Table/Math/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
-    
-      <category term="Hash Table" scheme="http://windsuzu.github.io/tags/Hash-Table/"/>
     
   </entry>
   
