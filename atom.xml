@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-20T06:28:42.000Z</updated>
+  <updated>2017-10-21T07:25:37.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#110 Balanced Binary Tree - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-110/"/>
+    <id>http://windsuzu.github.io/leetcode-110/</id>
+    <published>2017-10-21T07:16:23.000Z</published>
+    <updated>2017-10-21T07:25:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, determine if it is height-balanced.</p>
+<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
+<p>給一二元樹，驗證它是否高度平衡。</p>
+<p>高度平衡的定義為，二元樹其兩個子樹的每個節點的深度不超過 1 。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">5</span></div><div class="line">      / \</div><div class="line">     <span class="number">3</span>   <span class="number">4</span></div><div class="line">    / \   \</div><div class="line">   <span class="number">2</span>   <span class="number">6</span>   <span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div></pre></td></tr></table></figure></p>
+<p>該二元樹其兩個子樹的每個節點，深度差皆不超過 1 ，為高度平衡。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">5</span></div><div class="line">      / \</div><div class="line">     <span class="number">3</span>   <span class="number">4</span></div><div class="line">    / \   \</div><div class="line">   <span class="number">2</span>   <span class="number">6</span>   <span class="number">1</span></div><div class="line">          /</div><div class="line">         <span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>該二元樹倒節點 4 時，其左子樹為空，深度為 1，右子樹持續走到 7 ，深度為 3 ， 3 - 1 &gt; 1 ，不為高度平衡。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>要確定每一個節點的左右子樹是否高度平衡，利用 findDepth 找出該節點的深度，再比較左右節點的差是否大於 1 。</p>
+<p>再來要確定每一個節點的平衡，利用遞迴對整棵樹的每一個節點進行一次上述的比較。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isBalanced</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">findDepth</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(findDepth(root!.<span class="keyword">left</span>), findDepth(root!.<span class="keyword">right</span>)) + <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">left</span> = findDepth(root!.<span class="keyword">left</span>)</div><div class="line">    <span class="keyword">let</span> <span class="keyword">right</span> = findDepth(root!.<span class="keyword">right</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(<span class="keyword">left</span> - <span class="keyword">right</span>) &lt;= <span class="number">1</span> &amp;&amp; isBalanced(root!.<span class="keyword">left</span>) &amp;&amp; isBalanced(root!.<span class="keyword">right</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary tree, determine if it is height-balanced.&lt;/p&gt;
+&lt;p&gt;For th
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
+    
+      <category term="Depth-first Search" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/Depth-first-Search/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
+    
+      <category term="Depth-first Search" scheme="http://windsuzu.github.io/tags/Depth-first-Search/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#459 Repeated Substring Pattern - in Swift</title>
@@ -853,54 +900,9 @@
     
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
-      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
-    
       <category term="Bit Manipulation" scheme="http://windsuzu.github.io/tags/Bit-Manipulation/"/>
     
-  </entry>
-  
-  <entry>
-    <title>LeetCode#458 Poor Pigs - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-458/"/>
-    <id>http://windsuzu.github.io/leetcode-458/</id>
-    <published>2017-10-02T06:26:13.000Z</published>
-    <updated>2017-10-02T07:04:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>There are 1000 buckets, one and only one of them contains poison, the rest are filled with water. They all look the same. If a pig drinks that poison it will die within 15 minutes. What is the minimum amount of pigs you need to figure out which bucket contains the poison within one hour.</p>
-<p>有一千個桶子，只有一個桶子裝滿毒，其他的皆裝滿水。</p>
-<p>如果一隻豬喝到毒，他會在 15 分鐘內死掉。</p>
-<p>你需要用到最少幾隻豬來試出哪一個桶子有毒 ?</p>
-<p>Answer this question, and write an algorithm for the follow-up general case.</p>
-<p>回答問題，並且寫出接下來 follow-up 的演算法。</p>
-<p>If there are n buckets and a pig drinking poison will die within m minutes, how many pigs (x) you need to figure out the “poison” bucket within p minutes? There is exact one bucket with poison.</p>
-<p>如果有 n 個桶子，豬喝到毒會在 m 分鐘內死掉，請問需要幾隻豬 (x) 來找出毒桶子在 p 分鐘內 ?</p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>如果有 60 分鐘可以測 5 個桶子，喝到毒的豬會在 15 分鐘死掉，那只需要一隻豬即可。</p>
-<p>喝一個桶子，等 15 分鐘，再喝一個，等 15 分鐘，直到喝完四個。如果沒死，代表第五個桶子有毒。</p>
-<hr>
-<p>如果有 60 分鐘測 5x5 個桶子，一樣喝到毒會在 15 分鐘死掉，那這時只需兩隻豬。</p>
-<p>一隻豬由左往右喝，一隻豬由上往下喝，喝完等待 15 分鐘，一樣做四次測驗，如果兩隻豬都沒有死掉，代表第二十五個桶子有毒。</p>
-<hr>
-<p>如果有 60 分鐘測 5x5x5 個桶子，一樣喝到毒會在 15 分鐘死掉，那這時只需三隻豬。</p>
-<p>一隻豬由左往右喝整層，一隻豬由上往下喝整層，一隻豬由前往後喝整層，喝完等待 15 分鐘，一樣做四次測驗，如果三隻豬都沒有死掉，代表第一百二十五個桶子有毒。</p>
-<p><img src="/leetcode-458/poor_pigs.gif" alt=""></p>
-<p>到這裡我們已經可以知道，如果有 n 桶水，可以測試 b 次 ( minutesToTest / minutesToDie + 1 )時，<br>只要跟豬的數量 x 平方，可以大於等於 n 就可以找出毒，也就是 <code>b^x &gt;= n</code>。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">1000</span>, minutesToTest = <span class="number">60</span>, minutesToDie = <span class="number">4</span>, b = <span class="number">60</span>/<span class="number">4</span>+<span class="number">1</span> = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="number">5</span>^x &gt;= <span class="number">1000</span></div><div class="line"></div><div class="line">x = log5(<span class="number">1000</span>) = <span class="number">5</span></div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">poorPigs</span><span class="params">(<span class="number">_</span> buckets: Int, <span class="number">_</span> minutesToDie: Int, <span class="number">_</span> minutesToTest: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> pigs = <span class="number">0.0</span></div><div class="line">    <span class="keyword">while</span> pow(<span class="type">Double</span>(minutesToTest / minutesToDie + <span class="number">1</span>), pigs) &lt; <span class="type">Double</span>(buckets) &#123;</div><div class="line">        pigs += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(pigs)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;There are 1000 buckets, one and only one of them contains poison, the 
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
     
   </entry>
   

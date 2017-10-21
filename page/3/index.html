@@ -296,6 +296,189 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-458/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-458/" itemprop="url">
+                  LeetCode#458 Poor Pigs - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-02T14:26:13+08:00">
+                2017-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-458/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-458/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>There are 1000 buckets, one and only one of them contains poison, the rest are filled with water. They all look the same. If a pig drinks that poison it will die within 15 minutes. What is the minimum amount of pigs you need to figure out which bucket contains the poison within one hour.</p>
+<p>有一千個桶子，只有一個桶子裝滿毒，其他的皆裝滿水。</p>
+<p>如果一隻豬喝到毒，他會在 15 分鐘內死掉。</p>
+<p>你需要用到最少幾隻豬來試出哪一個桶子有毒 ?</p>
+<p>Answer this question, and write an algorithm for the follow-up general case.</p>
+<p>回答問題，並且寫出接下來 follow-up 的演算法。</p>
+<p>If there are n buckets and a pig drinking poison will die within m minutes, how many pigs (x) you need to figure out the “poison” bucket within p minutes? There is exact one bucket with poison.</p>
+<p>如果有 n 個桶子，豬喝到毒會在 m 分鐘內死掉，請問需要幾隻豬 (x) 來找出毒桶子在 p 分鐘內 ?</p>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>如果有 60 分鐘可以測 5 個桶子，喝到毒的豬會在 15 分鐘死掉，那只需要一隻豬即可。</p>
+<p>喝一個桶子，等 15 分鐘，再喝一個，等 15 分鐘，直到喝完四個。如果沒死，代表第五個桶子有毒。</p>
+<hr>
+<p>如果有 60 分鐘測 5x5 個桶子，一樣喝到毒會在 15 分鐘死掉，那這時只需兩隻豬。</p>
+<p>一隻豬由左往右喝，一隻豬由上往下喝，喝完等待 15 分鐘，一樣做四次測驗，如果兩隻豬都沒有死掉，代表第二十五個桶子有毒。</p>
+<hr>
+<p>如果有 60 分鐘測 5x5x5 個桶子，一樣喝到毒會在 15 分鐘死掉，那這時只需三隻豬。</p>
+<p>一隻豬由左往右喝整層，一隻豬由上往下喝整層，一隻豬由前往後喝整層，喝完等待 15 分鐘，一樣做四次測驗，如果三隻豬都沒有死掉，代表第一百二十五個桶子有毒。</p>
+<p><img src="/leetcode-458/poor_pigs.gif" alt=""></p>
+<p>到這裡我們已經可以知道，如果有 n 桶水，可以測試 b 次 ( minutesToTest / minutesToDie + 1 )時，<br>只要跟豬的數量 x 平方，可以大於等於 n 就可以找出毒，也就是 <code>b^x &gt;= n</code>。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">1000</span>, minutesToTest = <span class="number">60</span>, minutesToDie = <span class="number">4</span>, b = <span class="number">60</span>/<span class="number">4</span>+<span class="number">1</span> = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="number">5</span>^x &gt;= <span class="number">1000</span></div><div class="line"></div><div class="line">x = log5(<span class="number">1000</span>) = <span class="number">5</span></div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">poorPigs</span><span class="params">(<span class="number">_</span> buckets: Int, <span class="number">_</span> minutesToDie: Int, <span class="number">_</span> minutesToTest: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> pigs = <span class="number">0.0</span></div><div class="line">    <span class="keyword">while</span> pow(<span class="type">Double</span>(minutesToTest / minutesToDie + <span class="number">1</span>), pigs) &lt; <span class="type">Double</span>(buckets) &#123;</div><div class="line">        pigs += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(pigs)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-645/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2027,197 +2210,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-415/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-415/" itemprop="url">
-                  LeetCode#415 Add Strings - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-21T14:20:50+08:00">
-                2017-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-415/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-415/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
-<p>給兩個非負數的 Integer num1 和 num2 但以 String 呈現，返回兩數加總。</p>
-<blockquote>
-<p>Note:<br>The length of both num1 and num2 is &lt; 5100.<br>Both num1 and num2 contains only digits 0-9.<br>Both num1 and num2 does not contain any leading zero.<br>You must not use any built-in BigInteger library or convert the inputs to integer directly.</p>
-</blockquote>
-<p>num1 和 num2 的長度 &lt; 5100。<br>num1 和 num2 字串中只包含 0-9。<br>num1 和 num2 不會包含前綴的 0。<br>不可以使用內建的 BigInteger 函數，或者將 String 直接轉為 Integer 操作。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將兩數轉為 UnicodeScalar ，並且從尾巴開始算起。</p>
-<p>將數字減去 0 的 UnicodeScalar ，就可以得到該數字位於 0-9 的值。</p>
-<p>再來就是利用 carry 來算出 10 進位結果即可。</p>
-<h2 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">addStrings</span><span class="params">(<span class="number">_</span> num1: String, <span class="number">_</span> num2: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> arr1:[<span class="type">UnicodeScalar</span>] = num1.unicodeScalars.reversed()</div><div class="line">    <span class="keyword">var</span> arr2:[<span class="type">UnicodeScalar</span>] = num2.unicodeScalars.reversed()</div><div class="line">    <span class="keyword">var</span> res = <span class="string">""</span></div><div class="line">    <span class="keyword">var</span> carry = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> index = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> index &lt; arr1.<span class="built_in">count</span> || index &lt; arr2.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">var</span> n1 = <span class="number">0</span></div><div class="line">        <span class="keyword">var</span> n2 = <span class="number">0</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> index &lt; arr1.<span class="built_in">count</span> &#123;</div><div class="line">            <span class="keyword">let</span> ch1 = arr1[index];</div><div class="line">            n1 = <span class="type">Int</span>(ch1.value) - <span class="type">Int</span>(<span class="string">"0"</span>.unicodeScalars.first!.value)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> index &lt; arr2.<span class="built_in">count</span> &#123;</div><div class="line">            <span class="keyword">let</span> ch2 = arr2[index];</div><div class="line">            n2 = <span class="type">Int</span>(ch2.value) - <span class="type">Int</span>(<span class="string">"0"</span>.unicodeScalars.first!.value)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> sum = n1 + n2 + carry</div><div class="line">        res = <span class="type">String</span>(sum % <span class="number">10</span>) + res</div><div class="line">        carry = sum / <span class="number">10</span></div><div class="line">        index += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> carry &gt; <span class="number">0</span> &#123;</div><div class="line">        res = <span class="type">String</span>(carry) + res</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h2><p>將兩數都轉為字串陣列，做迴圈直到最長的數字結束。</p>
-<p>迴圈從兩個數的尾端將每圈的兩數加總，超過 9 就進位，沒超過就加在答案的前面。</p>
-<p>最後查看有無多餘的 carry ，有一樣加在答案前面。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">addStrings</span><span class="params">(<span class="number">_</span> num1: String, <span class="number">_</span> num2: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> arr1 = <span class="type">Array</span>(num1.characters)</div><div class="line">    <span class="keyword">let</span> arr2 = <span class="type">Array</span>(num2.characters)</div><div class="line">    <span class="keyword">var</span> carry = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> res = <span class="string">""</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">max</span>(arr1.<span class="built_in">count</span>, arr2.<span class="built_in">count</span>)&#123;</div><div class="line">        <span class="keyword">if</span> arr1.<span class="built_in">count</span> - i - <span class="number">1</span> &gt;= <span class="number">0</span> &#123;</div><div class="line">            carry += <span class="type">Int</span>(<span class="type">String</span>(arr1[arr1.<span class="built_in">count</span> - i - <span class="number">1</span>]))!</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> arr2.<span class="built_in">count</span> - i - <span class="number">1</span> &gt;= <span class="number">0</span> &#123;</div><div class="line">            carry += <span class="type">Int</span>(<span class="type">String</span>(arr2[arr2.<span class="built_in">count</span> - i - <span class="number">1</span>]))!</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> carry &gt; <span class="number">9</span> &#123;</div><div class="line">            res = <span class="type">String</span>(carry-<span class="number">10</span>) + res</div><div class="line">            carry = <span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            res = <span class="type">String</span>(carry) + res</div><div class="line">            carry = <span class="number">0</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> carry &gt; <span class="number">0</span> &#123;</div><div class="line">        res = <span class="type">String</span>(carry) + res</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="過程"><a href="#過程" class="headerlink" title="過程"></a>過程</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="string">"87"</span> , <span class="string">"85"</span></div><div class="line"></div><div class="line">res = <span class="string">""</span></div><div class="line"></div><div class="line">--- <span class="type">Loop</span> <span class="type">Begin</span> --- </div><div class="line">&#123;</div><div class="line">	carry += <span class="number">7</span></div><div class="line">	carry += <span class="number">5</span></div><div class="line"></div><div class="line">	<span class="comment">// carry = 13</span></div><div class="line"></div><div class="line">	carry &gt; <span class="number">9</span> &#123;</div><div class="line">		res = <span class="string">"13 - 10"</span> + <span class="string">""</span> = <span class="string">"3"</span></div><div class="line">		carry = <span class="number">1</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	---</div><div class="line"></div><div class="line">	carry += <span class="number">8</span></div><div class="line">	carry += <span class="number">8</span></div><div class="line"></div><div class="line">	<span class="comment">// carry = 17</span></div><div class="line"></div><div class="line">	carry &gt; <span class="number">9</span> &#123;</div><div class="line">		res = <span class="string">"17 - 10"</span> + <span class="string">"3"</span> = <span class="string">"73"</span></div><div class="line">		carry = <span class="number">1</span></div><div class="line">	&#125;</div><div class="line">&#125; </div><div class="line">--- <span class="type">Loop</span> <span class="type">End</span> ---</div><div class="line"></div><div class="line">carry &gt; <span class="number">0</span> &#123;</div><div class="line">	res = <span class="string">"1"</span> + <span class="string">"73"</span> = <span class="string">"173"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="type">Output</span> : <span class="string">"173"</span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2267,7 +2259,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-count">108</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

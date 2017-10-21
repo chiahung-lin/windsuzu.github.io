@@ -3,6 +3,50 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#110 Balanced Binary Tree - in Swift]]></title>
+      <url>/leetcode-110/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, determine if it is height-balanced.</p>
+<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
+<p>給一二元樹，驗證它是否高度平衡。</p>
+<p>高度平衡的定義為，二元樹其兩個子樹的每個節點的深度不超過 1 。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">5</span></div><div class="line">      / \</div><div class="line">     <span class="number">3</span>   <span class="number">4</span></div><div class="line">    / \   \</div><div class="line">   <span class="number">2</span>   <span class="number">6</span>   <span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div></pre></td></tr></table></figure></p>
+<p>該二元樹其兩個子樹的每個節點，深度差皆不超過 1 ，為高度平衡。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">5</span></div><div class="line">      / \</div><div class="line">     <span class="number">3</span>   <span class="number">4</span></div><div class="line">    / \   \</div><div class="line">   <span class="number">2</span>   <span class="number">6</span>   <span class="number">1</span></div><div class="line">          /</div><div class="line">         <span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>該二元樹倒節點 4 時，其左子樹為空，深度為 1，右子樹持續走到 7 ，深度為 3 ， 3 - 1 &gt; 1 ，不為高度平衡。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>要確定每一個節點的左右子樹是否高度平衡，利用 findDepth 找出該節點的深度，再比較左右節點的差是否大於 1 。</p>
+<p>再來要確定每一個節點的平衡，利用遞迴對整棵樹的每一個節點進行一次上述的比較。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isBalanced</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">findDepth</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(findDepth(root!.<span class="keyword">left</span>), findDepth(root!.<span class="keyword">right</span>)) + <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">left</span> = findDepth(root!.<span class="keyword">left</span>)</div><div class="line">    <span class="keyword">let</span> <span class="keyword">right</span> = findDepth(root!.<span class="keyword">right</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(<span class="keyword">left</span> - <span class="keyword">right</span>) &lt;= <span class="number">1</span> &amp;&amp; isBalanced(root!.<span class="keyword">left</span>) &amp;&amp; isBalanced(root!.<span class="keyword">right</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Tree </category>
+            
+            <category> Depth-first Search </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Tree </tag>
+            
+            <tag> Depth-first Search </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#459 Repeated Substring Pattern - in Swift]]></title>
       <url>/leetcode-459/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</p>
@@ -798,9 +842,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -888,9 +932,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1148,9 +1192,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1550,9 +1594,9 @@
             
             <tag> Array </tag>
             
-            <tag> Math </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
