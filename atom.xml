@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-21T07:25:37.000Z</updated>
+  <updated>2017-10-22T03:32:52.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#643 Maximum Average Subarray I - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-643/"/>
+    <id>http://windsuzu.github.io/leetcode-643/</id>
+    <published>2017-10-22T03:26:43.000Z</published>
+    <updated>2017-10-22T03:32:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.</p>
+<p>給一個由 n 個整數組成的陣列，並且給定目標值 k 。找出陣列中連續 k 個值其平均為陣列中最大平均值，並且返回該平均值。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">12</span>,-<span class="number">5</span>,-<span class="number">6</span>,<span class="number">50</span>,<span class="number">3</span>], k = <span class="number">4</span></div><div class="line"><span class="type">Output</span>: <span class="number">12.75</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">Maximum</span> average <span class="keyword">is</span> (<span class="number">12</span>-<span class="number">5</span>-<span class="number">6</span>+<span class="number">50</span>)/<span class="number">4</span> = <span class="number">51</span>/<span class="number">4</span> = <span class="number">12.75</span></div></pre></td></tr></table></figure></p>
+<p>在 [1,12,-5,-6,50,3] 陣列中，要找出連續 4 個數的平均為最大平均值。<br>答案為 [12,-5,-6,50] 這段， (12-5-6+50)/4 = 51/4 = 12.75</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先算出陣列起始 k 個元素的加總 (temp) ，新增一個目前最大值 (res)。</p>
+<p>由陣列第 k 個以後開始，將 temp 去掉第一個值，並加上新的值，重新比對 res 跟 temp 。</p>
+<p>最後得出的 res / k 即是最大平均值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxAverage</span><span class="params">(<span class="number">_</span> nums: [Int], <span class="number">_</span> k: Int)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    <span class="keyword">var</span> temp = nums[<span class="number">0</span>..&lt;k].<span class="built_in">reduce</span>(<span class="number">0</span>, &#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;)</div><div class="line">    <span class="keyword">var</span> res = temp</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> k..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        temp += nums[i] - nums[i-k]</div><div class="line">        res = <span class="built_in">max</span>(res, temp)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Double</span>(res) / <span class="type">Double</span>(k)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given an array consisting of n integers, find the contiguous subarray 
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Array" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Array/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#110 Balanced Binary Tree - in Swift</title>
@@ -859,50 +898,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Dynamic Programming" scheme="http://windsuzu.github.io/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#231 Power of Two - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-231/"/>
-    <id>http://windsuzu.github.io/leetcode-231/</id>
-    <published>2017-10-02T14:39:55.000Z</published>
-    <updated>2017-10-02T14:46:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer, write a function to determine if it is a power of two.</p>
-<p>給個整數，寫個函式驗證他是否為 2 的平方數。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>只要可以被 2 整除，就對該數除 2 ，直到無法再除。</p>
-<p>查看該數是否為 1 。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">var</span> n = n</div><div class="line">    <span class="keyword">while</span> n % <span class="number">2</span> == <span class="number">0</span> &#123; n /= <span class="number">2</span> &#125;</div><div class="line">    <span class="keyword">return</span> n == <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="位元操作"><a href="#位元操作" class="headerlink" title="位元操作"></a>位元操作</h2><p>2 的位元數就代表該數「二進位」只有一個 1 。</p>
-<p>所以只要將 n 與 n - 1 做 AND 運算看是否為 0 即可。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>(<span class="number">1</span>), <span class="number">2</span>(<span class="number">10</span>), <span class="number">4</span>(<span class="number">100</span>), <span class="number">8</span>(<span class="number">1000</span>), <span class="number">16</span>(<span class="number">10000</span>) ....</div><div class="line"></div><div class="line"><span class="number">1</span> &amp; <span class="number">0</span> = <span class="number">0</span></div><div class="line"><span class="number">10</span> &amp; <span class="number">01</span> = <span class="number">0</span></div><div class="line"><span class="number">100</span> &amp; <span class="number">011</span> = <span class="number">0</span></div><div class="line"><span class="number">1000</span> &amp; <span class="number">0111</span> = <span class="number">0</span></div><div class="line">..</div><div class="line">..</div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">return</span> n &amp; (n - <span class="number">1</span>) == <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given an integer, write a function to determine if it is a power of tw
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Math" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/"/>
-    
-      <category term="Bit Manipulation" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/Bit-Manipulation/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Bit Manipulation" scheme="http://windsuzu.github.io/tags/Bit-Manipulation/"/>
-    
-      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
     
   </entry>
   

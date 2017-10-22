@@ -296,6 +296,211 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-401/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-401/" itemprop="url">
+                  LeetCode#401 Binary Watch - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-12T14:07:15+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Backtracking/" itemprop="url" rel="index">
+                    <span itemprop="name">Backtracking</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Backtracking/Bit-Manipulation/" itemprop="url" rel="index">
+                    <span itemprop="name">Bit Manipulation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-401/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-401/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).</p>
+<p>Each LED represents a zero or one, with the least significant bit on the right.</p>
+<p>一個二元錶有四個 LEDs 在上，代表 24 個小時，還有六個 LEDs 在下，代表 60 分鐘。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Binary_clock_samui_moon.jpg" alt="binary watch"><br>For example, the above binary watch reads “3:25”.</p>
+<p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
+<p>像上面就是一個二元錶，代表 3:25 。</p>
+<p>設計一個函式，放進 n 表示有幾顆 LED 燈亮著，回傳所有有可能的時間。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: n = <span class="number">1</span></div><div class="line"><span class="type">Return</span>: [<span class="string">"1:00"</span>, <span class="string">"2:00"</span>, <span class="string">"4:00"</span>, <span class="string">"8:00"</span>, <span class="string">"0:01"</span>, <span class="string">"0:02"</span>, <span class="string">"0:04"</span>, <span class="string">"0:08"</span>, <span class="string">"0:16"</span>, <span class="string">"0:32"</span>]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意<br>小時的格式，不可有前綴的 0 ，舉例 : “1:00” 是對的 , “01:00” 是錯的。<br>分鐘的格式，必須有前綴的 0 ，舉例 : “10:01” 是對的 , “10:1” 是錯的。</p>
+</blockquote>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>可不可以找出每一個時間，個別代表有幾個燈號，答案是可以的。<br>如果是 <code>0:00</code> 代表有 0 顆燈亮著。<br><code>1:00</code> 、 <code>0:04</code> 、 <code>0:16</code> ，代表有 1 顆燈亮著。<br><code>11:59</code> 代表有 8 顆燈 (3 + 5) 亮著。 為什麼？</p>
+<p>只要看二進位就知道 1 -&gt; 1 ， 2 -&gt; 10 ， 4 -&gt; 100 ， 8 -&gt; 1000 ， 16 -&gt; 10000 ， 32 -&gt; 100000</p>
+<p>所以如果把 11 跟 59 都轉成二進位會變成 01011 跟 0111011 。<br>就可以知道，<br>11 亮了 1, 2, 8 的燈。<br>59 亮了 1, 2, 8, 16, 32 的燈。</p>
+<p>知道了這個，現在只要找出全部的時間，符合燈號跟設定要找的一致，就可以放進答案中。</p>
+<p><img src="/leetcode-401/binary_watch.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readBinaryWatch</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; [<span class="type">String</span>] &#123;</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">String</span>]()</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">findLEDs</span><span class="params">(<span class="number">_</span> h: Int, <span class="number">_</span> m: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">let</span> hc = <span class="type">Array</span>(<span class="type">String</span>(h, radix: <span class="number">2</span>).characters).<span class="built_in">filter</span> &#123; $<span class="number">0</span> == <span class="string">"1"</span> &#125;.<span class="built_in">count</span></div><div class="line">        <span class="keyword">let</span> mc = <span class="type">Array</span>(<span class="type">String</span>(m, radix: <span class="number">2</span>).characters).<span class="built_in">filter</span> &#123; $<span class="number">0</span> == <span class="string">"1"</span> &#125;.<span class="built_in">count</span></div><div class="line">        <span class="keyword">return</span> hc + mc</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> h <span class="keyword">in</span> <span class="number">0</span>...<span class="number">11</span> &#123;</div><div class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> <span class="number">0</span>...<span class="number">59</span> &#123;</div><div class="line">            <span class="keyword">if</span> findLEDs(h, m) == num &#123;</div><div class="line">                res.append(<span class="type">String</span>(format: <span class="string">"%d:%02d"</span>, h, m))</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-447/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2023,184 +2228,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-387/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-387/" itemprop="url">
-                  LeetCode#387 First Unique Character in a String - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-02T14:07:49+08:00">
-                2017-09-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-387/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-387/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string, find the first non-repeating character in it and return it’s index. If it doesn’t exist, return -1.</p>
-<p>從字串中找出第一個沒有重複的字元，並返回她的索引。如果沒有，則返回 -1 。</p>
-<p>Examples:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">"leetcode"</span></div><div class="line"><span class="keyword">return</span> <span class="number">0</span>.</div><div class="line"></div><div class="line">s = <span class="string">"loveleetcode"</span>,</div><div class="line"><span class="keyword">return</span> <span class="number">2</span>.</div></pre></td></tr></table></figure>
-<p>「leetcode」的第一個字元 l 沒有重複出現在字串中，所以回傳 0 。</p>
-<p>「loveleetcode」的第三個字元 v 沒有重複，所以回傳 2 。</p>
-<p>Note: You may assume the string contain only lowercase letters.</p>
-<p>可以假設字串中只有小寫的單字。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>無腦的用 dictionary 做了一次果然被算 timeout 。</p>
-<p>AC 解是將各個字元轉為字母 0 ~ 25 ，代表陣列中 26 個位置，<br>只要該單字出現，便 + 1 至該位置中。</p>
-<p>第二次迴圈時，只要出現第一個位置為 1 (只出現過一次) 的字母，便回傳該索引。</p>
-<p><img src="/leetcode-387/uniquec.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">firstUniqChar</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> alphabet = [<span class="type">Int</span>?](repeating: <span class="literal">nil</span>, <span class="built_in">count</span>: <span class="number">26</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s.utf8 &#123;</div><div class="line">        <span class="keyword">let</span> index = <span class="type">Int</span>(<span class="built_in">c</span> - <span class="number">97</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">var</span> val = alphabet[index] &#123;</div><div class="line">            val += <span class="number">1</span></div><div class="line">            alphabet[index] = val</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            alphabet[index] = <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> index = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s.utf8 &#123;</div><div class="line">        <span class="keyword">if</span> alphabet[<span class="type">Int</span>(<span class="built_in">c</span> - <span class="number">97</span>)] == <span class="number">1</span> &#123;</div><div class="line">            <span class="keyword">return</span> index</div><div class="line">        &#125;</div><div class="line">        index += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> -<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2250,7 +2277,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">108</span>
+                <span class="site-state-item-count">109</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

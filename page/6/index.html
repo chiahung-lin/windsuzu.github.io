@@ -296,6 +296,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-387/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-387/" itemprop="url">
+                  LeetCode#387 First Unique Character in a String - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-02T14:07:49+08:00">
+                2017-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-387/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-387/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string, find the first non-repeating character in it and return it’s index. If it doesn’t exist, return -1.</p>
+<p>從字串中找出第一個沒有重複的字元，並返回她的索引。如果沒有，則返回 -1 。</p>
+<p>Examples:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">"leetcode"</span></div><div class="line"><span class="keyword">return</span> <span class="number">0</span>.</div><div class="line"></div><div class="line">s = <span class="string">"loveleetcode"</span>,</div><div class="line"><span class="keyword">return</span> <span class="number">2</span>.</div></pre></td></tr></table></figure>
+<p>「leetcode」的第一個字元 l 沒有重複出現在字串中，所以回傳 0 。</p>
+<p>「loveleetcode」的第三個字元 v 沒有重複，所以回傳 2 。</p>
+<p>Note: You may assume the string contain only lowercase letters.</p>
+<p>可以假設字串中只有小寫的單字。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>無腦的用 dictionary 做了一次果然被算 timeout 。</p>
+<p>AC 解是將各個字元轉為字母 0 ~ 25 ，代表陣列中 26 個位置，<br>只要該單字出現，便 + 1 至該位置中。</p>
+<p>第二次迴圈時，只要出現第一個位置為 1 (只出現過一次) 的字母，便回傳該索引。</p>
+<p><img src="/leetcode-387/uniquec.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">firstUniqChar</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> alphabet = [<span class="type">Int</span>?](repeating: <span class="literal">nil</span>, <span class="built_in">count</span>: <span class="number">26</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s.utf8 &#123;</div><div class="line">        <span class="keyword">let</span> index = <span class="type">Int</span>(<span class="built_in">c</span> - <span class="number">97</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">var</span> val = alphabet[index] &#123;</div><div class="line">            val += <span class="number">1</span></div><div class="line">            alphabet[index] = val</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            alphabet[index] = <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> index = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s.utf8 &#123;</div><div class="line">        <span class="keyword">if</span> alphabet[<span class="type">Int</span>(<span class="built_in">c</span> - <span class="number">97</span>)] == <span class="number">1</span> &#123;</div><div class="line">            <span class="keyword">return</span> index</div><div class="line">        &#125;</div><div class="line">        index += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> -<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-169/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2018,188 +2196,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-530/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-530/" itemprop="url">
-                  LeetCode#530 Minimum Absolute Difference in BST - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-23T12:11:56+08:00">
-                2017-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Binary-Search-Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Binary Search Tree</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-530/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-530/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.</p>
-<p>找出二元樹任意兩點，差距最小的值。</p>
-<p>Example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"></div><div class="line">   <span class="number">1</span></div><div class="line">    \</div><div class="line">     <span class="number">3</span></div><div class="line">    /</div><div class="line">   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line"><span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> minimum absolute difference <span class="keyword">is</span> <span class="number">1</span>, which <span class="keyword">is</span> the difference between <span class="number">2</span> and <span class="number">1</span> (or between <span class="number">2</span> and <span class="number">3</span>).</div></pre></td></tr></table></figure></p>
-<p>最小的差是 1 ，來自 2 和 1 (或 3 和 2)</p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>BST 特性由小到大取節點，比較每次的差值與目前最小值。</p>
-<p><img src="/leetcode-530/minimum.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getMinimumDifference</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> numbers = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> res = <span class="type">Int</span>.<span class="built_in">max</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">inOrder</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        inOrder(root.<span class="keyword">left</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> last = numbers.last &#123;</div><div class="line">            res = <span class="built_in">min</span>((root.val - last), res)</div><div class="line">        &#125;</div><div class="line">        numbers.append(root.val)</div><div class="line">        inOrder(root.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    inOrder(root)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2249,7 +2245,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">108</span>
+                <span class="site-state-item-count">109</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
