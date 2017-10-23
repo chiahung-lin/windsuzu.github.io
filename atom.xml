@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-22T03:32:52.000Z</updated>
+  <updated>2017-10-23T08:20:14.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#501 Find Mode in Binary Search Tree - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-501/"/>
+    <id>http://windsuzu.github.io/leetcode-501/</id>
+    <published>2017-10-23T08:14:51.000Z</published>
+    <updated>2017-10-23T08:20:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary search tree (BST) with duplicates, find all the mode(s) (the most frequently occurred element) in the given BST.</p>
+<p>給一二元搜尋樹 (BST) 包含重複節點，找出該樹的眾數 (mode(s)) (可能有多個) (出現最多次的元素) 。</p>
+<p>Assume a BST is defined as follows:</p>
+<ol>
+<li>The left subtree of a node contains only nodes with keys less than or equal to the node’s key.</li>
+<li>The right subtree of a node contains only nodes with keys greater than or equal to the node’s key.</li>
+<li>Both the left and right subtrees must also be binary search trees.</li>
+</ol>
+<p>假設該 BST 定義為下:</p>
+<ol>
+<li>左子樹只包含「小於或等於」的節點</li>
+<li>右子樹只包含「大於或等於」的節點</li>
+<li>其餘左右子樹必須維持上述的規則</li>
+</ol>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> <span class="type">BST</span> [<span class="number">1</span>,null,<span class="number">2</span>,<span class="number">2</span>],</div><div class="line">   <span class="number">1</span></div><div class="line">    \</div><div class="line">     <span class="number">2</span></div><div class="line">    /</div><div class="line">   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> [<span class="number">2</span>].</div></pre></td></tr></table></figure></p>
+<p>Note: If a tree has more than one mode, you can return them in any order.</p>
+<p>如果不止一個眾數，請回傳一個沒有限制排序的陣列。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這個做法不為最佳解，也不限制只能在 BST ，可以使用在任何二元樹。</p>
+<p>利用 map 記錄每一個節點值出現的次數，並且不斷更新 maxVal (最多出現次數)的值。</p>
+<p>走完一遍樹後，再從 map 中找出所有 v (次數) 等於 maxVal 的節點 k ，加進 result 中。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMode</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> [] &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Int</span>:<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> maxVal = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">traverse</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">        dict[root!.val] = dict[root!.val] != <span class="literal">nil</span> ? dict[root!.val]! + <span class="number">1</span> : <span class="number">1</span></div><div class="line">        maxVal = <span class="built_in">max</span>(dict[root!.val]!, maxVal)</div><div class="line">        </div><div class="line">        traverse(root!.<span class="keyword">left</span>)</div><div class="line">        traverse(root!.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    traverse(root)</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">for</span> (k,v) <span class="keyword">in</span> dict &#123;</div><div class="line">        <span class="keyword">if</span> v == maxVal &#123; res.append(k) &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary search tree (BST) with duplicates, find all the mode(s)
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#643 Maximum Average Subarray I - in Swift</title>
@@ -854,50 +906,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Linked List" scheme="http://windsuzu.github.io/tags/Linked-List/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#70 Climbing Stairs - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-70/"/>
-    <id>http://windsuzu.github.io/leetcode-70/</id>
-    <published>2017-10-03T06:13:24.000Z</published>
-    <updated>2017-10-03T06:24:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
-<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
-<p>你正在爬樓梯，需要花 n 步可以走到頂端。</p>
-<p>每一步你可以踩 1 或 2 格樓梯。</p>
-<p>請問你有幾種方法可以走到頂端 ?</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>如果有 1 層，有 1 一種方式 (只有踩 1 格)</p>
-<p>如果有 2 層，有 11, 2 兩種方式 (連續踩兩次 1 格或一次踩 2 格)</p>
-<p>如果有 3 層，有 111, 12, 21 三種方式</p>
-<p>如果有 4 層，有 1111, 112, 121, 211, 22 五種方式</p>
-<p>如果有 5 層，有 11111, 1112, 1121, 1211, 2111, 122, 212, 221 八種方式</p>
-<hr>
-<p>注意看，<br>n = 1, 1<br>n = 2, 2<br>n = 3, 3 = 1 + 2 (前面兩個結果相加)<br>n = 4, 5 = 3 + 2 (前面兩個結果相加)<br>n = 5, 8 = 5 + 3 (前面兩個結果相加)</p>
-<p>這題其實要解的是<a href="https://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97" target="_blank" rel="external">費氏數列</a></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">climbStairs</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">if</span> n == <span class="number">1</span> &#123; <span class="keyword">return</span> <span class="number">1</span> &#125;</div><div class="line">    <span class="keyword">if</span> n == <span class="number">2</span> &#123; <span class="keyword">return</span> <span class="number">2</span> &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> n1 = <span class="number">1</span></div><div class="line">    <span class="keyword">var</span> n2 = <span class="number">2</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">2</span>..&lt;n &#123;</div><div class="line">        res = n1 + n2</div><div class="line">        n1 = n2</div><div class="line">        n2 = res</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;You are climbing a stair case. It takes n steps to reach to the top.&lt;/
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Dynamic Programming" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Dynamic-Programming/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Dynamic Programming" scheme="http://windsuzu.github.io/tags/Dynamic-Programming/"/>
     
   </entry>
   

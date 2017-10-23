@@ -296,6 +296,221 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-566/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-566/" itemprop="url">
+                  LeetCode#566 Reshape the Matrix - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-31T14:03:28+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-566/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-566/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>In MATLAB, there is a very useful function called ‘reshape’, which can reshape a matrix into a new one with different size but keep its original data.</p>
+<p>You’re given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively.</p>
+<p>The reshaped matrix need to be filled with all the elements of the original matrix in the same row-traversing order as they were.</p>
+<p>If the ‘reshape’ operation with given parameters is possible and legal, output the new reshaped matrix; Otherwise, output the original matrix.</p>
+<p>將矩陣進行 ‘reshape’ 的動作，將它變成新的 Size 但卻保留原來的 data 。</p>
+<p>給一個用二維陣列表示的矩陣，再輸入兩個整數，一個 r 代表新的列數 (row) ， 一個 c 代表新的行數 (column) 。</p>
+<p>如果給的參數皆為正確，就輸出 ‘reshape’ 後的矩陣。相反，輸出原來矩陣。</p>
+<p>Example 1:</p>
+<blockquote>
+<p>Input:</p>
+<blockquote>
+<p>nums =<br> [[1,2],<br> [3,4]]<br> r = 1, c = 4</p>
+</blockquote>
+<p>Output:</p>
+<blockquote>
+<p>[[1,2,3,4]]</p>
+</blockquote>
+</blockquote>
+<p>Explanation:<br> The row-traversing of nums is [1,2,3,4]. The new reshaped matrix is a <code>1 * 4</code> matrix, fill it row by row by using the previous list.</p>
+<p> <code>2 * 2</code> 矩陣轉為 <code>1 * 4</code> 之後， 變為 1 row 分別填入 [1,2,3,4]</p>
+<p>Example 2:</p>
+<blockquote>
+<p>Input:</p>
+<blockquote>
+<p>nums =<br> [[1,2],<br> [3,4]]<br> r = 2, c = 4</p>
+</blockquote>
+<p>Output:</p>
+<blockquote>
+<p>[[1,2],<br> [3,4]]</p>
+</blockquote>
+</blockquote>
+<p>Explanation:<br> There is no way to reshape a <code>2 * 2</code> matrix to a <code>2 * 4</code> matrix. So output the original matrix.</p>
+<p><code>2 * 2</code> 矩陣不可能變成 <code>2 * 4</code> ， 所以輸出原本的矩陣 [[1,2], [3,4]]。</p>
+<h1 id="第一次解題-142-ms"><a href="#第一次解題-142-ms" class="headerlink" title="第一次解題 : 142 ms"></a>第一次解題 : 142 ms</h1><p>先將原矩陣鋪成 (flat) 單個 Array， 確保 flatArray 的元素數量 = <code>R * C</code> ，否則就直接返回原矩陣。</p>
+<p>使用巢狀迴圈建立每個 Row， 再對每個 Row 依序塞進位在 flatArray 的元素，最後輸出。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">matrixReshape</span><span class="params">(<span class="number">_</span> nums: [[Int]], <span class="number">_</span> r: Int, <span class="number">_</span> <span class="built_in">c</span>: Int)</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> flatarray = nums.flatMap(&#123; $<span class="number">0</span> &#125;)</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> flatarray.<span class="built_in">count</span> != r*<span class="built_in">c</span> &#123;</div><div class="line">        <span class="keyword">return</span> nums</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> reshaped = [[<span class="type">Int</span>]]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;r &#123;</div><div class="line">        reshaped.append([<span class="type">Int</span>]())</div><div class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">c</span> &#123;</div><div class="line">            reshaped[i].append(flatarray[<span class="number">0</span>])</div><div class="line">            flatarray.removeFirst()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> reshaped</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Best-Solution-56-ms"><a href="#Best-Solution-56-ms" class="headerlink" title="Best Solution : 56 ms"></a>Best Solution : 56 ms</h1><p>利用 elementArray 盛載 reshape 後每個 row 的 element 。</p>
+<p>只要超過 column 數就把他裝進 resultArray 中，</p>
+<p>如此下去直到填滿 resultArray 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">matrixReshape</span><span class="params">(<span class="number">_</span> nums: [[Int]], <span class="number">_</span> r: Int, <span class="number">_</span> <span class="built_in">c</span>: Int)</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> resultArray:[[<span class="type">Int</span>]] = <span class="type">Array</span>.<span class="keyword">init</span>()</div><div class="line">    <span class="keyword">var</span> elementArray:[<span class="type">Int</span>] = <span class="type">Array</span>.<span class="keyword">init</span>()</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> elementCount:<span class="type">Int</span> = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> firstArray <span class="keyword">in</span> nums</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> val <span class="keyword">in</span> firstArray</div><div class="line">        &#123;</div><div class="line">            elementArray.append(val)</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(elementArray.<span class="built_in">count</span>&gt;=<span class="built_in">c</span>)</div><div class="line">            &#123;</div><div class="line">                resultArray.append(elementArray)</div><div class="line">                elementArray.removeAll()</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            elementCount = elementCount+<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(elementCount != r * <span class="built_in">c</span>)</div><div class="line">    &#123;</div><div class="line">        resultArray = nums</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> resultArray</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-557/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1965,182 +2180,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/learn-android-rxjava-with-retrofit/" itemprop="url">
-                  學習 RxJava 結合 Retrofit
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-05-05T18:14:45+08:00">
-                2017-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/learn-android-rxjava-with-retrofit/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="learn-android-rxjava-with-retrofit/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 ! </p>
-<blockquote>
-<p>前面的文章<br><a href="https://windsuzu.github.io/2017/05/02/learn-android-retrofit2/">學習 Android Retrofit 2</a><br><a href="https://windsuzu.github.io/2017/05/05/learn-android-rxjava/">學習 Android RxJava</a></p>
-</blockquote>
-<p>這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。</p>
-<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">"io.reactivex.rxjava2:rxjava:2.x.y"</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex.rxjava2:rxandroid:2.0.1'</span></div><div class="line"></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.2.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.2.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:adapter-rxjava2:2.2.0'</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>要記得 retrofit 與他的快樂夥伴的版本要一致 (2.2.0)</p>
-</blockquote>
-<p>在設置這邊發生了好多錯誤，原來之前學習時用的是 RxJava1，所以跟 Retrofit2 的 Adapter 配不起來 (汗)，1和2有一些差別，可以到 <a href="https://github.com/ReactiveX/RxJava/wiki/What%27s-different-in-2.0" target="_blank" rel="external">RxJava Github - What’s different in 2.0</a> 查看。</p>
-<h2 id="實作-Retrofit-Service-Interface"><a href="#實作-Retrofit-Service-Interface" class="headerlink" title="實作 Retrofit Service Interface"></a>實作 Retrofit Service Interface</h2><p>一樣拿 GitHub Api 測試看看 :</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String BASEURL = <span class="string">"http://api.github.com/"</span>;</div><div class="line"></div><div class="line">    <span class="meta">@GET</span>(<span class="string">"users/&#123;userId&#125;"</span>)</div><div class="line">    <span class="function">Observable&lt;GitHubUser&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"userId"</span>)</span> String userId)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這邊要注意的是原本的 Call<githubuser> 變為 Observable<githubuser> ，因為是用 RxJava 觀察者模式訂閱，所以必須要返回一個 Observable 對象，才能夠進行接續的 <code>subscribeOn()</code> 、 <code>subScribe()</code> 等 RxJava 操作。其餘的都跟只有 Retrofit 時一樣。</githubuser></githubuser></p>
-<h2 id="創建-Retrofit-元件"><a href="#創建-Retrofit-元件" class="headerlink" title="創建 Retrofit 元件"></a>創建 Retrofit 元件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Retrofit <span class="title">provideRetrofit</span><span class="params">(String baseUrl)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">            .addConverterFactory(GsonConverterFactory.create())</div><div class="line">            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">            .baseUrl(baseUrl)</div><div class="line">            .build();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這邊除了原本添加的 Gson 轉換器，還要新增 Retrofit 與 RxJava 相依的 RxJava2CallAdapterFactory 。</p>
-<h2 id="實作-Retrofit-RxJava-異步網路請求"><a href="#實作-Retrofit-RxJava-異步網路請求" class="headerlink" title="實作 Retrofit + RxJava 異步網路請求"></a>實作 Retrofit + RxJava 異步網路請求</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GitHubService service = provideRetrofit(GitHubService.BASEURL).create(GitHubService.class);</div><div class="line"></div><div class="line">service.getUser(USERID)</div><div class="line">        .subscribeOn(Schedulers.io())</div><div class="line">        .observeOn(AndroidSchedulers.mainThread())</div><div class="line">        .subscribe(user -&gt; Log.d(TAG, user.getName()));</div></pre></td></tr></table></figure>
-<p>先利用 <code>getUser()</code> 獲得 Observable ，再開始使用 RxJava 的方法，能夠歷經 map 、 fliter 、 flatMap ，最後傳給 Observer 進行主執行緒的操作。</p>
-<h2 id="結"><a href="#結" class="headerlink" title="結"></a>結</h2><p>除此之外，若是像設計登入流程，伺服器可能會先回傳一個 token ，需要再以 token 去取得用戶資料。這時可能就要使用 flatMap 再一次發送 token 取得資料。</p>
-<p>或是登入時需要實作 <code>onError()</code> 的響應，一方面又想要維持 lambda 語法的簡潔，那就必須要另外新增兩個 <code>Action (Consumer)</code> ，來實作 <code>onNext()</code> 、 <code>onError()</code> 的方法，再放入 <code>subScribe</code> 中。</p>
-<blockquote>
-<p>上面說的登入設計可以參考這篇文章<br><a href="http://www.jianshu.com/p/1fb294ec7e3b" target="_blank" rel="external">【Android】RxJava + Retrofit完成网络请求</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2190,7 +2229,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">109</span>
+                <span class="site-state-item-count">110</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
