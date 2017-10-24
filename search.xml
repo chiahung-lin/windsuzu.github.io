@@ -3,6 +3,43 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#119 Pascal's Triangle II - in Swift]]></title>
+      <url>/leetcode-119/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an index k, return the kth row of the Pascal’s triangle.</p>
+<p>給定索引值 k ，返回帕斯卡三角形的第 k+1 層。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example, given k = 3,<br>Return [1,3,3,1].</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>首先定義第 k 個的陣列中會有 k + 1 個元素，</p>
+<p>如果 k 為 1 直接返回 [1] ， k &gt; 1 則開始從第一層帕斯卡三角形開始組起。</p>
+<p>每一層跳過 1 開始，由後往前填滿該層的元素，每個元素恰好為上一層的該元素 + 前一個元素組成。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">k = <span class="number">3</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</div><div class="line"></div><div class="line">第一層</div><div class="line">k[<span class="number">1</span>] = k[<span class="number">1</span>] + k[<span class="number">0</span>] = <span class="number">0</span> + <span class="number">1</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>]</div><div class="line"></div><div class="line">第二層</div><div class="line">k[<span class="number">2</span>] = k[<span class="number">2</span>] + k[<span class="number">1</span>] = <span class="number">0</span> + <span class="number">1</span></div><div class="line">k[<span class="number">1</span>] = k[<span class="number">1</span>] + k[<span class="number">0</span>] = <span class="number">1</span> + <span class="number">1</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>]</div><div class="line"></div><div class="line">第三層</div><div class="line">k[<span class="number">3</span>] = k[<span class="number">3</span>] + k[<span class="number">2</span>] = <span class="number">0</span> + <span class="number">1</span></div><div class="line">k[<span class="number">2</span>] = k[<span class="number">2</span>] + k[<span class="number">1</span>] = <span class="number">1</span> + <span class="number">2</span></div><div class="line">k[<span class="number">1</span>] = k[<span class="number">1</span>] + k[<span class="number">0</span>] = <span class="number">2</span> + <span class="number">1</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>]</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getRow</span><span class="params">(<span class="number">_</span> rowIndex: Int)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> rowIndex == <span class="number">0</span> &#123; <span class="keyword">return</span> [<span class="number">1</span>] &#125;</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>](repeating: <span class="number">0</span>, <span class="built_in">count</span>: rowIndex + <span class="number">1</span>)</div><div class="line">    res[<span class="number">0</span>] = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...rowIndex &#123;</div><div class="line">        <span class="keyword">var</span> j = i</div><div class="line">        <span class="keyword">while</span> j &gt;= <span class="number">1</span> &#123;</div><div class="line">            res[j] += res[j - <span class="number">1</span>]</div><div class="line">            j -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Array </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Array </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#501 Find Mode in Binary Search Tree - in Swift]]></title>
       <url>/leetcode-501/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary search tree (BST) with duplicates, find all the mode(s) (the most frequently occurred element) in the given BST.</p>
@@ -4684,8 +4721,6 @@
         
         <tags>
             
-            <tag> 軟體工程 </tag>
-            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -4693,6 +4728,8 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
+            
+            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -4770,6 +4807,8 @@
         
         <tags>
             
+            <tag> Android </tag>
+            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -4779,8 +4818,6 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
-            
-            <tag> Android </tag>
             
             <tag> iOS </tag>
             
