@@ -296,6 +296,202 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-104/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-104/" itemprop="url">
+                  LeetCode#104 Maximum Depth of Binary Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-06T14:20:39+08:00">
+                2017-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Depth-first Search</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-104/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-104/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, find its maximum depth.</p>
+<p>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
+<p>找出二元樹的最大深度。</p>
+<p>Example :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">3</span></div><div class="line">      / \</div><div class="line">     <span class="number">9</span>  <span class="number">20</span></div><div class="line">    / \</div><div class="line">   <span class="number">15</span>  <span class="number">7</span></div><div class="line">        \</div><div class="line">        <span class="number">10</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">4</span></div></pre></td></tr></table></figure></p>
+<p>從根節點 3 走到 10 的距離最長，有 4 個節點。</p>
+<h1 id="第一次解題-52-ms"><a href="#第一次解題-52-ms" class="headerlink" title="第一次解題 : 52 ms"></a>第一次解題 : 52 ms</h1><p>建立一個 array 用來擺放下一步該走的節點，跟著存在的節點不斷的往下走，直到沒有節點。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxDepth</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> depth = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> temp = [root]</div><div class="line">    <span class="keyword">while</span> !temp.isEmpty &#123;</div><div class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> temp &#123;</div><div class="line">            temp.removeFirst()</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> node = node?.<span class="keyword">left</span> &#123;</div><div class="line">                temp.append(node)</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> node = node?.<span class="keyword">right</span> &#123;</div><div class="line">                temp.append(node)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        depth += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> depth</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[<span class="number">3</span>]</div><div class="line">--- next level ---</div><div class="line">[<span class="number">9</span>, <span class="number">20</span>]</div><div class="line">[<span class="number">20</span>, <span class="number">15</span>, <span class="number">7</span>]</div><div class="line">--- next level ---</div><div class="line">[<span class="number">15</span>, <span class="number">7</span>]</div><div class="line">[<span class="number">7</span>]</div><div class="line">--- next level ---</div><div class="line">[<span class="number">10</span>]</div><div class="line">--- next level ---</div></pre></td></tr></table></figure>
+<h1 id="Best-Solution-with-Recursive-Function-32-ms"><a href="#Best-Solution-with-Recursive-Function-32-ms" class="headerlink" title="Best Solution with Recursive Function : 32 ms"></a>Best Solution with Recursive Function : 32 ms</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxDepth</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span> + <span class="built_in">max</span>(maxDepth(root!.<span class="keyword">left</span>), maxDepth(root!.<span class="keyword">right</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> represent the root level = <span class="number">1</span></div><div class="line"></div><div class="line">level <span class="number">2</span> -&gt; <span class="number">1</span> + <span class="built_in">max</span>(<span class="number">1</span>, <span class="number">1</span>) <span class="comment">// 9, 20 ✔</span></div><div class="line"></div><div class="line">level <span class="number">3</span> -&gt; <span class="number">2</span> + <span class="built_in">max</span>(<span class="number">1</span>, <span class="number">1</span>) <span class="comment">// 15, 7 ✔</span></div><div class="line">level <span class="number">3</span> -&gt; <span class="number">2</span> + <span class="built_in">max</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="comment">// nothing under 20</span></div><div class="line"></div><div class="line">level <span class="number">4</span> -&gt; <span class="number">3</span> + <span class="built_in">max</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="comment">// nothing under 15</span></div><div class="line">level <span class="number">4</span> -&gt; <span class="number">3</span> + <span class="built_in">max</span>(<span class="number">0</span>, <span class="number">1</span>) <span class="comment">// nil, 10 ✔ -&gt; answer = 4</span></div><div class="line"></div><div class="line">level <span class="number">5</span> -&gt; <span class="number">4</span> + <span class="built_in">max</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="comment">// nothing under 10</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-485/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1985,201 +2181,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-344/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-344/" itemprop="url">
-                  LeetCode#344 Reverse String - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-02T12:48:53+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Two-Pointers/" itemprop="url" rel="index">
-                    <span itemprop="name">Two Pointers</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Two-Pointers/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-344/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-344/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and returns the string reversed.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Example:</div><div class="line">Given s = &quot;hello&quot;, return &quot;olleh&quot;.</div></pre></td></tr></table></figure>
-<p>寫個函式將字串反轉過來。<br> 輸入: “hello”<br> 輸出: “olleh”</p>
-<h1 id="第一次解題-229-ms"><a href="#第一次解題-229-ms" class="headerlink" title="第一次解題 : 229 ms"></a>第一次解題 : 229 ms</h1><p>純粹使用 swift 內建的 reversed 函式。 不用動腦 … ㄎㄎ</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseString</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(s.characters.reversed())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Other-Solution-1"><a href="#Other-Solution-1" class="headerlink" title="Other Solution 1"></a>Other Solution 1</h1><p>使用迴圈不斷首尾對調對調。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseString</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> stringArray = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> j = s.characters.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> i &lt; j &#123;</div><div class="line">        <span class="keyword">let</span> temp = stringArray[i]</div><div class="line">        stringArray[i] = stringArray[j]</div><div class="line">        stringArray[j] = temp</div><div class="line">        i+=<span class="number">1</span></div><div class="line">        j-=<span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(stringArray)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Other-Solution-2"><a href="#Other-Solution-2" class="headerlink" title="Other Solution 2"></a>Other Solution 2</h1><p>從字串的最後一個字元，一直往前加入到新的字串中。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseString</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> index = s.endIndex</div><div class="line">    <span class="keyword">var</span> result = <span class="string">""</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> index != s.startIndex &#123;</div><div class="line">        index = s.index(before: index)</div><div class="line">        result.append(s[index])</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2229,7 +2230,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">112</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

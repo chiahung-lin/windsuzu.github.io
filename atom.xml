@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-24T06:11:59.000Z</updated>
+  <updated>2017-10-25T05:14:59.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#434 Number of Segments in a String - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-434/"/>
+    <id>http://windsuzu.github.io/leetcode-434/</id>
+    <published>2017-10-25T05:10:25.000Z</published>
+    <updated>2017-10-25T05:14:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.</p>
+<p>Please note that the string does not contain any non-printable characters.</p>
+<p>算出一個字串中有幾個段落，一個段落代表一段不含空白的連續字元。</p>
+<p>注意字串中不計算任何 “沒印出” 的字元</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"Hello, my name is John"</span></div><div class="line"><span class="type">Output</span>: <span class="number">5</span></div></pre></td></tr></table></figure>
+<p>該字串分為五段，”Hello,” 和 “my” 和 “name” 和 “is” 和 “John”</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">countSegments</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> s.characters.<span class="built_in">split</span>(separator: <span class="string">" "</span>).<span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一行解決，用空白字元拆開全部字元，算出拆開的段落有幾個。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Count the number of segments in a string, where a segment is defined t
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/String/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#119 Pascal&#39;s Triangle II - in Swift</title>
@@ -860,54 +900,6 @@
       <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
     
       <category term="Binary Search" scheme="http://windsuzu.github.io/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#437 Path Sum III - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-437/"/>
-    <id>http://windsuzu.github.io/leetcode-437/</id>
-    <published>2017-10-05T06:56:21.000Z</published>
-    <updated>2017-10-05T07:07:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are given a binary tree in which each node contains an integer value.</p>
-<p>Find the number of paths that sum to a given value.</p>
-<p>The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).</p>
-<p>The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.</p>
-<p>有一棵二元樹，每一個節點皆代表一整數。</p>
-<p>找出有幾條路徑，加總值等於題目賦予的值。</p>
-<p>路徑不用從根節點開始，也不需要再葉節點結束。但一定是從父節點一直往下移動。</p>
-<p>整棵樹不會超過 1000 個節點，而且值會在 -1,000,000 到 1,000,000 之間。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">root = [<span class="number">10</span>,<span class="number">5</span>,-<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,null,<span class="number">11</span>,<span class="number">3</span>,-<span class="number">2</span>,null,<span class="number">1</span>], sum = <span class="number">8</span></div><div class="line"></div><div class="line">           <span class="number">10</span></div><div class="line">          /  \</div><div class="line">         <span class="number">5</span>   -<span class="number">3</span></div><div class="line">        / \    \</div><div class="line">       <span class="number">3</span>   <span class="number">2</span>   <span class="number">11</span></div><div class="line">      / \   \</div><div class="line">     <span class="number">3</span>  -<span class="number">2</span>   <span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Return</span> <span class="number">3</span>. <span class="type">The</span> paths that sum to <span class="number">8</span> are:</div><div class="line"></div><div class="line"><span class="number">1</span>.  <span class="number">5</span> -&gt; <span class="number">3</span></div><div class="line"><span class="number">2</span>.  <span class="number">5</span> -&gt; <span class="number">2</span> -&gt; <span class="number">1</span></div><div class="line"><span class="number">3</span>. -<span class="number">3</span> -&gt; <span class="number">11</span></div></pre></td></tr></table></figure>
-<p>這棵樹共有 3 條路徑加總為 8 。<br>第一條 5 -&gt; 3<br>第二條 5 -&gt; 2 -&gt; 1<br>第三條 -3 -&gt; 11</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先寫出 findPath 函式，從確定好的頂點開始往下走，如果節點值與目標值相同，代表路徑多了一條。</p>
-<p>每往下走目標值必須與當前的節點值相減，便於比對整條路的加總。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findPath</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> sum: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">if</span> root.val == sum &#123; res += <span class="number">1</span> &#125;</div><div class="line">    res += findPath(root.<span class="keyword">left</span>, sum - root.val)</div><div class="line">    res += findPath(root.<span class="keyword">right</span>, sum - root.val)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>由根節點開始，往下給每一個節點進行 findPath ，最終得出所有可能的路徑。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">pathSum</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> sum: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">return</span> findPath(root, sum) + pathSum(root.<span class="keyword">left</span>, sum) + pathSum(root.<span class="keyword">right</span>, sum)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="/leetcode-437/nodesum.gif" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;You are given a binary tree in which each node contains an integer val
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
     
   </entry>
   

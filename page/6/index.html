@@ -296,6 +296,200 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-242/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-242/" itemprop="url">
+                  LeetCode#242 Valid Anagram
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-05T14:36:41+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Sort/" itemprop="url" rel="index">
+                    <span itemprop="name">Sort</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Sort/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-242/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-242/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two strings s and t, write a function to determine if t is an anagram of s.</p>
+<p>有兩個字串 s 跟 t ，寫個函式來驗證 t 是否為 s 重新建構出來的字串。</p>
+<p>For example :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">"anagram"</span>, t = <span class="string">"nagaram"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div><div class="line">s = <span class="string">"rat"</span>, t = <span class="string">"car"</span>, <span class="keyword">return</span> <span class="literal">false</span>.</div></pre></td></tr></table></figure></p>
+<p>“nagaram” 是從 anagram 重構出來的所以回傳 true 。<br>“rat” 不是從 car 重構的所以回傳 false 。</p>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>建立一個字元表，第一次將 s 每個字元放進去字元表中。</p>
+<p>第二次尋遍 t ，將相同出現的字元從字元表減去。</p>
+<p>最後若字元表有不為 0 的數字，則代表 t 跟 s 沒有相符。</p>
+<p><img src="/leetcode-242/anagram.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isAnagram</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> t: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> alphabet = [<span class="type">Int</span>](repeating: <span class="number">0</span>, <span class="built_in">count</span>: <span class="number">26</span>)</div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s.utf8 &#123; alphabet[<span class="type">Int</span>(<span class="built_in">c</span>) - <span class="number">97</span>] += <span class="number">1</span> &#125;</div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> t.utf8 &#123; alphabet[<span class="type">Int</span>(<span class="built_in">c</span>) - <span class="number">97</span>] -= <span class="number">1</span> &#125;</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> alphabet &#123; <span class="keyword">if</span> i != <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125; &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-506/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2012,197 +2206,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-455/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-455/" itemprop="url">
-                  LeetCode#455 Assign Cookies - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-26T13:12:21+08:00">
-                2017-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Greedy/" itemprop="url" rel="index">
-                    <span itemprop="name">Greedy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-455/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-455/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Assume you are an awesome parent and want to give your children some cookies.</p>
-<p>But, you should give each child at most one cookie. Each child i has a greed factor gi, which is the minimum size of a cookie that the child will be content with;</p>
-<p>and each cookie j has a size sj. If sj &gt;= gi, we can assign the cookie j to the child i, and the child i will be content.</p>
-<p>Your goal is to maximize the number of your content children and output the maximum number.</p>
-<p>給定兩個陣列，一個代表各個餅乾的尺寸， 一個代表每個小孩想要的餅乾尺寸。</p>
-<p>現在將餅乾分配給小孩們，但分配的餅乾尺寸不能夠小於小孩期望的餅乾尺寸。</p>
-<p>求這些餅乾最多可以滿足幾個小孩。</p>
-<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">1</span>,<span class="number">1</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">You</span> have <span class="number">3</span> children and <span class="number">2</span> cookies. <span class="type">The</span> greed factors of <span class="number">3</span> children are <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>.</div><div class="line"><span class="type">And</span> even though you have <span class="number">2</span> cookies, since their size <span class="keyword">is</span> both <span class="number">1</span>, you could only make the child whose greed factor <span class="keyword">is</span> <span class="number">1</span> content.</div><div class="line"><span class="type">You</span> need to output <span class="number">1</span>.</div></pre></td></tr></table></figure></p>
-<p>現在有三個小孩，兩個尺寸為 1 的餅乾，但只有一個小孩接受尺寸為 1 的餅乾，所以得出答案 1 。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>], [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">You</span> have <span class="number">2</span> children and <span class="number">3</span> cookies. <span class="type">The</span> greed factors of <span class="number">2</span> children are <span class="number">1</span>, <span class="number">2</span>.</div><div class="line"><span class="type">You</span> have <span class="number">3</span> cookies and their sizes are big enough to gratify all of the children,</div><div class="line"><span class="type">You</span> need to output <span class="number">2</span>.</div></pre></td></tr></table></figure></p>
-<p>現在有兩個小孩，三個尺寸為 1, 2, 3 的餅乾，一個小孩接受尺寸為 1 的餅乾， 另一個接受尺寸為 2 的餅乾，所以得出答案 2 。</p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將小孩按照慾望的順序由低往高排，餅乾也照著尺寸大小由小往大排。</p>
-<p>遍尋餅乾的尺寸，只要小孩喜歡這個餅乾，就將已滿足的小孩 + 1 。</p>
-<p>由於慾望與餅乾皆有排序，所以餅乾才可以不斷地往前數，因為前一個小孩不想要的，下一個小孩當然也不想要。</p>
-<p><img src="/leetcode-455/greedy.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findContentChildren</span><span class="params">(<span class="number">_</span> g: [Int], <span class="number">_</span> s: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">let</span> g = g.sorted(by: &lt;)</div><div class="line">    <span class="keyword">let</span> s = s.sorted(by: &lt;)</div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> j = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span>(i&lt;g.<span class="built_in">count</span> &amp;&amp; j&lt;s.<span class="built_in">count</span>) &#123;</div><div class="line">        <span class="keyword">if</span> g[i] &lt;= s[j] &#123;</div><div class="line">            i += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        j += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> i</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2252,7 +2255,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">112</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

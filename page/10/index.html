@@ -296,6 +296,201 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-344/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-344/" itemprop="url">
+                  LeetCode#344 Reverse String - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-02T12:48:53+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Two-Pointers/" itemprop="url" rel="index">
+                    <span itemprop="name">Two Pointers</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Two-Pointers/String/" itemprop="url" rel="index">
+                    <span itemprop="name">String</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-344/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-344/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and returns the string reversed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Example:</div><div class="line">Given s = &quot;hello&quot;, return &quot;olleh&quot;.</div></pre></td></tr></table></figure>
+<p>寫個函式將字串反轉過來。<br> 輸入: “hello”<br> 輸出: “olleh”</p>
+<h1 id="第一次解題-229-ms"><a href="#第一次解題-229-ms" class="headerlink" title="第一次解題 : 229 ms"></a>第一次解題 : 229 ms</h1><p>純粹使用 swift 內建的 reversed 函式。 不用動腦 … ㄎㄎ</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseString</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(s.characters.reversed())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Other-Solution-1"><a href="#Other-Solution-1" class="headerlink" title="Other Solution 1"></a>Other Solution 1</h1><p>使用迴圈不斷首尾對調對調。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseString</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> stringArray = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> j = s.characters.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> i &lt; j &#123;</div><div class="line">        <span class="keyword">let</span> temp = stringArray[i]</div><div class="line">        stringArray[i] = stringArray[j]</div><div class="line">        stringArray[j] = temp</div><div class="line">        i+=<span class="number">1</span></div><div class="line">        j-=<span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(stringArray)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Other-Solution-2"><a href="#Other-Solution-2" class="headerlink" title="Other Solution 2"></a>Other Solution 2</h1><p>從字串的最後一個字元，一直往前加入到新的字串中。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseString</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> index = s.endIndex</div><div class="line">    <span class="keyword">var</span> result = <span class="string">""</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> index != s.startIndex &#123;</div><div class="line">        index = s.index(before: index)</div><div class="line">        result.append(s[index])</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-575/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1992,199 +2187,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-461/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-461/" itemprop="url">
-                  LeetCode#461 Hamming distance - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-23T09:03:46+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Bit-Manipulation/" itemprop="url" rel="index">
-                    <span itemprop="name">Bit Manipulation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-461/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-461/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
-<p>Given two integers x and y, calculate the Hamming distance.</p>
-<p>兩個等長字符串之間的漢明距離是兩個字符串對應位置的不同字符的個數。</p>
-<p>現在給兩個整數 x, y ，計算出它們的漢明距離。</p>
-<p>Note:<br> 0 ≤ x, y &lt; 231.</p>
-<p>Example:</p>
-<p> Input: x = 1, y = 4</p>
-<p> Output: 2</p>
-<p> Explanation:<br> 1   (0 0 0 1)<br> 4   (0 1 0 0)<br>        ?   ?</p>
-<p> The above arrows point to positions where the corresponding bits are different.</p>
-<p> 上面的 ？ 符號表示該 bits 不相同</p>
-<h1 id="科普"><a href="#科普" class="headerlink" title="科普"></a>科普</h1><p>什麼是<a href="https://goo.gl/n4Cc69" target="_blank" rel="external">漢明距離 (Hamming distance)</a></p>
-<p>漢明距離是以理察·衛斯里·漢明的名字命名的，漢明在誤差檢測與校正碼的基礎性論文中首次引入這個概念。在通信中累計定長二進位字中發生翻轉的錯誤數據位，所以它也被稱為信號距離。漢明重量分析在包括<code>資訊理論</code>、<code>編碼理論</code>、<code>密碼學</code>等領域都有應用。但是，如果要比較兩個不同長度的字符串，不僅要進行替換，而且要進行插入與刪除的運算，在這種場合下，通常使用更加複雜的編輯距離等算法。</p>
-<h1 id="第一次解題-Accepted"><a href="#第一次解題-Accepted" class="headerlink" title="第一次解題 : Accepted"></a>第一次解題 : Accepted</h1><p>第一次解，想說把數字轉換成二位元字串<br>也就是使用 pad 這個方法取得兩個 binaryX 跟 binaryY<br>接下來就比對兩個字串每一個值是否有差異，就過了。。。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">hammingDistance</span><span class="params">(<span class="number">_</span> x: Int, <span class="number">_</span> y: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// How to convert Int to Binary in Swift : https://goo.gl/6m9TEY</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">pad</span><span class="params">(string : String, toSize: Int)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">var</span> padded = string</div><div class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;(toSize - string.characters.<span class="built_in">count</span>) &#123;</div><div class="line">            padded = <span class="string">"0"</span> + padded</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> padded</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> binaryX = pad(string: <span class="type">String</span>(x, radix: <span class="number">2</span>), toSize: <span class="number">32</span>)</div><div class="line">    <span class="keyword">let</span> binaryY = pad(string: <span class="type">String</span>(y, radix: <span class="number">2</span>), toSize: <span class="number">32</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> diff = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> binaryX.characters.<span class="built_in">indices</span> &#123;</div><div class="line">        <span class="keyword">let</span> c1 = binaryX.characters[i]</div><div class="line">        <span class="keyword">let</span> c2 = binaryY.characters[i]</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> c1 != c2 &#123;</div><div class="line">            diff += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> diff</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Other-Best-Practices"><a href="#Other-Best-Practices" class="headerlink" title="Other Best Practices"></a>Other Best Practices</h1><p>想想其實漢明距離就是要求兩個字符串的<a href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%BC%82%E6%88%96" target="_blank" rel="external">互斥或閘 (exclusive or)</a> </p>
-<p>也就是 x ^ y 的答案</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">hammingDistance</span><span class="params">(<span class="number">_</span> x: Int, <span class="number">_</span> y: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">let</span> <span class="built_in">c</span> = x ^ y</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(<span class="built_in">c</span>, radix: <span class="number">2</span>).characters.<span class="built_in">filter</span> &#123; $<span class="number">0</span> == <span class="string">"1"</span>&#125;.<span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2234,7 +2236,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">112</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

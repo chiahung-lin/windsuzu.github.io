@@ -3,6 +3,44 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#434 Number of Segments in a String - in Swift]]></title>
+      <url>/leetcode-434/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.</p>
+<p>Please note that the string does not contain any non-printable characters.</p>
+<p>算出一個字串中有幾個段落，一個段落代表一段不含空白的連續字元。</p>
+<p>注意字串中不計算任何 “沒印出” 的字元</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"Hello, my name is John"</span></div><div class="line"><span class="type">Output</span>: <span class="number">5</span></div></pre></td></tr></table></figure>
+<p>該字串分為五段，”Hello,” 和 “my” 和 “name” 和 “is” 和 “John”</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">countSegments</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> s.characters.<span class="built_in">split</span>(separator: <span class="string">" "</span>).<span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一行解決，用空白字元拆開全部字元，算出拆開的段落有幾個。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> String </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> String </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#119 Pascal's Triangle II - in Swift]]></title>
       <url>/leetcode-119/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an index k, return the kth row of the Pascal’s triangle.</p>
@@ -4721,6 +4759,8 @@
         
         <tags>
             
+            <tag> 軟體工程 </tag>
+            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -4728,8 +4768,6 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
-            
-            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -4807,8 +4845,6 @@
         
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -4818,6 +4854,8 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
+            
+            <tag> Android </tag>
             
             <tag> iOS </tag>
             

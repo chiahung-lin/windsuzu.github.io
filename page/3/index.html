@@ -296,6 +296,199 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-437/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-437/" itemprop="url">
+                  LeetCode#437 Path Sum III - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-05T14:56:21+08:00">
+                2017-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-437/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-437/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are given a binary tree in which each node contains an integer value.</p>
+<p>Find the number of paths that sum to a given value.</p>
+<p>The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).</p>
+<p>The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.</p>
+<p>有一棵二元樹，每一個節點皆代表一整數。</p>
+<p>找出有幾條路徑，加總值等於題目賦予的值。</p>
+<p>路徑不用從根節點開始，也不需要再葉節點結束。但一定是從父節點一直往下移動。</p>
+<p>整棵樹不會超過 1000 個節點，而且值會在 -1,000,000 到 1,000,000 之間。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">root = [<span class="number">10</span>,<span class="number">5</span>,-<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,null,<span class="number">11</span>,<span class="number">3</span>,-<span class="number">2</span>,null,<span class="number">1</span>], sum = <span class="number">8</span></div><div class="line"></div><div class="line">           <span class="number">10</span></div><div class="line">          /  \</div><div class="line">         <span class="number">5</span>   -<span class="number">3</span></div><div class="line">        / \    \</div><div class="line">       <span class="number">3</span>   <span class="number">2</span>   <span class="number">11</span></div><div class="line">      / \   \</div><div class="line">     <span class="number">3</span>  -<span class="number">2</span>   <span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Return</span> <span class="number">3</span>. <span class="type">The</span> paths that sum to <span class="number">8</span> are:</div><div class="line"></div><div class="line"><span class="number">1</span>.  <span class="number">5</span> -&gt; <span class="number">3</span></div><div class="line"><span class="number">2</span>.  <span class="number">5</span> -&gt; <span class="number">2</span> -&gt; <span class="number">1</span></div><div class="line"><span class="number">3</span>. -<span class="number">3</span> -&gt; <span class="number">11</span></div></pre></td></tr></table></figure>
+<p>這棵樹共有 3 條路徑加總為 8 。<br>第一條 5 -&gt; 3<br>第二條 5 -&gt; 2 -&gt; 1<br>第三條 -3 -&gt; 11</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先寫出 findPath 函式，從確定好的頂點開始往下走，如果節點值與目標值相同，代表路徑多了一條。</p>
+<p>每往下走目標值必須與當前的節點值相減，便於比對整條路的加總。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findPath</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> sum: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">if</span> root.val == sum &#123; res += <span class="number">1</span> &#125;</div><div class="line">    res += findPath(root.<span class="keyword">left</span>, sum - root.val)</div><div class="line">    res += findPath(root.<span class="keyword">right</span>, sum - root.val)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由根節點開始，往下給每一個節點進行 findPath ，最終得出所有可能的路徑。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">pathSum</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> sum: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">return</span> findPath(root, sum) + pathSum(root.<span class="keyword">left</span>, sum) + pathSum(root.<span class="keyword">right</span>, sum)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/leetcode-437/nodesum.gif" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1987,199 +2180,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-572/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-572/" itemprop="url">
-                  LeetCode#572 Subtree of Another Tree - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-25T15:33:46+08:00">
-                2017-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-572/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-572/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this node’s descendants. The tree s could also be considered as a subtree of itself.</p>
-<p>給兩個不為空的二元樹 s 和 t 。<br>驗證 t 是否相同於 s 的子樹，必須擁有相同的架構和值。<br>s 子樹由 s 組成，所以 s 也可以視作 s 子樹。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h2><p>Given tree s:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    <span class="number">3</span></div><div class="line">   / \</div><div class="line">  <span class="number">4</span>   <span class="number">5</span></div><div class="line"> / \</div><div class="line"><span class="number">1</span>   <span class="number">2</span></div></pre></td></tr></table></figure></p>
-<p>Given tree t:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="number">4</span></div><div class="line">    / \</div><div class="line">   <span class="number">1</span>   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Return</span> <span class="literal">true</span>, because t has the same structure and node values with a subtree of s.</div></pre></td></tr></table></figure></p>
-<p>回傳 true ，因為 t 可以相同於 s 子樹。</p>
-<h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h2><p>Given tree s:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">      <span class="number">3</span></div><div class="line">     / \</div><div class="line">    <span class="number">4</span>   <span class="number">5</span></div><div class="line">   / \</div><div class="line">  <span class="number">1</span>   <span class="number">2</span></div><div class="line"> /</div><div class="line"><span class="number">0</span></div></pre></td></tr></table></figure></p>
-<p>Given tree t:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="number">4</span></div><div class="line">    / \</div><div class="line">   <span class="number">1</span>   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Return</span> <span class="literal">false</span>.</div></pre></td></tr></table></figure></p>
-<p>回傳 false ，因為 t 並沒有相同於任何 s 子樹。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>利用 isSame 函式去判斷兩棵樹是否完全相等。</p>
-<p>如果 s 為空 ， t 也應該為空。</p>
-<p>如果皆不為空，兩個節點的值應該要相等，相等繼續往左右節點做 isSame 函式，不相等則回傳 false 。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isSame</span><span class="params">(<span class="number">_</span> s: TreeNode?, <span class="number">_</span> t: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> s == <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">return</span> t == <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> s = s, <span class="keyword">let</span> t = t, s.val == t.val &#123;</div><div class="line">        <span class="keyword">return</span> isSame(s.<span class="keyword">left</span>,t.<span class="keyword">left</span>) &amp;&amp; isSame(s.<span class="keyword">right</span>,t.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>有了 isSame 函式，現在只要確認 s 子樹 是否有節點相等於 t 樹的根節點。<br>如果開頭相同，就可以執行 isSame 函式。</p>
-<p>所以看到主函式，若 s 為空 ， t 也應該為空。<br>若 s 根節點相等於 t 根節點，確認 t 是否相等於 s 或 s左子樹 或 s右子樹。</p>
-<p>若開頭不同，往下找有沒有其他 s 的節點為 t 的根節點。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isSubtree</span><span class="params">(<span class="number">_</span> s: TreeNode?, <span class="number">_</span> t: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> s == <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">return</span> t == <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> s = s, <span class="keyword">let</span> t = t, s.val == t.val &#123;</div><div class="line">        <span class="keyword">return</span> isSame(s,t) || isSame(s.<span class="keyword">left</span>,t) || isSame(s.<span class="keyword">right</span>,t)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> isSubtree(s?.<span class="keyword">left</span>,t) || isSubtree(s?.<span class="keyword">right</span>,t)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2229,7 +2229,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">112</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

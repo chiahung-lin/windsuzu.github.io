@@ -296,6 +296,180 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-services/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/learn-android-services/" itemprop="url">
+                  學習Android背景執行服務 Android Services
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-04-05T00:44:58+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/learn-android-services/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="learn-android-services/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近為了設計無網路情況下，將資料儲存在SQLite中，而偵測用戶網路連接後，將資料上傳。必須使用到Service的功能，所以剛好有機會把Service學得更深!</p>
+<p>Android的<code>Service</code>是Android的四大組件之一。不同於<code>Activity</code>的生命週期，<code>Service</code>可以在背景不斷的工作，直到停止或是系統無法提供資源為止。通常運用在後台播放音樂、定時檢查更新資料，或是執行很久的工作，如上傳及下載檔案。</p>
+<h2 id="好文參考"><a href="#好文參考" class="headerlink" title="好文參考"></a>好文參考</h2><p><a href="https://developer.android.com/guide/components/services.html?hl=zh-tw" target="_blank" rel="external">Services | Android Developers</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/11952435" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切(上)</a><br><a href="http://www.aaronlife.com/teaching/uch_android_2015-02-06_00.html" target="_blank" rel="external">健行科技Android手機程式設計人才培訓班 - Service背景執行程式</a><br><a href="http://xnfood.com.tw/android-service/" target="_blank" rel="external">《Android》『Service』- 背景執行服務的基本用法</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>要讓Service能在後台運行，必須定義一個繼承Service的類別，並在<code>AndroidManifest.xml</code>宣告這個Service以及其他相關屬性，並了解如何啟動他。Service的呼叫分為兩種 :</p>
+<h3 id="startService"><a href="#startService" class="headerlink" title="startService"></a>startService</h3><p>當Service使用<code>startService()</code>啟動後，就算Activity被關閉，Service也會持續在Background工作著。Service與Acitivty之間沒有什麼交集，Service完成任務也不會回傳東西給原來的應用程式。</p>
+<h3 id="bindService"><a href="#bindService" class="headerlink" title="bindService"></a>bindService</h3><p>呼叫<code>bindService()</code>則可以讓Activity與Service進行綁定，例如在Activity中指定Service執行某些任務。而bindService也能夠讓Service被多個不同的應用程式呼叫，達到跨應用程式的互動與協作。</p>
+<p><img src="https://developer.android.com/images/service_lifecycle.png" alt="兩種啟動Service方式的生命週期" title="https://developer.android.com/guide/components/services.html"></p>
+<ol>
+<li><p>應用程式呼叫<code>startService()</code>後，系統呼叫Service類別內的<code>onCreate()</code>，接著呼叫<code>onStartCommand()</code>利用Intent提供的參數做事。直到工作結束或是應用程式呼叫<code>stopService()</code>才會停止。</p>
+</li>
+<li><p>應用程式呼叫<code>bindService()</code>與Service綁定前，應用程式需要建立一個<code>serviceConnection</code>物件，呼叫後若Service尚未啟動，Service類別內的<code>onCreate()</code>就會被呼叫，使用這種方法啟動Service的應用程式，可以透過<code>onBind()</code>方法取得IBinder物件，接下來就可以透過IBinder物件來取得Service的事件。</p>
+</li>
+</ol>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="在AndroidManifest-xml檔中新增定義。"><a href="#在AndroidManifest-xml檔中新增定義。" class="headerlink" title="在AndroidManifest.xml檔中新增定義。"></a>在AndroidManifest.xml檔中新增定義。</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;? xml version = "1.0" encoding = "utf-8" ?&gt;    </div><div class="line"><span class="tag">&lt; <span class="attr">manifest</span> <span class="attr">xmlns:android</span> = <span class="string">"http://schemas.android.com/apk/res/android"</span>   </span></div><div class="line">    <span class="attr">package</span> = <span class="string">"com.example.serviceTest"</span>  </div><div class="line">    <span class="attr">android:versionCode</span> = <span class="string">"1"</span>  </div><div class="line">    <span class="attr">android:versionName</span> = <span class="string">"1.0"</span> &gt;   </div><div class="line">  </div><div class="line">    <span class="tag">&lt; <span class="attr">uses-sdk</span>  </span></div><div class="line">        <span class="attr">android:minSdkVersion</span> = <span class="string">"14"</span>  </div><div class="line">        <span class="attr">android:targetSdkVersion</span> = <span class="string">"17"</span> /&gt;</div><div class="line">  </div><div class="line">    <span class="tag">&lt; <span class="attr">application</span>  </span></div><div class="line">        <span class="attr">android:allowBackup</span> = <span class="string">"true"</span></div><div class="line">        <span class="attr">android:icon</span> = <span class="string">"@drawable/ic_launcher"</span>  </div><div class="line">        <span class="attr">android:label</span> = <span class="string">"@string/app_name"</span>  </div><div class="line">        <span class="attr">android:theme</span> = <span class="string">"@style/AppTheme"</span> &gt;   </div><div class="line">    ……  </div><div class="line">        <span class="tag">&lt; <span class="attr">service</span> <span class="attr">android:name</span> = <span class="string">"com.example.serviceTest.MyService"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/ <span class="attr">service</span> &gt;</span>  </div><div class="line">    <span class="tag">&lt;/ <span class="attr">application</span> &gt;</span>  </div><div class="line">  </div><div class="line"><span class="tag">&lt;/ <span class="attr">manifest</span> &gt;</span></div></pre></td></tr></table></figure>
+<h3 id="實作-Service-類別"><a href="#實作-Service-類別" class="headerlink" title="實作 Service 類別"></a>實作 Service 類別</h3><p>實作一個繼承自Service類別的物件。bindService與startService兩者能夠同時存在並不衝突，而且在這次專案裡剛好都會使用到，所以只要同時實作onStartCommand()與onBind()兩個事件即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;   </div><div class="line">  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyService"</span>;</div><div class="line">  </div><div class="line">    <span class="keyword">private</span> MyBinder mBinder = <span class="keyword">new</span> MyBinder();</div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;   </div><div class="line">        <span class="keyword">super</span> .onCreate();  </div><div class="line">        Log.d(TAG, <span class="string">"onCreate() executed"</span>);</div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;   </div><div class="line">        Log.d(TAG, <span class="string">"onStartCommand() executed"</span>);  </div><div class="line">        <span class="comment">// 執行任務</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;   </div><div class="line">        <span class="keyword">super</span>.onDestroy();  </div><div class="line">        Log.d(TAG, <span class="string">"onDestroy() executed"</span>);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> mBinder;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MyBinder</span> <span class="keyword">extends</span> <span class="title">Binder</span> </span>&#123;  </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDownload</span><span class="params">()</span> </span>&#123;   </div><div class="line">            Log.d(<span class="string">"TAG"</span>, <span class="string">"startDownload() executed"</span>);  </div><div class="line">            <span class="comment">// 執行任務</span></div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="在-Activity-實作-1"><a href="#在-Activity-實作-1" class="headerlink" title="在 Activity 實作 (1)"></a>在 Activity 實作 (1)</h3><p>在Activity中呼叫startService()來執行第一種啟動Service的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></div><div class="line">&#123;</div><div class="line">    setContentView(R.layout.activity_main);</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MyService.class); </div><div class="line">    <span class="keyword">this</span>.startService(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="在-Activity-實作-2"><a href="#在-Activity-實作-2" class="headerlink" title="在 Activity 實作 (2)"></a>在 Activity 實作 (2)</h3><p>建立 MyBinder 與 ServiceConnection 物件，並呼叫bindService()執行第二種方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> MyService.MyBinder myBinder;  </div><div class="line">	<span class="keyword">private</span> ServiceConnection mServiceConnection = <span class="keyword">new</span> ServiceConnection() &#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName className, IBinder binder)</span> </span>&#123;</div><div class="line">            myBinder = (MyService.MyBinder) service;  </div><div class="line">            myBinder.startDownload();  </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName className)</span> </span>&#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MyService.class);</div><div class="line">        <span class="keyword">this</span>.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="keyword">this</span>.unbindService(mServiceConnection);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上就是關於Android Services的基礎操作，另外還有很多Service相關的東西，如IntentService、Service和Thread的關係、如何運行前台的Service、或者是遠端Service的協作等著學習。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -531,7 +705,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">112</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
