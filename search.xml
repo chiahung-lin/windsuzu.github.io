@@ -3,6 +3,47 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#172 Factorial Trailing Zeroes - in Swift]]></title>
+      <url>/leetcode-172/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer n, return the number of trailing zeroes in n!.</p>
+<p>Note: Your solution should be in logarithmic time complexity.</p>
+<p>給定整數 n ，返回 n! 中有幾個後綴的 0 。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">5</span>!</div><div class="line"><span class="type">Output</span>: <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>5! = <code>1 * 2 * 3 * 4 * 5</code> = 120<br>後綴有 1 個 0 所以回傳 1</p>
+<p>Example 2 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">25</span>!</div><div class="line"><span class="type">Output</span>: <span class="number">6</span></div></pre></td></tr></table></figure></p>
+<p>25! = 15511210043330985984000000<br>後綴共有 6 個 0 所以回傳 6</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>從 <code>5!</code> 看為什麼會有後綴的 <code>0</code><br>因為 <code>1 * 2 * 3 * 4 * 5</code> 有 <code>2</code> 跟 <code>5</code> 相乘得出 <code>10</code><br>但從 <code>1</code> 到 <code>n</code> 那麼多個 <code>2</code> ，真正造成後綴出現 <code>0</code> 的是 <code>5</code><br>所以我們只需要對 <code>n / 5</code> 即可</p>
+<p>但 <code>25!</code> 不是 <code>25 / 5 = 5</code> 嗎，為什麼是 <code>6</code><br>因為 <code>25</code> 本身還多包含了 <code>5 * 5</code> ，所以要 + 1</p>
+<p>這邊利用遞迴若 <code>n / 5</code> 還可以被 <code>5</code> 除，那就在加進原來的答案中</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">trailingZeroes</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? <span class="number">0</span> : n / <span class="number">5</span> + trailingZeroes(n / <span class="number">5</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Math </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Math </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#434 Number of Segments in a String - in Swift]]></title>
       <url>/leetcode-434/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.</p>
@@ -4381,11 +4422,11 @@
             
             <tag> Android </tag>
             
-            <tag> Retrofit </tag>
-            
             <tag> RxJava </tag>
             
             <tag> RxAndroid </tag>
+            
+            <tag> Retrofit </tag>
             
         </tags>
         
@@ -4759,8 +4800,6 @@
         
         <tags>
             
-            <tag> 軟體工程 </tag>
-            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -4768,6 +4807,8 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
+            
+            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -4845,6 +4886,8 @@
         
         <tags>
             
+            <tag> Android </tag>
+            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -4854,8 +4897,6 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
-            
-            <tag> Android </tag>
             
             <tag> iOS </tag>
             

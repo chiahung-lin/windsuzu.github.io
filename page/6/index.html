@@ -296,6 +296,218 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-13/" itemprop="url">
+                  LeetCode#13 Roman to Integer - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-06T15:12:39+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/String/" itemprop="url" rel="index">
+                    <span itemprop="name">String</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-13/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-13/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a roman numeral, convert it to an integer.</p>
+<p>Input is guaranteed to be within the range from 1 to 3999.</p>
+<p>將羅馬文字的數字轉換為一般數字。</p>
+<p>範圍是 1 到 3999 。</p>
+<blockquote>
+<p> 題目敘述就只有這樣，好爛，所以找了一下羅馬數字圖表。<br> <a href="http://literacy.kent.edu/Minigrants/Cinci/romanchart.htm" target="_blank" rel="external">http://literacy.kent.edu/Minigrants/Cinci/romanchart.htm</a></p>
+</blockquote>
+<p>簡單來說 : </p>
+<ul>
+<li>I 代表 1</li>
+<li>V 代表 5 </li>
+<li>X 代表 10 </li>
+<li>L 代表 50 </li>
+<li>C 代表 100 </li>
+<li>D 代表 500 </li>
+<li>M 代表 1000</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="type">I</span> -&gt; <span class="number">1</span></div><div class="line"><span class="type">II</span> -&gt; <span class="number">2</span></div><div class="line"><span class="type">III</span> -&gt; <span class="number">3</span></div><div class="line"></div><div class="line"><span class="comment">// 但這種會比較特殊</span></div><div class="line"><span class="type">IV</span> -&gt; <span class="number">4</span></div><div class="line"><span class="comment">// 當小數字在大數字的前面時，變成大數字減小數字</span></div><div class="line"></div><div class="line"><span class="comment">// 繼續下去</span></div><div class="line"><span class="type">V</span> -&gt; <span class="number">5</span></div><div class="line"><span class="type">VI</span> -&gt; <span class="number">6</span></div><div class="line"><span class="type">VII</span> -&gt; <span class="number">7</span></div><div class="line"><span class="type">VIII</span> -&gt; <span class="number">8</span></div><div class="line"></div><div class="line"><span class="comment">// 又遇到一個，所以是 10 - 1</span></div><div class="line"><span class="type">IX</span> -&gt; <span class="number">9</span></div><div class="line"></div><div class="line"><span class="comment">// 繼續下去</span></div><div class="line"><span class="type">X</span> -&gt; <span class="number">10</span></div><div class="line"><span class="type">XI</span> -&gt; <span class="number">11</span></div><div class="line"><span class="type">XII</span> -&gt; <span class="number">12</span></div><div class="line"><span class="type">XIII</span> -&gt; <span class="number">13</span></div><div class="line"></div><div class="line"><span class="comment">// 特殊規則串插在中間</span></div><div class="line"><span class="type">XIV</span> -&gt; <span class="number">14</span></div><div class="line"></div><div class="line"><span class="comment">// Move on ...</span></div><div class="line"><span class="type">XV</span> -&gt; <span class="number">15</span></div></pre></td></tr></table></figure>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先將一般規則記錄在字典中。</p>
+<p>接著開始讀每一個羅馬數字，如果是正常的 「I」、「II」、「VIII」、「XII」，<br>就單純的將數字往上加上去。</p>
+<p>但若是遇到前一個字母小於，之後的字母，例如 「IV」、「IX」、「XIX」中的「IX」，<br>就必須要有新的規則。<br>這時候再看到 「XL」 是 10 跟 50 ，結果卻變成 40 。<br>我們發現原來這種數字是要，後面的數字 - 前面的數字。</p>
+<p>但因為是尋遍每個字母，尋到後面的字母時，需要把剛剛已經加進去的數字算進去，<br>所以要減去兩倍的前一個數字。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">答案 = <span class="number">0</span></div><div class="line"></div><div class="line">例如 <span class="type">XLIX</span> -&gt;</div><div class="line"></div><div class="line"><span class="type">X</span> -&gt; 答案 = <span class="number">10</span></div><div class="line"></div><div class="line"><span class="comment">// L 符合規則二 (L &gt; X)</span></div><div class="line"><span class="type">L</span> -&gt; 答案 = <span class="number">10</span> + (<span class="number">50</span> - <span class="number">2</span>*<span class="number">10</span>)</div><div class="line"></div><div class="line"><span class="type">I</span> -&gt; 答案 = <span class="number">10</span> + <span class="number">30</span> + <span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment">// X 符合規則二 (X &gt; I)</span></div><div class="line"><span class="type">X</span> -&gt; 答案 = <span class="number">10</span> + <span class="number">30</span> + <span class="number">1</span> + (<span class="number">10</span> - <span class="number">2</span>*<span class="number">1</span>)</div><div class="line">  </div><div class="line">  -&gt; 答案 = <span class="number">10</span> + <span class="number">30</span> + <span class="number">1</span> + <span class="number">8</span> = <span class="number">49</span></div></pre></td></tr></table></figure>
+<p><img src="/leetcode-13/roman.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">romanToInt</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">let</span> dict: [<span class="type">Character</span> : <span class="type">Int</span>] =</div><div class="line">        [<span class="string">"I"</span> : <span class="number">1</span>, <span class="string">"V"</span> : <span class="number">5</span>, <span class="string">"X"</span> : <span class="number">10</span>, <span class="string">"L"</span> : <span class="number">50</span>, <span class="string">"C"</span> : <span class="number">100</span>, <span class="string">"D"</span> : <span class="number">500</span>, <span class="string">"M"</span> : <span class="number">1000</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> sArr = <span class="type">Array</span>(s.characters)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;sArr.<span class="built_in">count</span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> i - <span class="number">1</span> &gt;= <span class="number">0</span> , dict[sArr[i]]! &gt; dict[sArr[i - <span class="number">1</span>]]! &#123;</div><div class="line">            res += dict[sArr[i]]! - (<span class="number">2</span> * dict[sArr[i - <span class="number">1</span>]]!)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            res += dict[sArr[i]]!</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-242/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2011,201 +2223,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-122/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-122/" itemprop="url">
-                  LeetCode#122 Best Time to Buy and Sell Stock II - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-27T12:07:38+08:00">
-                2017-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/Greedy/" itemprop="url" rel="index">
-                    <span itemprop="name">Greedy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-122/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-122/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Say you have an array for which the ith element is the price of a given stock on day i.</p>
-<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
-<p>給定陣列，他的第 i 個元素代表某股票在第 i 天的價格，設計一個算法來找到最大的利潤。</p>
-<p>可以盡可能完成越多次的交易，但不能同時參與多個交易 (必須在購買下一次股票前出售手上的股票)。</p>
-<p>舉例 [2,1,3,4,5,4,2,8,7]</p>
-<p>你可以在第二天買 1 第五天賣 5 賺 4 ，<br>在第七天買 2 第五天賣 8 賺 6，總共賺了 10 。</p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>舉例 [2,1,3,4,5,4,2,8,7]<br>在第二天買 1 第五天賣 5 可以賺 4<br>但在第二天買 1 第三天賣 3 ，第三天買 3 第四天賣 4 ， 第四天買 4 第五天賣 5 ，也會賺 4 。<br>所以只要當天減去昨天是賺的，就加進結果中，反之則無視。</p>
-<p><img src="/leetcode-122/maximum_profit.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxProfit</span><span class="params">(<span class="number">_</span> prices: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> last = -<span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> price <span class="keyword">in</span> prices &#123;</div><div class="line">        <span class="keyword">if</span> last &gt;= <span class="number">0</span> &amp;&amp; price - last &gt; <span class="number">0</span> &#123;</div><div class="line">            res += (price - last)</div><div class="line">        &#125;</div><div class="line">        last = price</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2255,7 +2272,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">112</span>
+                <span class="site-state-item-count">113</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

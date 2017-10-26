@@ -296,6 +296,178 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-412/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-412/" itemprop="url">
+                  LeetCode#412 Fizz Buzz - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-02T13:17:31+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-412/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-412/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a program that outputs the string representation of numbers from 1 to n.</p>
+<p>But for multiples of three it should output “Fizz” instead of the number and for the multiples of five output “Buzz”. For numbers which are multiples of both three and five output “FizzBuzz”.</p>
+<p>寫一個函式， 從 1 數到指定的數字， 遇到 3 就喊 Fizz ， 遇到 5 就喊 Buzz ， 那遇到 15 ..<br> 1! , 2! , Fizz! , 4! , Buzz! … 13! , 14 , FizzBuzz!</p>
+<p>Example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">15</span>,</div><div class="line"></div><div class="line"><span class="type">Return</span>:</div><div class="line">[</div><div class="line">    <span class="string">"1"</span>,</div><div class="line">    <span class="string">"2"</span>,</div><div class="line">    <span class="string">"Fizz"</span>,</div><div class="line">    <span class="string">"4"</span>,</div><div class="line">    <span class="string">"Buzz"</span>,</div><div class="line">    <span class="string">"Fizz"</span>,</div><div class="line">    <span class="string">"7"</span>,</div><div class="line">    <span class="string">"8"</span>,</div><div class="line">    <span class="string">"Fizz"</span>,</div><div class="line">    <span class="string">"Buzz"</span>,</div><div class="line">    <span class="string">"11"</span>,</div><div class="line">    <span class="string">"Fizz"</span>,</div><div class="line">    <span class="string">"13"</span>,</div><div class="line">    <span class="string">"14"</span>,</div><div class="line">    <span class="string">"FizzBuzz"</span></div><div class="line">]</div></pre></td></tr></table></figure></p>
+<h1 id="第一次解題-32-ms"><a href="#第一次解題-32-ms" class="headerlink" title="第一次解題 : 32 ms"></a>第一次解題 : 32 ms</h1><p>因為 3 跟 5 相乘的數遇到時因為以 15 作為最優先判斷，所以 i % 15 == 0 擺在第一個</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">fizzBuzz</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; [<span class="type">String</span>] &#123;</div><div class="line">    <span class="keyword">var</span> array = [<span class="type">String</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...n &#123;</div><div class="line">        <span class="keyword">if</span> i%<span class="number">15</span> == <span class="number">0</span> &#123;</div><div class="line">            array.append(<span class="string">"FizzBuzz"</span>)</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> i%<span class="number">5</span> == <span class="number">0</span> &#123;</div><div class="line">            array.append(<span class="string">"Buzz"</span>)</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">0</span> &#123;</div><div class="line">            array.append(<span class="string">"Fizz"</span>)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            array.append(<span class="string">"\(i)"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> array</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="更快速解法-4-ms"><a href="#更快速解法-4-ms" class="headerlink" title="更快速解法 : 4 ms"></a>更快速解法 : 4 ms</h1><p>雖然看起來更不容易讀，但因為沒有使用到 % 的運算，所以執行速度快了一些<br>每次迴圈各對 fizz 跟 buzz + 1<br>遇到判斷就轉成字串放到 array 中，把 fizz 或 buzz 歸零</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">fizzBuzz</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; [<span class="type">String</span>] &#123;</div><div class="line">    <span class="keyword">var</span> array = [<span class="type">String</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> fizz = <span class="number">0</span>, buzz = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...n &#123;</div><div class="line">        fizz+=<span class="number">1</span></div><div class="line">        buzz+=<span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> fizz == <span class="number">3</span> &amp;&amp; buzz == <span class="number">5</span> &#123;</div><div class="line">            array.append(<span class="string">"FizzBuzz"</span>)</div><div class="line">            fizz = <span class="number">0</span></div><div class="line">            buzz = <span class="number">0</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> fizz == <span class="number">3</span> &#123;</div><div class="line">            array.append(<span class="string">"Fizz"</span>)</div><div class="line">            fizz = <span class="number">0</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> buzz == <span class="number">5</span> &#123;</div><div class="line">            array.append(<span class="string">"Buzz"</span>)</div><div class="line">            buzz = <span class="number">0</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            array.append(<span class="string">"\(i)"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> array</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-344/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2017,176 +2189,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-595/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-595/" itemprop="url">
-                  LeetCode#595 Big Countries - in MySQL
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T09:03:46+08:00">
-                2017-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/SQL/" itemprop="url" rel="index">
-                    <span itemprop="name">SQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-595/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-595/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>這裡有一個 Table 叫作 “World”<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+-----------------+------------+------------+--------------+---------------+</div><div class="line">| name            | continent  | area       | population   | gdp           |</div><div class="line">+-----------------+------------+------------+--------------+---------------+</div><div class="line">| Afghanistan     | Asia       | 652230     | 25500100     | 20343000      |</div><div class="line">| Albania         | Europe     | 28748      | 2831741      | 12960000      |</div><div class="line">| Algeria         | Africa     | 2381741    | 37100000     | 188681000     |</div><div class="line">| Andorra         | Europe     | 468        | 78115        | 3712000       |</div><div class="line">| Angola          | Africa     | 1246700    | 20609294     | 100990000     |</div><div class="line">+-----------------+------------+------------+--------------+---------------+</div></pre></td></tr></table></figure></p>
-<p> 一個大的國家，必須要達成 「 area 超過 3000000 」 或是 「 population 超過 25000000 」</p>
-<p> 現在請你撰寫一個 SQL QUERY 找出大的國家，並且列出他的 ‘name, population, area’</p>
-<p> 依照上面的表格所示，查詢後的結果應該跟下表一樣:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+--------------+-------------+--------------+</div><div class="line">| name         | population  | area         |</div><div class="line">+--------------+-------------+--------------+</div><div class="line">| Afghanistan  | 25500100    | 652230       |</div><div class="line">| Algeria      | 37100000    | 2381741      |</div><div class="line">+--------------+-------------+--------------+</div></pre></td></tr></table></figure>
-<h1 id="第一次解題-Accepted"><a href="#第一次解題-Accepted" class="headerlink" title="第一次解題 : Accepted"></a>第一次解題 : Accepted</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, population, area </div><div class="line"><span class="keyword">FROM</span> World </div><div class="line"><span class="keyword">WHERE</span> area &gt; <span class="number">3000000</span> <span class="keyword">OR</span> population &gt; <span class="number">25000000</span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2236,7 +2238,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">112</span>
+                <span class="site-state-item-count">113</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
