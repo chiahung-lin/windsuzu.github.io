@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="LeetCode,Swift,Tree," />
+  <meta name="keywords" content="LeetCode,Swift,Math,Binary Search," />
 
 
 
@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="題目Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array. 給一個不為空的二元樹，請求出這個二元樹每一層的平均值。 Example 1:1234567891011Input:     3    / \   9  20      / \">
-<meta name="keywords" content="LeetCode,Swift,Tree">
+<meta name="description" content="題目You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins. Given n, find the total number of full staircase rows that can be formed. n is">
+<meta name="keywords" content="LeetCode,Swift,Math,Binary Search">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode#637 Average of Levels in Binary Tree - in Swift">
-<meta property="og:url" content="http://windsuzu.github.io/leetcode-637/index.html">
+<meta property="og:title" content="LeetCode#441 Arranging Coins - in Swift">
+<meta property="og:url" content="http://windsuzu.github.io/leetcode-441/index.html">
 <meta property="og:site_name" content="Jay's Code">
-<meta property="og:description" content="題目Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array. 給一個不為空的二元樹，請求出這個二元樹每一層的平均值。 Example 1:1234567891011Input:     3    / \   9  20      / \">
-<meta property="og:updated_time" content="2017-08-17T07:09:38.000Z">
+<meta property="og:description" content="題目You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins. Given n, find the total number of full staircase rows that can be formed. n is">
+<meta property="og:updated_time" content="2017-10-27T05:43:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode#637 Average of Levels in Binary Tree - in Swift">
-<meta name="twitter:description" content="題目Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array. 給一個不為空的二元樹，請求出這個二元樹每一層的平均值。 Example 1:1234567891011Input:     3    / \   9  20      / \">
+<meta name="twitter:title" content="LeetCode#441 Arranging Coins - in Swift">
+<meta name="twitter:description" content="題目You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins. Given n, find the total number of full staircase rows that can be formed. n is">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://windsuzu.github.io/leetcode-637/"/>
+  <link rel="canonical" href="http://windsuzu.github.io/leetcode-441/"/>
 
 
 
 
 
-  <title> LeetCode#637 Average of Levels in Binary Tree - in Swift | Jay's Code </title>
+  <title> LeetCode#441 Arranging Coins - in Swift | Jay's Code </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -296,7 +296,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-637/">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-441/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jay Wang">
@@ -317,7 +317,7 @@
             
             
               
-                LeetCode#637 Average of Levels in Binary Tree - in Swift
+                LeetCode#441 Arranging Coins - in Swift
               
             
           </h1>
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-04T16:10:24+08:00">
-                2017-08-04
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-27T13:18:18+08:00">
+                2017-10-27
               </time>
             
 
@@ -377,8 +377,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
+                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/Binary-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary Search</span>
                   </a>
                 </span>
 
@@ -395,9 +406,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/leetcode-637/#comments" itemprop="discussionUrl">
+                <a href="/leetcode-441/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-637/" itemprop="commentCount"></span>
+                        data-disqus-identifier="leetcode-441/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -423,28 +434,27 @@
       
 
       
-        <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.</p>
-<p>給一個不為空的二元樹，請求出這個二元樹每一層的平均值。</p>
-<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">     <span class="number">3</span></div><div class="line">    / \</div><div class="line">   <span class="number">9</span>  <span class="number">20</span></div><div class="line">      / \</div><div class="line">     <span class="number">15</span>  <span class="number">7</span></div><div class="line"> </div><div class="line"><span class="type">Output</span>: [<span class="number">3</span>, <span class="number">14.5</span>, <span class="number">11</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"> <span class="type">The</span> average value of nodes on level <span class="number">0</span> <span class="keyword">is</span> <span class="number">3</span>,  on level <span class="number">1</span> <span class="keyword">is</span> <span class="number">14.5</span>, and on level <span class="number">2</span> <span class="keyword">is</span> <span class="number">11</span>. <span class="type">Hence</span> <span class="keyword">return</span> [<span class="number">3</span>, <span class="number">14.5</span>, <span class="number">11</span>].</div></pre></td></tr></table></figure></p>
-<p>第 0 層平均值是 3 ， 第 1 層平均值是 (9+20)/2 = 14.5 ， 第 2 層是 11 。<br> 所以返回 [3, 14.5, 11] 。</p>
-<h1 id="第一次解題"><a href="#第一次解題" class="headerlink" title="第一次解題"></a>第一次解題</h1><p>假設二元樹長成這樣 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    <span class="number">3</span></div><div class="line">   / \</div><div class="line">  <span class="number">9</span>  <span class="number">20</span></div><div class="line"> / \</div><div class="line"><span class="number">15</span>  <span class="number">7</span></div></pre></td></tr></table></figure></p>
-<p>這一題要用<a href="https://goo.gl/WuKxn1" target="_blank" rel="external">廣度優先搜索算法 (Breadth-First-Search，BFS)</a> 下去演算。<br>跟<a href="https://goo.gl/ZPk1Ek" target="_blank" rel="external">深度優先搜索算法 (Depth-First-Search，DFS)</a> 不同， BFS 會去找出每層的節點，層層找下去。</p>
-<p>所以建立一個 TreeNode 的陣列。<br>當陣列不為空時，迴圈該層的節點，刪除每個節點後，計算加總以及是否要加入該節點底下的節點進到陣列。</p>
-<ul>
-<li><p>第一層</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">queue = [<span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..&lt;<span class="number">1</span> &#123;</div><div class="line">	node = <span class="number">3</span></div><div class="line">	queue = [] <span class="comment">// 刪掉 3</span></div><div class="line">	sum = <span class="number">3</span></div><div class="line">	queue = [<span class="number">9</span>, <span class="number">20</span>] <span class="comment">// 3 的底下</span></div><div class="line">&#125;</div><div class="line">average = <span class="number">3</span> / <span class="number">1</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>第二層</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">queue = [<span class="number">9</span>, <span class="number">20</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..&lt;<span class="number">2</span> &#123;</div><div class="line">	node = <span class="number">9</span></div><div class="line">	queue = [<span class="number">20</span>] <span class="comment">// 刪掉 9</span></div><div class="line">	sum = <span class="number">9</span></div><div class="line">	queue = [<span class="number">20</span>, <span class="number">15</span>, <span class="number">7</span>] <span class="comment">// 9 的底下</span></div><div class="line"></div><div class="line">	---</div><div class="line"></div><div class="line">	node = <span class="number">20</span></div><div class="line">	queue = [<span class="number">15</span>, <span class="number">7</span>] <span class="comment">// 刪掉 20</span></div><div class="line">	sum = <span class="number">9</span> + <span class="number">20</span></div><div class="line">	queue = [<span class="number">15</span>, <span class="number">7</span>] <span class="comment">// 15 的底下沒有東西</span></div><div class="line">&#125;</div><div class="line">average = <span class="number">29</span> / <span class="number">2</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>第三層</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">queue = [<span class="number">15</span>, <span class="number">7</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..&lt;<span class="number">2</span> &#123;</div><div class="line">	node = <span class="number">15</span></div><div class="line">	queue = [<span class="number">7</span>] <span class="comment">// 刪掉 15</span></div><div class="line">	sum = <span class="number">15</span></div><div class="line">	queue = [<span class="number">7</span>] <span class="comment">// 15 底下沒東西</span></div><div class="line"></div><div class="line">	---</div><div class="line"></div><div class="line">	node = <span class="number">7</span></div><div class="line">	queue = [] <span class="comment">// 刪掉 7</span></div><div class="line">	sum = <span class="number">15</span> + <span class="number">7</span></div><div class="line">	queue = [] <span class="comment">// 7 底下沒東西</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>跳出 while 迴圈</p>
-</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">averageOfLevels</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Double</span>] &#123;</div><div class="line">    <span class="keyword">var</span> result = [<span class="type">Double</span>]()</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> result</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> queue = [root]</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> !queue.isEmpty &#123;</div><div class="line">        <span class="keyword">let</span> n = queue.<span class="built_in">count</span></div><div class="line">        <span class="keyword">var</span> sum = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;n &#123;</div><div class="line">            <span class="keyword">let</span> node = queue.removeFirst()</div><div class="line">            sum += node.val</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">left</span> = node.<span class="keyword">left</span> &#123;</div><div class="line">                queue.append(<span class="keyword">left</span>)</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">right</span> = node.<span class="keyword">right</span> &#123;</div><div class="line">                queue.append(<span class="keyword">right</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> average = <span class="type">Double</span>(sum) / <span class="type">Double</span>(n)</div><div class="line">        result.append(average)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+        <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.</p>
+<p>Given n, find the total number of full staircase rows that can be formed.</p>
+<p>n is a non-negative integer and fits within the range of a 32-bit signed integer.</p>
+<p>給你 n 個硬幣排成樓梯的形狀，每 k 層有 k 個硬幣。</p>
+<p>現在給你 n ， 返回你最大可以排成的樓梯有幾層。 n 為一個非負數整數。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 3rd row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">2</span>.</div></pre></td></tr></table></figure></p>
+<p>5 個硬幣排完第 3 層還沒完成，所以返回 2 。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">8</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 4th row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">3</span>.</div></pre></td></tr></table></figure></p>
+<p>8 個硬幣排完第 4 層還沒完成，所以返回 3 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h2><p>對 n 從第一層開始減，直至無法再減。<br>代表該層未完成，返回前一層的值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsIterative</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> n = n</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...<span class="type">Int</span>.<span class="built_in">max</span> &#123;</div><div class="line">        <span class="keyword">if</span> n - i &gt;= <span class="number">0</span> &#123;</div><div class="line">            n -= i</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> i - <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Mathematic"><a href="#Mathematic" class="headerlink" title="Mathematic"></a>Mathematic</h2><p>要算出 n 層的硬幣有幾個，等於要算出 1 + 2 + 3 + … + n </p>
+<p>這有一個公式是(上底+下底)乘高除以2 : <code>sum = (1 + x) * x / 2</code></p>
+<p>並且在這題裡面的 sum 要小於等於 n ， 所以為 <code>(1 + x) * x / 2 &lt;= n</code></p>
+<p>解出這個式子 :</p>
+<blockquote>
+<p>(1 + x) * x / 2 &lt;= n<br>x^2 + x  &lt;= 2n<br>4x^2 + 4x &lt;= 8n<br>(2x + 1)(2x + 1) - 1 &lt;= 8n<br>x &lt;= (√(8n + 1) - 1) / 2</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsMathematic</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>((sqrt(<span class="number">8</span> * <span class="type">Double</span>(n) + <span class="number">1</span>) - <span class="number">1</span>) / <span class="type">Double</span>(<span class="number">2</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -477,7 +487,9 @@
           
             <a href="/tags/Swift/" rel="tag"># Swift</a>
           
-            <a href="/tags/Tree/" rel="tag"># Tree</a>
+            <a href="/tags/Math/" rel="tag"># Math</a>
+          
+            <a href="/tags/Binary-Search/" rel="tag"># Binary Search</a>
           
         </div>
       
@@ -490,18 +502,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/leetcode-292/" rel="next" title="LeetCode#292 Nim Game - in Swift">
-                <i class="fa fa-chevron-left"></i> LeetCode#292 Nim Game - in Swift
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/leetcode-496/" rel="prev" title="LeetCode#496 Next Greater Element I - in Swift">
-                LeetCode#496 Next Greater Element I - in Swift <i class="fa fa-chevron-right"></i>
+              <a href="/leetcode-172/" rel="prev" title="LeetCode#172 Factorial Trailing Zeroes - in Swift">
+                LeetCode#172 Factorial Trailing Zeroes - in Swift <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -645,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#題目"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一次解題"><span class="nav-number">2.</span> <span class="nav-text">第一次解題</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#題目"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#範例"><span class="nav-number">2.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解題"><span class="nav-number">3.</span> <span class="nav-text">解題</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative"><span class="nav-number">3.1.</span> <span class="nav-text">Iterative</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mathematic"><span class="nav-number">3.2.</span> <span class="nav-text">Mathematic</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -784,9 +792,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://windsuzu.github.io/leetcode-637/';
-          this.page.identifier = 'leetcode-637/';
-          this.page.title = 'LeetCode#637 Average of Levels in Binary Tree - in Swift';
+          this.page.url = 'http://windsuzu.github.io/leetcode-441/';
+          this.page.identifier = 'leetcode-441/';
+          this.page.title = 'LeetCode#441 Arranging Coins - in Swift';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jays-code.disqus.com/embed.js';

@@ -3,6 +3,58 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#441 Arranging Coins - in Swift]]></title>
+      <url>/leetcode-441/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.</p>
+<p>Given n, find the total number of full staircase rows that can be formed.</p>
+<p>n is a non-negative integer and fits within the range of a 32-bit signed integer.</p>
+<p>給你 n 個硬幣排成樓梯的形狀，每 k 層有 k 個硬幣。</p>
+<p>現在給你 n ， 返回你最大可以排成的樓梯有幾層。 n 為一個非負數整數。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 3rd row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">2</span>.</div></pre></td></tr></table></figure></p>
+<p>5 個硬幣排完第 3 層還沒完成，所以返回 2 。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">8</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 4th row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">3</span>.</div></pre></td></tr></table></figure></p>
+<p>8 個硬幣排完第 4 層還沒完成，所以返回 3 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h2><p>對 n 從第一層開始減，直至無法再減。<br>代表該層未完成，返回前一層的值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsIterative</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> n = n</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...<span class="type">Int</span>.<span class="built_in">max</span> &#123;</div><div class="line">        <span class="keyword">if</span> n - i &gt;= <span class="number">0</span> &#123;</div><div class="line">            n -= i</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> i - <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Mathematic"><a href="#Mathematic" class="headerlink" title="Mathematic"></a>Mathematic</h2><p>要算出 n 層的硬幣有幾個，等於要算出 1 + 2 + 3 + … + n </p>
+<p>這有一個公式是(上底+下底)乘高除以2 : <code>sum = (1 + x) * x / 2</code></p>
+<p>並且在這題裡面的 sum 要小於等於 n ， 所以為 <code>(1 + x) * x / 2 &lt;= n</code></p>
+<p>解出這個式子 :</p>
+<blockquote>
+<p>(1 + x) * x / 2 &lt;= n<br>x^2 + x  &lt;= 2n<br>4x^2 + 4x &lt;= 8n<br>(2x + 1)(2x + 1) - 1 &lt;= 8n<br>x &lt;= (√(8n + 1) - 1) / 2</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsMathematic</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>((sqrt(<span class="number">8</span> * <span class="type">Double</span>(n) + <span class="number">1</span>) - <span class="number">1</span>) / <span class="type">Double</span>(<span class="number">2</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Math </category>
+            
+            <category> Binary Search </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Math </tag>
+            
+            <tag> Binary Search </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#172 Factorial Trailing Zeroes - in Swift]]></title>
       <url>/leetcode-172/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer n, return the number of trailing zeroes in n!.</p>
@@ -4422,11 +4474,11 @@
             
             <tag> Android </tag>
             
+            <tag> Retrofit </tag>
+            
             <tag> RxJava </tag>
             
             <tag> RxAndroid </tag>
-            
-            <tag> Retrofit </tag>
             
         </tags>
         
@@ -4800,6 +4852,8 @@
         
         <tags>
             
+            <tag> 軟體工程 </tag>
+            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -4807,8 +4861,6 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
-            
-            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -4886,8 +4938,6 @@
         
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -4897,6 +4947,8 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
+            
+            <tag> Android </tag>
             
             <tag> iOS </tag>
             

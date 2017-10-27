@@ -296,6 +296,213 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-53/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-53/" itemprop="url">
+                  LeetCode#53 Maximum Subarray - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-07T16:22:50+08:00">
+                2017-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/Divide-and-Conquer/" itemprop="url" rel="index">
+                    <span itemprop="name">Divide and Conquer</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/Divide-and-Conquer/Dynamic-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Dynamic Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-53/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-53/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
+<p>找出陣列中，擁有最大值的子陣列，子陣列的值必須是連續且至少有一個值的。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>given the array [-2,1,-3,4,-1,2,1,-5,4],</p>
+<p>the contiguous subarray [4,-1,2,1] has the largest sum = 6.</p>
+<p>在陣列 [-2,1,-3,4,-1,2,1,-5,4] 中， [4,-1,2,1] 可以得到最大加總值 6 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>題目要求出該陣列最大的子陣列。利用動態規劃，把題目拆成每一小段，如果每下一段加總大於前一小段，就將值累積起來。否則應該起始新的段落重新開始。</p>
+<p><img src="/leetcode-53/dp.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxSubArray</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> nums.isEmpty &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> temp = nums[<span class="number">0</span>], end = nums[<span class="number">0</span>]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        temp = <span class="built_in">max</span>(temp + nums[i], nums[i])</div><div class="line">        end = <span class="built_in">max</span>(temp, end)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> end</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-35/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1995,201 +2202,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-107/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-107/" itemprop="url">
-                  LeetCode#107 Binary Tree Level Order Traversal II - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-27T13:23:14+08:00">
-                2017-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/Breadth-first-Search/" itemprop="url" rel="index">
-                    <span itemprop="name">Breadth-first Search</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-107/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-107/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, return the bottom-up level order traversal of its nodes’ values. (ie, from left to right, level by level from leaf to root).</p>
-<p>給定二元樹，返回他從底部到根部的節點尋訪。 (由左到右，由層到層，從葉到根)</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> binary tree [<span class="number">3</span>,<span class="number">9</span>,<span class="number">20</span>,null,null,<span class="number">15</span>,<span class="number">7</span>],</div><div class="line"></div><div class="line">       <span class="number">3</span></div><div class="line">      / \</div><div class="line">     <span class="number">9</span>  <span class="number">20</span></div><div class="line">       /  \</div><div class="line">      <span class="number">15</span>   <span class="number">7</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> its bottom-up level order traversal <span class="keyword">as</span>:</div><div class="line"></div><div class="line">[</div><div class="line">   [<span class="number">15</span>,<span class="number">7</span>],</div><div class="line">   [<span class="number">9</span>,<span class="number">20</span>],</div><div class="line">   [<span class="number">3</span>]</div><div class="line">]</div></pre></td></tr></table></figure>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義一個空的二維陣列，若 level = 第一層陣列的大小，則添加一個新的陣列進去。</p>
-<p>若到達底部節點，就將值送入對應的陣列中。</p>
-<p><img src="/leetcode-107/bfs2matrix.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">levelOrderBottom</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    <span class="keyword">var</span> res = [[<span class="type">Int</span>]]()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">bfs</span><span class="params">(<span class="number">_</span> root: TreeNode?, level: Int)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> level &gt;= res.<span class="built_in">count</span> &#123;</div><div class="line">            res.insert([<span class="type">Int</span>](), at: <span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">        bfs(root!.<span class="keyword">left</span>, level: level + <span class="number">1</span>)</div><div class="line">        bfs(root!.<span class="keyword">right</span>, level: level + <span class="number">1</span>)</div><div class="line">        res[res.<span class="built_in">count</span> - level - <span class="number">1</span>].append(root!.val)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    bfs(root, level: <span class="number">0</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2239,7 +2251,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">113</span>
+                <span class="site-state-item-count">114</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
