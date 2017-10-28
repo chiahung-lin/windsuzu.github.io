@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-27T05:43:30.000Z</updated>
+  <updated>2017-10-28T03:19:46.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#181 Employees Earning More Than Their Managers - in MySQL</title>
+    <link href="http://windsuzu.github.io/leetcode-181/"/>
+    <id>http://windsuzu.github.io/leetcode-181/</id>
+    <published>2017-10-28T03:14:22.000Z</published>
+    <updated>2017-10-28T03:19:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.</p>
+<p>Employee 表格描述所有員工包含他們的主管。</p>
+<p>每個員工都有屬於自己的 Id ，還有他們主管的 Id 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+----+-------+--------+-----------+</div><div class="line">| <span class="type">Id</span> | <span class="type">Name</span>  | <span class="type">Salary</span> | <span class="type">ManagerId</span> |</div><div class="line">+----+-------+--------+-----------+</div><div class="line">| <span class="number">1</span>  | <span class="type">Joe</span>   | <span class="number">70000</span>  | <span class="number">3</span>         |</div><div class="line">| <span class="number">2</span>  | <span class="type">Henry</span> | <span class="number">80000</span>  | <span class="number">4</span>         |</div><div class="line">| <span class="number">3</span>  | <span class="type">Sam</span>   | <span class="number">60000</span>  | <span class="type">NULL</span>      |</div><div class="line">| <span class="number">4</span>  | <span class="type">Max</span>   | <span class="number">90000</span>  | <span class="type">NULL</span>      |</div><div class="line">+----+-------+--------+-----------+</div></pre></td></tr></table></figure>
+<p>Given the Employee table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.</p>
+<p>現在寫出一個 SQL 查詢，找出有哪些員工賺的錢，比他們的主管還要多。</p>
+<p>根據上方的表格，可以得出只有 Joe 所賺的錢，比他的主管 Sam 還要多。</p>
+<p>回傳如下:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+----------+</div><div class="line">| <span class="type">Employee</span> |</div><div class="line">+----------+</div><div class="line">| <span class="type">Joe</span>      |</div><div class="line">+----------+</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p><code>SELECT</code> 兩個 <code>Employee</code> 表格，各代表 <code>e1, e2</code></p>
+<p>找出 <code>e1</code> 的 <code>ManagerId</code> 等於 <code>e2</code> 的 <code>Id</code> ，且 e1 的 <code>Salary</code> 大於 <code>e2</code> 的 <code>Salary</code></p>
+<p>返回 <code>Name</code> 但是題目規定要顯示 <code>Employee</code> ， 所以 <code>e1.Name as Employee</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> e1.Name <span class="keyword">as</span> Employee</div><div class="line"><span class="keyword">FROM</span> Employee e1 , Employee e2</div><div class="line"><span class="keyword">WHERE</span> e1.ManagerId = e2.Id <span class="keyword">AND</span> e1.Salary &gt; e2.Salary</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;The Employee table holds all employees including their managers. Every
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="MySQL" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/MySQL/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="MySQL" scheme="http://windsuzu.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#441 Arranging Coins - in Swift</title>
@@ -856,53 +900,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#27 Remove Element - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-27/"/>
-    <id>http://windsuzu.github.io/leetcode-27/</id>
-    <published>2017-10-08T10:17:44.000Z</published>
-    <updated>2017-10-08T10:31:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array and a value, remove all instances of that value in place and return the new length.</p>
-<p>Do not allocate extra space for another array, you must do this in place with constant memory.</p>
-<p>The order of elements can be changed. It doesn’t matter what you leave beyond the new length.</p>
-<p>給定陣列和目標值，刪除陣列中所有的目標值，返回新的陣列長度。</p>
-<p>可以隨意變動陣列元素，但只可以在同一個陣列操作，不可使用其他多餘的陣列。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Given input array nums = [3,2,2,3], val = 3</p>
-<p>Your function should return length = 2, with the first two elements of nums being 2.</p>
-<p>題目規定從 [3,2,2,3] 移除所有的 3 ，會得到 [2,2] 長度為 2 。 </p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>遍尋陣列，只要當下值不等於目標值，就從全新的 index 開始累積一次陣列。</p>
-<p>最後返回 index 累積的次數，即為答案。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeElement</span><span class="params">(<span class="number">_</span> nums: <span class="keyword">inout</span> [Int], <span class="number">_</span> val: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> index = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> nums[i] != val &#123;</div><div class="line">            nums[index] = nums[i]</div><div class="line">            index += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> index</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given an array and a value, remove all instances of that value in plac
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Array" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Array/"/>
-    
-      <category term="Two Pointers" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Array/Two-Pointers/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
-    
-      <category term="Two Pointers" scheme="http://windsuzu.github.io/tags/Two-Pointers/"/>
     
   </entry>
   

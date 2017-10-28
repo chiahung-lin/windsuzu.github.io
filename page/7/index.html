@@ -296,6 +296,188 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-404/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-404/" itemprop="url">
+                  LeetCode#404 Sum of Left Leaves - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-29T12:30:16+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-404/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-404/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Find the sum of all left leaves in a given binary tree.</p>
+<p>算出所有左葉節點的加總。</p>
+<p>Example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">       <span class="number">3</span></div><div class="line">      / \</div><div class="line">     <span class="number">9</span>  <span class="number">20</span></div><div class="line">       /  \</div><div class="line">      <span class="number">15</span>   <span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">There</span> are two <span class="keyword">left</span> leaves <span class="keyword">in</span> the binary tree, with values <span class="number">9</span> and <span class="number">15</span> respectively. <span class="type">Return</span> <span class="number">24</span>.</div></pre></td></tr></table></figure></p>
+<p>這個二元樹有兩個左葉節點，分別為 9 和 15 ，加總為 24 。</p>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>利用遞迴查找每一個左節點，如果該左節點無任何子節點 (左、右)，則判斷該左節點為葉節點。</p>
+<p>將他的值加入答案中，如果還不是葉節點，就繼續往下找。</p>
+<p><img src="/leetcode-404/left_sum.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">sumOfLeftLeaves</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">if</span> root?.<span class="keyword">left</span> != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">if</span> root?.<span class="keyword">left</span>?.<span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; root?.<span class="keyword">left</span>?.<span class="keyword">right</span> == <span class="literal">nil</span> &#123;</div><div class="line">            res += (root?.<span class="keyword">left</span>?.val)!</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            res += sumOfLeftLeaves(root?.<span class="keyword">left</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    res += sumOfLeftLeaves(root?.<span class="keyword">right</span>)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-167/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2006,191 +2188,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-598/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-598/" itemprop="url">
-                  LeetCode#598 Range Addition II - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-19T15:02:02+08:00">
-                2017-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-598/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-598/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an <code>m * n</code> matrix M initialized with all 0’s and several update operations.</p>
-<p>Operations are represented by a 2D array, and each operation is represented by an array with two positive integers a and b, which means M[i][j] should be added by one for all 0 &lt;= i &lt; a and 0 &lt;= j &lt; b.</p>
-<p>You need to count and return the number of maximum integers in the matrix after performing all the operations.</p>
-<p>給一個 <code>m * n</code> 的矩陣 M ，全部由 0 鋪上。</p>
-<p>再給一些更新元素，由 2D 陣列組成。　矩陣內含 a, b 兩個正整數，<br>意為 M 的 <code>[i][j]</code> 需要根據 <code>[a][b]</code> 的範圍，對每個元素 + 1 。</p>
-<p>現在需要求出矩陣 M 中最大的數有多少個。</p>
-<p>Example :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">m = <span class="number">3</span>, n = <span class="number">3</span></div><div class="line">operations = [[<span class="number">2</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">3</span>]]</div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">4</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">Initially</span>, <span class="type">M</span> =</div><div class="line">[[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</div><div class="line">[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</div><div class="line">[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]]</div><div class="line"></div><div class="line"><span class="type">After</span> performing [<span class="number">2</span>,<span class="number">2</span>], <span class="type">M</span> =</div><div class="line">[[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</div><div class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</div><div class="line">[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]]</div><div class="line"></div><div class="line"><span class="type">After</span> performing [<span class="number">3</span>,<span class="number">3</span>], <span class="type">M</span> =</div><div class="line">[[<span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>],</div><div class="line">[<span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>],</div><div class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]]</div><div class="line"></div><div class="line"><span class="type">So</span> the maximum integer <span class="keyword">in</span> <span class="type">M</span> <span class="keyword">is</span> <span class="number">2</span>, and there are four of it <span class="keyword">in</span> <span class="type">M</span>. <span class="type">So</span> <span class="keyword">return</span> <span class="number">4</span>.</div></pre></td></tr></table></figure></p>
-<p>最後矩陣 M 中最大的數為 2 ，並且有 4 個，所以回傳 4</p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>最終要找的最大值區塊永遠都會在左上角，所以只要求出最後左上角剩下的區塊就是答案。<br>這邊透過 min 函式， 來比對最後的 m 跟 n 會是多少。</p>
-<p><img src="/leetcode-598/range_addition.gif" alt="range_addition"></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxCount</span><span class="params">(<span class="number">_</span> m: Int, <span class="number">_</span> n: Int, <span class="number">_</span> ops: [[Int]])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ops.isEmpty &#123; <span class="keyword">return</span> m * n &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> row = <span class="number">40000</span></div><div class="line">    <span class="keyword">var</span> col = <span class="number">40000</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> op <span class="keyword">in</span> ops &#123;</div><div class="line">        row = <span class="built_in">min</span>(row, op[<span class="number">0</span>])</div><div class="line">        col = <span class="built_in">min</span>(col, op[<span class="number">1</span>])</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> row * col</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2240,7 +2237,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">114</span>
+                <span class="site-state-item-count">115</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2251,7 +2248,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

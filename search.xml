@@ -3,6 +3,48 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#181 Employees Earning More Than Their Managers - in MySQL]]></title>
+      <url>/leetcode-181/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.</p>
+<p>Employee 表格描述所有員工包含他們的主管。</p>
+<p>每個員工都有屬於自己的 Id ，還有他們主管的 Id 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+----+-------+--------+-----------+</div><div class="line">| <span class="type">Id</span> | <span class="type">Name</span>  | <span class="type">Salary</span> | <span class="type">ManagerId</span> |</div><div class="line">+----+-------+--------+-----------+</div><div class="line">| <span class="number">1</span>  | <span class="type">Joe</span>   | <span class="number">70000</span>  | <span class="number">3</span>         |</div><div class="line">| <span class="number">2</span>  | <span class="type">Henry</span> | <span class="number">80000</span>  | <span class="number">4</span>         |</div><div class="line">| <span class="number">3</span>  | <span class="type">Sam</span>   | <span class="number">60000</span>  | <span class="type">NULL</span>      |</div><div class="line">| <span class="number">4</span>  | <span class="type">Max</span>   | <span class="number">90000</span>  | <span class="type">NULL</span>      |</div><div class="line">+----+-------+--------+-----------+</div></pre></td></tr></table></figure>
+<p>Given the Employee table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.</p>
+<p>現在寫出一個 SQL 查詢，找出有哪些員工賺的錢，比他們的主管還要多。</p>
+<p>根據上方的表格，可以得出只有 Joe 所賺的錢，比他的主管 Sam 還要多。</p>
+<p>回傳如下:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+----------+</div><div class="line">| <span class="type">Employee</span> |</div><div class="line">+----------+</div><div class="line">| <span class="type">Joe</span>      |</div><div class="line">+----------+</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p><code>SELECT</code> 兩個 <code>Employee</code> 表格，各代表 <code>e1, e2</code></p>
+<p>找出 <code>e1</code> 的 <code>ManagerId</code> 等於 <code>e2</code> 的 <code>Id</code> ，且 e1 的 <code>Salary</code> 大於 <code>e2</code> 的 <code>Salary</code></p>
+<p>返回 <code>Name</code> 但是題目規定要顯示 <code>Employee</code> ， 所以 <code>e1.Name as Employee</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> e1.Name <span class="keyword">as</span> Employee</div><div class="line"><span class="keyword">FROM</span> Employee e1 , Employee e2</div><div class="line"><span class="keyword">WHERE</span> e1.ManagerId = e2.Id <span class="keyword">AND</span> e1.Salary &gt; e2.Salary</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> MySQL </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#441 Arranging Coins - in Swift]]></title>
       <url>/leetcode-441/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.</p>
