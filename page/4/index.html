@@ -296,6 +296,196 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-326/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-326/" itemprop="url">
+                  LeetCode#326 Power of Three - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-29T13:18:37+08:00">
+                2017-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-326/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-326/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer, write a function to determine if it is a power of three.</p>
+<p>給予一個整數，找出他是否為 3 的某次方。</p>
+<p>Follow up:<br>Could you do it without using any loop / recursion?</p>
+<p>能否不用任何迴圈 / 遞迴 ?</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="Iterative-Solution"><a href="#Iterative-Solution" class="headerlink" title="Iterative Solution"></a>Iterative Solution</h2><p>作為 3 的次方數，不斷除以 3 就會變成 1 ，但必須要注意數字要保持 % 3 == 0 。</p>
+<p>27 -&gt; 27/3 -&gt; 9/3 -&gt; 3/3 -&gt; 1 (O)</p>
+<p>18 -&gt; 18/3 -&gt; 6/3 -&gt; 2 (X)</p>
+<p>15 -&gt; 15/3 -&gt; 5 (%3 != 0) (X)</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> x = n</div><div class="line">    <span class="keyword">if</span> x &gt; <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">while</span> x % <span class="number">3</span> == <span class="number">0</span> &#123;</div><div class="line">            x /= <span class="number">3</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> x == <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Recursive-Solution"><a href="#Recursive-Solution" class="headerlink" title="Recursive Solution"></a>Recursive Solution</h2><p>把迴圈換成遞迴。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> n &gt; <span class="number">0</span> &amp;&amp; (n == <span class="number">1</span> || (n % <span class="number">3</span> == <span class="number">0</span> &amp;&amp; isPowerOfThree(n / <span class="number">3</span>)))</div></pre></td></tr></table></figure>
+<h2 id="No-Loop-Recursion-Solution"><a href="#No-Loop-Recursion-Solution" class="headerlink" title="No Loop / Recursion Solution"></a>No Loop / Recursion Solution</h2><p>3^19 為 1,162,261,467 , 再過來 3^20 = 3,486,784,401 已經超出 Int 的最大範圍 (2,147,483,647)。</p>
+<p>所以只要 n &gt; 0 且能被 3^19 整除就是 3 的次方數。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> ( n &gt; <span class="number">0</span> &amp;&amp; <span class="number">1162261467</span> % n == <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-182/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2023,198 +2213,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-671/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-671/" itemprop="url">
-                  LeetCode#671 Second Minimum Node In a Binary Tree - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-19T13:13:05+08:00">
-                2017-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-671/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-671/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this tree has exactly two or zero sub-node. If the node has two sub-nodes, then this node’s value is the smaller value among its two sub-nodes.</p>
-<p>給一個特殊不為空的二元樹且不包含任何負數值，每個節點在這個樹中皆擁有「兩個」或「零個」子節點。</p>
-<p>如果該節點有兩個子節點，那該節點的值會小於等於他的兩個子節點中間。</p>
-<p>Given such a binary tree, you need to output the second minimum value in the set made of all the nodes’ value in the whole tree.</p>
-<p>這樣的二元樹，你需要從全部的節點找出，並輸出他的第二最小值。</p>
-<p>If no such second minimum value exists, output -1 instead.</p>
-<p>如果沒有第二最小值，輸出 -1 。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">2</span></div><div class="line">      / \</div><div class="line">     <span class="number">2</span>   <span class="number">5</span></div><div class="line">    / \</div><div class="line">   <span class="number">5</span>   <span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">5</span></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> smallest value <span class="keyword">is</span> <span class="number">2</span>, the second smallest value <span class="keyword">is</span> <span class="number">5</span>.</div></pre></td></tr></table></figure></p>
-<p>最小值是 2 ， 第二最小值是 5 。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">2</span></div><div class="line">      / \</div><div class="line">     <span class="number">2</span>   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: -<span class="number">1</span></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> smallest value <span class="keyword">is</span> <span class="number">2</span>, but there isn't any second smallest value.</div></pre></td></tr></table></figure></p>
-<p>最小值是 2 ， 但找不到第二最小值，所以輸出 -1 。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>因為每個節點的值會小於等於他的兩個子節點中間的關係，根節點一定會是最小的值，所以第二小的值絕對不會跟根節點相同數字。</p>
-<p>知道這個後，用 DFS 找出每個節點不等於根節點的最小值就是答案。</p>
-<p><img src="/leetcode-671/special_tree.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findSecondMinimumValue</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = -<span class="number">1</span></div><div class="line">    <span class="keyword">var</span> k = root?.val</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dfs</span><span class="params">(<span class="number">_</span> node: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> node = node <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> node.val != k &#123;</div><div class="line">            <span class="keyword">if</span> res == -<span class="number">1</span> &#123;</div><div class="line">                res = node.val</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                res = <span class="built_in">min</span>(res, node.val)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        dfs(node.<span class="keyword">left</span>)</div><div class="line">        dfs(node.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    dfs(root)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2264,7 +2262,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-count">116</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

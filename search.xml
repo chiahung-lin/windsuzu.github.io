@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#9 Palindrome Number - in Swift]]></title>
+      <url>/leetcode-9/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
+<p>驗證一個整數是否為回文。不能使用額外的空間來操作。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="number">1232332321</span></div><div class="line"><span class="type">Output</span> : <span class="type">True</span></div></pre></td></tr></table></figure>
+<p>這是一個回文。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="number">1234567</span></div><div class="line"><span class="type">Output</span> : <span class="type">False</span></div></pre></td></tr></table></figure>
+<p>這不是回文。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>如果將數字做反轉，再比對兩個數字是否一樣，就可以驗證出是否為回文。</p>
+<p>但是當你要反轉很大的數字時，有可能造成 overflow 超過整數最大值。</p>
+<p>所以其實只需要將數字反轉到一半即可，再確認 half reverse 或是 half reverse 除以 10 是否相等於 half x 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPalindrome</span><span class="params">(<span class="number">_</span> x: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span> || (x &gt; <span class="number">0</span> &amp;&amp; x % <span class="number">10</span> == <span class="number">0</span>) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">var</span> x = x</div><div class="line">    <span class="keyword">var</span> half = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> x &gt; half &#123;</div><div class="line">        half = half * <span class="number">10</span> + x % <span class="number">10</span></div><div class="line">        x /= <span class="number">10</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> half == x || half / <span class="number">10</span> == x</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Math </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Math </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#181 Employees Earning More Than Their Managers - in MySQL]]></title>
       <url>/leetcode-181/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.</p>
@@ -1139,9 +1179,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1229,9 +1269,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1489,9 +1529,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1891,9 +1931,9 @@
             
             <tag> Array </tag>
             
-            <tag> Math </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
