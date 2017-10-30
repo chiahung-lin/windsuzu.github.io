@@ -296,6 +296,202 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-637/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-637/" itemprop="url">
+                  LeetCode#637 Average of Levels in Binary Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-04T16:10:24+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-637/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-637/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.</p>
+<p>給一個不為空的二元樹，請求出這個二元樹每一層的平均值。</p>
+<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">     <span class="number">3</span></div><div class="line">    / \</div><div class="line">   <span class="number">9</span>  <span class="number">20</span></div><div class="line">      / \</div><div class="line">     <span class="number">15</span>  <span class="number">7</span></div><div class="line"> </div><div class="line"><span class="type">Output</span>: [<span class="number">3</span>, <span class="number">14.5</span>, <span class="number">11</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"> <span class="type">The</span> average value of nodes on level <span class="number">0</span> <span class="keyword">is</span> <span class="number">3</span>,  on level <span class="number">1</span> <span class="keyword">is</span> <span class="number">14.5</span>, and on level <span class="number">2</span> <span class="keyword">is</span> <span class="number">11</span>. <span class="type">Hence</span> <span class="keyword">return</span> [<span class="number">3</span>, <span class="number">14.5</span>, <span class="number">11</span>].</div></pre></td></tr></table></figure></p>
+<p>第 0 層平均值是 3 ， 第 1 層平均值是 (9+20)/2 = 14.5 ， 第 2 層是 11 。<br> 所以返回 [3, 14.5, 11] 。</p>
+<h1 id="第一次解題"><a href="#第一次解題" class="headerlink" title="第一次解題"></a>第一次解題</h1><p>假設二元樹長成這樣 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    <span class="number">3</span></div><div class="line">   / \</div><div class="line">  <span class="number">9</span>  <span class="number">20</span></div><div class="line"> / \</div><div class="line"><span class="number">15</span>  <span class="number">7</span></div></pre></td></tr></table></figure></p>
+<p>這一題要用<a href="https://goo.gl/WuKxn1" target="_blank" rel="external">廣度優先搜索算法 (Breadth-First-Search，BFS)</a> 下去演算。<br>跟<a href="https://goo.gl/ZPk1Ek" target="_blank" rel="external">深度優先搜索算法 (Depth-First-Search，DFS)</a> 不同， BFS 會去找出每層的節點，層層找下去。</p>
+<p>所以建立一個 TreeNode 的陣列。<br>當陣列不為空時，迴圈該層的節點，刪除每個節點後，計算加總以及是否要加入該節點底下的節點進到陣列。</p>
+<ul>
+<li><p>第一層</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">queue = [<span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..&lt;<span class="number">1</span> &#123;</div><div class="line">	node = <span class="number">3</span></div><div class="line">	queue = [] <span class="comment">// 刪掉 3</span></div><div class="line">	sum = <span class="number">3</span></div><div class="line">	queue = [<span class="number">9</span>, <span class="number">20</span>] <span class="comment">// 3 的底下</span></div><div class="line">&#125;</div><div class="line">average = <span class="number">3</span> / <span class="number">1</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>第二層</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">queue = [<span class="number">9</span>, <span class="number">20</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..&lt;<span class="number">2</span> &#123;</div><div class="line">	node = <span class="number">9</span></div><div class="line">	queue = [<span class="number">20</span>] <span class="comment">// 刪掉 9</span></div><div class="line">	sum = <span class="number">9</span></div><div class="line">	queue = [<span class="number">20</span>, <span class="number">15</span>, <span class="number">7</span>] <span class="comment">// 9 的底下</span></div><div class="line"></div><div class="line">	---</div><div class="line"></div><div class="line">	node = <span class="number">20</span></div><div class="line">	queue = [<span class="number">15</span>, <span class="number">7</span>] <span class="comment">// 刪掉 20</span></div><div class="line">	sum = <span class="number">9</span> + <span class="number">20</span></div><div class="line">	queue = [<span class="number">15</span>, <span class="number">7</span>] <span class="comment">// 15 的底下沒有東西</span></div><div class="line">&#125;</div><div class="line">average = <span class="number">29</span> / <span class="number">2</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>第三層</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">queue = [<span class="number">15</span>, <span class="number">7</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..&lt;<span class="number">2</span> &#123;</div><div class="line">	node = <span class="number">15</span></div><div class="line">	queue = [<span class="number">7</span>] <span class="comment">// 刪掉 15</span></div><div class="line">	sum = <span class="number">15</span></div><div class="line">	queue = [<span class="number">7</span>] <span class="comment">// 15 底下沒東西</span></div><div class="line"></div><div class="line">	---</div><div class="line"></div><div class="line">	node = <span class="number">7</span></div><div class="line">	queue = [] <span class="comment">// 刪掉 7</span></div><div class="line">	sum = <span class="number">15</span> + <span class="number">7</span></div><div class="line">	queue = [] <span class="comment">// 7 底下沒東西</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>跳出 while 迴圈</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">averageOfLevels</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Double</span>] &#123;</div><div class="line">    <span class="keyword">var</span> result = [<span class="type">Double</span>]()</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> result</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> queue = [root]</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> !queue.isEmpty &#123;</div><div class="line">        <span class="keyword">let</span> n = queue.<span class="built_in">count</span></div><div class="line">        <span class="keyword">var</span> sum = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;n &#123;</div><div class="line">            <span class="keyword">let</span> node = queue.removeFirst()</div><div class="line">            sum += node.val</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">left</span> = node.<span class="keyword">left</span> &#123;</div><div class="line">                queue.append(<span class="keyword">left</span>)</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">right</span> = node.<span class="keyword">right</span> &#123;</div><div class="line">                queue.append(<span class="keyword">right</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> average = <span class="type">Double</span>(sum) / <span class="type">Double</span>(n)</div><div class="line">        result.append(average)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-496/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1989,202 +2185,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-476/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-476/" itemprop="url">
-                  LeetCode#476 Number Complement - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-28T23:54:58+08:00">
-                2017-07-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Bit-Manipulation/" itemprop="url" rel="index">
-                    <span itemprop="name">Bit Manipulation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-476/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-476/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.</p>
-<p>給一個正整數，算出他的二補數 (2’s complement)。 二補數就是將該數字的二進制碼全部翻轉過來。</p>
-<p>Note:<br> The given integer is guaranteed to fit within the range of a 32-bit signed integer.<br> You could assume no leading zero bit in the integer’s binary representation.</p>
-<p>Example 1:<br> Input: 5<br> Output: 2<br>Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.</p>
-<p>由於 5 的二進制是 101 ， 所以他的補數便是 010 ， 整數是 2</p>
-<p>Example 2:<br> Input: 1<br> Output: 0<br> Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.</p>
-<p>由於 1 的二進制是 1 ， 所以他的補數便是 0 ， 整數是 0</p>
-<h1 id="第一次解題-Accepted"><a href="#第一次解題-Accepted" class="headerlink" title="第一次解題 : Accepted"></a>第一次解題 : Accepted</h1><p>將數字轉為二進制，尋遍二進制碼將數字轉換。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findComplement</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> binary = <span class="type">String</span>(num, radix: <span class="number">2</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> complement: <span class="type">String</span> = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> binary.characters &#123;</div><div class="line">        complement += <span class="built_in">c</span> == <span class="string">"0"</span> ? <span class="string">"1"</span> : <span class="string">"0"</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(complement, radix: <span class="number">2</span>)!</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Best-Solution"><a href="#Best-Solution" class="headerlink" title="Best Solution"></a>Best Solution</h1><p>遍尋一遍是很耗資源的做法。所以要使用二元運算的方法來解。</p>
-<ol>
-<li><p>先取得與二進制 num 相同長度的 mask<br> <code>5(101) -&gt; 111</code><br> <code>9(1001) -&gt; 1111</code></p>
-</li>
-<li><p>以 <code>5(101)</code> 舉例，取得 Most Significant Bit 就是影響這個數串最大的數字，也就是最左邊的數 -&gt; <code>(1)01</code>。<br>Java 有內建 <code>Integer.highestOneBit(num)</code> 的方法，但 Swift 只能自己手動建立，取得除了最大數為1其他數為0的值 -&gt; <code>(1)00</code><br>接著對該數字利用下溢位 -1 ，取得 mask -&gt; <code>111</code></p>
-</li>
-<li><p>取得 mask 後，解題方法有二:</p>
-<p>3-1: 使用 ^ 運算子，相同數 XOR 交換<br><code>num(101) ^ mask(111) = 010</code></p>
-<p>3-2: 使用 ~ 跟 &amp; 運算子，對 num 作 NOT 運算取補數，並且跟 mask 作 AND 運算<br><code>~num(101) &amp; 111 = 010</code><br><code>-&gt; 11111111111111111111111111111010 &amp; 0000...111 = 010</code></p>
-</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findComplement</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> mask = <span class="number">1</span></div><div class="line">    <span class="keyword">while</span>(mask &lt;= num) &#123;</div><div class="line">        mask &lt;&lt;= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    mask-=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> num ^ mask</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2234,7 +2234,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">116</span>
+                <span class="site-state-item-count">117</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
