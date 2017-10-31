@@ -3,6 +3,51 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#26 Remove Duplicates from Sorted Array - in Swift]]></title>
+      <url>/leetcode-26/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this in place with constant memory.</p>
+<p>給一個已排序陣列，移除那些重複的元素，讓每個元素只出現一次，並且返回移除後陣列的新長度。</p>
+<p>不使用額外空間。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example,<br>Given input array nums = [1,1,2],</p>
+<p>Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn’t matter what you leave beyond the new length.</p>
+<p>[1,1,2] 應該要返回 2 ，因為 1 重複了兩次。移除後應為 [1,2] 長度為 2 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>題目雖然只寫到要求回傳新陣列的長度，實際上還會確認是否有正確移除重複的元素。</p>
+<p>所以首先定義一個數字可以代表新陣列長度以及當前索引值 (count)，</p>
+<p>走遍第一個元素之後，只要當前的元素與前一個元素不同，就將當前元素塞進 count 的索引，並且將 count + 1 。</p>
+<p>最後就可以從第二個元素開始堆出不會重複的陣列。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeDuplicates</span><span class="params">(<span class="number">_</span> nums: <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> nums.<span class="built_in">count</span> &lt; <span class="number">2</span> &#123; <span class="keyword">return</span> nums.<span class="built_in">count</span> &#125;</div><div class="line">    <span class="keyword">var</span> <span class="built_in">count</span> = <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> nums[i - <span class="number">1</span>] != nums[i] &#123;</div><div class="line">            nums[<span class="built_in">count</span>] = nums[i]</div><div class="line">            <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Array </category>
+            
+            <category> Two Pointers </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Array </tag>
+            
+            <tag> Two Pointers </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#38 Count and Say - in Swift]]></title>
       <url>/leetcode-38/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The count-and-say sequence is the sequence of integers with the first five terms as following:</p>

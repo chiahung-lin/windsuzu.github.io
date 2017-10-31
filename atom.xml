@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-10-30T06:02:34.000Z</updated>
+  <updated>2017-10-31T05:09:03.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#26 Remove Duplicates from Sorted Array - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-26/"/>
+    <id>http://windsuzu.github.io/leetcode-26/</id>
+    <published>2017-10-31T03:26:23.000Z</published>
+    <updated>2017-10-31T05:09:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this in place with constant memory.</p>
+<p>給一個已排序陣列，移除那些重複的元素，讓每個元素只出現一次，並且返回移除後陣列的新長度。</p>
+<p>不使用額外空間。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example,<br>Given input array nums = [1,1,2],</p>
+<p>Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn’t matter what you leave beyond the new length.</p>
+<p>[1,1,2] 應該要返回 2 ，因為 1 重複了兩次。移除後應為 [1,2] 長度為 2 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>題目雖然只寫到要求回傳新陣列的長度，實際上還會確認是否有正確移除重複的元素。</p>
+<p>所以首先定義一個數字可以代表新陣列長度以及當前索引值 (count)，</p>
+<p>走遍第一個元素之後，只要當前的元素與前一個元素不同，就將當前元素塞進 count 的索引，並且將 count + 1 。</p>
+<p>最後就可以從第二個元素開始堆出不會重複的陣列。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeDuplicates</span><span class="params">(<span class="number">_</span> nums: <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> nums.<span class="built_in">count</span> &lt; <span class="number">2</span> &#123; <span class="keyword">return</span> nums.<span class="built_in">count</span> &#125;</div><div class="line">    <span class="keyword">var</span> <span class="built_in">count</span> = <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> nums[i - <span class="number">1</span>] != nums[i] &#123;</div><div class="line">            nums[<span class="built_in">count</span>] = nums[i]</div><div class="line">            <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a sorted array, remove the duplicates in place such that each el
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Array" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Array/"/>
+    
+      <category term="Two Pointers" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Array/Two-Pointers/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
+    
+      <category term="Two Pointers" scheme="http://windsuzu.github.io/tags/Two-Pointers/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#38 Count and Say - in Swift</title>
@@ -874,50 +921,6 @@
       <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
     
       <category term="Depth-first Search" scheme="http://windsuzu.github.io/tags/Depth-first-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#198 House Robber - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-198/"/>
-    <id>http://windsuzu.github.io/leetcode-198/</id>
-    <published>2017-10-11T05:33:02.000Z</published>
-    <updated>2017-10-11T05:42:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
-<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
-<p>你是一個專業的小偷，打算沿著整條街偷每一戶的東西。 你可以偷每一戶的東西，但只要在同一天晚上，你偷完一間房子，又偷他左右鄰居，這時就會有警鈴響起，自動呼叫警察過來。</p>
-<p>現在給你一個包含正整數的陣列，每個數字代表每間住戶所擁有的財產，你需要找到能夠在一個晚上，偷到最多錢的方法，且不會驚動到警鈴。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">13</span>, <span class="number">9</span>]</div><div class="line"><span class="type">Output</span> : <span class="number">16</span></div></pre></td></tr></table></figure></p>
-<p>偷 3, 13 能偷到最多錢，也不會驚動警鈴。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : [<span class="number">1</span>, <span class="number">50</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">45</span>]</div><div class="line"><span class="type">Output</span> : <span class="number">95</span></div></pre></td></tr></table></figure></p>
-<p>偷 50, 45 能偷到最多錢，也不會驚動警鈴。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>一開始照範例一來說，只要算出奇數戶的加總，和偶數戶的加總，再來比對大小即可。</p>
-<p>但是若遇到範例二，可能會出現隔兩間的奇偶數相加，反而還比最多間不會觸動警鈴的加法，還要多的解。</p>
-<p>所以必須在每次加上新住戶的錢時，同時比對奇偶數目前已經累積的值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">rob</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> b = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;nums.<span class="built_in">count</span>&#123;</div><div class="line">        <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> &#123; a = <span class="built_in">max</span>(a + nums[i], b) &#125;</div><div class="line">        <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">1</span> &#123; b = <span class="built_in">max</span>(b + nums[i], a) &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(a, b)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;You are a professional robber planning to rob houses along a street. E
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Dynamic Programming" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Dynamic-Programming/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Dynamic Programming" scheme="http://windsuzu.github.io/tags/Dynamic-Programming/"/>
     
   </entry>
   
