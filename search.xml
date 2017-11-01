@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#112 Path Sum - in Swift]]></title>
+      <url>/leetcode-112/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+<p>給一二元樹和目標值，找出樹中是否有「根到葉」的路徑，路徑上所有節點的加總等於目標值。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> the below binary tree and sum = <span class="number">22</span>,</div><div class="line"></div><div class="line">        <span class="number">5</span></div><div class="line">       / \</div><div class="line">      <span class="number">4</span>   <span class="number">8</span></div><div class="line">     /   / \</div><div class="line">    <span class="number">11</span>  <span class="number">13</span>  <span class="number">4</span></div><div class="line">   /  \      \</div><div class="line">  <span class="number">7</span>    <span class="number">2</span>      <span class="number">1</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>, <span class="keyword">as</span> there exist a root-to-leaf path <span class="number">5</span>-&gt;<span class="number">4</span>-&gt;<span class="number">11</span>-&gt;<span class="number">2</span> which sum <span class="keyword">is</span> <span class="number">22</span>.</div></pre></td></tr></table></figure>
+<p>給上方二元樹，以及目標值 22 。</p>
+<p>返回 true ， 因為有一條「根到葉」路徑 5 -&gt; 4 -&gt; 11 -&gt; 2 其加總為 22 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>從根開始堆疊節點總和，一旦到達葉節點且堆疊的總和等於目標值，即可返回答案。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">hasPathSum</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> sum: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">findSum</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> heap: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        <span class="keyword">var</span> heap = heap</div><div class="line">        heap += root.val</div><div class="line">        <span class="keyword">if</span> root.<span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; root.<span class="keyword">right</span> == <span class="literal">nil</span> &amp;&amp; heap == sum &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</div><div class="line">        <span class="keyword">return</span> findSum(root.<span class="keyword">left</span>, heap) || findSum(root.<span class="keyword">right</span>, heap)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> findSum(root, <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Tree </category>
+            
+            <category> Depth-first Search </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Tree </tag>
+            
+            <tag> Depth-first Search </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#26 Remove Duplicates from Sorted Array - in Swift]]></title>
       <url>/leetcode-26/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.</p>
@@ -5029,6 +5069,8 @@
         
         <tags>
             
+            <tag> 軟體工程 </tag>
+            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -5036,8 +5078,6 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
-            
-            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -5115,8 +5155,6 @@
         
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -5126,6 +5164,8 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
+            
+            <tag> Android </tag>
             
             <tag> iOS </tag>
             
