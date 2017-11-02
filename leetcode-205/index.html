@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,Retrofit,RxJava,RxAndroid," />
+  <meta name="keywords" content="LeetCode,Swift,Hash Table," />
 
 
 
@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 !   前面的文章學習 Android Retrofit 2學習 Android RxJava  這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。 Setup設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。 123">
-<meta name="keywords" content="Android,Retrofit,RxJava,RxAndroid">
+<meta name="description" content="題目Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another">
+<meta name="keywords" content="LeetCode,Swift,Hash Table">
 <meta property="og:type" content="article">
-<meta property="og:title" content="學習 RxJava 結合 Retrofit">
-<meta property="og:url" content="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/index.html">
+<meta property="og:title" content="LeetCode#205 Isomorphic Strings - in Swift">
+<meta property="og:url" content="http://windsuzu.github.io/leetcode-205/index.html">
 <meta property="og:site_name" content="Jay's Code">
-<meta property="og:description" content="個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 !   前面的文章學習 Android Retrofit 2學習 Android RxJava  這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。 Setup設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。 123">
-<meta property="og:updated_time" content="2017-07-25T16:55:55.000Z">
+<meta property="og:description" content="題目Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another">
+<meta property="og:updated_time" content="2017-11-02T06:32:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="學習 RxJava 結合 Retrofit">
-<meta name="twitter:description" content="個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 !   前面的文章學習 Android Retrofit 2學習 Android RxJava  這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。 Setup設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。 123">
+<meta name="twitter:title" content="LeetCode#205 Isomorphic Strings - in Swift">
+<meta name="twitter:description" content="題目Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/"/>
+  <link rel="canonical" href="http://windsuzu.github.io/leetcode-205/"/>
 
 
 
 
 
-  <title> 學習 RxJava 結合 Retrofit | Jay's Code </title>
+  <title> LeetCode#205 Isomorphic Strings - in Swift | Jay's Code </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -296,7 +296,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-rxjava-with-retrofit/">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-205/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jay Wang">
@@ -317,7 +317,7 @@
             
             
               
-                學習 RxJava 結合 Retrofit
+                LeetCode#205 Isomorphic Strings - in Swift
               
             
           </h1>
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-05-05T18:14:45+08:00">
-                2017-05-05
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-02T14:18:09+08:00">
+                2017-11-02
               </time>
             
 
@@ -355,8 +355,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
                   </a>
                 </span>
 
@@ -373,9 +395,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/learn-android-rxjava-with-retrofit/#comments" itemprop="discussionUrl">
+                <a href="/leetcode-205/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="learn-android-rxjava-with-retrofit/" itemprop="commentCount"></span>
+                        data-disqus-identifier="leetcode-205/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,30 +423,23 @@
       
 
       
-        <p>個別學習完 RxJava 與 Retrofit 之後，是令人期待的合體了呢 ! </p>
-<blockquote>
-<p>前面的文章<br><a href="https://windsuzu.github.io/2017/05/02/learn-android-retrofit2/">學習 Android Retrofit 2</a><br><a href="https://windsuzu.github.io/2017/05/05/learn-android-rxjava/">學習 Android RxJava</a></p>
-</blockquote>
-<p>這篇文章僅僅是記錄如何將兩個框架結合在一起，不對兩者進行深入探討。</p>
-<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>設置 Gradle 除了 RxJava 與 Retrofit 的 Library 以外，還要再多設置讓兩者能夠結合的 adapter 套件。</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">"io.reactivex.rxjava2:rxjava:2.x.y"</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex.rxjava2:rxandroid:2.0.1'</span></div><div class="line"></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.2.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.2.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:adapter-rxjava2:2.2.0'</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>要記得 retrofit 與他的快樂夥伴的版本要一致 (2.2.0)</p>
-</blockquote>
-<p>在設置這邊發生了好多錯誤，原來之前學習時用的是 RxJava1，所以跟 Retrofit2 的 Adapter 配不起來 (汗)，1和2有一些差別，可以到 <a href="https://github.com/ReactiveX/RxJava/wiki/What%27s-different-in-2.0" target="_blank" rel="external">RxJava Github - What’s different in 2.0</a> 查看。</p>
-<h2 id="實作-Retrofit-Service-Interface"><a href="#實作-Retrofit-Service-Interface" class="headerlink" title="實作 Retrofit Service Interface"></a>實作 Retrofit Service Interface</h2><p>一樣拿 GitHub Api 測試看看 :</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String BASEURL = <span class="string">"http://api.github.com/"</span>;</div><div class="line"></div><div class="line">    <span class="meta">@GET</span>(<span class="string">"users/&#123;userId&#125;"</span>)</div><div class="line">    <span class="function">Observable&lt;GitHubUser&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"userId"</span>)</span> String userId)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這邊要注意的是原本的 Call<githubuser> 變為 Observable<githubuser> ，因為是用 RxJava 觀察者模式訂閱，所以必須要返回一個 Observable 對象，才能夠進行接續的 <code>subscribeOn()</code> 、 <code>subScribe()</code> 等 RxJava 操作。其餘的都跟只有 Retrofit 時一樣。</githubuser></githubuser></p>
-<h2 id="創建-Retrofit-元件"><a href="#創建-Retrofit-元件" class="headerlink" title="創建 Retrofit 元件"></a>創建 Retrofit 元件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Retrofit <span class="title">provideRetrofit</span><span class="params">(String baseUrl)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">            .addConverterFactory(GsonConverterFactory.create())</div><div class="line">            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">            .baseUrl(baseUrl)</div><div class="line">            .build();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這邊除了原本添加的 Gson 轉換器，還要新增 Retrofit 與 RxJava 相依的 RxJava2CallAdapterFactory 。</p>
-<h2 id="實作-Retrofit-RxJava-異步網路請求"><a href="#實作-Retrofit-RxJava-異步網路請求" class="headerlink" title="實作 Retrofit + RxJava 異步網路請求"></a>實作 Retrofit + RxJava 異步網路請求</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GitHubService service = provideRetrofit(GitHubService.BASEURL).create(GitHubService.class);</div><div class="line"></div><div class="line">service.getUser(USERID)</div><div class="line">        .subscribeOn(Schedulers.io())</div><div class="line">        .observeOn(AndroidSchedulers.mainThread())</div><div class="line">        .subscribe(user -&gt; Log.d(TAG, user.getName()));</div></pre></td></tr></table></figure>
-<p>先利用 <code>getUser()</code> 獲得 Observable ，再開始使用 RxJava 的方法，能夠歷經 map 、 fliter 、 flatMap ，最後傳給 Observer 進行主執行緒的操作。</p>
-<h2 id="結"><a href="#結" class="headerlink" title="結"></a>結</h2><p>除此之外，若是像設計登入流程，伺服器可能會先回傳一個 token ，需要再以 token 去取得用戶資料。這時可能就要使用 flatMap 再一次發送 token 取得資料。</p>
-<p>或是登入時需要實作 <code>onError()</code> 的響應，一方面又想要維持 lambda 語法的簡潔，那就必須要另外新增兩個 <code>Action (Consumer)</code> ，來實作 <code>onNext()</code> 、 <code>onError()</code> 的方法，再放入 <code>subScribe</code> 中。</p>
-<blockquote>
-<p>上面說的登入設計可以參考這篇文章<br><a href="http://www.jianshu.com/p/1fb294ec7e3b" target="_blank" rel="external">【Android】RxJava + Retrofit完成网络请求</a></p>
-</blockquote>
-
+        <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two strings s and t, determine if they are isomorphic.</p>
+<p>Two strings are isomorphic if the characters in s can be replaced to get t.</p>
+<p>All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.</p>
+<p>給定兩個字串 s 和 t ，驗證他們是否同構。</p>
+<p>兩個字串要達成同構， s 字串比需要能被 t 完全取代。</p>
+<p>完全取代指的是每一個被取代的字元，可以被自己本身取代，但不能有一個字元被兩個以上不同字元取代的狀況發生。</p>
+<p>Note:<br>You may assume both s and t have the same length.</p>
+<p>你可以假設 s 和 t 為相同長度。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> <span class="string">"egg"</span>, <span class="string">"add"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div><div class="line"></div><div class="line"><span class="type">Given</span> <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="keyword">return</span> <span class="literal">false</span>.</div><div class="line"></div><div class="line"><span class="type">Given</span> <span class="string">"paper"</span>, <span class="string">"title"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義一個 Dictionary 記錄 s 每個字元對應的 t 字元</p>
+<p>如果是 “abc” 對應 “xyz” 即是 [“a”: “x”, “b”: “y”, “c”: z]</p>
+<p>如果字典中存在 s 字元對應的值，就比對是否和當下的 t 字元相等。<br>比對不同，則返回 false 。</p>
+<p>如果字典中不存在，那就找出字典中是否有 value 已經存在 t 字元。<br>已存在，則返回 false 。<br>不存在，字典中新增一筆 s 對應 t 的記錄。</p>
+<p>如果跑完迴圈，都沒發生問題，返回 true 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isIsomorphic</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> t: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Character</span>: <span class="type">Character</span>]()</div><div class="line">    <span class="keyword">let</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">let</span> t = <span class="type">Array</span>(t.characters)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;s.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> pre = dict[s[i]] &#123;</div><div class="line">            <span class="keyword">if</span> pre != t[i] &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> dict.values.<span class="built_in">contains</span>(t[i]) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            dict[s[i]] = t[i]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -453,13 +468,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/Retrofit/" rel="tag"># Retrofit</a>
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
           
-            <a href="/tags/RxJava/" rel="tag"># RxJava</a>
-          
-            <a href="/tags/RxAndroid/" rel="tag"># RxAndroid</a>
+            <a href="/tags/Hash-Table/" rel="tag"># Hash Table</a>
           
         </div>
       
@@ -472,18 +485,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/leetcode-1/" rel="next" title="LeetCode#1 Two Sum - in Swift">
-                <i class="fa fa-chevron-left"></i> LeetCode#1 Two Sum - in Swift
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/learn-android-rxjava/" rel="prev" title="學習 Android RxJava">
-                學習 Android RxJava <i class="fa fa-chevron-right"></i>
+              <a href="/leetcode-112/" rel="prev" title="LeetCode#112 Path Sum - in Swift">
+                LeetCode#112 Path Sum - in Swift <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -627,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Setup"><span class="nav-number">1.</span> <span class="nav-text">Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作-Retrofit-Service-Interface"><span class="nav-number">2.</span> <span class="nav-text">實作 Retrofit Service Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#創建-Retrofit-元件"><span class="nav-number">3.</span> <span class="nav-text">創建 Retrofit 元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作-Retrofit-RxJava-異步網路請求"><span class="nav-number">4.</span> <span class="nav-text">實作 Retrofit + RxJava 異步網路請求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結"><span class="nav-number">5.</span> <span class="nav-text">結</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#題目"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#範例"><span class="nav-number">2.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解題"><span class="nav-number">3.</span> <span class="nav-text">解題</span></a></li></ol></div>
             
 
           </div>
@@ -766,9 +775,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://windsuzu.github.io/learn-android-rxjava-with-retrofit/';
-          this.page.identifier = 'learn-android-rxjava-with-retrofit/';
-          this.page.title = '學習 RxJava 結合 Retrofit';
+          this.page.url = 'http://windsuzu.github.io/leetcode-205/';
+          this.page.identifier = 'leetcode-205/';
+          this.page.title = 'LeetCode#205 Isomorphic Strings - in Swift';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jays-code.disqus.com/embed.js';

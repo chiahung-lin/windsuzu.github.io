@@ -3,6 +3,50 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#205 Isomorphic Strings - in Swift]]></title>
+      <url>/leetcode-205/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two strings s and t, determine if they are isomorphic.</p>
+<p>Two strings are isomorphic if the characters in s can be replaced to get t.</p>
+<p>All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.</p>
+<p>給定兩個字串 s 和 t ，驗證他們是否同構。</p>
+<p>兩個字串要達成同構， s 字串比需要能被 t 完全取代。</p>
+<p>完全取代指的是每一個被取代的字元，可以被自己本身取代，但不能有一個字元被兩個以上不同字元取代的狀況發生。</p>
+<p>Note:<br>You may assume both s and t have the same length.</p>
+<p>你可以假設 s 和 t 為相同長度。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> <span class="string">"egg"</span>, <span class="string">"add"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div><div class="line"></div><div class="line"><span class="type">Given</span> <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="keyword">return</span> <span class="literal">false</span>.</div><div class="line"></div><div class="line"><span class="type">Given</span> <span class="string">"paper"</span>, <span class="string">"title"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義一個 Dictionary 記錄 s 每個字元對應的 t 字元</p>
+<p>如果是 “abc” 對應 “xyz” 即是 [“a”: “x”, “b”: “y”, “c”: z]</p>
+<p>如果字典中存在 s 字元對應的值，就比對是否和當下的 t 字元相等。<br>比對不同，則返回 false 。</p>
+<p>如果字典中不存在，那就找出字典中是否有 value 已經存在 t 字元。<br>已存在，則返回 false 。<br>不存在，字典中新增一筆 s 對應 t 的記錄。</p>
+<p>如果跑完迴圈，都沒發生問題，返回 true 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isIsomorphic</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> t: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Character</span>: <span class="type">Character</span>]()</div><div class="line">    <span class="keyword">let</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">let</span> t = <span class="type">Array</span>(t.characters)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;s.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> pre = dict[s[i]] &#123;</div><div class="line">            <span class="keyword">if</span> pre != t[i] &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> dict.values.<span class="built_in">contains</span>(t[i]) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            dict[s[i]] = t[i]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Hash Table </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Hash Table </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#112 Path Sum - in Swift]]></title>
       <url>/leetcode-112/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
@@ -854,9 +898,9 @@
             
             <tag> Tree </tag>
             
-            <tag> Depth-first Search </tag>
-            
             <tag> Breadth-first Search </tag>
+            
+            <tag> Depth-first Search </tag>
             
         </tags>
         

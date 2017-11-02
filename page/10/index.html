@@ -296,6 +296,205 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-136/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-136/" itemprop="url">
+                  LeetCode#136 Single Number - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-05T19:51:00+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/Bit-Manipulation/" itemprop="url" rel="index">
+                    <span itemprop="name">Bit Manipulation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-136/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-136/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array of integers, every element appears twice except for one. Find that single one.</p>
+<p>給一串整數陣列，每個元素皆會出現兩次，只有一個元素不會。找出那一個元素。</p>
+<p>Example:<br> Input: [1,1,2,3,3,6,6]<br> Output: 2</p>
+<p>1, 3, 6 皆有重複出現，唯有 2 只出現一次。</p>
+<p>Note:<br>Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?</p>
+<p>你的演算法必須設定在 O(n) 時間內完成</p>
+<h1 id="第一次解題-Time-Limit-Exceeded"><a href="#第一次解題-Time-Limit-Exceeded" class="headerlink" title="第一次解題 : Time Limit Exceeded"></a>第一次解題 : Time Limit Exceeded</h1><p>手癢用 for + filter 的組合去找出 count 小於 2 次的數字。<br>但想想給了 Time Limit Exceeded 也是摸雞籠的事。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">singleNumber</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums &#123;</div><div class="line">        <span class="keyword">if</span> (nums.<span class="built_in">filter</span> &#123; $<span class="number">0</span> == num &#125;).<span class="built_in">count</span> &lt; <span class="number">2</span> &#123;</div><div class="line">            <span class="keyword">return</span> num</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> -<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第二次解題-25-ms"><a href="#第二次解題-25-ms" class="headerlink" title="第二次解題 : 25 ms"></a>第二次解題 : 25 ms</h1><p>偷看到可以用 XOR 解題<br>因為已經知道相同數字經過 XOR 運算後會等於 0 ，<br>並且 XOR 運算是符合<code>交換律</code>的。</p>
+<p>XOR 交換律 :<br> 101 ^ 101 ^ 010 =<br> 000 ^ 010 =<br> 010</p>
+<p> 101 ^ 010 ^ 101 =<br> 111 ^ 101 =<br> 010</p>
+<p>也就是 1 ^ 1 = 0  -&gt;<br>1 ^ 1 ^ 2 = 2<br>就算順序不同也會出現相同答案 : 1 ^ 2 ^ 1 = 2</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">singleNumber</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums &#123;</div><div class="line">        result ^= num</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-521/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1982,221 +2181,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-566/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-566/" itemprop="url">
-                  LeetCode#566 Reshape the Matrix - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-31T14:03:28+08:00">
-                2017-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-566/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-566/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>In MATLAB, there is a very useful function called ‘reshape’, which can reshape a matrix into a new one with different size but keep its original data.</p>
-<p>You’re given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively.</p>
-<p>The reshaped matrix need to be filled with all the elements of the original matrix in the same row-traversing order as they were.</p>
-<p>If the ‘reshape’ operation with given parameters is possible and legal, output the new reshaped matrix; Otherwise, output the original matrix.</p>
-<p>將矩陣進行 ‘reshape’ 的動作，將它變成新的 Size 但卻保留原來的 data 。</p>
-<p>給一個用二維陣列表示的矩陣，再輸入兩個整數，一個 r 代表新的列數 (row) ， 一個 c 代表新的行數 (column) 。</p>
-<p>如果給的參數皆為正確，就輸出 ‘reshape’ 後的矩陣。相反，輸出原來矩陣。</p>
-<p>Example 1:</p>
-<blockquote>
-<p>Input:</p>
-<blockquote>
-<p>nums =<br> [[1,2],<br> [3,4]]<br> r = 1, c = 4</p>
-</blockquote>
-<p>Output:</p>
-<blockquote>
-<p>[[1,2,3,4]]</p>
-</blockquote>
-</blockquote>
-<p>Explanation:<br> The row-traversing of nums is [1,2,3,4]. The new reshaped matrix is a <code>1 * 4</code> matrix, fill it row by row by using the previous list.</p>
-<p> <code>2 * 2</code> 矩陣轉為 <code>1 * 4</code> 之後， 變為 1 row 分別填入 [1,2,3,4]</p>
-<p>Example 2:</p>
-<blockquote>
-<p>Input:</p>
-<blockquote>
-<p>nums =<br> [[1,2],<br> [3,4]]<br> r = 2, c = 4</p>
-</blockquote>
-<p>Output:</p>
-<blockquote>
-<p>[[1,2],<br> [3,4]]</p>
-</blockquote>
-</blockquote>
-<p>Explanation:<br> There is no way to reshape a <code>2 * 2</code> matrix to a <code>2 * 4</code> matrix. So output the original matrix.</p>
-<p><code>2 * 2</code> 矩陣不可能變成 <code>2 * 4</code> ， 所以輸出原本的矩陣 [[1,2], [3,4]]。</p>
-<h1 id="第一次解題-142-ms"><a href="#第一次解題-142-ms" class="headerlink" title="第一次解題 : 142 ms"></a>第一次解題 : 142 ms</h1><p>先將原矩陣鋪成 (flat) 單個 Array， 確保 flatArray 的元素數量 = <code>R * C</code> ，否則就直接返回原矩陣。</p>
-<p>使用巢狀迴圈建立每個 Row， 再對每個 Row 依序塞進位在 flatArray 的元素，最後輸出。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">matrixReshape</span><span class="params">(<span class="number">_</span> nums: [[Int]], <span class="number">_</span> r: Int, <span class="number">_</span> <span class="built_in">c</span>: Int)</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> flatarray = nums.flatMap(&#123; $<span class="number">0</span> &#125;)</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> flatarray.<span class="built_in">count</span> != r*<span class="built_in">c</span> &#123;</div><div class="line">        <span class="keyword">return</span> nums</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> reshaped = [[<span class="type">Int</span>]]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;r &#123;</div><div class="line">        reshaped.append([<span class="type">Int</span>]())</div><div class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">c</span> &#123;</div><div class="line">            reshaped[i].append(flatarray[<span class="number">0</span>])</div><div class="line">            flatarray.removeFirst()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> reshaped</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Best-Solution-56-ms"><a href="#Best-Solution-56-ms" class="headerlink" title="Best Solution : 56 ms"></a>Best Solution : 56 ms</h1><p>利用 elementArray 盛載 reshape 後每個 row 的 element 。</p>
-<p>只要超過 column 數就把他裝進 resultArray 中，</p>
-<p>如此下去直到填滿 resultArray 。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">matrixReshape</span><span class="params">(<span class="number">_</span> nums: [[Int]], <span class="number">_</span> r: Int, <span class="number">_</span> <span class="built_in">c</span>: Int)</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> resultArray:[[<span class="type">Int</span>]] = <span class="type">Array</span>.<span class="keyword">init</span>()</div><div class="line">    <span class="keyword">var</span> elementArray:[<span class="type">Int</span>] = <span class="type">Array</span>.<span class="keyword">init</span>()</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> elementCount:<span class="type">Int</span> = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> firstArray <span class="keyword">in</span> nums</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> val <span class="keyword">in</span> firstArray</div><div class="line">        &#123;</div><div class="line">            elementArray.append(val)</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(elementArray.<span class="built_in">count</span>&gt;=<span class="built_in">c</span>)</div><div class="line">            &#123;</div><div class="line">                resultArray.append(elementArray)</div><div class="line">                elementArray.removeAll()</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            elementCount = elementCount+<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(elementCount != r * <span class="built_in">c</span>)</div><div class="line">    &#123;</div><div class="line">        resultArray = nums</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> resultArray</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2246,7 +2230,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">119</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

@@ -296,6 +296,215 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-101/" itemprop="url">
+                  LeetCode#101 Symmetric Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-13T15:42:17+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Depth-first Search</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/Breadth-first-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Breadth-first Search</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-101/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-101/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
+<p>給定二元樹，驗證他是否對稱。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example, this binary tree [1,2,2,3,4,4,3] is symmetric:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    <span class="number">1</span></div><div class="line">   / \</div><div class="line">  <span class="number">2</span>   <span class="number">2</span></div><div class="line"> / \ / \</div><div class="line"><span class="number">3</span>  <span class="number">4</span> <span class="number">4</span>  <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>But the following [1,2,2,null,3,null,3] is not:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  <span class="number">1</span></div><div class="line"> / \</div><div class="line"><span class="number">2</span>   <span class="number">2</span></div><div class="line"> \   \</div><div class="line">  <span class="number">3</span>   <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>從根節點左右開始驗證，若左右皆為 nil 則為對稱，若只有某一邊 nil 則不為對稱。</p>
+<p>若兩邊都存在，比對值是否相同，相同則繼續往下比對，</p>
+<p>比對左子樹的左節點，和右子樹的右節點是否相同，</p>
+<p>再比對左子樹的右節點，和右子樹的左節點是否相同，</p>
+<p>直到結束，返回答案值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isSymmetric</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="literal">true</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">checking</span><span class="params">(<span class="number">_</span> <span class="keyword">left</span>: TreeNode?, <span class="number">_</span> <span class="keyword">right</span>: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> != <span class="literal">nil</span> &#123; res = <span class="literal">false</span>; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> != <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> == <span class="literal">nil</span> &#123; res = <span class="literal">false</span>; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> == <span class="literal">nil</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> != <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> != <span class="literal">nil</span> &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">left</span>!.val != <span class="keyword">right</span>!.val &#123;</div><div class="line">                res = <span class="literal">false</span></div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                checking(<span class="keyword">left</span>?.<span class="keyword">left</span>, <span class="keyword">right</span>?.<span class="keyword">right</span>)</div><div class="line">                checking(<span class="keyword">left</span>?.<span class="keyword">right</span>, <span class="keyword">right</span>?.<span class="keyword">left</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    checking(root?.<span class="keyword">left</span>, root?.<span class="keyword">right</span>)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-257/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2021,195 +2230,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-70/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-70/" itemprop="url">
-                  LeetCode#70 Climbing Stairs - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-03T14:13:24+08:00">
-                2017-10-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Dynamic-Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Dynamic Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-70/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-70/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
-<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
-<p>你正在爬樓梯，需要花 n 步可以走到頂端。</p>
-<p>每一步你可以踩 1 或 2 格樓梯。</p>
-<p>請問你有幾種方法可以走到頂端 ?</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>如果有 1 層，有 1 一種方式 (只有踩 1 格)</p>
-<p>如果有 2 層，有 11, 2 兩種方式 (連續踩兩次 1 格或一次踩 2 格)</p>
-<p>如果有 3 層，有 111, 12, 21 三種方式</p>
-<p>如果有 4 層，有 1111, 112, 121, 211, 22 五種方式</p>
-<p>如果有 5 層，有 11111, 1112, 1121, 1211, 2111, 122, 212, 221 八種方式</p>
-<hr>
-<p>注意看，<br>n = 1, 1<br>n = 2, 2<br>n = 3, 3 = 1 + 2 (前面兩個結果相加)<br>n = 4, 5 = 3 + 2 (前面兩個結果相加)<br>n = 5, 8 = 5 + 3 (前面兩個結果相加)</p>
-<p>這題其實要解的是<a href="https://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97" target="_blank" rel="external">費氏數列</a></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">climbStairs</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">if</span> n == <span class="number">1</span> &#123; <span class="keyword">return</span> <span class="number">1</span> &#125;</div><div class="line">    <span class="keyword">if</span> n == <span class="number">2</span> &#123; <span class="keyword">return</span> <span class="number">2</span> &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> n1 = <span class="number">1</span></div><div class="line">    <span class="keyword">var</span> n2 = <span class="number">2</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">2</span>..&lt;n &#123;</div><div class="line">        res = n1 + n2</div><div class="line">        n1 = n2</div><div class="line">        n2 = res</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2259,7 +2279,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">119</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

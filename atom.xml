@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-01T06:06:42.000Z</updated>
+  <updated>2017-11-02T06:32:46.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#205 Isomorphic Strings - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-205/"/>
+    <id>http://windsuzu.github.io/leetcode-205/</id>
+    <published>2017-11-02T06:18:09.000Z</published>
+    <updated>2017-11-02T06:32:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two strings s and t, determine if they are isomorphic.</p>
+<p>Two strings are isomorphic if the characters in s can be replaced to get t.</p>
+<p>All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.</p>
+<p>給定兩個字串 s 和 t ，驗證他們是否同構。</p>
+<p>兩個字串要達成同構， s 字串比需要能被 t 完全取代。</p>
+<p>完全取代指的是每一個被取代的字元，可以被自己本身取代，但不能有一個字元被兩個以上不同字元取代的狀況發生。</p>
+<p>Note:<br>You may assume both s and t have the same length.</p>
+<p>你可以假設 s 和 t 為相同長度。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> <span class="string">"egg"</span>, <span class="string">"add"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div><div class="line"></div><div class="line"><span class="type">Given</span> <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="keyword">return</span> <span class="literal">false</span>.</div><div class="line"></div><div class="line"><span class="type">Given</span> <span class="string">"paper"</span>, <span class="string">"title"</span>, <span class="keyword">return</span> <span class="literal">true</span>.</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義一個 Dictionary 記錄 s 每個字元對應的 t 字元</p>
+<p>如果是 “abc” 對應 “xyz” 即是 [“a”: “x”, “b”: “y”, “c”: z]</p>
+<p>如果字典中存在 s 字元對應的值，就比對是否和當下的 t 字元相等。<br>比對不同，則返回 false 。</p>
+<p>如果字典中不存在，那就找出字典中是否有 value 已經存在 t 字元。<br>已存在，則返回 false 。<br>不存在，字典中新增一筆 s 對應 t 的記錄。</p>
+<p>如果跑完迴圈，都沒發生問題，返回 true 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isIsomorphic</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> t: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Character</span>: <span class="type">Character</span>]()</div><div class="line">    <span class="keyword">let</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">let</span> t = <span class="type">Array</span>(t.characters)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;s.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> pre = dict[s[i]] &#123;</div><div class="line">            <span class="keyword">if</span> pre != t[i] &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> dict.values.<span class="built_in">contains</span>(t[i]) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            dict[s[i]] = t[i]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given two strings s and t, determine if they are isomorphic.&lt;/p&gt;
+&lt;p&gt;Tw
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Hash Table" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Hash-Table/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Hash Table" scheme="http://windsuzu.github.io/tags/Hash-Table/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#112 Path Sum - in Swift</title>
@@ -866,56 +913,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#101 Symmetric Tree - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-101/"/>
-    <id>http://windsuzu.github.io/leetcode-101/</id>
-    <published>2017-10-13T07:42:17.000Z</published>
-    <updated>2017-10-13T07:55:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
-<p>給定二元樹，驗證他是否對稱。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example, this binary tree [1,2,2,3,4,4,3] is symmetric:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    <span class="number">1</span></div><div class="line">   / \</div><div class="line">  <span class="number">2</span>   <span class="number">2</span></div><div class="line"> / \ / \</div><div class="line"><span class="number">3</span>  <span class="number">4</span> <span class="number">4</span>  <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>But the following [1,2,2,null,3,null,3] is not:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  <span class="number">1</span></div><div class="line"> / \</div><div class="line"><span class="number">2</span>   <span class="number">2</span></div><div class="line"> \   \</div><div class="line">  <span class="number">3</span>   <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>從根節點左右開始驗證，若左右皆為 nil 則為對稱，若只有某一邊 nil 則不為對稱。</p>
-<p>若兩邊都存在，比對值是否相同，相同則繼續往下比對，</p>
-<p>比對左子樹的左節點，和右子樹的右節點是否相同，</p>
-<p>再比對左子樹的右節點，和右子樹的左節點是否相同，</p>
-<p>直到結束，返回答案值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isSymmetric</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="literal">true</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">checking</span><span class="params">(<span class="number">_</span> <span class="keyword">left</span>: TreeNode?, <span class="number">_</span> <span class="keyword">right</span>: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> != <span class="literal">nil</span> &#123; res = <span class="literal">false</span>; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> != <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> == <span class="literal">nil</span> &#123; res = <span class="literal">false</span>; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> == <span class="literal">nil</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> != <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> != <span class="literal">nil</span> &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">left</span>!.val != <span class="keyword">right</span>!.val &#123;</div><div class="line">                res = <span class="literal">false</span></div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                checking(<span class="keyword">left</span>?.<span class="keyword">left</span>, <span class="keyword">right</span>?.<span class="keyword">right</span>)</div><div class="line">                checking(<span class="keyword">left</span>?.<span class="keyword">right</span>, <span class="keyword">right</span>?.<span class="keyword">left</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    checking(root?.<span class="keyword">left</span>, root?.<span class="keyword">right</span>)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary tree, check whether it is a mirror of itself (ie, symme
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
-    
-      <category term="Depth-first Search" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/Depth-first-Search/"/>
-    
-      <category term="Breadth-first Search" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/Depth-first-Search/Breadth-first-Search/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
-    
-      <category term="Depth-first Search" scheme="http://windsuzu.github.io/tags/Depth-first-Search/"/>
-    
-      <category term="Breadth-first Search" scheme="http://windsuzu.github.io/tags/Breadth-first-Search/"/>
     
   </entry>
   

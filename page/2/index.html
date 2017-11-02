@@ -296,6 +296,203 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-501/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-501/" itemprop="url">
+                  LeetCode#501 Find Mode in Binary Search Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-23T16:14:51+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-501/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-501/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary search tree (BST) with duplicates, find all the mode(s) (the most frequently occurred element) in the given BST.</p>
+<p>給一二元搜尋樹 (BST) 包含重複節點，找出該樹的眾數 (mode(s)) (可能有多個) (出現最多次的元素) 。</p>
+<p>Assume a BST is defined as follows:</p>
+<ol>
+<li>The left subtree of a node contains only nodes with keys less than or equal to the node’s key.</li>
+<li>The right subtree of a node contains only nodes with keys greater than or equal to the node’s key.</li>
+<li>Both the left and right subtrees must also be binary search trees.</li>
+</ol>
+<p>假設該 BST 定義為下:</p>
+<ol>
+<li>左子樹只包含「小於或等於」的節點</li>
+<li>右子樹只包含「大於或等於」的節點</li>
+<li>其餘左右子樹必須維持上述的規則</li>
+</ol>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> <span class="type">BST</span> [<span class="number">1</span>,null,<span class="number">2</span>,<span class="number">2</span>],</div><div class="line">   <span class="number">1</span></div><div class="line">    \</div><div class="line">     <span class="number">2</span></div><div class="line">    /</div><div class="line">   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> [<span class="number">2</span>].</div></pre></td></tr></table></figure></p>
+<p>Note: If a tree has more than one mode, you can return them in any order.</p>
+<p>如果不止一個眾數，請回傳一個沒有限制排序的陣列。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這個做法不為最佳解，也不限制只能在 BST ，可以使用在任何二元樹。</p>
+<p>利用 map 記錄每一個節點值出現的次數，並且不斷更新 maxVal (最多出現次數)的值。</p>
+<p>走完一遍樹後，再從 map 中找出所有 v (次數) 等於 maxVal 的節點 k ，加進 result 中。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMode</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> [] &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Int</span>:<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> maxVal = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">traverse</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">        dict[root!.val] = dict[root!.val] != <span class="literal">nil</span> ? dict[root!.val]! + <span class="number">1</span> : <span class="number">1</span></div><div class="line">        maxVal = <span class="built_in">max</span>(dict[root!.val]!, maxVal)</div><div class="line">        </div><div class="line">        traverse(root!.<span class="keyword">left</span>)</div><div class="line">        traverse(root!.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    traverse(root)</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">for</span> (k,v) <span class="keyword">in</span> dict &#123;</div><div class="line">        <span class="keyword">if</span> v == maxVal &#123; res.append(k) &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-643/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2008,215 +2205,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-101/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-101/" itemprop="url">
-                  LeetCode#101 Symmetric Tree - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-13T15:42:17+08:00">
-                2017-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Tree</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/" itemprop="url" rel="index">
-                    <span itemprop="name">Depth-first Search</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/Breadth-first-Search/" itemprop="url" rel="index">
-                    <span itemprop="name">Breadth-first Search</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-101/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-101/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
-<p>給定二元樹，驗證他是否對稱。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example, this binary tree [1,2,2,3,4,4,3] is symmetric:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    <span class="number">1</span></div><div class="line">   / \</div><div class="line">  <span class="number">2</span>   <span class="number">2</span></div><div class="line"> / \ / \</div><div class="line"><span class="number">3</span>  <span class="number">4</span> <span class="number">4</span>  <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>But the following [1,2,2,null,3,null,3] is not:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  <span class="number">1</span></div><div class="line"> / \</div><div class="line"><span class="number">2</span>   <span class="number">2</span></div><div class="line"> \   \</div><div class="line">  <span class="number">3</span>   <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>從根節點左右開始驗證，若左右皆為 nil 則為對稱，若只有某一邊 nil 則不為對稱。</p>
-<p>若兩邊都存在，比對值是否相同，相同則繼續往下比對，</p>
-<p>比對左子樹的左節點，和右子樹的右節點是否相同，</p>
-<p>再比對左子樹的右節點，和右子樹的左節點是否相同，</p>
-<p>直到結束，返回答案值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isSymmetric</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="literal">true</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">checking</span><span class="params">(<span class="number">_</span> <span class="keyword">left</span>: TreeNode?, <span class="number">_</span> <span class="keyword">right</span>: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> != <span class="literal">nil</span> &#123; res = <span class="literal">false</span>; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> != <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> == <span class="literal">nil</span> &#123; res = <span class="literal">false</span>; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> == <span class="literal">nil</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> != <span class="literal">nil</span> &amp;&amp; <span class="keyword">right</span> != <span class="literal">nil</span> &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">left</span>!.val != <span class="keyword">right</span>!.val &#123;</div><div class="line">                res = <span class="literal">false</span></div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                checking(<span class="keyword">left</span>?.<span class="keyword">left</span>, <span class="keyword">right</span>?.<span class="keyword">right</span>)</div><div class="line">                checking(<span class="keyword">left</span>?.<span class="keyword">right</span>, <span class="keyword">right</span>?.<span class="keyword">left</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    checking(root?.<span class="keyword">left</span>, root?.<span class="keyword">right</span>)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2266,7 +2254,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">119</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
