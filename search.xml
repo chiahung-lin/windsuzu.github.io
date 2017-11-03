@@ -2232,11 +2232,11 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
+            
+            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2758,9 +2758,9 @@
             
             <tag> Array </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Divide and Conquer </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -3195,11 +3195,11 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
+            
+            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -3518,9 +3518,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -3903,9 +3903,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -4773,11 +4773,11 @@
             
             <tag> Android </tag>
             
+            <tag> Retrofit </tag>
+            
             <tag> RxJava </tag>
             
             <tag> RxAndroid </tag>
-            
-            <tag> Retrofit </tag>
             
         </tags>
         
