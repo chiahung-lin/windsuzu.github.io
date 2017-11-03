@@ -296,6 +296,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-183/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-183/" itemprop="url">
+                  LeetCode#183 Customers Who Never Order - in MySQL
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-03T11:07:43+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-183/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-183/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Suppose that a website contains two tables, the Customers table and the Orders table. Write a SQL query to find all customers who never order anything.</p>
+<p>給你兩個表格代表客人和點單記錄 (Customers &amp; Orders) ，寫出一個 SQL Query ，找出哪些客人沒有點過任何東西。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="type">Table</span>: <span class="type">Customers</span>.</div><div class="line"></div><div class="line">+----+-------+</div><div class="line">| <span class="type">Id</span> | <span class="type">Name</span>  |</div><div class="line">+----+-------+</div><div class="line">| <span class="number">1</span>  | <span class="type">Joe</span>   |</div><div class="line">| <span class="number">2</span>  | <span class="type">Henry</span> |</div><div class="line">| <span class="number">3</span>  | <span class="type">Sam</span>   |</div><div class="line">| <span class="number">4</span>  | <span class="type">Max</span>   |</div><div class="line">+----+-------+</div><div class="line"></div><div class="line"><span class="type">Table</span>: <span class="type">Orders</span>.</div><div class="line"></div><div class="line">+----+------------+</div><div class="line">| <span class="type">Id</span> | <span class="type">CustomerId</span> |</div><div class="line">+----+------------+</div><div class="line">| <span class="number">1</span>  | <span class="number">3</span>          |</div><div class="line">| <span class="number">2</span>  | <span class="number">1</span>          |</div><div class="line">+----+------------+</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Using</span> the above tables <span class="keyword">as</span> example, <span class="keyword">return</span> the following:</div><div class="line"></div><div class="line">+-----------+</div><div class="line">| <span class="type">Customers</span> |</div><div class="line">+-----------+</div><div class="line">| <span class="type">Henry</span>     |</div><div class="line">| <span class="type">Max</span>       |</div><div class="line">+-----------+</div></pre></td></tr></table></figure>
+<p>依照上方兩個表格的範例，可以查出 Henry 和 Max 沒有買過東西。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>有三種解法:</p>
+<h2 id="NOT-EXISTS"><a href="#NOT-EXISTS" class="headerlink" title="NOT EXISTS"></a>NOT EXISTS</h2><p>利用 NOT EXISTS 排除 C.Id = O.CustomerId 的查詢，負負得正，就是沒有下訂單的客人。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> C.Name</div><div class="line"><span class="keyword">FROM</span> Customers C</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></div><div class="line">(<span class="keyword">SELECT</span> <span class="keyword">Id</span></div><div class="line"><span class="keyword">FROM</span> Orders O</div><div class="line"><span class="keyword">WHERE</span> C.Id = O.CustomerId)</div></pre></td></tr></table></figure>
+<h2 id="NOT-IN"><a href="#NOT-IN" class="headerlink" title="NOT IN"></a>NOT IN</h2><p>類似 NOT EXISTS ，但直接利用 C.Id 查出不存在 O.CustomerId 的欄位。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> C.Name</div><div class="line"><span class="keyword">FROM</span> Customers C</div><div class="line"><span class="keyword">WHERE</span> C.Id <span class="keyword">NOT</span> <span class="keyword">IN</span></div><div class="line">(<span class="keyword">SELECT</span> O.CustomerId</div><div class="line"><span class="keyword">FROM</span> Orders O)</div></pre></td></tr></table></figure>
+<h2 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h2><p>LEFT JOIN 不管任何事都會把左邊印出，找出 C.Id = O.CustomerId ，如果沒有下過訂單，右邊就會為 NULL ，把這些右邊為 NULL 的欄位擷取出來即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> C.Name</div><div class="line"><span class="keyword">FROM</span> Customers C</div><div class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders O <span class="keyword">on</span> C.Id = O.CustomerId</div><div class="line"><span class="keyword">WHERE</span> O.CustomerId <span class="keyword">is</span> <span class="literal">NULL</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-205/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2023,195 +2201,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-119/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-119/" itemprop="url">
-                  LeetCode#119 Pascal's Triangle II - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-24T13:55:01+08:00">
-                2017-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-119/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-119/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an index k, return the kth row of the Pascal’s triangle.</p>
-<p>給定索引值 k ，返回帕斯卡三角形的第 k+1 層。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example, given k = 3,<br>Return [1,3,3,1].</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>首先定義第 k 個的陣列中會有 k + 1 個元素，</p>
-<p>如果 k 為 1 直接返回 [1] ， k &gt; 1 則開始從第一層帕斯卡三角形開始組起。</p>
-<p>每一層跳過 1 開始，由後往前填滿該層的元素，每個元素恰好為上一層的該元素 + 前一個元素組成。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">k = <span class="number">3</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</div><div class="line"></div><div class="line">第一層</div><div class="line">k[<span class="number">1</span>] = k[<span class="number">1</span>] + k[<span class="number">0</span>] = <span class="number">0</span> + <span class="number">1</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>]</div><div class="line"></div><div class="line">第二層</div><div class="line">k[<span class="number">2</span>] = k[<span class="number">2</span>] + k[<span class="number">1</span>] = <span class="number">0</span> + <span class="number">1</span></div><div class="line">k[<span class="number">1</span>] = k[<span class="number">1</span>] + k[<span class="number">0</span>] = <span class="number">1</span> + <span class="number">1</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>]</div><div class="line"></div><div class="line">第三層</div><div class="line">k[<span class="number">3</span>] = k[<span class="number">3</span>] + k[<span class="number">2</span>] = <span class="number">0</span> + <span class="number">1</span></div><div class="line">k[<span class="number">2</span>] = k[<span class="number">2</span>] + k[<span class="number">1</span>] = <span class="number">1</span> + <span class="number">2</span></div><div class="line">k[<span class="number">1</span>] = k[<span class="number">1</span>] + k[<span class="number">0</span>] = <span class="number">2</span> + <span class="number">1</span></div><div class="line">res = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>]</div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getRow</span><span class="params">(<span class="number">_</span> rowIndex: Int)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> rowIndex == <span class="number">0</span> &#123; <span class="keyword">return</span> [<span class="number">1</span>] &#125;</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>](repeating: <span class="number">0</span>, <span class="built_in">count</span>: rowIndex + <span class="number">1</span>)</div><div class="line">    res[<span class="number">0</span>] = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...rowIndex &#123;</div><div class="line">        <span class="keyword">var</span> j = i</div><div class="line">        <span class="keyword">while</span> j &gt;= <span class="number">1</span> &#123;</div><div class="line">            res[j] += res[j - <span class="number">1</span>]</div><div class="line">            j -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2256,7 +2250,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-count">121</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

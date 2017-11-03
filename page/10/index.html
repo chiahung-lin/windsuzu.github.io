@@ -296,6 +296,192 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-485/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-485/" itemprop="url">
+                  LeetCode#485 Max Consecutive Ones - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-05T21:38:22+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-485/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-485/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary array, find the maximum number of consecutive 1s in this array.</p>
+<p>給一個二進位陣列，找出連續出現最多次 1 的次數。</p>
+<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</div><div class="line"><span class="type">Output</span>: <span class="number">3</span></div><div class="line"> </div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> first two digits or the last three digits are consecutive 1s.</div><div class="line"><span class="type">The</span> maximum number of consecutive 1s <span class="keyword">is</span> <span class="number">3</span>.</div></pre></td></tr></table></figure></p>
+<p>前面兩個數字跟最後三個數字都是連續的 1 。 最長的是後面的 3 次。</p>
+<p>Note:<br> The input array will only contain 0 and 1.<br> The length of input array is a positive integer and will not exceed 10,000</p>
+<p>array 裡面只有 0 or 1 。 array 的長度不會超過 10,000 。</p>
+<h1 id="第一次解題-69-ms"><a href="#第一次解題-69-ms" class="headerlink" title="第一次解題 : 69 ms"></a>第一次解題 : 69 ms</h1><p>定義一個 counter 計算累積了幾次重複的 1<br>遇到 0 時就把 counter 歸零，放到 result 中<br>如果 counter &gt; result 就將 result 更新</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> counter = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums &#123;</div><div class="line">        counter += num == <span class="number">1</span> ? num : <span class="number">0</span></div><div class="line">        counter = num == <span class="number">0</span> ? <span class="number">0</span>: counter</div><div class="line">        result = counter &lt; result ? result : counter</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="One-Line-Solution"><a href="#One-Line-Solution" class="headerlink" title="One Line Solution"></a>One Line Solution</h1><p>我還以為我的算法很簡潔了，還有更厲害的。<br>將陣列透過 0 切成不同的 1s 陣列，用 reduce 的方式不斷比較出最高次數的陣列。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> nums.<span class="built_in">split</span>(separator: <span class="number">0</span>).<span class="built_in">reduce</span>(<span class="number">0</span>)&#123; <span class="built_in">max</span>($<span class="number">0</span>, $<span class="number">1</span>.<span class="built_in">count</span>)&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">findMaxConsecutiveOnes([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>])</div><div class="line"></div><div class="line"><span class="built_in">split</span> -&gt; <span class="built_in">count</span> (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</div><div class="line"><span class="built_in">reduce</span> -&gt; (<span class="number">0</span>, <span class="number">3</span>)</div><div class="line"><span class="built_in">reduce</span> -&gt; (<span class="number">3</span>, <span class="number">4</span>)</div><div class="line"><span class="built_in">reduce</span> -&gt; (<span class="number">5</span>)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-136/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1994,198 +2180,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-575/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-575/" itemprop="url">
-                  LeetCode#575 Distribute Candies - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-01T11:27:16+08:00">
-                2017-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
-                    <span itemprop="name">Hash Table</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-575/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-575/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer array with <code>even</code> length, where different numbers in this array represent different <code>kinds</code> of candies.<br>Each number means one candy of the corresponding kind. You need to distribute these candies <code>equally</code> in number to brother and sister.<br>Return the maximum number of kinds of candies the sister could gain.</p>
-<p>你有<code>偶數</code>顆糖果，在陣列中<code>不同數字</code>代表不同糖果。<br>現在需要把這些糖果<code>平分</code>給哥哥和妹妹，請問妹妹最多可以拿到多少不一樣的糖果 ?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Example 1:</div><div class="line"> Input: candies = [1,1,2,2,3,3]</div><div class="line"> Output: 3</div><div class="line"> Explanation:</div><div class="line"> There are three different kinds of candies (1, 2 and 3), and two candies for each kind.</div><div class="line"> Optimal distribution: The sister has candies [1,2,3] and the brother has candies [1,2,3], too.</div><div class="line"> The sister has three different kinds of candies.</div></pre></td></tr></table></figure>
-<p>現在有三種不同糖果 (1,2,3) ，每種各兩顆。<br>如果分成哥哥 (1,2,3) ，妹妹也 (1,2,3) ，妹妹最多可以拿到 3 種不同糖果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Example 2:</div><div class="line"> Input: candies = [1,1,2,3]</div><div class="line"> Output: 2</div><div class="line"> Explanation: For example, the sister has candies [2,3] and the brother has candies [1,1].</div><div class="line"> The sister has two different kinds of candies, the brother has only one kind of candies.</div></pre></td></tr></table></figure>
-<p>如果分成哥哥 (1,1) ，妹妹 (2,3) ，妹妹最多可以拿到 2 種不同糖果。</p>
-<h1 id="第一次解題-618-ms"><a href="#第一次解題-618-ms" class="headerlink" title="第一次解題 : 618 ms"></a>第一次解題 : 618 ms</h1><p>找出最多能夠分配的糖果數量 -&gt; <code>candies/2</code><br>找出所有種類的糖果 -&gt; <code>use Set remove duplicate</code></p>
-<p><code>[1,2,3,4,5,6] -&gt; (6 &gt; 3) -&gt; 3</code><br>如果糖果種類比最多能夠分配的糖果數量多 -&gt; <code>return candies.count</code></p>
-<p><code>[1,2,2,2,2,2] -&gt; (2 &lt; 3) -&gt; 2</code><br>如果能夠分配的糖果數量比種類多 -&gt; <code>return unique.count</code></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">distributeCandies</span><span class="params">(<span class="number">_</span> candies: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> maxDivided = candies.<span class="built_in">count</span> / <span class="number">2</span></div><div class="line">    <span class="keyword">let</span> unique = <span class="type">Array</span>(<span class="type">Set</span>(candies))</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> unique.<span class="built_in">count</span> &gt; maxDivided &#123;</div><div class="line">        <span class="keyword">return</span> maxDivided</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> unique.<span class="built_in">count</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Better-Solution-422-ms"><a href="#Better-Solution-422-ms" class="headerlink" title="Better Solution : 422 ms"></a>Better Solution : 422 ms</h1><p>建立一個 Set 將 candy 依序放入，會自動剔除重複的。<br>回傳 min(種類數量, 最多分配數量)</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">distributeCandies</span><span class="params">(<span class="number">_</span> candies: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> uniqueCandies: <span class="type">Set</span>&lt;<span class="type">Int</span>&gt; = []</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> candy <span class="keyword">in</span> candies &#123; uniqueCandies.insert(candy) &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(uniqueCandies.<span class="built_in">count</span>, candies.<span class="built_in">count</span> / <span class="number">2</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2230,7 +2229,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-count">121</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
