@@ -296,6 +296,197 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-438/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-438/" itemprop="url">
+                  LeetCode#438 Find All Anagrams in a String - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-04T21:36:41+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-438/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-438/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s.</p>
+<p>Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.</p>
+<p>The order of output does not matter.</p>
+<p>給定字串 s 和不為空的字串 p ，找出所有 s 中可能包含 p 的重組字。</p>
+<p>兩個字串 s, p 皆只存在小寫英文字母，且長度不超過 20,100 。</p>
+<p>答案的順序不同沒關係。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s: <span class="string">"cbaebabacd"</span> p: <span class="string">"abc"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">0</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">0</span> <span class="keyword">is</span> <span class="string">"cba"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"abc"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">6</span> <span class="keyword">is</span> <span class="string">"bac"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"abc"</span>.</div></pre></td></tr></table></figure>
+<p>“cbaebabacd” 中，從 0 開始的 cba 是 abc 的重組字，從 6 開始的 bac 也是 abc 的重組字。<br>所以回傳 [0, 6]</p>
+<p>Example 2:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s: <span class="string">"abab"</span> p: <span class="string">"ab"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">0</span> <span class="keyword">is</span> <span class="string">"ab"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">1</span> <span class="keyword">is</span> <span class="string">"ba"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">2</span> <span class="keyword">is</span> <span class="string">"ab"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div></pre></td></tr></table></figure>
+<p>“abab” 中，從 0 開始的 ab 是 ab 的重組字，從 1 開始的 ba 是 ab 的重組字，從 2 開始的 ab 也是 ab 的重組字。<br>所以回傳 [0, 1, 2]</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>解題中需要找到字元所對應的 ASCII 編號 ， Swift 中要找到編號運用下方的函式<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getHash</span><span class="params">(<span class="number">_</span> <span class="built_in">c</span>: Character)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(<span class="built_in">c</span>.unicodeScalars.first!.value)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接著運用 Sliding Window algorithm template 來解決這一個問題 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findAnagrams</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> p: String)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s), p = <span class="type">Array</span>(p)</div><div class="line">    <span class="comment">// 用來定義 ASCII 256 個字元符號的 Hash 表</span></div><div class="line">    <span class="keyword">var</span> hash = [<span class="type">Int</span>](repeating: <span class="number">0</span>, <span class="built_in">count</span>: <span class="number">256</span>)</div><div class="line">    </div><div class="line">    <span class="comment">// 將 p 的字元裝進 Hash 表中</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> p &#123;</div><div class="line">        hash[getHash(<span class="built_in">c</span>)] += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 定義 Two Pointers ， left 代表重組字的起始位置， right 代表重組字的尾巴</span></div><div class="line">    <span class="comment">// 以及 p 的長度 (用來代表在 p 寬度內要完成所有的配對才算一個重組字)</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span> , <span class="keyword">right</span> = <span class="number">0</span> , <span class="built_in">count</span> = p.<span class="built_in">count</span></div><div class="line">    </div><div class="line">    <span class="comment">// 將 s 由 0 開始每次往右移 1 格</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">right</span> &lt; s.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="comment">// 如果 hash 表中有存在該字元，就將 count - 1 代表越來越接近重組字。</span></div><div class="line">        <span class="keyword">if</span> hash[getHash(s[<span class="keyword">right</span>])] &gt;= <span class="number">1</span> &#123;</div><div class="line">            <span class="built_in">count</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 對該字元對應在 hash 表 - 1 ， s 右移 1 格</span></div><div class="line">        hash[getHash(s[<span class="keyword">right</span>])] -= <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> += <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="comment">// 如果該次 count == 0 ，代表 count 內的字元皆可替換，找到一個重組字</span></div><div class="line">        <span class="comment">// 在答案中放入 left 的值</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">count</span> == <span class="number">0</span> &#123; res.append(<span class="keyword">left</span>) &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 如果 s 的字元已經走到一組 p 的長度了， left 也需要往右移一格</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">right</span> - <span class="keyword">left</span> == p.<span class="built_in">count</span> &#123;</div><div class="line">            <span class="comment">// 查看 hash 表的 left 是否有大於等於 0 ，如果有代表剛剛該 left 有被算入正確的重組字中</span></div><div class="line">            <span class="comment">// 所以要把 count + 1 平衡回去</span></div><div class="line">            <span class="keyword">if</span> hash[getHash(s[<span class="keyword">left</span>])] &gt;= <span class="number">0</span> &#123;</div><div class="line">                <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 因為前面有將 hash 表該字元 - 1 ，所以要平衡回去</span></div><div class="line">            hash[getHash(s[<span class="keyword">left</span>])] += <span class="number">1</span></div><div class="line">            <span class="comment">// left 往右移 1 格</span></div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-183/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2016,191 +2207,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-434/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-434/" itemprop="url">
-                  LeetCode#434 Number of Segments in a String - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-25T13:10:25+08:00">
-                2017-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-434/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-434/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.</p>
-<p>Please note that the string does not contain any non-printable characters.</p>
-<p>算出一個字串中有幾個段落，一個段落代表一段不含空白的連續字元。</p>
-<p>注意字串中不計算任何 “沒印出” 的字元</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"Hello, my name is John"</span></div><div class="line"><span class="type">Output</span>: <span class="number">5</span></div></pre></td></tr></table></figure>
-<p>該字串分為五段，”Hello,” 和 “my” 和 “name” 和 “is” 和 “John”</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">countSegments</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> s.characters.<span class="built_in">split</span>(separator: <span class="string">" "</span>).<span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一行解決，用空白字元拆開全部字元，算出拆開的段落有幾個。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2250,7 +2256,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-count">122</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

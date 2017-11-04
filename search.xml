@@ -3,6 +3,50 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#438 Find All Anagrams in a String - in Swift]]></title>
+      <url>/leetcode-438/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s.</p>
+<p>Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.</p>
+<p>The order of output does not matter.</p>
+<p>給定字串 s 和不為空的字串 p ，找出所有 s 中可能包含 p 的重組字。</p>
+<p>兩個字串 s, p 皆只存在小寫英文字母，且長度不超過 20,100 。</p>
+<p>答案的順序不同沒關係。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s: <span class="string">"cbaebabacd"</span> p: <span class="string">"abc"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">0</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">0</span> <span class="keyword">is</span> <span class="string">"cba"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"abc"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">6</span> <span class="keyword">is</span> <span class="string">"bac"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"abc"</span>.</div></pre></td></tr></table></figure>
+<p>“cbaebabacd” 中，從 0 開始的 cba 是 abc 的重組字，從 6 開始的 bac 也是 abc 的重組字。<br>所以回傳 [0, 6]</p>
+<p>Example 2:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s: <span class="string">"abab"</span> p: <span class="string">"ab"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">0</span> <span class="keyword">is</span> <span class="string">"ab"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">1</span> <span class="keyword">is</span> <span class="string">"ba"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">2</span> <span class="keyword">is</span> <span class="string">"ab"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div></pre></td></tr></table></figure>
+<p>“abab” 中，從 0 開始的 ab 是 ab 的重組字，從 1 開始的 ba 是 ab 的重組字，從 2 開始的 ab 也是 ab 的重組字。<br>所以回傳 [0, 1, 2]</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>解題中需要找到字元所對應的 ASCII 編號 ， Swift 中要找到編號運用下方的函式<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getHash</span><span class="params">(<span class="number">_</span> <span class="built_in">c</span>: Character)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(<span class="built_in">c</span>.unicodeScalars.first!.value)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接著運用 Sliding Window algorithm template 來解決這一個問題 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findAnagrams</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> p: String)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s), p = <span class="type">Array</span>(p)</div><div class="line">    <span class="comment">// 用來定義 ASCII 256 個字元符號的 Hash 表</span></div><div class="line">    <span class="keyword">var</span> hash = [<span class="type">Int</span>](repeating: <span class="number">0</span>, <span class="built_in">count</span>: <span class="number">256</span>)</div><div class="line">    </div><div class="line">    <span class="comment">// 將 p 的字元裝進 Hash 表中</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> p &#123;</div><div class="line">        hash[getHash(<span class="built_in">c</span>)] += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 定義 Two Pointers ， left 代表重組字的起始位置， right 代表重組字的尾巴</span></div><div class="line">    <span class="comment">// 以及 p 的長度 (用來代表在 p 寬度內要完成所有的配對才算一個重組字)</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span> , <span class="keyword">right</span> = <span class="number">0</span> , <span class="built_in">count</span> = p.<span class="built_in">count</span></div><div class="line">    </div><div class="line">    <span class="comment">// 將 s 由 0 開始每次往右移 1 格</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">right</span> &lt; s.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="comment">// 如果 hash 表中有存在該字元，就將 count - 1 代表越來越接近重組字。</span></div><div class="line">        <span class="keyword">if</span> hash[getHash(s[<span class="keyword">right</span>])] &gt;= <span class="number">1</span> &#123;</div><div class="line">            <span class="built_in">count</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 對該字元對應在 hash 表 - 1 ， s 右移 1 格</span></div><div class="line">        hash[getHash(s[<span class="keyword">right</span>])] -= <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> += <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="comment">// 如果該次 count == 0 ，代表 count 內的字元皆可替換，找到一個重組字</span></div><div class="line">        <span class="comment">// 在答案中放入 left 的值</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">count</span> == <span class="number">0</span> &#123; res.append(<span class="keyword">left</span>) &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 如果 s 的字元已經走到一組 p 的長度了， left 也需要往右移一格</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">right</span> - <span class="keyword">left</span> == p.<span class="built_in">count</span> &#123;</div><div class="line">            <span class="comment">// 查看 hash 表的 left 是否有大於等於 0 ，如果有代表剛剛該 left 有被算入正確的重組字中</span></div><div class="line">            <span class="comment">// 所以要把 count + 1 平衡回去</span></div><div class="line">            <span class="keyword">if</span> hash[getHash(s[<span class="keyword">left</span>])] &gt;= <span class="number">0</span> &#123;</div><div class="line">                <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 因為前面有將 hash 表該字元 - 1 ，所以要平衡回去</span></div><div class="line">            hash[getHash(s[<span class="keyword">left</span>])] += <span class="number">1</span></div><div class="line">            <span class="comment">// left 往右移 1 格</span></div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Hash Table </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Hash Table </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#183 Customers Who Never Order - in MySQL]]></title>
       <url>/leetcode-183/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Suppose that a website contains two tables, the Customers table and the Orders table. Write a SQL query to find all customers who never order anything.</p>
@@ -2232,11 +2276,11 @@
             
             <tag> Swift </tag>
             
+            <tag> Hash Table </tag>
+            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
-            
-            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2758,9 +2802,9 @@
             
             <tag> Array </tag>
             
-            <tag> Divide and Conquer </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Divide and Conquer </tag>
             
         </tags>
         
@@ -3195,11 +3239,11 @@
             
             <tag> Swift </tag>
             
+            <tag> Hash Table </tag>
+            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
-            
-            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -3518,9 +3562,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -3903,9 +3947,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         

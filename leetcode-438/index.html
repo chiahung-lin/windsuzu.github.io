@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="LeetCode,Swift,Math,Binary Search," />
+  <meta name="keywords" content="LeetCode,Swift,Hash Table," />
 
 
 
@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="題目You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins. Given n, find the total number of full staircase rows that can be formed. n is">
-<meta name="keywords" content="LeetCode,Swift,Math,Binary Search">
+<meta name="description" content="題目Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s. Strings consists of lowercase English letters only and the length of both strings s and p will not be larg">
+<meta name="keywords" content="LeetCode,Swift,Hash Table">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode#441 Arranging Coins - in Swift">
-<meta property="og:url" content="http://windsuzu.github.io/leetcode-441/index.html">
+<meta property="og:title" content="LeetCode#438 Find All Anagrams in a String - in Swift">
+<meta property="og:url" content="http://windsuzu.github.io/leetcode-438/index.html">
 <meta property="og:site_name" content="Jay's Code">
-<meta property="og:description" content="題目You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins. Given n, find the total number of full staircase rows that can be formed. n is">
-<meta property="og:updated_time" content="2017-10-27T05:43:30.000Z">
+<meta property="og:description" content="題目Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s. Strings consists of lowercase English letters only and the length of both strings s and p will not be larg">
+<meta property="og:updated_time" content="2017-11-04T13:42:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode#441 Arranging Coins - in Swift">
-<meta name="twitter:description" content="題目You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins. Given n, find the total number of full staircase rows that can be formed. n is">
+<meta name="twitter:title" content="LeetCode#438 Find All Anagrams in a String - in Swift">
+<meta name="twitter:description" content="題目Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s. Strings consists of lowercase English letters only and the length of both strings s and p will not be larg">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://windsuzu.github.io/leetcode-441/"/>
+  <link rel="canonical" href="http://windsuzu.github.io/leetcode-438/"/>
 
 
 
 
 
-  <title> LeetCode#441 Arranging Coins - in Swift | Jay's Code </title>
+  <title> LeetCode#438 Find All Anagrams in a String - in Swift | Jay's Code </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -296,7 +296,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-441/">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-438/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jay Wang">
@@ -317,7 +317,7 @@
             
             
               
-                LeetCode#441 Arranging Coins - in Swift
+                LeetCode#438 Find All Anagrams in a String - in Swift
               
             
           </h1>
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-27T13:18:18+08:00">
-                2017-10-27
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-04T21:36:41+08:00">
+                2017-11-04
               </time>
             
 
@@ -377,19 +377,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/Binary-Search/" itemprop="url" rel="index">
-                    <span itemprop="name">Binary Search</span>
+                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
                   </a>
                 </span>
 
@@ -406,9 +395,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/leetcode-441/#comments" itemprop="discussionUrl">
+                <a href="/leetcode-438/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-441/" itemprop="commentCount"></span>
+                        data-disqus-identifier="leetcode-438/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -434,27 +423,23 @@
       
 
       
-        <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.</p>
-<p>Given n, find the total number of full staircase rows that can be formed.</p>
-<p>n is a non-negative integer and fits within the range of a 32-bit signed integer.</p>
-<p>給你 n 個硬幣排成樓梯的形狀，每 k 層有 k 個硬幣。</p>
-<p>現在給你 n ， 返回你最大可以排成的樓梯有幾層。 n 為一個非負數整數。</p>
+        <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s.</p>
+<p>Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.</p>
+<p>The order of output does not matter.</p>
+<p>給定字串 s 和不為空的字串 p ，找出所有 s 中可能包含 p 的重組字。</p>
+<p>兩個字串 s, p 皆只存在小寫英文字母，且長度不超過 20,100 。</p>
+<p>答案的順序不同沒關係。</p>
 <hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 3rd row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">2</span>.</div></pre></td></tr></table></figure></p>
-<p>5 個硬幣排完第 3 層還沒完成，所以返回 2 。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">8</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 4th row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">3</span>.</div></pre></td></tr></table></figure></p>
-<p>8 個硬幣排完第 4 層還沒完成，所以返回 3 。</p>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s: <span class="string">"cbaebabacd"</span> p: <span class="string">"abc"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">0</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">0</span> <span class="keyword">is</span> <span class="string">"cba"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"abc"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">6</span> <span class="keyword">is</span> <span class="string">"bac"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"abc"</span>.</div></pre></td></tr></table></figure>
+<p>“cbaebabacd” 中，從 0 開始的 cba 是 abc 的重組字，從 6 開始的 bac 也是 abc 的重組字。<br>所以回傳 [0, 6]</p>
+<p>Example 2:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s: <span class="string">"abab"</span> p: <span class="string">"ab"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">0</span> <span class="keyword">is</span> <span class="string">"ab"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">1</span> <span class="keyword">is</span> <span class="string">"ba"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div><div class="line"><span class="type">The</span> substring with start index = <span class="number">2</span> <span class="keyword">is</span> <span class="string">"ab"</span>, which <span class="keyword">is</span> an anagram of <span class="string">"ab"</span>.</div></pre></td></tr></table></figure>
+<p>“abab” 中，從 0 開始的 ab 是 ab 的重組字，從 1 開始的 ba 是 ab 的重組字，從 2 開始的 ab 也是 ab 的重組字。<br>所以回傳 [0, 1, 2]</p>
 <hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h2><p>對 n 從第一層開始減，直至無法再減。<br>代表該層未完成，返回前一層的值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsIterative</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> n = n</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...<span class="type">Int</span>.<span class="built_in">max</span> &#123;</div><div class="line">        <span class="keyword">if</span> n - i &gt;= <span class="number">0</span> &#123;</div><div class="line">            n -= i</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> i - <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Mathematic"><a href="#Mathematic" class="headerlink" title="Mathematic"></a>Mathematic</h2><p>要算出 n 層的硬幣有幾個，等於要算出 1 + 2 + 3 + … + n </p>
-<p>這有一個公式是(上底+下底)乘高除以2 : <code>sum = (1 + x) * x / 2</code></p>
-<p>並且在這題裡面的 sum 要小於等於 n ， 所以為 <code>(1 + x) * x / 2 &lt;= n</code></p>
-<p>解出這個式子 :</p>
-<blockquote>
-<p>(1 + x) * x / 2 &lt;= n<br>x^2 + x  &lt;= 2n<br>4x^2 + 4x &lt;= 8n<br>(2x + 1)(2x + 1) - 1 &lt;= 8n<br>x &lt;= (√(8n + 1) - 1) / 2</p>
-</blockquote>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsMathematic</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>((sqrt(<span class="number">8</span> * <span class="type">Double</span>(n) + <span class="number">1</span>) - <span class="number">1</span>) / <span class="type">Double</span>(<span class="number">2</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>解題中需要找到字元所對應的 ASCII 編號 ， Swift 中要找到編號運用下方的函式<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getHash</span><span class="params">(<span class="number">_</span> <span class="built_in">c</span>: Character)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(<span class="built_in">c</span>.unicodeScalars.first!.value)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接著運用 Sliding Window algorithm template 來解決這一個問題 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findAnagrams</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> p: String)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s), p = <span class="type">Array</span>(p)</div><div class="line">    <span class="comment">// 用來定義 ASCII 256 個字元符號的 Hash 表</span></div><div class="line">    <span class="keyword">var</span> hash = [<span class="type">Int</span>](repeating: <span class="number">0</span>, <span class="built_in">count</span>: <span class="number">256</span>)</div><div class="line">    </div><div class="line">    <span class="comment">// 將 p 的字元裝進 Hash 表中</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> p &#123;</div><div class="line">        hash[getHash(<span class="built_in">c</span>)] += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 定義 Two Pointers ， left 代表重組字的起始位置， right 代表重組字的尾巴</span></div><div class="line">    <span class="comment">// 以及 p 的長度 (用來代表在 p 寬度內要完成所有的配對才算一個重組字)</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span> , <span class="keyword">right</span> = <span class="number">0</span> , <span class="built_in">count</span> = p.<span class="built_in">count</span></div><div class="line">    </div><div class="line">    <span class="comment">// 將 s 由 0 開始每次往右移 1 格</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">right</span> &lt; s.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="comment">// 如果 hash 表中有存在該字元，就將 count - 1 代表越來越接近重組字。</span></div><div class="line">        <span class="keyword">if</span> hash[getHash(s[<span class="keyword">right</span>])] &gt;= <span class="number">1</span> &#123;</div><div class="line">            <span class="built_in">count</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 對該字元對應在 hash 表 - 1 ， s 右移 1 格</span></div><div class="line">        hash[getHash(s[<span class="keyword">right</span>])] -= <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> += <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="comment">// 如果該次 count == 0 ，代表 count 內的字元皆可替換，找到一個重組字</span></div><div class="line">        <span class="comment">// 在答案中放入 left 的值</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">count</span> == <span class="number">0</span> &#123; res.append(<span class="keyword">left</span>) &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 如果 s 的字元已經走到一組 p 的長度了， left 也需要往右移一格</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">right</span> - <span class="keyword">left</span> == p.<span class="built_in">count</span> &#123;</div><div class="line">            <span class="comment">// 查看 hash 表的 left 是否有大於等於 0 ，如果有代表剛剛該 left 有被算入正確的重組字中</span></div><div class="line">            <span class="comment">// 所以要把 count + 1 平衡回去</span></div><div class="line">            <span class="keyword">if</span> hash[getHash(s[<span class="keyword">left</span>])] &gt;= <span class="number">0</span> &#123;</div><div class="line">                <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 因為前面有將 hash 表該字元 - 1 ，所以要平衡回去</span></div><div class="line">            hash[getHash(s[<span class="keyword">left</span>])] += <span class="number">1</span></div><div class="line">            <span class="comment">// left 往右移 1 格</span></div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -487,9 +472,7 @@
           
             <a href="/tags/Swift/" rel="tag"># Swift</a>
           
-            <a href="/tags/Math/" rel="tag"># Math</a>
-          
-            <a href="/tags/Binary-Search/" rel="tag"># Binary Search</a>
+            <a href="/tags/Hash-Table/" rel="tag"># Hash Table</a>
           
         </div>
       
@@ -502,18 +485,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/leetcode-181/" rel="next" title="LeetCode#181 Employees Earning More Than Their Managers - in MySQL">
-                <i class="fa fa-chevron-left"></i> LeetCode#181 Employees Earning More Than Their Managers - in MySQL
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/leetcode-172/" rel="prev" title="LeetCode#172 Factorial Trailing Zeroes - in Swift">
-                LeetCode#172 Factorial Trailing Zeroes - in Swift <i class="fa fa-chevron-right"></i>
+              <a href="/leetcode-183/" rel="prev" title="LeetCode#183 Customers Who Never Order - in MySQL">
+                LeetCode#183 Customers Who Never Order - in MySQL <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -657,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#題目"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#範例"><span class="nav-number">2.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解題"><span class="nav-number">3.</span> <span class="nav-text">解題</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative"><span class="nav-number">3.1.</span> <span class="nav-text">Iterative</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mathematic"><span class="nav-number">3.2.</span> <span class="nav-text">Mathematic</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#題目"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#範例"><span class="nav-number">2.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解題"><span class="nav-number">3.</span> <span class="nav-text">解題</span></a></li></ol></div>
             
 
           </div>
@@ -796,9 +775,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://windsuzu.github.io/leetcode-441/';
-          this.page.identifier = 'leetcode-441/';
-          this.page.title = 'LeetCode#441 Arranging Coins - in Swift';
+          this.page.url = 'http://windsuzu.github.io/leetcode-438/';
+          this.page.identifier = 'leetcode-438/';
+          this.page.title = 'LeetCode#438 Find All Anagrams in a String - in Swift';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jays-code.disqus.com/embed.js';
