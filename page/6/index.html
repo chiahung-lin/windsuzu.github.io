@@ -296,6 +296,194 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-543/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-543/" itemprop="url">
+                  LeetCode#543 Diameter of Binary Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-16T11:23:45+08:00">
+                2017-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-543/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-543/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.</p>
+<p>給定二元樹，計算出樹的直徑為多少。 </p>
+<p>二元樹當中任意兩點的路徑若為最長，就代表該樹的直徑。</p>
+<p>這條直徑有可能會經過根節點，有可能不會。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Given a binary tree<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">       <span class="number">1</span></div><div class="line">      / \</div><div class="line">     <span class="number">2</span>   <span class="number">3</span></div><div class="line">    / \</div><div class="line">   <span class="number">4</span>   <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">Return</span> <span class="number">3</span>, which <span class="keyword">is</span> the length of the path [<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>] or [<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>].</div></pre></td></tr></table></figure></p>
+<p>直徑為 3 ，因為最長路徑為 [4,2,1,3] 或 [5,2,1,3] 。</p>
+<p>Path does not pass root<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">            <span class="number">1</span></div><div class="line">           / \</div><div class="line">          <span class="number">2</span>   <span class="number">3</span></div><div class="line">         / \</div><div class="line">        <span class="number">4</span>   <span class="number">5</span></div><div class="line">       /     \</div><div class="line">      <span class="number">6</span>       <span class="number">7</span></div><div class="line">     / \       \</div><div class="line">    <span class="number">8</span>   <span class="number">10</span>      <span class="number">9</span></div><div class="line">         \</div><div class="line">         <span class="number">11</span></div><div class="line"></div><div class="line"><span class="type">Return</span> <span class="number">7</span>, which <span class="keyword">is</span> the length of the path [<span class="number">11</span>,<span class="number">10</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</div></pre></td></tr></table></figure></p>
+<p>直徑為 7 ，因為最長路徑為 [11,10,6,4,2,5,7,9] 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>每個節點的直徑，就等於左子樹的深度 + 右子樹的深度。</p>
+<p><img src="/leetcode-543/diameter.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">diameterOfBinaryTree</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> depth = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getDepth</span><span class="params">(root : TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> <span class="keyword">left</span> = getDepth(root: root?.<span class="keyword">left</span>)</div><div class="line">        <span class="keyword">let</span> <span class="keyword">right</span> = getDepth(root: root?.<span class="keyword">right</span>)</div><div class="line">        </div><div class="line">        depth = <span class="built_in">max</span>(depth, <span class="keyword">left</span> + <span class="keyword">right</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="keyword">left</span> , <span class="keyword">right</span>) + <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    getDepth(root: root)</div><div class="line">    <span class="keyword">return</span> depth</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-268/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2056,218 +2244,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-13/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-13/" itemprop="url">
-                  LeetCode#13 Roman to Integer - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-06T15:12:39+08:00">
-                2017-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-13/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-13/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a roman numeral, convert it to an integer.</p>
-<p>Input is guaranteed to be within the range from 1 to 3999.</p>
-<p>將羅馬文字的數字轉換為一般數字。</p>
-<p>範圍是 1 到 3999 。</p>
-<blockquote>
-<p> 題目敘述就只有這樣，好爛，所以找了一下羅馬數字圖表。<br> <a href="http://literacy.kent.edu/Minigrants/Cinci/romanchart.htm" target="_blank" rel="external">http://literacy.kent.edu/Minigrants/Cinci/romanchart.htm</a></p>
-</blockquote>
-<p>簡單來說 : </p>
-<ul>
-<li>I 代表 1</li>
-<li>V 代表 5 </li>
-<li>X 代表 10 </li>
-<li>L 代表 50 </li>
-<li>C 代表 100 </li>
-<li>D 代表 500 </li>
-<li>M 代表 1000</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="type">I</span> -&gt; <span class="number">1</span></div><div class="line"><span class="type">II</span> -&gt; <span class="number">2</span></div><div class="line"><span class="type">III</span> -&gt; <span class="number">3</span></div><div class="line"></div><div class="line"><span class="comment">// 但這種會比較特殊</span></div><div class="line"><span class="type">IV</span> -&gt; <span class="number">4</span></div><div class="line"><span class="comment">// 當小數字在大數字的前面時，變成大數字減小數字</span></div><div class="line"></div><div class="line"><span class="comment">// 繼續下去</span></div><div class="line"><span class="type">V</span> -&gt; <span class="number">5</span></div><div class="line"><span class="type">VI</span> -&gt; <span class="number">6</span></div><div class="line"><span class="type">VII</span> -&gt; <span class="number">7</span></div><div class="line"><span class="type">VIII</span> -&gt; <span class="number">8</span></div><div class="line"></div><div class="line"><span class="comment">// 又遇到一個，所以是 10 - 1</span></div><div class="line"><span class="type">IX</span> -&gt; <span class="number">9</span></div><div class="line"></div><div class="line"><span class="comment">// 繼續下去</span></div><div class="line"><span class="type">X</span> -&gt; <span class="number">10</span></div><div class="line"><span class="type">XI</span> -&gt; <span class="number">11</span></div><div class="line"><span class="type">XII</span> -&gt; <span class="number">12</span></div><div class="line"><span class="type">XIII</span> -&gt; <span class="number">13</span></div><div class="line"></div><div class="line"><span class="comment">// 特殊規則串插在中間</span></div><div class="line"><span class="type">XIV</span> -&gt; <span class="number">14</span></div><div class="line"></div><div class="line"><span class="comment">// Move on ...</span></div><div class="line"><span class="type">XV</span> -&gt; <span class="number">15</span></div></pre></td></tr></table></figure>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先將一般規則記錄在字典中。</p>
-<p>接著開始讀每一個羅馬數字，如果是正常的 「I」、「II」、「VIII」、「XII」，<br>就單純的將數字往上加上去。</p>
-<p>但若是遇到前一個字母小於，之後的字母，例如 「IV」、「IX」、「XIX」中的「IX」，<br>就必須要有新的規則。<br>這時候再看到 「XL」 是 10 跟 50 ，結果卻變成 40 。<br>我們發現原來這種數字是要，後面的數字 - 前面的數字。</p>
-<p>但因為是尋遍每個字母，尋到後面的字母時，需要把剛剛已經加進去的數字算進去，<br>所以要減去兩倍的前一個數字。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">答案 = <span class="number">0</span></div><div class="line"></div><div class="line">例如 <span class="type">XLIX</span> -&gt;</div><div class="line"></div><div class="line"><span class="type">X</span> -&gt; 答案 = <span class="number">10</span></div><div class="line"></div><div class="line"><span class="comment">// L 符合規則二 (L &gt; X)</span></div><div class="line"><span class="type">L</span> -&gt; 答案 = <span class="number">10</span> + (<span class="number">50</span> - <span class="number">2</span>*<span class="number">10</span>)</div><div class="line"></div><div class="line"><span class="type">I</span> -&gt; 答案 = <span class="number">10</span> + <span class="number">30</span> + <span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment">// X 符合規則二 (X &gt; I)</span></div><div class="line"><span class="type">X</span> -&gt; 答案 = <span class="number">10</span> + <span class="number">30</span> + <span class="number">1</span> + (<span class="number">10</span> - <span class="number">2</span>*<span class="number">1</span>)</div><div class="line">  </div><div class="line">  -&gt; 答案 = <span class="number">10</span> + <span class="number">30</span> + <span class="number">1</span> + <span class="number">8</span> = <span class="number">49</span></div></pre></td></tr></table></figure>
-<p><img src="/leetcode-13/roman.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">romanToInt</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    <span class="keyword">let</span> dict: [<span class="type">Character</span> : <span class="type">Int</span>] =</div><div class="line">        [<span class="string">"I"</span> : <span class="number">1</span>, <span class="string">"V"</span> : <span class="number">5</span>, <span class="string">"X"</span> : <span class="number">10</span>, <span class="string">"L"</span> : <span class="number">50</span>, <span class="string">"C"</span> : <span class="number">100</span>, <span class="string">"D"</span> : <span class="number">500</span>, <span class="string">"M"</span> : <span class="number">1000</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> sArr = <span class="type">Array</span>(s.characters)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;sArr.<span class="built_in">count</span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> i - <span class="number">1</span> &gt;= <span class="number">0</span> , dict[sArr[i]]! &gt; dict[sArr[i - <span class="number">1</span>]]! &#123;</div><div class="line">            res += dict[sArr[i]]! - (<span class="number">2</span> * dict[sArr[i - <span class="number">1</span>]]!)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            res += dict[sArr[i]]!</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2317,7 +2293,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">122</span>
+                <span class="site-state-item-count">123</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

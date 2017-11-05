@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#507 Perfect Number - in Swift]]></title>
+      <url>/leetcode-507/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>We define the Perfect Number is a positive integer that is equal to the sum of all its positive divisors except itself.</p>
+<p>Now, given an integer n, write a function that returns true when it is a perfect number and false when it is not.</p>
+<p>我們定義一個「完美數」是一個正整數，且他的全部因數除了自己本身，加起來等於他自己。</p>
+<p>現在給你一整數 n ，寫出一個函式驗證該數是否為完美數。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">28</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="number">28</span> = <span class="number">1</span> + <span class="number">2</span> + <span class="number">4</span> + <span class="number">7</span> + <span class="number">14</span></div></pre></td></tr></table></figure>
+<p>28 的全部因數有 1, 2, 4, 7, 14, 28 ，排除 28 ，其他加起來又等於 28 ，所以返回 true</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先求 num 的所有因子，由於 1 為每個數的因子，所以將 1 先加進 sum 裡面</p>
+<p>判斷 s 的因子只需要從範圍 [2, sqrt(num)] 下手，判斷這個範圍內的 i 是否可以被 num 整除</p>
+<p>如果可以整除，代表 i 和 num/i 都是 num 的因子，加進 sum 中</p>
+<p>最後判斷 sum 是否等於 num 即可</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkPerfectNumber</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> num &lt;= <span class="number">1</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> sum = <span class="number">1</span>, i = <span class="number">2</span>, s = <span class="type">Int</span>(sqrt(<span class="type">Double</span>(num)))</div><div class="line">    <span class="keyword">while</span> i &lt;= s &#123;</div><div class="line">        <span class="keyword">if</span> num % i == <span class="number">0</span> &#123; sum += i + (num / i) &#125;</div><div class="line">        i += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> sum == num</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Math </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Math </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#438 Find All Anagrams in a String - in Swift]]></title>
       <url>/leetcode-438/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s.</p>
@@ -2276,11 +2316,11 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
+            
+            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2802,9 +2842,9 @@
             
             <tag> Array </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Divide and Conquer </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -3239,11 +3279,11 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
+            
+            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -3562,9 +3602,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -3947,9 +3987,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -4817,11 +4857,11 @@
             
             <tag> Android </tag>
             
-            <tag> Retrofit </tag>
-            
             <tag> RxJava </tag>
             
             <tag> RxAndroid </tag>
+            
+            <tag> Retrofit </tag>
             
         </tags>
         
@@ -5195,8 +5235,6 @@
         
         <tags>
             
-            <tag> 軟體工程 </tag>
-            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -5204,6 +5242,8 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
+            
+            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -5281,6 +5321,8 @@
         
         <tags>
             
+            <tag> Android </tag>
+            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -5290,8 +5332,6 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
-            
-            <tag> Android </tag>
             
             <tag> iOS </tag>
             
