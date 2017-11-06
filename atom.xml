@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-05T14:31:02.000Z</updated>
+  <updated>2017-11-06T12:33:20.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#20 Valid Parentheses - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-20/"/>
+    <id>http://windsuzu.github.io/leetcode-20/</id>
+    <published>2017-11-06T12:19:58.000Z</published>
+    <updated>2017-11-06T12:33:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
+<p>The brackets must close in the correct order, <code>&quot;()&quot;</code> and <code>&quot;()[]{}&quot;</code> are all valid but <code>&quot;(]&quot;</code> and <code>&quot;([)]&quot;</code> are not.</p>
+<p>給一個字串，裡面只會包含 <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> , <code>&#39;]&#39;</code> ，現在驗證字串是否符合格式。</p>
+<p>這些括號，必須要按照正確的順序合起來， <code>&quot;()&quot;</code> 或 <code>&quot;()[]{}&quot;</code> 就是正確的，但 <code>&quot;(]&quot;</code> 或 <code>&quot;([)]&quot;</code> 就不是。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="string">"(&#123;&#125;)"</span></div><div class="line"><span class="type">Output</span> : <span class="type">True</span></div></pre></td></tr></table></figure></p>
+<p>這是正確的括號開始跟結尾的用法。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"&#123;&#123;]&#125;"</span></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>這是錯誤的括號用法。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這題題目提示是一題 Stack 的題目， Swift 雖然沒有 Stack 類別 ，但 Array 也有提供 popLast 的用法。</p>
+<p>只要遇到三種括號的開頭，就將該括號的結尾加進陣列中</p>
+<p>若遇到三種括號的結尾時，陣列為空代表根本沒出現過開頭，回傳 false 。</p>
+<p>若陣列的 popLast 回傳的第一個元素，不等於自己，代表開頭不對稱，也回傳 false 。</p>
+<p>最後若跑完字串，陣列被 pop 到空的，就是一個 valid 的字串，回傳 true 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isValid</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> s = <span class="type">Array</span>(s)</div><div class="line">    <span class="keyword">var</span> stack = [<span class="type">String</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s &#123;</div><div class="line">        <span class="keyword">switch</span> <span class="built_in">c</span> &#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">"("</span>:</div><div class="line">            stack.append(<span class="string">")"</span>)</div><div class="line">        <span class="keyword">case</span> <span class="string">"&#123;"</span>:</div><div class="line">            stack.append(<span class="string">"&#125;"</span>)</div><div class="line">        <span class="keyword">case</span> <span class="string">"["</span>:</div><div class="line">            stack.append(<span class="string">"]"</span>)</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">if</span> stack.isEmpty &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> pop = stack.popLast(), pop != <span class="type">String</span>(<span class="built_in">c</span>)   &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> stack.isEmpty</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a string containing just the characters &lt;code&gt;&amp;#39;(&amp;#39;&lt;/code&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/String/"/>
+    
+      <category term="Stack" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/String/Stack/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
+    
+      <category term="Stack" scheme="http://windsuzu.github.io/tags/Stack/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#507 Perfect Number - in Swift</title>
@@ -860,52 +909,6 @@
       <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
     
       <category term="Binary Search" scheme="http://windsuzu.github.io/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#345 Reverse Vowels of a String - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-345/"/>
-    <id>http://windsuzu.github.io/leetcode-345/</id>
-    <published>2017-10-17T07:25:58.000Z</published>
-    <updated>2017-10-17T07:31:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and reverse only the vowels of a string.</p>
-<p>反轉字串，但只反轉母音的部分。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">1</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"hello"</span>, <span class="keyword">return</span> <span class="string">"holle"</span>.</div></pre></td></tr></table></figure>
-<p>hello 中的 eo 轉換為 oe</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">2</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"leetcode"</span>, <span class="keyword">return</span> <span class="string">"leotcede"</span>.</div></pre></td></tr></table></figure>
-<p>leetcode 中的 eeoe 轉換為 eoee</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義母音表，接著像 <a href="https://windsuzu.github.io/leetcode-344/">Reverse String</a> 這題一樣進行兩個指針的迴圈。</p>
-<p>不同的是，若當下左邊的字母不為母音，就將左指針 +1<br>反之，右邊不為母音，將右指針 -1</p>
-<p>確定抓到左右兩個母音時，就將左右調換，左右各進退一步。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseVowels</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">set</span>: <span class="type">Set</span>&lt;<span class="type">Character</span>&gt; = [<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>, <span class="string">"A"</span>, <span class="string">"E"</span>, <span class="string">"I"</span>, <span class="string">"O"</span>, <span class="string">"U"</span>]</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">right</span> = s.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &#123;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">left</span>]) &#123;</div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">right</span>]) &#123;</div><div class="line">            <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> temp = s[<span class="keyword">left</span>]</div><div class="line">        s[<span class="keyword">left</span>] = s[<span class="keyword">right</span>]</div><div class="line">        s[<span class="keyword">right</span>] = temp</div><div class="line">        <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Write a function that takes a string as input and reverse only the vow
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Two Pointers" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Two-Pointers/"/>
-    
-      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Two-Pointers/String/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
-    
-      <category term="Two Pointers" scheme="http://windsuzu.github.io/tags/Two-Pointers/"/>
     
   </entry>
   

@@ -3,6 +3,53 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#20 Valid Parentheses - in Swift]]></title>
+      <url>/leetcode-20/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
+<p>The brackets must close in the correct order, <code>&quot;()&quot;</code> and <code>&quot;()[]{}&quot;</code> are all valid but <code>&quot;(]&quot;</code> and <code>&quot;([)]&quot;</code> are not.</p>
+<p>給一個字串，裡面只會包含 <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> , <code>&#39;]&#39;</code> ，現在驗證字串是否符合格式。</p>
+<p>這些括號，必須要按照正確的順序合起來， <code>&quot;()&quot;</code> 或 <code>&quot;()[]{}&quot;</code> 就是正確的，但 <code>&quot;(]&quot;</code> 或 <code>&quot;([)]&quot;</code> 就不是。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="string">"(&#123;&#125;)"</span></div><div class="line"><span class="type">Output</span> : <span class="type">True</span></div></pre></td></tr></table></figure></p>
+<p>這是正確的括號開始跟結尾的用法。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"&#123;&#123;]&#125;"</span></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
+<p>這是錯誤的括號用法。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這題題目提示是一題 Stack 的題目， Swift 雖然沒有 Stack 類別 ，但 Array 也有提供 popLast 的用法。</p>
+<p>只要遇到三種括號的開頭，就將該括號的結尾加進陣列中</p>
+<p>若遇到三種括號的結尾時，陣列為空代表根本沒出現過開頭，回傳 false 。</p>
+<p>若陣列的 popLast 回傳的第一個元素，不等於自己，代表開頭不對稱，也回傳 false 。</p>
+<p>最後若跑完字串，陣列被 pop 到空的，就是一個 valid 的字串，回傳 true 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isValid</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> s = <span class="type">Array</span>(s)</div><div class="line">    <span class="keyword">var</span> stack = [<span class="type">String</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s &#123;</div><div class="line">        <span class="keyword">switch</span> <span class="built_in">c</span> &#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">"("</span>:</div><div class="line">            stack.append(<span class="string">")"</span>)</div><div class="line">        <span class="keyword">case</span> <span class="string">"&#123;"</span>:</div><div class="line">            stack.append(<span class="string">"&#125;"</span>)</div><div class="line">        <span class="keyword">case</span> <span class="string">"["</span>:</div><div class="line">            stack.append(<span class="string">"]"</span>)</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">if</span> stack.isEmpty &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> pop = stack.popLast(), pop != <span class="type">String</span>(<span class="built_in">c</span>)   &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> stack.isEmpty</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> String </category>
+            
+            <category> Stack </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> String </tag>
+            
+            <tag> Stack </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#507 Perfect Number - in Swift]]></title>
       <url>/leetcode-507/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>We define the Perfect Number is a positive integer that is equal to the sum of all its positive divisors except itself.</p>
@@ -2316,11 +2363,11 @@
             
             <tag> Swift </tag>
             
+            <tag> Hash Table </tag>
+            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
-            
-            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -2842,9 +2889,9 @@
             
             <tag> Array </tag>
             
-            <tag> Divide and Conquer </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Divide and Conquer </tag>
             
         </tags>
         
@@ -3279,11 +3326,11 @@
             
             <tag> Swift </tag>
             
+            <tag> Hash Table </tag>
+            
             <tag> Two Pointers </tag>
             
             <tag> Binary Search </tag>
-            
-            <tag> Hash Table </tag>
             
             <tag> Sort </tag>
             
@@ -3602,9 +3649,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -3987,9 +4034,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         

@@ -296,6 +296,212 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-441/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-441/" itemprop="url">
+                  LeetCode#441 Arranging Coins - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-27T13:18:18+08:00">
+                2017-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/Binary-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary Search</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-441/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-441/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.</p>
+<p>Given n, find the total number of full staircase rows that can be formed.</p>
+<p>n is a non-negative integer and fits within the range of a 32-bit signed integer.</p>
+<p>給你 n 個硬幣排成樓梯的形狀，每 k 層有 k 個硬幣。</p>
+<p>現在給你 n ， 返回你最大可以排成的樓梯有幾層。 n 為一個非負數整數。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 3rd row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">2</span>.</div></pre></td></tr></table></figure></p>
+<p>5 個硬幣排完第 3 層還沒完成，所以返回 2 。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">n = <span class="number">8</span></div><div class="line"></div><div class="line"><span class="type">The</span> coins can form the following rows:</div><div class="line">¤</div><div class="line">¤ ¤</div><div class="line">¤ ¤ ¤</div><div class="line">¤ ¤</div><div class="line"></div><div class="line"><span class="type">Because</span> the 4th row <span class="keyword">is</span> incomplete, we <span class="keyword">return</span> <span class="number">3</span>.</div></pre></td></tr></table></figure></p>
+<p>8 個硬幣排完第 4 層還沒完成，所以返回 3 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><h2 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h2><p>對 n 從第一層開始減，直至無法再減。<br>代表該層未完成，返回前一層的值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsIterative</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> n = n</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...<span class="type">Int</span>.<span class="built_in">max</span> &#123;</div><div class="line">        <span class="keyword">if</span> n - i &gt;= <span class="number">0</span> &#123;</div><div class="line">            n -= i</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> i - <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Mathematic"><a href="#Mathematic" class="headerlink" title="Mathematic"></a>Mathematic</h2><p>要算出 n 層的硬幣有幾個，等於要算出 1 + 2 + 3 + … + n </p>
+<p>這有一個公式是(上底+下底)乘高除以2 : <code>sum = (1 + x) * x / 2</code></p>
+<p>並且在這題裡面的 sum 要小於等於 n ， 所以為 <code>(1 + x) * x / 2 &lt;= n</code></p>
+<p>解出這個式子 :</p>
+<blockquote>
+<p>(1 + x) * x / 2 &lt;= n<br>x^2 + x  &lt;= 2n<br>4x^2 + 4x &lt;= 8n<br>(2x + 1)(2x + 1) - 1 &lt;= 8n<br>x &lt;= (√(8n + 1) - 1) / 2</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">arrangeCoinsMathematic</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>((sqrt(<span class="number">8</span> * <span class="type">Double</span>(n) + <span class="number">1</span>) - <span class="number">1</span>) / <span class="type">Double</span>(<span class="number">2</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-172/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1988,204 +2194,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-345/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-345/" itemprop="url">
-                  LeetCode#345 Reverse Vowels of a String - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-17T15:25:58+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Two-Pointers/" itemprop="url" rel="index">
-                    <span itemprop="name">Two Pointers</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Two-Pointers/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-345/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-345/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Write a function that takes a string as input and reverse only the vowels of a string.</p>
-<p>反轉字串，但只反轉母音的部分。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">1</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"hello"</span>, <span class="keyword">return</span> <span class="string">"holle"</span>.</div></pre></td></tr></table></figure>
-<p>hello 中的 eo 轉換為 oe</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Example</span> <span class="number">2</span>:</div><div class="line"><span class="type">Given</span> s = <span class="string">"leetcode"</span>, <span class="keyword">return</span> <span class="string">"leotcede"</span>.</div></pre></td></tr></table></figure>
-<p>leetcode 中的 eeoe 轉換為 eoee</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>定義母音表，接著像 <a href="https://windsuzu.github.io/leetcode-344/">Reverse String</a> 這題一樣進行兩個指針的迴圈。</p>
-<p>不同的是，若當下左邊的字母不為母音，就將左指針 +1<br>反之，右邊不為母音，將右指針 -1</p>
-<p>確定抓到左右兩個母音時，就將左右調換，左右各進退一步。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseVowels</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">set</span>: <span class="type">Set</span>&lt;<span class="type">Character</span>&gt; = [<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>, <span class="string">"A"</span>, <span class="string">"E"</span>, <span class="string">"I"</span>, <span class="string">"O"</span>, <span class="string">"U"</span>]</div><div class="line">    <span class="keyword">var</span> s = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> <span class="keyword">left</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">right</span> = s.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &#123;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">left</span>]) &#123;</div><div class="line">            <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> <span class="keyword">left</span> &lt; <span class="keyword">right</span> &amp;&amp; !<span class="keyword">set</span>.<span class="built_in">contains</span>(s[<span class="keyword">right</span>]) &#123;</div><div class="line">            <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> temp = s[<span class="keyword">left</span>]</div><div class="line">        s[<span class="keyword">left</span>] = s[<span class="keyword">right</span>]</div><div class="line">        s[<span class="keyword">right</span>] = temp</div><div class="line">        <span class="keyword">left</span> += <span class="number">1</span></div><div class="line">        <span class="keyword">right</span> -= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2235,7 +2243,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-count">124</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2246,7 +2254,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
