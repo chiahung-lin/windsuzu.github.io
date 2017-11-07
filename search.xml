@@ -3,6 +3,48 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#111 Minimum Depth of Binary Tree - in Swift]]></title>
+      <url>/leetcode-111/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, find its minimum depth.</p>
+<p>The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.</p>
+<p>給定二元樹，找出最小深度。</p>
+<p>最小深度代表由根節點至某個最近的葉節點所畫出的最短路徑。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">        <span class="number">1</span></div><div class="line">       / \</div><div class="line">      <span class="number">2</span>   <span class="number">3</span></div><div class="line">     / \</div><div class="line">    <span class="number">4</span>   <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">2</span></div></pre></td></tr></table></figure>
+<p>有一條最短路徑為 1 -&gt; 3 ，其深度為 2 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>對樹進行 dps ，並且每下一層就將 depth 值 + 1 ，直到走到葉節點時，</p>
+<p>比對這條路徑的深度跟答案的最小值，即可求出最終答案。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">minDepth</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> res = <span class="type">Int</span>.<span class="built_in">max</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dig</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> depth: Int)</span></span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        <span class="keyword">var</span> depth = depth</div><div class="line">        depth += <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> root.<span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; root.<span class="keyword">right</span> == <span class="literal">nil</span> &#123;</div><div class="line">            res = <span class="built_in">min</span>(depth, res)</div><div class="line">        &#125;</div><div class="line">        dig(root.<span class="keyword">left</span>, depth)</div><div class="line">        dig(root.<span class="keyword">right</span>, depth)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    dig(root, <span class="number">0</span>)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Tree </category>
+            
+            <category> Depth-first Search </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Tree </tag>
+            
+            <tag> Depth-first Search </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#20 Valid Parentheses - in Swift]]></title>
       <url>/leetcode-20/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
@@ -4904,11 +4946,11 @@
             
             <tag> Android </tag>
             
+            <tag> Retrofit </tag>
+            
             <tag> RxJava </tag>
             
             <tag> RxAndroid </tag>
-            
-            <tag> Retrofit </tag>
             
         </tags>
         
@@ -5282,6 +5324,8 @@
         
         <tags>
             
+            <tag> 軟體工程 </tag>
+            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -5289,8 +5333,6 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
-            
-            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -5368,8 +5410,6 @@
         
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -5379,6 +5419,8 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
+            
+            <tag> Android </tag>
             
             <tag> iOS </tag>
             

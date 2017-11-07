@@ -296,6 +296,197 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-448/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-448/" itemprop="url">
+                  LeetCode#448 Find All Numbers Disappeared in an Array - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-09T13:10:52+08:00">
+                2017-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-448/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-448/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.<br>Find all the elements of [1, n] inclusive that do not appear in this array.<br>Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.</p>
+<p>給一個整數陣列，範圍介在 1 ≤ a[i] ≤ n ( n 代表陣列長度)，注意有的元素可能出現兩次有一只有一次。<br>尋找陣列中有哪幾個數字不見了。 請在 O(n) 時間內算出。</p>
+<p>Example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">[<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">[<span class="number">5</span>,<span class="number">6</span>]</div></pre></td></tr></table></figure></p>
+<p>[4,3,2,7,8,2,3,1] 有 8 個元素，應該要包含 [1,2,3,4,5,6,7,8] 。<br>可是缺少了 [5,6] 。</p>
+<h1 id="第一次解題-Wrong-Answer"><a href="#第一次解題-Wrong-Answer" class="headerlink" title="第一次解題 : Wrong Answer"></a>第一次解題 : Wrong Answer</h1><p>第一次理解錯題目了，以為是 n 是指陣列中最大的那個數字，<br>雖然 [4,3,2,7,8,2,3,1] 可行， 但 [1,1] 就錯了。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findDisappearedNumbers</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> <span class="built_in">max</span> = nums.<span class="built_in">max</span>() <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> []</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> result = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...<span class="built_in">max</span> &#123;</div><div class="line">        <span class="keyword">if</span> !nums.<span class="built_in">contains</span>(i) &#123;</div><div class="line">            result.append(i)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第二次解題-Time-Limit-Exceeded"><a href="#第二次解題-Time-Limit-Exceeded" class="headerlink" title="第二次解題 : Time Limit Exceeded"></a>第二次解題 : Time Limit Exceeded</h1><p>用 contains 函數可能太耗時間了，所以沒過。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findDisappearedNumbers</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> nums.isEmpty &#123; <span class="keyword">return</span> [] &#125;</div><div class="line">    <span class="keyword">var</span> result = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> !nums.<span class="built_in">contains</span>(i) &#123;</div><div class="line">            result.append(i)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第三次解題-169-ms"><a href="#第三次解題-169-ms" class="headerlink" title="第三次解題 : 169 ms"></a>第三次解題 : 169 ms</h1><p>對每一個數字應該在的位子標記成 <code>負數</code> ， 以 [4,3,2,7,8,2,3,1] 為例 :</p>
+<ul>
+<li>第一個迴圈的意思 :<br>4 應該在陣列中第三個位子， 所以 nums[abs(nums[0]) -1] = nums[3]<br>把 nums[3] 標註成負數 nums[val] = -nums[val]<br>如果該數字已經標註成負數，就跳過。</li>
+</ul>
+<ul>
+<li>第二個迴圈的意思 :<br>現在你已經有了新的陣列 -&gt; [-4,-3,-2,-7,8,2,-3,-1]<br>就可以知道 [8,2] 的位子沒有變成負數，也就是陣列中第五個跟第六個是缺少的。</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findDisappearedNumbers</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">var</span> nums = nums</div><div class="line">    <span class="keyword">var</span> result = [<span class="type">Int</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">let</span> val = <span class="built_in">abs</span>(nums[i]) - <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> nums[val] &gt; <span class="number">0</span> &#123;</div><div class="line">            nums[val] = -nums[val]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> nums[i] &gt; <span class="number">0</span> &#123;</div><div class="line">            result.append(i + <span class="number">1</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-226/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2028,199 +2219,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-463/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-463/" itemprop="url">
-                  LeetCode#463 Island Perimeter - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-03T12:49:42+08:00">
-                2017-08-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
-                    <span itemprop="name">Hash Table</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-463/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-463/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.<br>Grid cells are connected horizontally/vertically (not diagonally).<br>The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).<br>The island doesn’t have “lakes” (water inside that isn’t connected to the water around the island).<br>One cell is a square with side length 1. The grid is rectangular, width and height don’t exceed 100. Determine the perimeter of the island.</p>
-<p>有一張小島的二維地圖， 1 代表土地， 0 代表海水。<br>方塊只有縱橫連接，沒有對角連接。<br>土地是被海水包圍成一座小島的，在這張地圖上只有一個小島，且小島是沒有湖的。<br>每個方塊的邊長皆為 1 ，地圖是方形長寬不會超過 100 ，請求出小島的周長。</p>
-<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[0,1,0,0],</div><div class="line">[1,1,1,0],</div><div class="line">[0,1,0,0],</div><div class="line">[1,1,0,0]]</div></pre></td></tr></table></figure></p>
-<p>Answer: 16<br> Explanation: The perimeter is the 16 yellow stripes in the image below:</p>
-<p>16條黃色圍起來的就是小島的周長。</p>
-<p> <img src="/leetcode-463/island.png" alt="island"></p>
-<h1 id="第一次解題-Wrong-Answer"><a href="#第一次解題-Wrong-Answer" class="headerlink" title="第一次解題 : Wrong Answer"></a>第一次解題 : Wrong Answer</h1><p><img src="/leetcode-463/island_commentary.png" alt="island-Commentary"></p>
-<p>可以發現 :<br>1.如果土地在第一行或最後一行的時候，該行的土地都要邊長 + 1<br>2.如果土地在第一列或最後一列的時候，該列的土地都要邊長 + 1<br>3.接下來找如果不在第一行時，上面的鄰居是土地時，邊長 + 1<br>4.如果不在最後一行時，下面的鄰居是土地時，邊長 + 1<br>5.接下來找如果不在第一列時，左邊的鄰居是土地時，邊長 + 1<br>6.如果不在最後一列時，右邊的鄰居是土地時，邊長 + 1</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">islandPerimeter</span><span class="params">(<span class="number">_</span> grid: [[Int]])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;grid.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">0</span>..&lt;grid[i].<span class="built_in">count</span> &#123;</div><div class="line">            <span class="keyword">var</span> cellR = <span class="number">0</span></div><div class="line">            <span class="keyword">let</span> cell = grid[i][j]</div><div class="line">            <span class="keyword">if</span> cell == <span class="number">1</span> &#123;</div><div class="line">				cellR = (i == <span class="number">0</span> || i == grid.<span class="built_in">count</span> - <span class="number">1</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">				cellR = (j == <span class="number">0</span> || j == grid[i].<span class="built_in">count</span> - <span class="number">1</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">     </div><div class="line">                <span class="keyword">if</span> i != <span class="number">0</span> &#123;</div><div class="line">                    cellR = (grid[i-<span class="number">1</span>][j] == <span class="number">0</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> i != grid.<span class="built_in">count</span> - <span class="number">1</span> &#123;</div><div class="line">                    cellR = (grid[i+<span class="number">1</span>][j] == <span class="number">0</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> j != <span class="number">0</span> &#123;</div><div class="line">                    cellR = (grid[i][j-<span class="number">1</span>] == <span class="number">0</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> j != grid[i].<span class="built_in">count</span> - <span class="number">1</span> &#123;</div><div class="line">                    cellR = (grid[i][j+<span class="number">1</span>] == <span class="number">0</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">                &#125;</div><div class="line">                result += cellR</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="第二次解題-328-ms"><a href="#第二次解題-328-ms" class="headerlink" title="第二次解題 : 328 ms"></a>第二次解題 : 328 ms</h1><p>第一次交答案的時候錯了，原來 [[1]] 也算一個地圖的一座島</p>
-<p>所以下面兩個敘述是錯的 :<br>1.如果土地在第一行或最後一行的時候，該行的土地都要邊長 + 1<br>2.如果土地在第一列或最後一列的時候，該列的土地都要邊長 + 1</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cellR = (i == <span class="number">0</span> || i == grid.<span class="built_in">count</span> - <span class="number">1</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">cellR = (j == <span class="number">0</span> || j == grid[i].<span class="built_in">count</span> - <span class="number">1</span>) ? cellR + <span class="number">1</span> : cellR</div></pre></td></tr></table></figure>
-<p>應該是 :<br>1.如果土地在第一行，該行的土地都要邊長 + 1<br>2.如果土地在最後一行，該行的土地都要邊長 + 1<br>3.如果土地在第一列，該列的土地都要邊長 + 1<br>4.如果土地在最後一列，該列的土地都要邊長 + 1</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cellR = (i == <span class="number">0</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">cellR = (i == grid.<span class="built_in">count</span> - <span class="number">1</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line"></div><div class="line">cellR = (j == <span class="number">0</span>) ? cellR + <span class="number">1</span> : cellR</div><div class="line">cellR = (j == grid[i].<span class="built_in">count</span> - <span class="number">1</span>) ? cellR + <span class="number">1</span> : cellR</div></pre></td></tr></table></figure>
-<h1 id="Cool-Soultion"><a href="#Cool-Soultion" class="headerlink" title="Cool Soultion"></a>Cool Soultion</h1><p>找出他的規律發現，只要有兩個方塊合在一起，邊長就會少 2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+--+     +--+                   +--+--+</div><div class="line">|  |  +  |  |          -&gt;       |     |</div><div class="line">+--+     +--+                   +--+--+</div><div class="line"> </div><div class="line">4 + 4 - ? = 6  -&gt; ? = 2</div></pre></td></tr></table></figure>
-<p>所以找出<code>所有方塊 * 4</code> - <code>鄰居方塊 * 2</code></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">islandPerimeter</span><span class="params">(<span class="number">_</span> grid: [[Int]])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> islands = <span class="number">0</span>, neighbors = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;grid.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">0</span>..&lt;grid[i].<span class="built_in">count</span> &#123;</div><div class="line">            <span class="keyword">if</span> grid[i][j] == <span class="number">1</span> &#123;</div><div class="line">                islands += <span class="number">1</span></div><div class="line">                <span class="keyword">if</span> i &lt; grid.<span class="built_in">count</span> - <span class="number">1</span> &amp;&amp; grid[i+<span class="number">1</span>][j] == <span class="number">1</span> &#123;</div><div class="line">                    neighbors += <span class="number">1</span></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> j &lt; grid[i].<span class="built_in">count</span> - <span class="number">1</span> &amp;&amp; grid[i][j+<span class="number">1</span>] == <span class="number">1</span> &#123;</div><div class="line">                    neighbors += <span class="number">1</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> islands * <span class="number">4</span> - neighbors * <span class="number">2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2270,7 +2268,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">124</span>
+                <span class="site-state-item-count">125</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
