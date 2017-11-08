@@ -296,6 +296,196 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-290/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-290/" itemprop="url">
+                  LeetCode#290 Word Pattern - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-08T11:47:05+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
+                    <span itemprop="name">Hash Table</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-290/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-290/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a pattern and a string str, find if str follows the same pattern.</p>
+<p>Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.</p>
+<p>給定一個字串格式 pattern 和字串 str ，驗證 str 是否符合 pattern 的格式。</p>
+<p>Notes:<br>You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.</p>
+<p>pattern 字串只包含小寫字母， str 字串包含小寫字母，和用空白分隔段落。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>pattern = “abba”, str = “dog cat cat dog” should return true.<br>pattern = “abba”, str = “dog cat cat fish” should return false.<br>pattern = “aaaa”, str = “dog cat cat dog” should return false.<br>pattern = “abba”, str = “dog dog dog dog” should return false.</p>
+<p>“dog cat cat dog” 符合 “abba” 的格式，返回 true<br>“dog cat cat fish” 不符合 “abba” 的格式 ，應為 “abbc” ，返回 false<br>“dog cat cat dog” 不符合 “aaaa” 的格式，應為 “abba” ，返回 false<br>“dog dog dog dog” 不符合 “abba” 的格式，應為 “aaaa” ，返回 false</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將 str 用空白切割與 pattern 一同轉為 Array ，如果兩個 Array 不同長度代表不合格式。</p>
+<p>開始遍歷兩個陣列各取 p 和 s ，如果 p 已經出現在 hashTable 的 key 裡，查看他的 val 是否與 s 相同，不同就代表不合格式。</p>
+<p>如果沒出現過，則查看 s 是否已經出現在 hashTable 的 val 裡，如果有，代表他已經與不同的 key 配對過了，不合格式。</p>
+<p>如果上面兩關都通過，將 p 對應 s 加進 hashTable 裡。</p>
+<p>遍歷結束都沒有返回 false 代表格式正確。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">wordPattern</span><span class="params">(<span class="number">_</span> pattern: String, <span class="number">_</span> str: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> pattern.isEmpty &amp;&amp; str.isEmpty &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">let</span> p = <span class="type">Array</span>(pattern)</div><div class="line">    <span class="keyword">let</span> s = str.<span class="built_in">split</span>(separator: <span class="string">" "</span>)</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">String</span> : <span class="type">String</span>]()</div><div class="line">    <span class="keyword">if</span> p.<span class="built_in">count</span> != s.<span class="built_in">count</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> i != p.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> pre = dict[<span class="type">String</span>(p[i])] &#123;</div><div class="line">            <span class="keyword">if</span> pre != <span class="type">String</span>(s[i]) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> dict.values.<span class="built_in">contains</span>(<span class="type">String</span>(s[i])) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            dict[<span class="type">String</span>(p[i])] = <span class="type">String</span>(s[i])</div><div class="line">        &#125;</div><div class="line">        i += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-111/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2021,193 +2211,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-9/" itemprop="url">
-                  LeetCode#9 Palindrome Number - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-29T11:07:22+08:00">
-                2017-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-9/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
-<p>驗證一個整數是否為回文。不能使用額外的空間來操作。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="number">1232332321</span></div><div class="line"><span class="type">Output</span> : <span class="type">True</span></div></pre></td></tr></table></figure>
-<p>這是一個回文。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span> : <span class="number">1234567</span></div><div class="line"><span class="type">Output</span> : <span class="type">False</span></div></pre></td></tr></table></figure>
-<p>這不是回文。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>如果將數字做反轉，再比對兩個數字是否一樣，就可以驗證出是否為回文。</p>
-<p>但是當你要反轉很大的數字時，有可能造成 overflow 超過整數最大值。</p>
-<p>所以其實只需要將數字反轉到一半即可，再確認 half reverse 或是 half reverse 除以 10 是否相等於 half x 。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPalindrome</span><span class="params">(<span class="number">_</span> x: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span> || (x &gt; <span class="number">0</span> &amp;&amp; x % <span class="number">10</span> == <span class="number">0</span>) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">var</span> x = x</div><div class="line">    <span class="keyword">var</span> half = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> x &gt; half &#123;</div><div class="line">        half = half * <span class="number">10</span> + x % <span class="number">10</span></div><div class="line">        x /= <span class="number">10</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> half == x || half / <span class="number">10</span> == x</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2257,7 +2260,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">125</span>
+                <span class="site-state-item-count">126</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

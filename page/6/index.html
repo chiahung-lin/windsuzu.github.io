@@ -296,6 +296,198 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-671/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-671/" itemprop="url">
+                  LeetCode#671 Second Minimum Node In a Binary Tree - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-19T13:13:05+08:00">
+                2017-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-671/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-671/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this tree has exactly two or zero sub-node. If the node has two sub-nodes, then this node’s value is the smaller value among its two sub-nodes.</p>
+<p>給一個特殊不為空的二元樹且不包含任何負數值，每個節點在這個樹中皆擁有「兩個」或「零個」子節點。</p>
+<p>如果該節點有兩個子節點，那該節點的值會小於等於他的兩個子節點中間。</p>
+<p>Given such a binary tree, you need to output the second minimum value in the set made of all the nodes’ value in the whole tree.</p>
+<p>這樣的二元樹，你需要從全部的節點找出，並輸出他的第二最小值。</p>
+<p>If no such second minimum value exists, output -1 instead.</p>
+<p>如果沒有第二最小值，輸出 -1 。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">2</span></div><div class="line">      / \</div><div class="line">     <span class="number">2</span>   <span class="number">5</span></div><div class="line">    / \</div><div class="line">   <span class="number">5</span>   <span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">5</span></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> smallest value <span class="keyword">is</span> <span class="number">2</span>, the second smallest value <span class="keyword">is</span> <span class="number">5</span>.</div></pre></td></tr></table></figure></p>
+<p>最小值是 2 ， 第二最小值是 5 。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">2</span></div><div class="line">      / \</div><div class="line">     <span class="number">2</span>   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: -<span class="number">1</span></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> smallest value <span class="keyword">is</span> <span class="number">2</span>, but there isn't any second smallest value.</div></pre></td></tr></table></figure></p>
+<p>最小值是 2 ， 但找不到第二最小值，所以輸出 -1 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>因為每個節點的值會小於等於他的兩個子節點中間的關係，根節點一定會是最小的值，所以第二小的值絕對不會跟根節點相同數字。</p>
+<p>知道這個後，用 DFS 找出每個節點不等於根節點的最小值就是答案。</p>
+<p><img src="/leetcode-671/special_tree.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findSecondMinimumValue</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = -<span class="number">1</span></div><div class="line">    <span class="keyword">var</span> k = root?.val</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dfs</span><span class="params">(<span class="number">_</span> node: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> node = node <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> node.val != k &#123;</div><div class="line">            <span class="keyword">if</span> res == -<span class="number">1</span> &#123;</div><div class="line">                res = node.val</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                res = <span class="built_in">min</span>(res, node.val)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        dfs(node.<span class="keyword">left</span>)</div><div class="line">        dfs(node.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    dfs(root)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-541/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2065,194 +2257,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-409/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-409/" itemprop="url">
-                  LeetCode#409 Longest Palindrome - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-09T11:28:51+08:00">
-                2017-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
-                    <span itemprop="name">Hash Table</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-409/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-409/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.</p>
-<p>This is case sensitive, for example “Aa” is not considered a palindrome here.</p>
-<p>給一個字串包含大小寫文字，找出裡面文字能拼成最長的回文有多長。</p>
-<p>請注意大小寫的區別， “Aa” 不包含在回文裡面。</p>
-<p>Example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"><span class="string">"abccccdd"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line"><span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">One</span> longest palindrome that can be built <span class="keyword">is</span> <span class="string">"dccaccd"</span>, whose length <span class="keyword">is</span> <span class="number">7</span>.</div></pre></td></tr></table></figure>
-<p>“abccccdd” 最長的回文可以拼成 “dccaccd”，長度為 7 。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>可以發現不管文字有多少，只要相同的字出現兩次，回文最長長度就會 + 2 。</p>
-<p>如果分完所有的兩次，還有剩下任意一個單字，就可以把它加進回文中，最長長度 + 1 。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"aa"</span> -&gt; <span class="number">2</span></div><div class="line"><span class="string">"aab"</span> -&gt; <span class="number">3</span></div><div class="line"></div><div class="line"><span class="string">"aabb"</span> -&gt; <span class="number">4</span></div><div class="line"><span class="string">"aabbc"</span> -&gt; <span class="number">5</span></div><div class="line"><span class="string">"aabbcd"</span> -&gt; <span class="number">5</span></div></pre></td></tr></table></figure>
-<p><img src="/leetcode-409/palindromes.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestPalindrome</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Character</span> : <span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> res = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> s.characters &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">var</span> i = dict[<span class="built_in">c</span>] &#123;</div><div class="line">            i += <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> i == <span class="number">2</span> &#123;</div><div class="line">                res += <span class="number">2</span></div><div class="line">                i = <span class="number">0</span></div><div class="line">            &#125;</div><div class="line">            dict[<span class="built_in">c</span>] = i</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            dict[<span class="built_in">c</span>] = <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> dict.<span class="built_in">contains</span>(<span class="keyword">where</span>: &#123;$<span class="number">0.1</span> &gt; <span class="number">0</span> &#125;) &#123;</div><div class="line">        res += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2302,7 +2306,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">125</span>
+                <span class="site-state-item-count">126</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

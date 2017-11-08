@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-07T06:25:04.000Z</updated>
+  <updated>2017-11-08T03:54:46.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#290 Word Pattern - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-290/"/>
+    <id>http://windsuzu.github.io/leetcode-290/</id>
+    <published>2017-11-08T03:47:05.000Z</published>
+    <updated>2017-11-08T03:54:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a pattern and a string str, find if str follows the same pattern.</p>
+<p>Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.</p>
+<p>給定一個字串格式 pattern 和字串 str ，驗證 str 是否符合 pattern 的格式。</p>
+<p>Notes:<br>You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.</p>
+<p>pattern 字串只包含小寫字母， str 字串包含小寫字母，和用空白分隔段落。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>pattern = “abba”, str = “dog cat cat dog” should return true.<br>pattern = “abba”, str = “dog cat cat fish” should return false.<br>pattern = “aaaa”, str = “dog cat cat dog” should return false.<br>pattern = “abba”, str = “dog dog dog dog” should return false.</p>
+<p>“dog cat cat dog” 符合 “abba” 的格式，返回 true<br>“dog cat cat fish” 不符合 “abba” 的格式 ，應為 “abbc” ，返回 false<br>“dog cat cat dog” 不符合 “aaaa” 的格式，應為 “abba” ，返回 false<br>“dog dog dog dog” 不符合 “abba” 的格式，應為 “aaaa” ，返回 false</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將 str 用空白切割與 pattern 一同轉為 Array ，如果兩個 Array 不同長度代表不合格式。</p>
+<p>開始遍歷兩個陣列各取 p 和 s ，如果 p 已經出現在 hashTable 的 key 裡，查看他的 val 是否與 s 相同，不同就代表不合格式。</p>
+<p>如果沒出現過，則查看 s 是否已經出現在 hashTable 的 val 裡，如果有，代表他已經與不同的 key 配對過了，不合格式。</p>
+<p>如果上面兩關都通過，將 p 對應 s 加進 hashTable 裡。</p>
+<p>遍歷結束都沒有返回 false 代表格式正確。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">wordPattern</span><span class="params">(<span class="number">_</span> pattern: String, <span class="number">_</span> str: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> pattern.isEmpty &amp;&amp; str.isEmpty &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">let</span> p = <span class="type">Array</span>(pattern)</div><div class="line">    <span class="keyword">let</span> s = str.<span class="built_in">split</span>(separator: <span class="string">" "</span>)</div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">String</span> : <span class="type">String</span>]()</div><div class="line">    <span class="keyword">if</span> p.<span class="built_in">count</span> != s.<span class="built_in">count</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> i != p.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> pre = dict[<span class="type">String</span>(p[i])] &#123;</div><div class="line">            <span class="keyword">if</span> pre != <span class="type">String</span>(s[i]) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> dict.values.<span class="built_in">contains</span>(<span class="type">String</span>(s[i])) &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">            dict[<span class="type">String</span>(p[i])] = <span class="type">String</span>(s[i])</div><div class="line">        &#125;</div><div class="line">        i += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a pattern and a string str, find if str follows the same pattern
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Hash Table" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Hash-Table/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Hash Table" scheme="http://windsuzu.github.io/tags/Hash-Table/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#111 Minimum Depth of Binary Tree - in Swift</title>
@@ -866,39 +911,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#175 Combine Two Tables - in MySQL</title>
-    <link href="http://windsuzu.github.io/leetcode-175/"/>
-    <id>http://windsuzu.github.io/leetcode-175/</id>
-    <published>2017-10-19T07:13:44.000Z</published>
-    <updated>2017-10-19T07:18:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Table: Person</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| PersonId    | int     |</div><div class="line">| FirstName   | varchar |</div><div class="line">| LastName    | varchar |</div><div class="line">+-------------+---------+</div><div class="line">PersonId is the primary key column for this table.</div><div class="line"></div><div class="line">PersonId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Table: Address</div><div class="line"></div><div class="line">+-------------+---------+</div><div class="line">| Column Name | Type    |</div><div class="line">+-------------+---------+</div><div class="line">| AddressId   | int     |</div><div class="line">| PersonId    | int     |</div><div class="line">| City        | varchar |</div><div class="line">| State       | varchar |</div><div class="line">+-------------+---------+</div><div class="line">AddressId is the primary key column for this table.</div><div class="line"></div><div class="line">AddressId 是這個表格的主鍵。</div></pre></td></tr></table></figure>
-<p>Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:<br>FirstName, LastName, City, State</p>
-<p>寫一個 SQL 查詢，回傳每一個 Person 的值，以及其對應的 Address 欄位，<br>格式為 FirstName, LastName, City, State ，<br>不管有沒有對應的 Address 都要傳回。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>沒什麼難度的 SQL 查詢。</p>
-<p>注意的是不管有沒有對應的 Address 都要回傳 Person ，所以要使用 LEFT JOIN 右邊為空時返回 null 即可。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> FirstName, LastName, City, State</div><div class="line"><span class="keyword">FROM</span> Person</div><div class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">ON</span> Person.PersonId = Address.PersonId</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div c
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="MySQL" scheme="http://windsuzu.github.io/categories/LeetCode/MySQL/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="MySQL" scheme="http://windsuzu.github.io/tags/MySQL/"/>
     
   </entry>
   
