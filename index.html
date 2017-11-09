@@ -296,6 +296,202 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-67/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-67/" itemprop="url">
+                  LeetCode#67 Add Binary - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-09T13:56:18+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/String/" itemprop="url" rel="index">
+                    <span itemprop="name">String</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-67/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-67/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two binary strings, return their sum (also a binary string).</p>
+<p>給兩個二元字串，返回他們的加總 (也是一個二元字串)。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>a = “11”<br>b = “1”<br>Return “100”.</p>
+<p>“11” 十進位為 3 ， “1” 十進位為 1 ，相加為 4 ，二進位為 “100”</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將兩個字串轉為字元陣列，定義一個 sum 擺放加總結果，與 carry 判斷是否進位。</p>
+<p>從兩個陣列尾端開始做相加，如果加總大於等於 2 ，將加總減去 2 ，且代表需要進位，將 carry 值帶至下一次加總。</p>
+<p>每次加總完畢，放入 sum 的第一個位置。</p>
+<p>最後結束迴圈時，若還有剩下的 carry 值，放進 sum ，返回 sum 的字串。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">addBinary</span><span class="params">(<span class="number">_</span> a: String, <span class="number">_</span> b: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> a = <span class="type">Array</span>(a)</div><div class="line">    <span class="keyword">let</span> b = <span class="type">Array</span>(b)</div><div class="line">    <span class="keyword">var</span> i = a.<span class="built_in">count</span>, j = b.<span class="built_in">count</span></div><div class="line">    <span class="keyword">var</span> sum = [<span class="type">Character</span>]()</div><div class="line">    <span class="keyword">var</span> carry = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> i != <span class="number">0</span> || j != <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">var</span> first = <span class="number">0</span>, second = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> i - <span class="number">1</span> &gt;= <span class="number">0</span> &#123; first = <span class="type">Int</span>(<span class="type">String</span>(a[i - <span class="number">1</span>]))! &#125;</div><div class="line">        <span class="keyword">if</span> j - <span class="number">1</span> &gt;= <span class="number">0</span> &#123; second = <span class="type">Int</span>(<span class="type">String</span>(b[j - <span class="number">1</span>]))! &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">var</span> temp = first + second + carry</div><div class="line">        carry = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> temp &gt;= <span class="number">2</span> &#123;</div><div class="line">            temp -= <span class="number">2</span></div><div class="line">            carry += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        sum.insert(<span class="type">Character</span>(<span class="type">String</span>(temp)), at: <span class="number">0</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> i != <span class="number">0</span> &#123; i -= <span class="number">1</span> &#125;</div><div class="line">        <span class="keyword">if</span> j != <span class="number">0</span> &#123; j -= <span class="number">1</span> &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> carry == <span class="number">1</span> &#123; sum.insert(<span class="type">Character</span>(<span class="type">String</span>(carry)), at: <span class="number">0</span>) &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(sum)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-290/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2014,203 +2210,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-38/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-38/" itemprop="url">
-                  LeetCode#38 Count and Say - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-30T13:46:46+08:00">
-                2017-10-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-38/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-38/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>The count-and-say sequence is the sequence of integers with the first five terms as following:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.     <span class="number">1</span></div><div class="line"><span class="number">2</span>.     <span class="number">11</span></div><div class="line"><span class="number">3</span>.     <span class="number">21</span></div><div class="line"><span class="number">4</span>.     <span class="number">1211</span></div><div class="line"><span class="number">5</span>.     <span class="number">111221</span></div><div class="line"></div><div class="line"><span class="number">1</span> <span class="keyword">is</span> read off <span class="keyword">as</span> <span class="string">"one 1"</span> or <span class="number">11</span>.</div><div class="line"><span class="number">11</span> <span class="keyword">is</span> read off <span class="keyword">as</span> <span class="string">"two 1s"</span> or <span class="number">21</span>.</div><div class="line"><span class="number">21</span> <span class="keyword">is</span> read off <span class="keyword">as</span> <span class="string">"one 2, then one 1"</span> or <span class="number">1211</span>.</div></pre></td></tr></table></figure>
-<p>Given an integer n, generate the nth term of the count-and-say sequence.</p>
-<p>Note: Each term of the sequence of integers will be represented as a string.</p>
-<p>“數和說”序列的前五種規則如下所示 :</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.     <span class="number">1</span></div><div class="line"><span class="number">2</span>.     <span class="number">11</span></div><div class="line"><span class="number">3</span>.     <span class="number">21</span></div><div class="line"><span class="number">4</span>.     <span class="number">1211</span></div><div class="line"><span class="number">5</span>.     <span class="number">111221</span></div><div class="line"></div><div class="line"><span class="number">1</span> 是 <span class="number">1</span> ， 因為 <span class="number">1</span> 個 <span class="number">1</span> 所以下一個</div><div class="line"><span class="number">2</span> 是 <span class="number">11</span> ， 因為 <span class="number">2</span> 個 <span class="number">1</span> 所以下一個</div><div class="line"><span class="number">3</span> 是 <span class="number">21</span> ， 因為 <span class="number">1</span> 個 <span class="number">2</span> ， <span class="number">1</span> 個 <span class="number">1</span> ，所以下一個</div><div class="line"><span class="number">4</span> 是 <span class="number">1211</span></div></pre></td></tr></table></figure>
-<p>按照這個順序下去，算出第 n 個的時候 ，他的”數和說”會是多少。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">1</span></div><div class="line"><span class="type">Output</span>: <span class="string">"1"</span></div></pre></td></tr></table></figure></p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="number">4</span></div><div class="line"><span class="type">Output</span>: <span class="string">"1211"</span></div></pre></td></tr></table></figure></p>
-<p>返回的值為字串。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這題用堆疊的方式做上去， 1 為 “1”</p>
-<p>下一個 2 就是 1 的 count and say ，所以 <code>1</code> 個 <code>1</code> 等於 “11”</p>
-<p>下一個 3 就是 2 的 count and say ，所以 “11” 為 <code>2</code> 個 <code>1</code> 等於 “21”</p>
-<p>下一個 4 就是 3 的 count and say ，所以 “21” 為 <code>1</code> 個 <code>2</code> 和 <code>1</code> 個 <code>1</code> 等於 “1211”</p>
-<p>下一個 5 就是 4 的 count and say ，所以 “1211” 為 <code>1</code> 個 <code>1</code> 和 <code>1</code> 個 <code>2</code> 和 <code>2</code> 個 <code>1</code> 等於 “111221”</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">countAndSay</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> res = <span class="string">"1"</span></div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span> &#123; <span class="keyword">return</span> res &#125;</div><div class="line">    <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">2</span>...n &#123;</div><div class="line">        res = convertNext(res)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那要怎麼算出 count and say ，我們設計一個函式來計算。</p>
-<p>例如 5 要求 4 (“1211”) 的 count and say ，只要走過字串，定義當下的值以及累加的次數，遇到不同值就寫進新的字串中，並且更新當下值以及累加次數。</p>
-<p>別忘了還要再把最後沒加進新字串的值加進去。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> -&gt; temp = <span class="string">"1"</span> , <span class="built_in">count</span> = <span class="number">1</span>, new = <span class="string">""</span></div><div class="line"><span class="number">2</span> -&gt; temp = <span class="string">"2"</span> , <span class="built_in">count</span> = <span class="number">1</span>, new = <span class="string">"11"</span></div><div class="line"><span class="number">1</span> -&gt; temp = <span class="string">"1"</span> , <span class="built_in">count</span> = <span class="number">1</span>, new = <span class="string">"1112"</span></div><div class="line"><span class="number">1</span> -&gt; temp = <span class="string">"1"</span> , <span class="built_in">count</span> = <span class="number">2</span>, new = <span class="string">"1112"</span></div><div class="line">end</div><div class="line">new = <span class="string">"111221"</span></div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">convertNext</span><span class="params">(<span class="number">_</span> last: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> arr = <span class="type">Array</span>(last.characters)</div><div class="line">    <span class="keyword">var</span> <span class="built_in">count</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> temp = <span class="string">""</span></div><div class="line">    <span class="keyword">var</span> new = <span class="string">""</span></div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> i != arr.<span class="built_in">count</span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> temp != <span class="type">String</span>(arr[i]) &#123;</div><div class="line">            new += <span class="built_in">count</span> == <span class="number">0</span> ? <span class="string">""</span> : <span class="type">String</span>(<span class="built_in">count</span>) + temp</div><div class="line">            temp = <span class="type">String</span>(arr[i])</div><div class="line">            <span class="built_in">count</span> = <span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        i += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    new += <span class="type">String</span>(<span class="built_in">count</span>) + temp</div><div class="line">    <span class="keyword">return</span> new</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2260,7 +2259,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">126</span>
+                <span class="site-state-item-count">127</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

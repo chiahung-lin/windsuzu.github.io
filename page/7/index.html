@@ -296,6 +296,210 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-628/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-628/" itemprop="url">
+                  LeetCode#628 Maximum Product of Three Numbers - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-10T00:00:03+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-628/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-628/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an integer array, find three numbers whose product is maximum and output the maximum product.</p>
+<p>給一個整數陣列，找出三個數字他們相乘會是最大的數字。</p>
+<p>Note:</p>
+<ol>
+<li>The length of the given array will be in range [3,10^4] and all elements are in the range [-1000, 1000].</li>
+<li>Multiplication of any three numbers in the input won’t exceed the range of 32-bit signed integer.</li>
+</ol>
+<p>整數陣列的範圍為 [3, 10^4] ，然後所有元素的值的範圍為 [-1000, 1000] 。<br>算出來的乘積答案不會超過 32 位元正負號整數。</p>
+<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line"><span class="type">Output</span>: <span class="number">6</span></div></pre></td></tr></table></figure></p>
+<p>剛好陣列只有三個數字，最大乘積即是 6 。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="type">Output</span>: <span class="number">24</span></div></pre></td></tr></table></figure></p>
+<p>陣列中最大的乘積是 <code>2 * 3 * 4</code> = 24</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>一開始想到一個直觀又懶的解法，直接把陣列先重新排序，<br>然後抓最大的三個數字就可以得到最大乘積。</p>
+<p>但是事情沒有那麼單純，題目規定數字範圍在 -1000 到 1000 當中，<br>也就是如果最小的兩個數字的絕對值比第二、第三大，那在相乘最大數字，就會得到更大的乘積。</p>
+<p>所以必須要找出兩種可能，並且比較誰比較大，即是答案。</p>
+<p><img src="/leetcode-628/maxproduct.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maximumProduct</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">let</span> nums = nums.sorted(by: &gt;)</div><div class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[<span class="number">2</span>],</div><div class="line">               nums[<span class="number">0</span>] * nums[nums.<span class="built_in">count</span> - <span class="number">1</span>] * nums[nums.<span class="built_in">count</span> - <span class="number">2</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-409/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2017,201 +2221,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-599/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-599/" itemprop="url">
-                  LeetCode#599 Minimum Index Sum of Two Lists - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-31T20:55:36+08:00">
-                2017-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
-                    <span itemprop="name">Hash Table</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-599/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-599/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Suppose Andy and Doris want to choose a restaurant for dinner, and they both have a list of favorite restaurants represented by strings.</p>
-<p>You need to help them find out their common interest with the least list index sum. If there is a choice tie between answers, output all of them with no order requirement. You could assume there always exists an answer.</p>
-<p>假設 Andy 和 Doris 想要找一間餐廳吃晚餐，他們兩個人都有一個喜愛的餐廳名單。</p>
-<p>你的任務是幫他們兩個找到，第一個共同出現在名單上的餐廳。你可以假設 Andy 和 Doris 一定會有一間一樣喜歡的餐廳。</p>
-<p>補充 : 如果皆是同時找到的餐廳，就把全部同時找到的餐廳列出來。</p>
-<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">[<span class="string">"Shogun"</span>, <span class="string">"Tapioca Express"</span>, <span class="string">"Burger King"</span>, <span class="string">"KFC"</span>]</div><div class="line">[<span class="string">"Piatti"</span>, <span class="string">"The Grill at Torrey Pines"</span>, <span class="string">"Hungry Hunter Steakhouse"</span>, <span class="string">"Shogun"</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span>: [<span class="string">"Shogun"</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> only restaurant they both like <span class="keyword">is</span> <span class="string">"Shogun"</span>.</div></pre></td></tr></table></figure></p>
-<p>他們兩個人的名單只有一間 Shogun 是共同喜歡的餐廳。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">[<span class="string">"Shogun"</span>, <span class="string">"Tapioca Express"</span>, <span class="string">"Burger King"</span>, <span class="string">"KFC"</span>]</div><div class="line">[<span class="string">"KFC"</span>, <span class="string">"Shogun"</span>, <span class="string">"Burger King"</span>]</div><div class="line"></div><div class="line"><span class="type">Output</span>: [<span class="string">"Shogun"</span>]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> restaurant they both like and have the least index sum <span class="keyword">is</span> <span class="string">"Shogun"</span> with index sum <span class="number">1</span> (<span class="number">0</span>+<span class="number">1</span>).</div></pre></td></tr></table></figure></p>
-<p>他們兩個人的名單有 Shogun 跟 KFC 是共同喜歡的餐廳。但是 Shogun 在兩個人的名單會先被共同找到。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>第一次錯誤發現如果有同時間的餐廳要一次列出來，結果我只列了一個。</p>
-<p>接下來連續三次都 Time Limit Exceeded =0= LOLOLOL</p>
-<p>多次失敗後終於 AC</p>
-<hr>
-<p>首先將 Andy 的名單記錄到 dictionary [餐廳名: 找到的時間]。</p>
-<p>接下來看 Doris 的名單，只要餐廳在剛剛紀錄的 ditionary 裡，就把該餐廳被 Andy 找到的時間，跟 Doris 找到現在這間餐廳的時間加在一起，作為最小值。</p>
-<p>如果最小值出現新低，就更新最小值，並把答案陣列翻新。</p>
-<p>如果最小值相同，就把餐廳加進答案陣列中。</p>
-<p><img src="/leetcode-599/andy_doris.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findRestaurant</span><span class="params">(<span class="number">_</span> list1: [String], <span class="number">_</span> list2: [String])</span></span> -&gt; [<span class="type">String</span>] &#123;</div><div class="line">    <span class="keyword">var</span> best = <span class="type">Int</span>.<span class="built_in">max</span></div><div class="line">    <span class="keyword">var</span> dict1 = [<span class="type">String</span>: <span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> ans = [<span class="type">String</span>]()</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (i,v) <span class="keyword">in</span> list1.enumerated() &#123; dict1[v] = i &#125;</div><div class="line">    <span class="keyword">for</span> (i,v) <span class="keyword">in</span> list2.enumerated() &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> j = dict1[v] &#123;</div><div class="line">            <span class="keyword">if</span> i + j &lt; best &#123;</div><div class="line">                best = i + j</div><div class="line">                ans = [v]</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> i + j == best &#123;</div><div class="line">                ans.append(v)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2261,7 +2270,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">126</span>
+                <span class="site-state-item-count">127</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

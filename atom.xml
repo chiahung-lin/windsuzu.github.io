@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-08T03:54:46.000Z</updated>
+  <updated>2017-11-09T06:08:05.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#67 Add Binary - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-67/"/>
+    <id>http://windsuzu.github.io/leetcode-67/</id>
+    <published>2017-11-09T05:56:18.000Z</published>
+    <updated>2017-11-09T06:08:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two binary strings, return their sum (also a binary string).</p>
+<p>給兩個二元字串，返回他們的加總 (也是一個二元字串)。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>a = “11”<br>b = “1”<br>Return “100”.</p>
+<p>“11” 十進位為 3 ， “1” 十進位為 1 ，相加為 4 ，二進位為 “100”</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將兩個字串轉為字元陣列，定義一個 sum 擺放加總結果，與 carry 判斷是否進位。</p>
+<p>從兩個陣列尾端開始做相加，如果加總大於等於 2 ，將加總減去 2 ，且代表需要進位，將 carry 值帶至下一次加總。</p>
+<p>每次加總完畢，放入 sum 的第一個位置。</p>
+<p>最後結束迴圈時，若還有剩下的 carry 值，放進 sum ，返回 sum 的字串。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">addBinary</span><span class="params">(<span class="number">_</span> a: String, <span class="number">_</span> b: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">let</span> a = <span class="type">Array</span>(a)</div><div class="line">    <span class="keyword">let</span> b = <span class="type">Array</span>(b)</div><div class="line">    <span class="keyword">var</span> i = a.<span class="built_in">count</span>, j = b.<span class="built_in">count</span></div><div class="line">    <span class="keyword">var</span> sum = [<span class="type">Character</span>]()</div><div class="line">    <span class="keyword">var</span> carry = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> i != <span class="number">0</span> || j != <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">var</span> first = <span class="number">0</span>, second = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> i - <span class="number">1</span> &gt;= <span class="number">0</span> &#123; first = <span class="type">Int</span>(<span class="type">String</span>(a[i - <span class="number">1</span>]))! &#125;</div><div class="line">        <span class="keyword">if</span> j - <span class="number">1</span> &gt;= <span class="number">0</span> &#123; second = <span class="type">Int</span>(<span class="type">String</span>(b[j - <span class="number">1</span>]))! &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">var</span> temp = first + second + carry</div><div class="line">        carry = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> temp &gt;= <span class="number">2</span> &#123;</div><div class="line">            temp -= <span class="number">2</span></div><div class="line">            carry += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        sum.insert(<span class="type">Character</span>(<span class="type">String</span>(temp)), at: <span class="number">0</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> i != <span class="number">0</span> &#123; i -= <span class="number">1</span> &#125;</div><div class="line">        <span class="keyword">if</span> j != <span class="number">0</span> &#123; j -= <span class="number">1</span> &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> carry == <span class="number">1</span> &#123; sum.insert(<span class="type">Character</span>(<span class="type">String</span>(carry)), at: <span class="number">0</span>) &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(sum)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given two binary strings, return their sum (also a binary string).&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Math" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Math/String/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
+    
+      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#290 Word Pattern - in Swift</title>
@@ -869,48 +913,6 @@
       <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
     
       <category term="Depth-first Search" scheme="http://windsuzu.github.io/tags/Depth-first-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#459 Repeated Substring Pattern - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-459/"/>
-    <id>http://windsuzu.github.io/leetcode-459/</id>
-    <published>2017-10-20T06:13:11.000Z</published>
-    <updated>2017-10-20T06:28:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</p>
-<p>給定一個不為空的字串，且字元皆為小寫英文字母，字串長度不超過 10000 。<br>驗證該字串，是否為字串中某子字串複製組合而成。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"abab"</span></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">It's</span> the substring <span class="string">"ab"</span> twice.</div></pre></td></tr></table></figure></p>
-<p>abab 是被 ab 子字串複製組合而成</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"aba"</span></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
-<p>aba 不為任何子字串的重複</p>
-<p>Example 3:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"abcabcabcabc"</span></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">It's</span> the substring <span class="string">"abc"</span> four times. (<span class="type">And</span> the substring <span class="string">"abcabc"</span> twice.)</div></pre></td></tr></table></figure></p>
-<p>abcabcabcabc 為 abc 重組四次， abcabc 重組兩次而成</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>若字串符合題目條件，<br>那字串第一個字元會是每個重複字串的第一個字元(頭)，<br>而字串最後一個字元會是每個重複字串的最後一個字元(腳)。</p>
-<p>將原字串 S 複製為二生出 SS ( abab -&gt; abababab )<br>再將 SS 頭跟腳去掉得到 S2 ( abababab -&gt; _bababa_ )<br>若在去掉頭腳的 S2 中還可以找到 S 的模式那代表這個字串是符合題目條件的。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">repeatedSubstringPattern</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> ss = s + s</div><div class="line">    <span class="keyword">let</span> s2 = ss.substring(with: ss.index(after: ss.startIndex)..&lt;ss.index(before: ss.endIndex))</div><div class="line">    <span class="keyword">return</span> s2.<span class="built_in">contains</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a non-empty string check if it can be constructed by taking a su
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="String" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/String/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="String" scheme="http://windsuzu.github.io/tags/String/"/>
     
   </entry>
   
