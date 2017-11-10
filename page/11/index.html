@@ -296,6 +296,205 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-292/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-292/" itemprop="url">
+                  LeetCode#292 Nim Game - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-05T11:52:51+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Brainteaser/" itemprop="url" rel="index">
+                    <span itemprop="name">Brainteaser</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-292/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-292/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones.</p>
+<p>Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.</p>
+<p>For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.</p>
+<p>你正在跟朋友玩一個遊戲叫 Nim Game ，桌上有好多個石頭，每個人輪流拿掉 1-3 個石頭，最後拿掉全部石頭的人即可獲勝。現在這個遊戲皆是由你先開始。</p>
+<p>假設你跟你的朋友都很屌很有策略，不會錯失任何贏的機會。寫一個函式去判斷當石頭是 x 個的時候，你是否會贏得這次的比賽。</p>
+<p>舉例來說，如果桌上有 4 個石頭，你先攻。那你永遠都不會贏。因為不管你第一步移走 1, 2, 3個石頭，最後一個一定是你朋友拿走。</p>
+<h1 id="第一次解題-16-ms"><a href="#第一次解題-16-ms" class="headerlink" title="第一次解題 : 16 ms"></a>第一次解題 : 16 ms</h1><ol>
+<li><p>可以發現，當最後石頭剩下 4 個的時候，不管你拿幾個石頭，最後一個一定是你的朋友拿走。</p>
+</li>
+<li><p>所以剩 4 個的時候拿的人都會輸。</p>
+</li>
+<li><p>把石頭數量翻倍， 4 &lt; n &lt; 8 ，也就是當 n = 5, 6, 7 時，可以發現都能夠把 死亡數字 4 留給對方。</p>
+</li>
+<li><p>但是到 8 的時候，就變成對方能把死亡數字 4 給你了。</p>
+</li>
+<li><p>所以 8 也是死亡數字。</p>
+</li>
+<li><p>把石頭 * 3倍， 8 &lt; n &lt; 12 ，當 n = 9, 10, 11 ，都可以把 8 做球給對方，所以都會贏</p>
+</li>
+<li><p>以此類推，當 n % 4 == 0 時， 你都會輸。</p>
+</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">canWinNim</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> n % <span class="number">4</span> != <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這根本不是程式題目，是數學。<br>(／‵Д′)／~ ╧╧</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-637/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2001,190 +2200,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-500/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-500/" itemprop="url">
-                  LeetCode#500 Keyboard Row - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-29T17:22:55+08:00">
-                2017-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
-                    <span itemprop="name">Hash Table</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-500/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-500/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a List of words, return the words that can be typed using letters of alphabet on only one row’s of American keyboard like the image below.</p>
-<p>給一串單詞陣列，從每一個單詞篩選出單詞全部的字母都位在鍵盤上同一行。<br>要以下方鍵盤圖片為標準 :<br><img src="/leetcode-500/keyboard.png" alt="Keyboard"></p>
-<p>Example 1:<br> Input: [“Hello”, “Alaska”, “Dad”, “Peace”]<br> Output: [“Alaska”, “Dad”]</p>
-<p>例如 Alaska 與 Dad 都位在 ASDFGHJKL 這行，所以就挑出來。</p>
-<p>Note:<br> You may use one character in the keyboard more than once.<br> You may assume the input string will only contain letters of alphabet.</p>
-<p> 假定每個字元都會用到一次以上。<br> 假定每個輸入的東西都是 a-z 字母。</p>
-<h1 id="第一次解題-Accepted"><a href="#第一次解題-Accepted" class="headerlink" title="第一次解題 : Accepted"></a>第一次解題 : Accepted</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findWords</span><span class="params">(<span class="number">_</span> words: [String])</span></span> -&gt; [<span class="type">String</span>] &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> rules =  [<span class="string">"QWERTYUIOP"</span>, <span class="string">"ASDFGHJKL"</span>, <span class="string">"ZXCVBNM"</span>]</div><div class="line">    <span class="keyword">var</span> result = words</div><div class="line">    </div><div class="line">    words.forEach &#123; word <span class="keyword">in</span></div><div class="line">        <span class="comment">// 如果單詞不在規則內就把它 filter 掉</span></div><div class="line">        <span class="keyword">if</span> (checkWords(word: word.uppercased())) &#123;</div><div class="line">            result = result.<span class="built_in">filter</span> &#123; $<span class="number">0</span> != word &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">// 定義 checkWords 函式確認是否該單字都在鍵盤同一行</span></div><div class="line">    <span class="comment">// true 表示該刪除， false 相反</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">checkWords</span><span class="params">(word: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 使用第一個單字來判斷這個單詞應該要對應哪一個單字</span></div><div class="line">        </div><div class="line">        <span class="keyword">let</span> rule = rules.<span class="built_in">filter</span> &#123; $<span class="number">0</span>.range(of: <span class="type">String</span>(word.characters.first!)) != <span class="literal">nil</span> &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// 如果單字不在該規則中，就直接返回 true</span></div><div class="line">        <span class="keyword">for</span> <span class="built_in">c</span> <span class="keyword">in</span> word.characters &#123;</div><div class="line">            <span class="keyword">if</span> (rule.first!.range(of: <span class="type">String</span>(<span class="built_in">c</span>))) == <span class="literal">nil</span> &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Best-Solution-For-Java"><a href="#Best-Solution-For-Java" class="headerlink" title="Best Solution ? For Java"></a>Best Solution ? For Java</h1><p>因為有神人使用正規式解答，但是我沒有精通，所以不知道在 Swift 要怎麼寫。。。<br>先放上 Java 的代碼，等哪天我會了再來解釋。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> String[] findWords(String[] words) &#123;</div><div class="line">    <span class="keyword">return</span> Stream.of(words).filter(s -&gt; s.toLowerCase().matches(<span class="string">"[qwertyuiop]*|[asdfghjkl]*|[zxcvbnm]*"</span>)).toArray(String[]::<span class="keyword">new</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2234,7 +2249,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-count">128</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2245,7 +2260,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

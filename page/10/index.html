@@ -296,6 +296,197 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-258/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-258/" itemprop="url">
+                  LeetCode#258 Add Digits - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-12T16:50:07+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-258/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-258/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><ul>
+<li><p>Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.<br>給一個不為負數的整數，重複的將每個位數的數字加起來，直到結果剩一個整數。</p>
+</li>
+<li><p>For example:<br>Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it.<br>例如 38 ， 3 + 8 = 11 ， 1 + 1 = 2 ， 2 不能再拆開了所以回傳 2 。</p>
+</li>
+</ul>
+<ul>
+<li>Follow up:<br>Could you do it without any loop/recursion in O(1) runtime?<br>請解出題目但不使用「迴圈」或是「遞迴」函式。</li>
+</ul>
+<h1 id="第一次解題-45-ms"><a href="#第一次解題-45-ms" class="headerlink" title="第一次解題 : 45 ms"></a>第一次解題 : 45 ms</h1><p><a href="https://en.wikipedia.org/wiki/Digital_root#Congruence_formula" target="_blank" rel="external">這是一題要算出數根 (Digital Root) 的題目。</a></p>
+<p>要算出數根有二種方式 :</p>
+<p>第一種必須遵循 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b = <span class="number">10</span></div><div class="line"></div><div class="line">dr(n) = <span class="number">0</span> <span class="keyword">if</span> n == <span class="number">0</span></div><div class="line">dr(n) = (b-<span class="number">1</span>) <span class="keyword">if</span> n != <span class="number">0</span> and n % (b-<span class="number">1</span>) == <span class="number">0</span></div><div class="line">dr(n) = n mod (b-<span class="number">1</span>) <span class="keyword">if</span> n % (b-<span class="number">1</span>) != <span class="number">0</span></div></pre></td></tr></table></figure></p>
+<p>第二種 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dr(n) = <span class="number">1</span> + (n-<span class="number">1</span>) % <span class="number">9</span></div></pre></td></tr></table></figure></p>
+<p>可以發現除了 0 的數根為 0 以外，之後的數根皆由 1 ~ 9 不斷的循環。</p>
+<p>0 -&gt; 0, 1 -&gt; 1, 2 -&gt; 2, … 9 -&gt; 9, 10 -&gt; 1, 11 -&gt; 2</p>
+<p>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15<br>0 1 2 3 4 5 6 7 8 9  1  2  3  4  5  6</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">addDigits</span><span class="params">(<span class="number">_</span> num: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span> + (num - <span class="number">1</span>) % <span class="number">9</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-371/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2004,205 +2195,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-292/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-292/" itemprop="url">
-                  LeetCode#292 Nim Game - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-05T11:52:51+08:00">
-                2017-08-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Brainteaser/" itemprop="url" rel="index">
-                    <span itemprop="name">Brainteaser</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-292/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-292/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones.</p>
-<p>Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.</p>
-<p>For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.</p>
-<p>你正在跟朋友玩一個遊戲叫 Nim Game ，桌上有好多個石頭，每個人輪流拿掉 1-3 個石頭，最後拿掉全部石頭的人即可獲勝。現在這個遊戲皆是由你先開始。</p>
-<p>假設你跟你的朋友都很屌很有策略，不會錯失任何贏的機會。寫一個函式去判斷當石頭是 x 個的時候，你是否會贏得這次的比賽。</p>
-<p>舉例來說，如果桌上有 4 個石頭，你先攻。那你永遠都不會贏。因為不管你第一步移走 1, 2, 3個石頭，最後一個一定是你朋友拿走。</p>
-<h1 id="第一次解題-16-ms"><a href="#第一次解題-16-ms" class="headerlink" title="第一次解題 : 16 ms"></a>第一次解題 : 16 ms</h1><ol>
-<li><p>可以發現，當最後石頭剩下 4 個的時候，不管你拿幾個石頭，最後一個一定是你的朋友拿走。</p>
-</li>
-<li><p>所以剩 4 個的時候拿的人都會輸。</p>
-</li>
-<li><p>把石頭數量翻倍， 4 &lt; n &lt; 8 ，也就是當 n = 5, 6, 7 時，可以發現都能夠把 死亡數字 4 留給對方。</p>
-</li>
-<li><p>但是到 8 的時候，就變成對方能把死亡數字 4 給你了。</p>
-</li>
-<li><p>所以 8 也是死亡數字。</p>
-</li>
-<li><p>把石頭 * 3倍， 8 &lt; n &lt; 12 ，當 n = 9, 10, 11 ，都可以把 8 做球給對方，所以都會贏</p>
-</li>
-<li><p>以此類推，當 n % 4 == 0 時， 你都會輸。</p>
-</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">canWinNim</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> n % <span class="number">4</span> != <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這根本不是程式題目，是數學。<br>(／‵Д′)／~ ╧╧</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2252,7 +2244,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-count">128</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2263,7 +2255,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

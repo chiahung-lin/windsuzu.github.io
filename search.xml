@@ -3,6 +3,53 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#234 Palindrome Linked List - in Swift]]></title>
+      <url>/leetcode-234/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a singly linked list, determine if it is a palindrome.</p>
+<p>給一個鏈結串列，判斷他是否回文。</p>
+<p>Follow up:<br>Could you do it in O(n) time and O(1) space?</p>
+<p>你可以使用 O(n) 的時間與 O(1) 的空間來解出題目嗎 ?</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>題目要求 O(1) 的空間，所以不使用多餘的字串或陣列來驗證。</p>
+<p>利用 slow 和 fast 指針，將 slow 指向串列的中間點，</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">2</span>-&gt;<span class="number">1</span></div><div class="line">      s     f</div></pre></td></tr></table></figure>
+<p>這時候將 s 進行反轉，獲得 rev 串列<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span>-&gt;<span class="number">2</span>-&gt;<span class="number">1</span> = <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>再來比對 rev 和 head 是否相等，若有不相等，返回 false<br>若執行至 rev 結束，都是相等，返回 true</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rev  : <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span></div><div class="line">head : <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">4</span>-&gt;<span class="number">5</span></div></pre></td></tr></table></figure>
+<hr>
+<p>主程式碼 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPalindrome</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> fast = head, slow = head, head = head</div><div class="line">    <span class="keyword">while</span> fast != <span class="literal">nil</span> &amp;&amp; fast!.next != <span class="literal">nil</span> &#123;</div><div class="line">        fast = fast?.next?.next</div><div class="line">        slow = slow?.next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> rev = <span class="built_in">reverse</span>(slow)</div><div class="line">    <span class="keyword">while</span> rev != <span class="literal">nil</span> &amp;&amp; head != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">if</span> rev?.val != head?.val &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">        head = head?.next</div><div class="line">        rev = rev?.next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>反轉串列函式 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverse</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</div><div class="line">    <span class="keyword">var</span> pre: <span class="type">ListNode</span>?</div><div class="line">    <span class="keyword">var</span> cur = head</div><div class="line">    <span class="keyword">while</span> cur != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">let</span> next = cur?.next</div><div class="line">        cur?.next = pre</div><div class="line">        pre = cur</div><div class="line">        cur = next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> pre</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Linked List </category>
+            
+            <category> Two Pointers </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Two Pointers </tag>
+            
+            <tag> Linked List </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#67 Add Binary - in Swift]]></title>
       <url>/leetcode-67/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two binary strings, return their sum (also a binary string).</p>
@@ -603,9 +650,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Binary Search </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -974,9 +1021,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Binary Search </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1018,9 +1065,9 @@
             
             <tag> Swift </tag>
             
-            <tag> String </tag>
-            
             <tag> Two Pointers </tag>
+            
+            <tag> String </tag>
             
         </tags>
         
@@ -1654,9 +1701,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -1744,9 +1791,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -2004,9 +2051,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Math </tag>
-            
             <tag> Hash Table </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -2406,9 +2453,9 @@
             
             <tag> Array </tag>
             
-            <tag> Math </tag>
-            
             <tag> Bit Manipulation </tag>
+            
+            <tag> Math </tag>
             
         </tags>
         
@@ -4500,9 +4547,9 @@
             
             <tag> Swift </tag>
             
-            <tag> String </tag>
-            
             <tag> Two Pointers </tag>
+            
+            <tag> String </tag>
             
         </tags>
         
@@ -5031,11 +5078,11 @@
             
             <tag> Android </tag>
             
+            <tag> Retrofit </tag>
+            
             <tag> RxJava </tag>
             
             <tag> RxAndroid </tag>
-            
-            <tag> Retrofit </tag>
             
         </tags>
         
@@ -5409,8 +5456,6 @@
         
         <tags>
             
-            <tag> 軟體工程 </tag>
-            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -5418,6 +5463,8 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
+            
+            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -5495,6 +5542,8 @@
         
         <tags>
             
+            <tag> Android </tag>
+            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -5504,8 +5553,6 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
-            
-            <tag> Android </tag>
             
             <tag> iOS </tag>
             

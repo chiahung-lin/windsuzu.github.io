@@ -296,6 +296,215 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-169/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-169/" itemprop="url">
+                  LeetCode#169 Majority Element - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-01T14:17:46+08:00">
+                2017-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/Divide-and-Conquer/" itemprop="url" rel="index">
+                    <span itemprop="name">Divide and Conquer</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Array/Divide-and-Conquer/Bit-Manipulation/" itemprop="url" rel="index">
+                    <span itemprop="name">Bit Manipulation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-169/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-169/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.</p>
+<p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
+<p>從陣列中找出出現次數超過一半次數的元素。</p>
+<p>可以假設陣列不為空，且一定有一個超過次數元素存在。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這題其實要求的是就是數學上的「眾數」。</p>
+<p>這裡用的是投票算法，鑑於題目規定眾數一定存在。</p>
+<p>我們定義一個計數器，歸零時賦予新值成為新的眾數候選。</p>
+<p>不為零時，如果新的數字等於候選數，計數器 +1 ，反之 -1 。</p>
+<p><img src="/leetcode-169/boyer_moore_algor.gif" alt=""></p>
+<p>為什麼這樣做就可以得出解呢，這裡有<a href="http://blog.csdn.net/kimixuchen/article/details/52787307#原理解析" target="_blank" rel="external">投票算法的原理解析</a>。</p>
+<p>簡單來說，我們可以無視程式運行到計數器最後歸零的過程，純粹只看歸零後的剩餘數字。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">majorityElement</span><span class="params">(<span class="number">_</span> nums: [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> <span class="built_in">count</span> = <span class="number">1</span></div><div class="line">    <span class="keyword">var</span> res = nums[<span class="number">0</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">            <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">            res = nums[i]</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> res == nums[i] &#123;</div><div class="line">            <span class="built_in">count</span> += <span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="built_in">count</span> -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-599/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1991,189 +2200,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-661/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-661/" itemprop="url">
-                  LeetCode#661 Image Smoother - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-22T18:17:51+08:00">
-                2017-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-661/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-661/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a 2D integer matrix M representing the gray scale of an image, you need to design a smoother to make the gray scale of each cell becomes the average gray scale (rounding down) of all the 8 surrounding cells and itself. If a cell has less than 8 surrounding cells, then use as many as you can.</p>
-<p>給一個二維矩陣，數字代表圖片的灰度，現在對圖片進行平滑處理，將每個像素轉換為周圍 9 個值的平均。</p>
-<p>Example 1:</p>
-<p>Input:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</div><div class="line">[<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]]</div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line"></div><div class="line">[[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</div><div class="line">[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</div><div class="line">[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]]</div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"></div><div class="line"><span class="type">For</span> the point (<span class="number">0</span>,<span class="number">0</span>), (<span class="number">0</span>,<span class="number">2</span>), (<span class="number">2</span>,<span class="number">0</span>), (<span class="number">2</span>,<span class="number">2</span>): floor(<span class="number">3</span>/<span class="number">4</span>) = floor(<span class="number">0.75</span>) = <span class="number">0</span></div><div class="line"><span class="type">For</span> the point (<span class="number">0</span>,<span class="number">1</span>), (<span class="number">1</span>,<span class="number">0</span>), (<span class="number">1</span>,<span class="number">2</span>), (<span class="number">2</span>,<span class="number">1</span>): floor(<span class="number">5</span>/<span class="number">6</span>) = floor(<span class="number">0.83333333</span>) = <span class="number">0</span></div><div class="line"><span class="type">For</span> the point (<span class="number">1</span>,<span class="number">1</span>): floor(<span class="number">8</span>/<span class="number">9</span>) = floor(<span class="number">0.88888889</span>) = <span class="number">0</span></div></pre></td></tr></table></figure></p>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p><img src="/leetcode-661/submission.png" alt=""></p>
-<p>先列出每個節點的位置，找出 9 宮格的範圍， min I ~ max I 與 min J ~ max J 。<br>算出該次節點的 9 宮格加總 / 次數，填入新陣列中。</p>
-<p><img src="/leetcode-661/smoother.gif" alt=""></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">imageSmoother</span><span class="params">(<span class="number">_</span> M: [[Int]])</span></span> -&gt; [[<span class="type">Int</span>]] &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> matrix = <span class="type">M</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;matrix.<span class="built_in">count</span> &#123;</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">0</span>..&lt;matrix[i].<span class="built_in">count</span> &#123;</div><div class="line">            </div><div class="line">            <span class="keyword">let</span> mini = i == <span class="number">0</span> ? <span class="number">0</span> : i - <span class="number">1</span></div><div class="line">            <span class="keyword">let</span> maxi = i == <span class="type">M</span>.<span class="built_in">count</span> - <span class="number">1</span> ? <span class="type">M</span>.<span class="built_in">count</span> - <span class="number">1</span> : i + <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">let</span> minj = j == <span class="number">0</span> ? <span class="number">0</span> : j - <span class="number">1</span></div><div class="line">            <span class="keyword">let</span> maxj = j == matrix[i].<span class="built_in">count</span> - <span class="number">1</span> ? matrix[i].<span class="built_in">count</span> - <span class="number">1</span> : j + <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">var</span> sum = <span class="number">0</span></div><div class="line">            <span class="keyword">var</span> cnt = <span class="number">0</span></div><div class="line">            </div><div class="line">            <span class="keyword">for</span> a <span class="keyword">in</span> mini...maxi &#123;</div><div class="line">                <span class="keyword">for</span> b <span class="keyword">in</span> minj...maxj&#123;</div><div class="line">                    sum += <span class="type">M</span>[a][b]</div><div class="line">                    cnt += <span class="number">1</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            matrix[i][j] = (sum / cnt)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> matrix</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2223,7 +2249,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-count">128</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2234,7 +2260,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

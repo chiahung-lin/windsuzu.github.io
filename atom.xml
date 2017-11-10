@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-09T06:08:05.000Z</updated>
+  <updated>2017-11-10T06:20:18.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#234 Palindrome Linked List - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-234/"/>
+    <id>http://windsuzu.github.io/leetcode-234/</id>
+    <published>2017-11-10T06:09:31.000Z</published>
+    <updated>2017-11-10T06:20:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a singly linked list, determine if it is a palindrome.</p>
+<p>給一個鏈結串列，判斷他是否回文。</p>
+<p>Follow up:<br>Could you do it in O(n) time and O(1) space?</p>
+<p>你可以使用 O(n) 的時間與 O(1) 的空間來解出題目嗎 ?</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>題目要求 O(1) 的空間，所以不使用多餘的字串或陣列來驗證。</p>
+<p>利用 slow 和 fast 指針，將 slow 指向串列的中間點，</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">2</span>-&gt;<span class="number">1</span></div><div class="line">      s     f</div></pre></td></tr></table></figure>
+<p>這時候將 s 進行反轉，獲得 rev 串列<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span>-&gt;<span class="number">2</span>-&gt;<span class="number">1</span> = <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>再來比對 rev 和 head 是否相等，若有不相等，返回 false<br>若執行至 rev 結束，都是相等，返回 true</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rev  : <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span></div><div class="line">head : <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">4</span>-&gt;<span class="number">5</span></div></pre></td></tr></table></figure>
+<hr>
+<p>主程式碼 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPalindrome</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">var</span> fast = head, slow = head, head = head</div><div class="line">    <span class="keyword">while</span> fast != <span class="literal">nil</span> &amp;&amp; fast!.next != <span class="literal">nil</span> &#123;</div><div class="line">        fast = fast?.next?.next</div><div class="line">        slow = slow?.next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> rev = <span class="built_in">reverse</span>(slow)</div><div class="line">    <span class="keyword">while</span> rev != <span class="literal">nil</span> &amp;&amp; head != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">if</span> rev?.val != head?.val &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">        head = head?.next</div><div class="line">        rev = rev?.next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>反轉串列函式 :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverse</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</div><div class="line">    <span class="keyword">var</span> pre: <span class="type">ListNode</span>?</div><div class="line">    <span class="keyword">var</span> cur = head</div><div class="line">    <span class="keyword">while</span> cur != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">let</span> next = cur?.next</div><div class="line">        cur?.next = pre</div><div class="line">        pre = cur</div><div class="line">        cur = next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> pre</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a singly linked list, determine if it is a palindrome.&lt;/p&gt;
+&lt;p&gt;給一
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Linked List" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Linked-List/"/>
+    
+      <category term="Two Pointers" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Linked-List/Two-Pointers/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Two Pointers" scheme="http://windsuzu.github.io/tags/Two-Pointers/"/>
+    
+      <category term="Linked List" scheme="http://windsuzu.github.io/tags/Linked-List/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#67 Add Binary - in Swift</title>
@@ -648,9 +698,9 @@
     
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
-      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
-    
       <category term="Binary Search" scheme="http://windsuzu.github.io/tags/Binary-Search/"/>
+    
+      <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
     
   </entry>
   
@@ -866,53 +916,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#110 Balanced Binary Tree - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-110/"/>
-    <id>http://windsuzu.github.io/leetcode-110/</id>
-    <published>2017-10-21T07:16:23.000Z</published>
-    <updated>2017-10-21T07:25:37.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, determine if it is height-balanced.</p>
-<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
-<p>給一二元樹，驗證它是否高度平衡。</p>
-<p>高度平衡的定義為，二元樹其兩個子樹的每個節點的深度不超過 1 。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">5</span></div><div class="line">      / \</div><div class="line">     <span class="number">3</span>   <span class="number">4</span></div><div class="line">    / \   \</div><div class="line">   <span class="number">2</span>   <span class="number">6</span>   <span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">True</span></div></pre></td></tr></table></figure></p>
-<p>該二元樹其兩個子樹的每個節點，深度差皆不超過 1 ，為高度平衡。</p>
-<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">       <span class="number">5</span></div><div class="line">      / \</div><div class="line">     <span class="number">3</span>   <span class="number">4</span></div><div class="line">    / \   \</div><div class="line">   <span class="number">2</span>   <span class="number">6</span>   <span class="number">1</span></div><div class="line">          /</div><div class="line">         <span class="number">7</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="type">False</span></div></pre></td></tr></table></figure></p>
-<p>該二元樹倒節點 4 時，其左子樹為空，深度為 1，右子樹持續走到 7 ，深度為 3 ， 3 - 1 &gt; 1 ，不為高度平衡。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>要確定每一個節點的左右子樹是否高度平衡，利用 findDepth 找出該節點的深度，再比較左右節點的差是否大於 1 。</p>
-<p>再來要確定每一個節點的平衡，利用遞迴對整棵樹的每一個節點進行一次上述的比較。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isBalanced</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">findDepth</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(findDepth(root!.<span class="keyword">left</span>), findDepth(root!.<span class="keyword">right</span>)) + <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</div><div class="line">    <span class="keyword">let</span> <span class="keyword">left</span> = findDepth(root!.<span class="keyword">left</span>)</div><div class="line">    <span class="keyword">let</span> <span class="keyword">right</span> = findDepth(root!.<span class="keyword">right</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(<span class="keyword">left</span> - <span class="keyword">right</span>) &lt;= <span class="number">1</span> &amp;&amp; isBalanced(root!.<span class="keyword">left</span>) &amp;&amp; isBalanced(root!.<span class="keyword">right</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary tree, determine if it is height-balanced.&lt;/p&gt;
-&lt;p&gt;For th
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
-    
-      <category term="Depth-first Search" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/Depth-first-Search/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
-    
-      <category term="Depth-first Search" scheme="http://windsuzu.github.io/tags/Depth-first-Search/"/>
     
   </entry>
   

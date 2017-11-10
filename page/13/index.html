@@ -296,6 +296,231 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-retrofit2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/learn-android-retrofit2/" itemprop="url">
+                  學習 Android Retrofit 2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-05-02T17:59:05+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/learn-android-retrofit2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="learn-android-retrofit2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Retrofit 是什麼 ? 我也是學習 RxJava 途中才知道， Retrofit 跟 Volley 一樣是 Android 一種 HTTP 請求的框架，但實際操作了一遍，感覺比 Volley 還要更簡便，而且能夠支援 RxJava 的關係，必須要學習一下。</p>
+<blockquote>
+<p>好文參考<br><a href="http://www.jianshu.com/p/7efdc3477269" target="_blank" rel="external">【Android】Retrofit 2.0 的使用</a><br><a href="http://wuxiaolong.me/2016/01/15/retrofit/" target="_blank" rel="external">Android Retrofit 2.0使用</a><br><a href="http://www.jianshu.com/p/308f3c54abdd" target="_blank" rel="external">你真的会用Retrofit2吗?Retrofit2完全教程</a><br><a href="http://bxbxbai.github.io/2015/12/13/retrofit2/" target="_blank" rel="external">Retrofit2源碼解析</a></p>
+</blockquote>
+<h2 id="Retrofit-2-介紹"><a href="#Retrofit-2-介紹" class="headerlink" title="Retrofit 2 介紹"></a>Retrofit 2 介紹</h2><p>上面說到 Retrofit 2 為一種 HTTP 請求的工具，並且使用 REST API 設計，由 RESTful Client 向 Server 發出請求。</p>
+<blockquote>
+<p>有關 RESTful API 的相關文章<br><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">RESTful API 设计指南</a><br><a href="http://ithelp.ithome.com.tw/articles/10157431" target="_blank" rel="external">定義 1 - 什麼是 REST/RESTful ?</a></p>
+</blockquote>
+<p><img src="/learn-android-retrofit2/retrofit.png" alt="Retrofit 模型"></p>
+<ol>
+<li>創建一個能裝載數據的 Class (Model or POJO)，</li>
+<li>創建 Interface 來管理各種 HTTP APIs</li>
+<li>最後創建 REST Client 發出請求，等待回傳 JSON 數據，使用內建的 Gson 解析序列</li>
+</ol>
+<hr>
+<h2 id="Retrofit-2-基本的用法"><a href="#Retrofit-2-基本的用法" class="headerlink" title="Retrofit 2 基本的用法"></a>Retrofit 2 基本的用法</h2><h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><ul>
+<li><p>Gradle 配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile 'com.squareup.retrofit2:retrofit:2.2.0'</div><div class="line">compile 'com.squareup.retrofit2:converter-gson:2.2.0'</div></pre></td></tr></table></figure>
+</li>
+<li><p>別忘了到 manifest 新增網路的權限</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="創建裝載數據-Class"><a href="#創建裝載數據-Class" class="headerlink" title="創建裝載數據 Class"></a>創建裝載數據 Class</h3><p>這邊可以使用 Android Studio 的插件 GsonFormat ，輕鬆將 JSON 轉換為 JavaBean 類別。</p>
+<p>安裝方法 -&gt; Settings -&gt; Plugins -&gt; Browse Repositories -&gt; 搜尋 GsonFormat -&gt; restart</p>
+<p>新增空白的 Class 後 Alt + Insert</p>
+<p><img src="/learn-android-retrofit2/gsonformat1.png" alt=""><br><img src="/learn-android-retrofit2/gsonformat2.png" alt=""></p>
+<p>就能夠直接產生一個 JavaBean 的類別 !<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> email;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.email = email;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="創建-Retrofit-物件與實作-Interface"><a href="#創建-Retrofit-物件與實作-Interface" class="headerlink" title="創建 Retrofit 物件與實作 Interface"></a>創建 Retrofit 物件與實作 Interface</h3><p>假設今天要到 <code>http://www.api.com/user/{userid}</code> 取得 user 的資料。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">            .addConverterFactory(GsonConverterFactory.create()) <span class="comment">// 使用 Gson 解析</span></div><div class="line">            .baseUrl(<span class="string">"http://www.api.com/"</span>)</div><div class="line">            .build();</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApiService</span> </span>&#123;</div><div class="line">  <span class="comment">// 會返回一個 call 類別</span></div><div class="line">  <span class="meta">@GET</span>(<span class="string">"user/&#123;userid&#125;"</span>)</div><div class="line">  <span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"userid"</span>)</span> String userid)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="創建要去請求-API-的-Client-Service"><a href="#創建要去請求-API-的-Client-Service" class="headerlink" title="創建要去請求 API 的 Client Service"></a>創建要去請求 API 的 Client Service</h3><ul>
+<li><p>創建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Api apiService = retrofit.create(ApiService.class);</div><div class="line">Call&lt;User&gt; call = apiService.getUser(<span class="string">"123"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>發出請求 (同步)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">User user = call.execute();</div></pre></td></tr></table></figure>
+</li>
+<li><p>發出請求 (異步)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">call.enqueue(<span class="keyword">new</span> Callback&lt;User&gt;()&#123;  </div><div class="line">         <span class="meta">@Override</span>  </div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Response&lt;User&gt; response)</span> </span>&#123;  </div><div class="line">             <span class="comment">//成功後，使用 response.body() 得到結果</span></div><div class="line">             User user = response.body();</div><div class="line">          &#125;  </div><div class="line">          <span class="meta">@Override</span>  </div><div class="line">          <span class="function"><span class="keyword">public</span> <span class="title">voidonFailure</span><span class="params">(Throwable t)</span> </span>&#123;  </div><div class="line">             <span class="comment">// 請求失敗</span></div><div class="line">         &#125;  </div><div class="line">     &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="HTTP-API-不同的請求方法"><a href="#HTTP-API-不同的請求方法" class="headerlink" title="HTTP API 不同的請求方法"></a>HTTP API 不同的請求方法</h2><p>以下來自官方的文檔，作為記憶之用，請參考 <a href="http://square.github.io/retrofit/" target="_blank" rel="external">Retrofit Documentation</a></p>
+<blockquote>
+<p>另外可以參考<br><a href="https://bng86.gitbooks.io/android-third-party-/content/retrofit.html" target="_blank" rel="external">Retrofit · Android third-party 使用心得</a><br><a href="http://www.devwiki.net/2016/03/19/Retrofit-Use-Course-2/" target="_blank" rel="external">Retrofit使用教程(二) | DevWiki Blog</a></p>
+</blockquote>
+<h3 id="GET-METHOD"><a href="#GET-METHOD" class="headerlink" title="GET METHOD"></a>GET METHOD</h3><ul>
+<li><p>假設要讀取用戶列表，不用用到任何參數</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"users/list"</span>)</div><div class="line">Call&lt;List&lt;User&gt;&gt; getUsers();</div></pre></td></tr></table></figure>
+</li>
+<li><p>可以帶入 query</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"users/list?sort=desc"</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>URL 帶入參數</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"group/&#123;id&#125;/users"</span>)</div><div class="line">Call&lt;List&lt;User&gt;&gt; groupList(<span class="meta">@Path</span>(<span class="string">"id"</span>) <span class="keyword">int</span> groupId);</div></pre></td></tr></table></figure>
+</li>
+<li><p>若要邊帶入 URL 參數並且 query</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"group/&#123;id&#125;/users"</span>)</div><div class="line">Call&lt;List&lt;User&gt;&gt; groupList(<span class="meta">@Path</span>(<span class="string">"id"</span>) <span class="keyword">int</span> groupId, <span class="meta">@Query</span>(<span class="string">"sort"</span>) String sort);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="POST-METHOD"><a href="#POST-METHOD" class="headerlink" title="POST METHOD"></a>POST METHOD</h3><ul>
+<li><p>假設要更新使用者資料，需要使用 <code>form-encoded</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormUrlEncoded</span></div><div class="line"><span class="meta">@POST</span>(<span class="string">"user/edit"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">updateUser</span><span class="params">(@Field(<span class="string">"first_name"</span>)</span> String first, @<span class="title">Field</span><span class="params">(<span class="string">"last_name"</span>)</span> String last)</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>需要利用 <code>multipart</code> 上傳文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Multipart</span></div><div class="line"><span class="meta">@PUT</span>(<span class="string">"user/photo"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">updateUser</span><span class="params">(@Part(<span class="string">"photo"</span>)</span> RequestBody photo, @<span class="title">Part</span><span class="params">(<span class="string">"description"</span>)</span> RequestBody description)</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>使用過 Retrofit 的確比 Volley 的用法更簡潔方便了，再來就要試試怎麼樣引入 RxJava 當中。多多實作再來了解其中的運作原理吧 !</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/learn-android-databinding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1688,7 +1913,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-count">128</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1699,7 +1924,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
