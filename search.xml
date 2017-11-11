@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#687 Longest Univalue Path - in Swift]]></title>
+      <url>/leetcode-687/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
+<p>給一個二元樹，找出一條最長，且連續出現一樣節點值的路徑，這條路徑可能通過節點也可能沒通過節點。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"></div><div class="line">        <span class="number">5</span></div><div class="line">       / \</div><div class="line">      <span class="number">4</span>   <span class="number">5</span></div><div class="line">     / \   \</div><div class="line">    <span class="number">1</span>   <span class="number">1</span>   <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">2</span></div><div class="line"></div><div class="line"><span class="number">5</span> -&gt; <span class="number">5</span> -&gt; <span class="number">5</span> 的長度為 <span class="number">2</span></div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"></div><div class="line">        <span class="number">1</span></div><div class="line">       / \</div><div class="line">      <span class="number">4</span>   <span class="number">5</span></div><div class="line">     / \   \</div><div class="line">    <span class="number">4</span>   <span class="number">4</span>   <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">2</span></div><div class="line"></div><div class="line"><span class="number">4</span> -&gt; <span class="number">4</span> -&gt; <span class="number">4</span> 的長度為 <span class="number">2</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>利用遞迴比對每個節點的左右兩節點，如果與該節點相同值，就會回傳已累積的長度 + 1 。</p>
+<p>並且定義一個最大長度 len ，在每節點的比對中，刷新 len 的最大值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestUnivaluePath</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> len = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getLength</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> val : Int)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">var</span> <span class="keyword">left</span> = getLength(root.<span class="keyword">left</span>, root.val)</div><div class="line">        <span class="keyword">var</span> <span class="keyword">right</span> = getLength(root.<span class="keyword">right</span>, root.val)</div><div class="line">        len = <span class="built_in">max</span>(len, <span class="keyword">left</span> + <span class="keyword">right</span>)</div><div class="line">        <span class="keyword">if</span> val == root.val &#123; <span class="keyword">return</span> <span class="built_in">max</span>(<span class="keyword">left</span>, <span class="keyword">right</span>) + <span class="number">1</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    getLength(root, root.val)</div><div class="line">    <span class="keyword">return</span> len</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Tree </category>
+            
+            <category> Recursion </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Tree </tag>
+            
+            <tag> Recursion </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#234 Palindrome Linked List - in Swift]]></title>
       <url>/leetcode-234/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a singly linked list, determine if it is a palindrome.</p>
@@ -650,9 +690,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Binary Search </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Binary Search </tag>
             
         </tags>
         
@@ -1021,9 +1061,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Binary Search </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Binary Search </tag>
             
         </tags>
         
@@ -1065,9 +1105,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Two Pointers </tag>
-            
             <tag> String </tag>
+            
+            <tag> Two Pointers </tag>
             
         </tags>
         
@@ -1701,9 +1741,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -1791,9 +1831,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -2051,9 +2091,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Hash Table </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Hash Table </tag>
             
         </tags>
         
@@ -2453,9 +2493,9 @@
             
             <tag> Array </tag>
             
-            <tag> Bit Manipulation </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Bit Manipulation </tag>
             
         </tags>
         
@@ -4547,9 +4587,9 @@
             
             <tag> Swift </tag>
             
-            <tag> Two Pointers </tag>
-            
             <tag> String </tag>
+            
+            <tag> Two Pointers </tag>
             
         </tags>
         
@@ -5456,6 +5496,8 @@
         
         <tags>
             
+            <tag> 軟體工程 </tag>
+            
             <tag> Android </tag>
             
             <tag> DI </tag>
@@ -5463,8 +5505,6 @@
             <tag> Dependency Injection </tag>
             
             <tag> 依賴注入 </tag>
-            
-            <tag> 軟體工程 </tag>
             
         </tags>
         
@@ -5542,8 +5582,6 @@
         
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> MVC </tag>
             
             <tag> MVP </tag>
@@ -5553,6 +5591,8 @@
             <tag> architecture patterns </tag>
             
             <tag> 軟體工程 </tag>
+            
+            <tag> Android </tag>
             
             <tag> iOS </tag>
             

@@ -296,6 +296,200 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-112/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-112/" itemprop="url">
+                  LeetCode#112 Path Sum - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-11-01T13:49:12+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Tree/Depth-first-Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Depth-first Search</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-112/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-112/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+<p>給一二元樹和目標值，找出樹中是否有「根到葉」的路徑，路徑上所有節點的加總等於目標值。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> the below binary tree and sum = <span class="number">22</span>,</div><div class="line"></div><div class="line">        <span class="number">5</span></div><div class="line">       / \</div><div class="line">      <span class="number">4</span>   <span class="number">8</span></div><div class="line">     /   / \</div><div class="line">    <span class="number">11</span>  <span class="number">13</span>  <span class="number">4</span></div><div class="line">   /  \      \</div><div class="line">  <span class="number">7</span>    <span class="number">2</span>      <span class="number">1</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>, <span class="keyword">as</span> there exist a root-to-leaf path <span class="number">5</span>-&gt;<span class="number">4</span>-&gt;<span class="number">11</span>-&gt;<span class="number">2</span> which sum <span class="keyword">is</span> <span class="number">22</span>.</div></pre></td></tr></table></figure>
+<p>給上方二元樹，以及目標值 22 。</p>
+<p>返回 true ， 因為有一條「根到葉」路徑 5 -&gt; 4 -&gt; 11 -&gt; 2 其加總為 22 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>從根開始堆疊節點總和，一旦到達葉節點且堆疊的總和等於目標值，即可返回答案。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">hasPathSum</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> sum: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">findSum</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> heap: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;</div><div class="line">        <span class="keyword">var</span> heap = heap</div><div class="line">        heap += root.val</div><div class="line">        <span class="keyword">if</span> root.<span class="keyword">left</span> == <span class="literal">nil</span> &amp;&amp; root.<span class="keyword">right</span> == <span class="literal">nil</span> &amp;&amp; heap == sum &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</div><div class="line">        <span class="keyword">return</span> findSum(root.<span class="keyword">left</span>, heap) || findSum(root.<span class="keyword">right</span>, heap)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> findSum(root, <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-26/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2019,190 +2213,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-643/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-643/" itemprop="url">
-                  LeetCode#643 Maximum Average Subarray I - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-22T11:26:43+08:00">
-                2017-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-643/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-643/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.</p>
-<p>給一個由 n 個整數組成的陣列，並且給定目標值 k 。找出陣列中連續 k 個值其平均為陣列中最大平均值，並且返回該平均值。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">12</span>,-<span class="number">5</span>,-<span class="number">6</span>,<span class="number">50</span>,<span class="number">3</span>], k = <span class="number">4</span></div><div class="line"><span class="type">Output</span>: <span class="number">12.75</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">Maximum</span> average <span class="keyword">is</span> (<span class="number">12</span>-<span class="number">5</span>-<span class="number">6</span>+<span class="number">50</span>)/<span class="number">4</span> = <span class="number">51</span>/<span class="number">4</span> = <span class="number">12.75</span></div></pre></td></tr></table></figure></p>
-<p>在 [1,12,-5,-6,50,3] 陣列中，要找出連續 4 個數的平均為最大平均值。<br>答案為 [12,-5,-6,50] 這段， (12-5-6+50)/4 = 51/4 = 12.75</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先算出陣列起始 k 個元素的加總 (temp) ，新增一個目前最大值 (res)。</p>
-<p>由陣列第 k 個以後開始，將 temp 去掉第一個值，並加上新的值，重新比對 res 跟 temp 。</p>
-<p>最後得出的 res / k 即是最大平均值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxAverage</span><span class="params">(<span class="number">_</span> nums: [Int], <span class="number">_</span> k: Int)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    <span class="keyword">var</span> temp = nums[<span class="number">0</span>..&lt;k].<span class="built_in">reduce</span>(<span class="number">0</span>, &#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;)</div><div class="line">    <span class="keyword">var</span> res = temp</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> k..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        temp += nums[i] - nums[i-k]</div><div class="line">        res = <span class="built_in">max</span>(res, temp)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Double</span>(res) / <span class="type">Double</span>(k)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2252,7 +2262,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">128</span>
+                <span class="site-state-item-count">129</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2263,7 +2273,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -2274,7 +2284,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

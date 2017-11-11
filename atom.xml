@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-10T06:20:18.000Z</updated>
+  <updated>2017-11-11T05:56:20.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode#687 Longest Univalue Path - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-687/"/>
+    <id>http://windsuzu.github.io/leetcode-687/</id>
+    <published>2017-11-11T05:47:19.000Z</published>
+    <updated>2017-11-11T05:56:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
+<p>給一個二元樹，找出一條最長，且連續出現一樣節點值的路徑，這條路徑可能通過節點也可能沒通過節點。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"></div><div class="line">        <span class="number">5</span></div><div class="line">       / \</div><div class="line">      <span class="number">4</span>   <span class="number">5</span></div><div class="line">     / \   \</div><div class="line">    <span class="number">1</span>   <span class="number">1</span>   <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">2</span></div><div class="line"></div><div class="line"><span class="number">5</span> -&gt; <span class="number">5</span> -&gt; <span class="number">5</span> 的長度為 <span class="number">2</span></div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"></div><div class="line">        <span class="number">1</span></div><div class="line">       / \</div><div class="line">      <span class="number">4</span>   <span class="number">5</span></div><div class="line">     / \   \</div><div class="line">    <span class="number">4</span>   <span class="number">4</span>   <span class="number">5</span></div><div class="line"></div><div class="line"><span class="type">Output</span>: <span class="number">2</span></div><div class="line"></div><div class="line"><span class="number">4</span> -&gt; <span class="number">4</span> -&gt; <span class="number">4</span> 的長度為 <span class="number">2</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>利用遞迴比對每個節點的左右兩節點，如果與該節點相同值，就會回傳已累積的長度 + 1 。</p>
+<p>並且定義一個最大長度 len ，在每節點的比對中，刷新 len 的最大值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestUnivaluePath</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> len = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getLength</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> val : Int)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">var</span> <span class="keyword">left</span> = getLength(root.<span class="keyword">left</span>, root.val)</div><div class="line">        <span class="keyword">var</span> <span class="keyword">right</span> = getLength(root.<span class="keyword">right</span>, root.val)</div><div class="line">        len = <span class="built_in">max</span>(len, <span class="keyword">left</span> + <span class="keyword">right</span>)</div><div class="line">        <span class="keyword">if</span> val == root.val &#123; <span class="keyword">return</span> <span class="built_in">max</span>(<span class="keyword">left</span>, <span class="keyword">right</span>) + <span class="number">1</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    getLength(root, root.val)</div><div class="line">    <span class="keyword">return</span> len</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary tree, find the length of the longest path where each no
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
+    
+      <category term="Recursion" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/Recursion/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
+    
+      <category term="Recursion" scheme="http://windsuzu.github.io/tags/Recursion/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode#234 Palindrome Linked List - in Swift</title>
@@ -698,9 +740,9 @@
     
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
-      <category term="Binary Search" scheme="http://windsuzu.github.io/tags/Binary-Search/"/>
-    
       <category term="Math" scheme="http://windsuzu.github.io/tags/Math/"/>
+    
+      <category term="Binary Search" scheme="http://windsuzu.github.io/tags/Binary-Search/"/>
     
   </entry>
   
@@ -877,45 +919,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#643 Maximum Average Subarray I - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-643/"/>
-    <id>http://windsuzu.github.io/leetcode-643/</id>
-    <published>2017-10-22T03:26:43.000Z</published>
-    <updated>2017-10-22T03:32:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.</p>
-<p>給一個由 n 個整數組成的陣列，並且給定目標值 k 。找出陣列中連續 k 個值其平均為陣列中最大平均值，並且返回該平均值。</p>
-<hr>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">12</span>,-<span class="number">5</span>,-<span class="number">6</span>,<span class="number">50</span>,<span class="number">3</span>], k = <span class="number">4</span></div><div class="line"><span class="type">Output</span>: <span class="number">12.75</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">Maximum</span> average <span class="keyword">is</span> (<span class="number">12</span>-<span class="number">5</span>-<span class="number">6</span>+<span class="number">50</span>)/<span class="number">4</span> = <span class="number">51</span>/<span class="number">4</span> = <span class="number">12.75</span></div></pre></td></tr></table></figure></p>
-<p>在 [1,12,-5,-6,50,3] 陣列中，要找出連續 4 個數的平均為最大平均值。<br>答案為 [12,-5,-6,50] 這段， (12-5-6+50)/4 = 51/4 = 12.75</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>先算出陣列起始 k 個元素的加總 (temp) ，新增一個目前最大值 (res)。</p>
-<p>由陣列第 k 個以後開始，將 temp 去掉第一個值，並加上新的值，重新比對 res 跟 temp 。</p>
-<p>最後得出的 res / k 即是最大平均值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxAverage</span><span class="params">(<span class="number">_</span> nums: [Int], <span class="number">_</span> k: Int)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    <span class="keyword">var</span> temp = nums[<span class="number">0</span>..&lt;k].<span class="built_in">reduce</span>(<span class="number">0</span>, &#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;)</div><div class="line">    <span class="keyword">var</span> res = temp</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> k..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">        temp += nums[i] - nums[i-k]</div><div class="line">        res = <span class="built_in">max</span>(res, temp)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Double</span>(res) / <span class="type">Double</span>(k)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given an array consisting of n integers, find the contiguous subarray 
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Array" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Array/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
     
   </entry>
   

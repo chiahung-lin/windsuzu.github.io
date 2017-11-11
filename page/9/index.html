@@ -296,6 +296,188 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-530/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-530/" itemprop="url">
+                  LeetCode#530 Minimum Absolute Difference in BST - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-23T12:11:56+08:00">
+                2017-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/Binary-Search-Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary Search Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-530/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-530/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.</p>
+<p>找出二元樹任意兩點，差距最小的值。</p>
+<p>Example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line"></div><div class="line">   <span class="number">1</span></div><div class="line">    \</div><div class="line">     <span class="number">3</span></div><div class="line">    /</div><div class="line">   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line"><span class="number">1</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>:</div><div class="line"><span class="type">The</span> minimum absolute difference <span class="keyword">is</span> <span class="number">1</span>, which <span class="keyword">is</span> the difference between <span class="number">2</span> and <span class="number">1</span> (or between <span class="number">2</span> and <span class="number">3</span>).</div></pre></td></tr></table></figure></p>
+<p>最小的差是 1 ，來自 2 和 1 (或 3 和 2)</p>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>BST 特性由小到大取節點，比較每次的差值與目前最小值。</p>
+<p><img src="/leetcode-530/minimum.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getMinimumDifference</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> numbers = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> res = <span class="type">Int</span>.<span class="built_in">max</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">inOrder</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        inOrder(root.<span class="keyword">left</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> last = numbers.last &#123;</div><div class="line">            res = <span class="built_in">min</span>((root.val - last), res)</div><div class="line">        &#125;</div><div class="line">        numbers.append(root.val)</div><div class="line">        inOrder(root.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    inOrder(root)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-661/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1998,200 +2180,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-389/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-389/" itemprop="url">
-                  LeetCode#389 Find the Difference - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-13T12:34:05+08:00">
-                2017-08-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/" itemprop="url" rel="index">
-                    <span itemprop="name">Hash Table</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/Hash-Table/Bit-Manipulation/" itemprop="url" rel="index">
-                    <span itemprop="name">Bit Manipulation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-389/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-389/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given two strings s and t which consist of only lowercase letters.<br>String t is generated by random shuffling string s and then add one more letter at a random position.<br>Find the letter that was added in t.</p>
-<p>給兩個字串 s 和 t ，兩個都只包含小寫文字。<br>字串 t 是由 s 的文字隨機打亂組成，再加入一個隨機的文字在隨機的位置。<br>找出那個隨機的文字。</p>
-<p>Example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>:</div><div class="line">s = <span class="string">"leetcode"</span></div><div class="line">t = <span class="string">"lteweodce"</span></div><div class="line"></div><div class="line"><span class="type">Output</span>:</div><div class="line">w</div></pre></td></tr></table></figure>
-<h1 id="第一次解題-33-ms"><a href="#第一次解題-33-ms" class="headerlink" title="第一次解題 : 33 ms"></a>第一次解題 : 33 ms</h1><p>算出 s 跟 t 的 bit 加總，相減後就可以得出多出來的 bit ，轉回 Character 就是答案。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findTheDifference</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> t: String)</span></span> -&gt; <span class="type">Character</span> &#123;</div><div class="line">	<span class="keyword">var</span> sumS = [<span class="type">UInt8</span>](s.utf8).<span class="built_in">map</span> &#123; <span class="type">Int</span>($<span class="number">0</span>) &#125;.<span class="built_in">reduce</span>(<span class="number">0</span>)&#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;</div><div class="line">	<span class="keyword">var</span> sumT = [<span class="type">UInt8</span>](t.utf8).<span class="built_in">map</span> &#123; <span class="type">Int</span>($<span class="number">0</span>) &#125;.<span class="built_in">reduce</span>(<span class="number">0</span>)&#123;$<span class="number">0</span> + $<span class="number">1</span>&#125;</div><div class="line">	<span class="keyword">return</span> <span class="type">Character</span>(<span class="type">UnicodeScalar</span>(sumT - sumS)!)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Other-Solution"><a href="#Other-Solution" class="headerlink" title="Other Solution"></a>Other Solution</h1><p>利用 XOR 相同會回傳 0 ，將字串組成後依序執行 XOR，最後會只剩下不同的那一個。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findTheDifference</span><span class="params">(<span class="number">_</span> s: String, <span class="number">_</span> t: String)</span></span> -&gt; <span class="type">Character</span> &#123;</div><div class="line">    <span class="keyword">let</span> xor = (s + t).utf8.<span class="built_in">reduce</span>(<span class="number">0</span>, &#123; $<span class="number">0</span> ^ $<span class="number">1</span>&#125;)</div><div class="line">    <span class="keyword">return</span> <span class="type">Character</span>(<span class="type">UnicodeScalar</span>(xor))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2241,7 +2229,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">128</span>
+                <span class="site-state-item-count">129</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2252,7 +2240,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -2263,7 +2251,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

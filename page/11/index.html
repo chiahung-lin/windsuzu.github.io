@@ -296,6 +296,192 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-521/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jay Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jay's Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/leetcode-521/" itemprop="url">
+                  LeetCode#521 Longest Uncommon Subsequence I - in Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-05T15:34:33+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/Swift/String/" itemprop="url" rel="index">
+                    <span itemprop="name">String</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/leetcode-521/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="leetcode-521/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>這應該是個愚人節題目。</p>
+<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a group of two strings, you need to find the longest uncommon subsequence of this group of two strings. The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this subsequence should not be any subsequence of the other strings.</p>
+<p>A subsequence is a sequence that can be derived from one sequence by deleting some characters without changing the order of the remaining elements. Trivially, any string is a subsequence of itself and an empty string is a subsequence of any string.</p>
+<p>The input will be two strings, and the output needs to be the length of the longest uncommon subsequence. If the longest uncommon subsequence doesn’t exist, return -1.</p>
+<p>給兩個字串，你必須在兩個字串中找出 longest uncommon subsequence (最長的不同字元序列 ? 考我英文 ?)， 這個序列代表的是一個「全新、不同於另一個字串所擁有的字元序列」。</p>
+<p>一個字元序列可以從其他的字串衍生而來，舉一般例子，任何字串都可以是自己的字元序列，而空白也可以是任何字串的字元序列。</p>
+<p>輸入兩個字串，輸出一個最長的不同字元序列，如果不存在最長的不同字元序列，那就輸出 -1 。</p>
+<p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: <span class="string">"aba"</span>, <span class="string">"cdc"</span></div><div class="line"><span class="type">Output</span>: <span class="number">3</span></div><div class="line"></div><div class="line"><span class="type">Explanation</span>: <span class="type">The</span> longest uncommon subsequence <span class="keyword">is</span> <span class="string">"aba"</span> (or <span class="string">"cdc"</span>),</div><div class="line">because <span class="string">"aba"</span> <span class="keyword">is</span> a subsequence of <span class="string">"aba"</span>,</div><div class="line">but not a subsequence of any other strings <span class="keyword">in</span> the group of two strings.</div></pre></td></tr></table></figure></p>
+<p>在這個範例中，最長的不同字元序列可以是 “aba” 或是 “cdc”<br>因為 “aba” 是 “aba” 的字元序列<br>但不是任何其他字串的字元序列</p>
+<h1 id="第一次解題-15-ms"><a href="#第一次解題-15-ms" class="headerlink" title="第一次解題 : 15 ms"></a>第一次解題 : 15 ms</h1><p>這純粹是一題考我英文的題目<br><img src="/leetcode-521/question.jpg" width="200"><br>因為只有兩個字串相同時，會發生不存在不同字元序列。<br>其他時間只要列出最長的那個字串的長度就行了。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findLUSlength</span><span class="params">(<span class="number">_</span> a: String, <span class="number">_</span> b: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> a == b ? -<span class="number">1</span> : <span class="built_in">max</span>(a.characters.<span class="built_in">count</span>, b.characters.<span class="built_in">count</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-292/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2011,195 +2197,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://windsuzu.github.io/leetcode-557/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jay Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jay's Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/leetcode-557/" itemprop="url">
-                  LeetCode#557 Reverse Words in a String III - in Swift
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-30T13:43:20+08:00">
-                2017-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/Swift/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/leetcode-557/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="leetcode-557/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.</p>
-<p>給一個字串，將字串中每個單詞反轉過來，組合成一個新的字串。<br>但單詞順序還是跟原本一樣，空白位置也一樣。</p>
-<p>Example 1:<br> <code>Input: &quot;Let&#39;s take LeetCode contest&quot;</code><br> <code>Output: &quot;s&#39;teL ekat edoCteeL tsetnoc&quot;</code></p>
-<p>Note: In the string, each word is separated by single space and there will not be any extra space in the string.</p>
-<p>在字串中，每個單詞都被單個空白給區隔開來，也不會有多的空白在字串中。</p>
-<h1 id="第一次解題-Accepted"><a href="#第一次解題-Accepted" class="headerlink" title="第一次解題 : Accepted"></a>第一次解題 : Accepted</h1><p>先將字串依 space 拆成 Array<br>對每個字做 Swift 內建的 String.characters.reversed()</p>
-<p>取得反轉過的字串後， append 到答案的字串中，並且加上一個空白。<br>最後返回時，把最後一個空白清掉。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseWords</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> <span class="built_in">split</span> = s.components(separatedBy: <span class="string">" "</span>)</div><div class="line">    <span class="keyword">var</span> reversedWords = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">split</span> &#123;</div><div class="line">        reversedWords.append(<span class="type">String</span>(s.characters.reversed()))</div><div class="line">        reversedWords.append(<span class="string">" "</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> reversedWords.substring(to: reversedWords.index(before: reversedWords.endIndex))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Best-Solution-332-ms-lt-632-ms"><a href="#Best-Solution-332-ms-lt-632-ms" class="headerlink" title="Best Solution : 332 ms &lt; 632 ms"></a>Best Solution : 332 ms &lt; 632 ms</h1><p>一樣 String 拆成 Array ，對每個拆好的 String 進行自訂的 reverseWord 函式。<br>reverse 過的字串 append 到 result 中，並且判斷迴圈還沒到最後一個的都要加一個空白。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseWords</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> stringArray =  s.components(separatedBy: <span class="string">" "</span>)</div><div class="line">    <span class="keyword">var</span> result = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;stringArray.<span class="built_in">count</span> &#123;</div><div class="line">        result += reverseWord(stringArray[i])</div><div class="line">        <span class="keyword">if</span> i != stringArray.<span class="built_in">count</span> - <span class="number">1</span>  &#123;</div><div class="line">            result += <span class="string">" "</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>裡面自訂的 reverseWord 函式長得這樣 :</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseWord</span><span class="params">(<span class="number">_</span> s: String)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">var</span> arrayOfString = <span class="type">Array</span>(s.characters)</div><div class="line">    <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> j = arrayOfString.<span class="built_in">count</span> - <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</div><div class="line">        <span class="keyword">let</span> temp = arrayOfString[i]</div><div class="line">        arrayOfString[i] = arrayOfString[j]</div><div class="line">        arrayOfString[j] = temp</div><div class="line">        i += <span class="number">1</span></div><div class="line">        j -= <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(arrayOfString)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>想法是這樣的 : </p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 將字串換成 array : Let's -&gt; Array(Let's)</span></div><div class="line"> </div><div class="line">  0 &lt; 4 &#123;</div><div class="line">    temp = Array[0] -&gt; "L"</div><div class="line">    </div><div class="line">    Array[0] = Array[4] -&gt; Array(set's)</div><div class="line">    Array[4] = temp -&gt; Array(set'L)</div><div class="line">    </div><div class="line">    i = 1</div><div class="line">    j = 3</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> 1 &lt; 3 &#123;</div><div class="line">    temp = Array[1] -&gt; "e"</div><div class="line"> </div><div class="line">    Array[1] = Array[3] -&gt; Array(s't's)</div><div class="line">    Array[3] = temp -&gt; Array(s'teL)</div><div class="line"> </div><div class="line">    i = 2</div><div class="line">    j = 2</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> */</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2249,7 +2246,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">128</span>
+                <span class="site-state-item-count">129</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -2260,7 +2257,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -2271,7 +2268,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
