@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://windsuzu.github.io/"/>
-  <updated>2017-11-11T05:56:20.000Z</updated>
+  <updated>2017-11-12T07:24:17.000Z</updated>
   <id>http://windsuzu.github.io/</id>
   
   <author>
@@ -16,11 +16,50 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>LeetCode#203 Remove Linked List Elements - in Swift</title>
+    <link href="http://windsuzu.github.io/leetcode-203/"/>
+    <id>http://windsuzu.github.io/leetcode-203/</id>
+    <published>2017-11-12T06:43:14.000Z</published>
+    <updated>2017-11-12T07:24:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Remove all elements from a linked list of integers that have value val.</p>
+<p>刪除鏈結串列中，題目所指定的值。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Given: 1 –&gt; 2 –&gt; 6 –&gt; 3 –&gt; 4 –&gt; 5 –&gt; 6, val = 6<br>Return: 1 –&gt; 2 –&gt; 3 –&gt; 4 –&gt; 5</p>
+<p>題目指定從鏈結串列中刪除所有 6 的值。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>檢查每一個節點的值是否和目標值相同，如果相同則返回 next ，不同則返回該節點。</p>
+<p>利用該判斷遞迴，就可以將所有不為目標值的節點，接在一起。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeElements</span><span class="params">(<span class="number">_</span> head: ListNode?, <span class="number">_</span> val: Int)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> head = head <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">nil</span> &#125;</div><div class="line">    head.next = removeElements(head.next, val)</div><div class="line">    <span class="keyword">return</span> head.val == val ? head.next : head</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Remove all elements from a linked list of integers that have value val
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
+    
+      <category term="Linked List" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Linked-List/"/>
+    
+    
+      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
+    
+      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
+    
+      <category term="Linked List" scheme="http://windsuzu.github.io/tags/Linked-List/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LeetCode#687 Longest Univalue Path - in Swift</title>
     <link href="http://windsuzu.github.io/leetcode-687/"/>
     <id>http://windsuzu.github.io/leetcode-687/</id>
     <published>2017-11-11T05:47:19.000Z</published>
-    <updated>2017-11-11T05:56:20.000Z</updated>
+    <updated>2017-11-12T06:45:05.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary tree, find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
 <p>給一個二元樹，找出一條最長，且連續出現一樣節點值的路徑，這條路徑可能通過節點也可能沒通過節點。</p>
@@ -30,7 +69,7 @@
 <hr>
 <h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>利用遞迴比對每個節點的左右兩節點，如果與該節點相同值，就會回傳已累積的長度 + 1 。</p>
 <p>並且定義一個最大長度 len ，在每節點的比對中，刷新 len 的最大值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestUnivaluePath</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> len = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getLength</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> val : Int)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">var</span> <span class="keyword">left</span> = getLength(root.<span class="keyword">left</span>, root.val)</div><div class="line">        <span class="keyword">var</span> <span class="keyword">right</span> = getLength(root.<span class="keyword">right</span>, root.val)</div><div class="line">        len = <span class="built_in">max</span>(len, <span class="keyword">left</span> + <span class="keyword">right</span>)</div><div class="line">        <span class="keyword">if</span> val == root.val &#123; <span class="keyword">return</span> <span class="built_in">max</span>(<span class="keyword">left</span>, <span class="keyword">right</span>) + <span class="number">1</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    getLength(root, root.val)</div><div class="line">    <span class="keyword">return</span> len</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestUnivaluePath</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">    <span class="keyword">var</span> len = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getLength</span><span class="params">(<span class="number">_</span> root: TreeNode?, <span class="number">_</span> val : Int)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> root = root <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">        <span class="keyword">let</span> <span class="keyword">left</span> = getLength(root.<span class="keyword">left</span>, root.val)</div><div class="line">        <span class="keyword">let</span> <span class="keyword">right</span> = getLength(root.<span class="keyword">right</span>, root.val)</div><div class="line">        len = <span class="built_in">max</span>(len, <span class="keyword">left</span> + <span class="keyword">right</span>)</div><div class="line">        <span class="keyword">if</span> val == root.val &#123; <span class="keyword">return</span> <span class="built_in">max</span>(<span class="keyword">left</span>, <span class="keyword">right</span>) + <span class="number">1</span> &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    getLength(root, root.val)</div><div class="line">    <span class="keyword">return</span> len</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -867,58 +906,6 @@
       <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
     
       <category term="Array" scheme="http://windsuzu.github.io/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode#501 Find Mode in Binary Search Tree - in Swift</title>
-    <link href="http://windsuzu.github.io/leetcode-501/"/>
-    <id>http://windsuzu.github.io/leetcode-501/</id>
-    <published>2017-10-23T08:14:51.000Z</published>
-    <updated>2017-10-23T08:20:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given a binary search tree (BST) with duplicates, find all the mode(s) (the most frequently occurred element) in the given BST.</p>
-<p>給一二元搜尋樹 (BST) 包含重複節點，找出該樹的眾數 (mode(s)) (可能有多個) (出現最多次的元素) 。</p>
-<p>Assume a BST is defined as follows:</p>
-<ol>
-<li>The left subtree of a node contains only nodes with keys less than or equal to the node’s key.</li>
-<li>The right subtree of a node contains only nodes with keys greater than or equal to the node’s key.</li>
-<li>Both the left and right subtrees must also be binary search trees.</li>
-</ol>
-<p>假設該 BST 定義為下:</p>
-<ol>
-<li>左子樹只包含「小於或等於」的節點</li>
-<li>右子樹只包含「大於或等於」的節點</li>
-<li>其餘左右子樹必須維持上述的規則</li>
-</ol>
-<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>For example:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="type">Given</span> <span class="type">BST</span> [<span class="number">1</span>,null,<span class="number">2</span>,<span class="number">2</span>],</div><div class="line">   <span class="number">1</span></div><div class="line">    \</div><div class="line">     <span class="number">2</span></div><div class="line">    /</div><div class="line">   <span class="number">2</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> [<span class="number">2</span>].</div></pre></td></tr></table></figure></p>
-<p>Note: If a tree has more than one mode, you can return them in any order.</p>
-<p>如果不止一個眾數，請回傳一個沒有限制排序的陣列。</p>
-<hr>
-<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>這個做法不為最佳解，也不限制只能在 BST ，可以使用在任何二元樹。</p>
-<p>利用 map 記錄每一個節點值出現的次數，並且不斷更新 maxVal (最多出現次數)的值。</p>
-<p>走完一遍樹後，再從 map 中找出所有 v (次數) 等於 maxVal 的節點 k ，加進 result 中。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMode</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> [] &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> dict = [<span class="type">Int</span>:<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> maxVal = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">traverse</span><span class="params">(<span class="number">_</span> root: TreeNode?)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> root == <span class="literal">nil</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">        </div><div class="line">        dict[root!.val] = dict[root!.val] != <span class="literal">nil</span> ? dict[root!.val]! + <span class="number">1</span> : <span class="number">1</span></div><div class="line">        maxVal = <span class="built_in">max</span>(dict[root!.val]!, maxVal)</div><div class="line">        </div><div class="line">        traverse(root!.<span class="keyword">left</span>)</div><div class="line">        traverse(root!.<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    traverse(root)</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> res = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">for</span> (k,v) <span class="keyword">in</span> dict &#123;</div><div class="line">        <span class="keyword">if</span> v == maxVal &#123; res.append(k) &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Given a binary search tree (BST) with duplicates, find all the mode(s)
-    
-    </summary>
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/categories/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/categories/LeetCode/Swift/Tree/"/>
-    
-    
-      <category term="LeetCode" scheme="http://windsuzu.github.io/tags/LeetCode/"/>
-    
-      <category term="Swift" scheme="http://windsuzu.github.io/tags/Swift/"/>
-    
-      <category term="Tree" scheme="http://windsuzu.github.io/tags/Tree/"/>
     
   </entry>
   
