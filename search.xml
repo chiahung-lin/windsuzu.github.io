@@ -3,6 +3,48 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode#219 Contains Duplicate II - in Swift]]></title>
+      <url>/leetcode-219/</url>
+      <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.</p>
+<p>給一組整數陣列，找出陣列是否包含重複的數字，且重複的數字未在 i 和 j 索引的距離，不超過 k 。</p>
+<hr>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p>Example 1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>], <span class="number">3</span></div><div class="line"><span class="type">Output</span>: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>陣列中 2 出現重複，且第一個索引 1 與第二個索引 4 的距離不超過 3 ，返回 true 。</p>
+<p>Example 2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Input</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>], <span class="number">2</span></div><div class="line"><span class="type">Output</span>: <span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p>陣列中 2 出現重複，且第一個索引 1 與第二個索引 4 的距離超過 2 ，返回 false 。</p>
+<hr>
+<h1 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h1><p>將 nums 每一個值依序加進 set 裡面，如果 set 無法新增，代表已經重複。</p>
+<p>如果指針 i 超過 k 之後，就開始刪除 set 裡面超過距離的值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">containsNearbyDuplicate</span><span class="params">(<span class="number">_</span> nums: [Int], <span class="number">_</span> k: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">var</span> <span class="keyword">set</span> = <span class="type">Set</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;nums.<span class="built_in">count</span> &#123;</div><div class="line">            <span class="keyword">if</span> i &gt; k &#123; <span class="keyword">set</span>.remove(nums[i - k - <span class="number">1</span>]) &#125;</div><div class="line">            <span class="keyword">if</span> !<span class="keyword">set</span>.insert(nums[i]).inserted &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> LeetCode </category>
+            
+            <category> Swift </category>
+            
+            <category> Array </category>
+            
+            <category> Hash Table </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> Swift </tag>
+            
+            <tag> Array </tag>
+            
+            <tag> Hash Table </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode#203 Remove Linked List Elements - in Swift]]></title>
       <url>/leetcode-203/</url>
       <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Remove all elements from a linked list of integers that have value val.</p>
